@@ -10,7 +10,9 @@
 
 class TimeCodeGenerator {
 public:
-    std:string generatorTimeCode(std::string privateKey, long PassID);
+    TimeCodeGenerator();
+    ~TimeCodeGenerator();
+    std:string generateTimeCode(std::string privateKey, unsigned long PassID, unsigned long timeStamp);
 };
 
 #endif //MONKEYS_TIME_CODE_GENERATOR_HPP

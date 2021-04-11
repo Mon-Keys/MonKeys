@@ -4,6 +4,6 @@
 
 #include "../include/time_code_generator.hpp"
 
-std::string TimeCodeGenerator::generatorTimeCode(std::string privateKey, unsigned long PassID, unsigned long timeStamp) {
+std::string TimeCodeGenerator::generateTimeCode(std::string privateKey, unsigned long PassID, unsigned long timeStamp) {
 
 }
