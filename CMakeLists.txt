@@ -4,7 +4,7 @@ project(MonKeys C)
 set(CMAKE_C_STANDARD 11)
 
 include_directories(.)
-include_directories(inc)
+include_directories(visionLib/include)
 
 add_executable(MonKeys
-        inc/client.hpp)
+        visionLib/include/client.hpp)
