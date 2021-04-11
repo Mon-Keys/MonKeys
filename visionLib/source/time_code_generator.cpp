@@ -2,8 +2,8 @@
 // Created by ilyagu on 11.04.2021.
 //
 
-#include "../inc/time_code_generator.hpp"
+#include "../include/time_code_generator.hpp"
 
-void TimeCodeGenerator::generatorTimeCode() {
+std::string TimeCodeGenerator::generatorTimeCode(std::string privateKey, unsigned long PassID, unsigned long timeStamp) {
 
 }

@@ -5,9 +5,12 @@
 #ifndef MONKEYS_TIME_CODE_GENERATOR_HPP
 #define MONKEYS_TIME_CODE_GENERATOR_HPP
 
+#include <iostream>
+#include <string>
+
 class TimeCodeGenerator {
 public:
-    void generatorTimeCode();
+    std:string generatorTimeCode(std::string privateKey, long PassID);
 };
 
 #endif //MONKEYS_TIME_CODE_GENERATOR_HPP
