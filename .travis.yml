@@ -1,0 +1,20 @@
+  
+arch: amd64
+os: linux
+dist: focal
+
+language: c
+
+compiler: gcc
+
+
+
+install:
+  - sudo apt-get install valgrind
+  - sudo apt-get install cppcheck
+  - sudo pip install cpplint
+
+script:
+  - cd visionLib
+  - cd ..
+
