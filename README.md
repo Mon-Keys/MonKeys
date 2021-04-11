@@ -1,5 +1,7 @@
 # СКУД VISION
 
+[![Build Status](https://travis-ci.com/perlinleo/MonKeys.svg?branch=main)](https://travis-ci.com/perlinleo/MonKeys)
+
 ```json
 {
     "name": "MonKeys",
