@@ -66,6 +66,7 @@ class HttpClient : public WebApplicationClient {
    Pass *passes;
    int passesCount;
    std::string name;
+   std::string password;
    bool isConnected;
    bool isLogin;
 };
