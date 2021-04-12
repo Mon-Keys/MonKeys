@@ -5,39 +5,39 @@
 
 #include "../include/Logger.hpp"
 
-void Logger::OpenLog(){
+unsigned int Database::OpenLog(){
 
 }
 
+unsigned int Database::CloseLog(){
 
-void Logger::CloseLog(){
+}
+
+unsigned int Database::WriteLog(const char* errorMessage){
+
+}
+
+unsigned int LogFile::OpenLog(){
+
+}
+
+unsigned int LogFile::CloseLog(){
+
+}
+
+unsigned int LogFile::WriteLog(const char* errorMessage){
+    
+}
+
+void Logger::CloseLog(IWriteToLog &Log){
+    
+}
+
+void Logger::OpenLog(IWriteToLog &Log){
     
 }
 
 
-void Logger::WriteLog(std::string text){
-    
-}
-
-void Logger::LogError(){
-    
-}
-
-
-void Logger::LogSuccesfulPass(){
-    
-}
-
-
-void Logger::LogUserLogin(){
-    
-}
-
-
-void Logger::LogUserLogout(){
-    
-}
-
-void Logger::LogUnsuccesfulPass(){
+void Logger::WriteLog(IWriteToLog &Log, std::string text){
     
 }
