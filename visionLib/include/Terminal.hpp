@@ -5,7 +5,7 @@
 #ifndef MONKEYS_TERMINAL_HPP
 #define MONKEYS_TERMINAL_HPP
 
-Class Terminal {
+class Terminal {
  public:
     void open();
     void readTimeCode();

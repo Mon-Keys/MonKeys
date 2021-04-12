@@ -5,13 +5,9 @@
 #ifndef MONKEYS_ORM_HPP
 #define MONKEYS_ORM_HPP
 
-#include <std::string>
+#include <string>
 
 class ORM {
- public:
-    void getPassData();
-    void getClientData();
-    void getCompanyData();
  private:
     class ClientDB {
      public:
@@ -34,6 +30,10 @@ class ORM {
         long ID;
         std::string name;
     };
+ public:
+    PassDB getPassData(long ID);
+    ClientDB getClientData(long ID);
+    CompanyDB getCompanyData(long ID);
 };
 
 #endif //MONKEYS_ORM_HPP

@@ -2,10 +2,10 @@
 // Created by Monkeys on 11.04.2021.
 //
 
-#ifndef MONKEYS_TERMINAL_REQUEST_HPP
-#define MONKEYS_TERMINAL_REQUEST_HPP
+#ifndef MONKEYS_TERMINALSERVER_HPP
+#define MONKEYS_TERMINALSERVER_HPP
 
-class TerminalRequest {
+class TerminalServer {
 public:
     void getClientDataFromDB();
     void getPassDataFromDB();
@@ -15,4 +15,4 @@ public:
 private:
 };
 
-#endif //MONKEYS_TERMINAL_REQUEST_HPP
+#endif //MONKEYS_TERMINALSERVER_HPP

@@ -5,8 +5,8 @@
 TEST(openLogFile, correctFile){
     Logger ErrorLogger(LOG_ERROR_FATAL);
     std::string FilePath = "../log.log";
-    LogFile lf(FilePath);
+    
     lf.OpenLog()
-    ErrorLogger.write
+    ErrorLogger.WriteLog(lf, text);
     lf.CloseLog()
 }

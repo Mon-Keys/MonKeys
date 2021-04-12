@@ -5,7 +5,7 @@
 #ifndef MONKEYS_HTTPSERVER_HPP
 #define MONKEYS_HTTPSERVER_HPP
 
-class ClientServer {
+class ClientRequest {
     void waitRequest();
     void waitConnection();
     void reply();

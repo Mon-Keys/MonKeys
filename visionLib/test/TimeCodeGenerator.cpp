@@ -1,5 +1,5 @@
 #include "gtest/gtest.h"
-#include "../include/timeCodeGenerator.hpp"
+#include "../include/TimeCodeGenerator.hpp"
 
 TEST(TimeCodeGeneratorTest, correct_generate_on_one_time_segment) {
     unsigned long PassID = 1;

@@ -2,14 +2,14 @@
 // Created by Monkeys on 11.04.2021.
 //
 
-#ifndef MONKEYS_HTTPCLIENT_HPP
-#define MONKEYS_HTTPCLIENT_HPP
+#ifndef MONKEYS_CLIENT_HPP
+#define MONKEYS_CLIENT_HPP
 
 #include <string>
 
 #include "../include/WebApplicationClient.hpp"
 
-class HttpClient : public WebApplicationClient {
+class Client : public WebApplicationClient {
  public:
    class Pass {
     public:
@@ -35,14 +35,14 @@ class HttpClient : public WebApplicationClient {
       std::string companyName;
    };
 
-   HttpClient();
-   ~HttpClient();
+   Client();
+   ~Client();
 
-   HttpClient(const HttpClient&) = delete;
-   HttpClient(HttpClient&&) = delete;
+   Client(const Client&) = delete;
+   Client(Client&&) = delete;
 
-   HttpClient& operator=(const HttpClient&) = delete;
-   HttpClient& operator=(HttpClient&&) = delete;
+   Client& operator=(const Client&) = delete;
+   Client& operator=(Client&&) = delete;
 
    void logIn();
    void logOut();
@@ -53,7 +53,7 @@ class HttpClient : public WebApplicationClient {
    void establishConnection(const char *url);
    void breakConection();
 
-   HttpClient::Pass getPass(int index);
+   Client::Pass getPass(int index);
    bool getIsConnected();
    bool getIsLogIn();
 
@@ -71,4 +71,4 @@ class HttpClient : public WebApplicationClient {
    bool isLogin;
 };
 
-#endif //MONKEYS_HTTPCLIENT_HPP
+#endif //MONKEYS_CLIENT_HPP

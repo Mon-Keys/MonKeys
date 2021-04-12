@@ -2,7 +2,7 @@
 // Created by Monkeys on 11.04.2021.
 //
 
-#include "../inc/terminal.hpp"
+#include "../include/Terminal.hpp"
 
 void Terminal::open() {
 

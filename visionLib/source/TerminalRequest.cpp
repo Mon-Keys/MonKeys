@@ -3,7 +3,7 @@
 //
 
 #include <iostream>
-#include "../inc/terminal_server.hpp"
+#include "../include/TerminalRequest.hpp"
 
 void TerminalServer::waitRequest() {
 

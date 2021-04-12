@@ -1,12 +1,12 @@
 #include "gtest/gtest.h"
 #include "gmock/gmock.h"
-#include "../include/httpClient.hpp"
+#include "../include/Client.hpp"
 
 using ::testing::AtLeast; 
 
 
-TEST(TestHttpClient, correct_log_in) {
-    HttpClient client;
+TEST(TestClient, correct_log_in) {
+    Client client;
     const char *url = "http://mail.ru";
     client.establishConnection(url);
     client.logIn();
@@ -14,16 +14,16 @@ TEST(TestHttpClient, correct_log_in) {
     client.breakConection();    
 }
 
-TEST(TestHttpClient, unauthorized_client) {
-    HttpClient client;
+TEST(TestClient, unauthorized_client) {
+    Client client;
     const char *url = "http://mail.ru";
     client.establishConnection(url);
     EXPECT_FALSE(client.getIsLogIn());
     client.breakConection();
 }
 
-TEST(TestHttpClient, correct_log_out) {
-    HttpClient client;
+TEST(TestClient, correct_log_out) {
+    Client client;
     const char *url = "http://mail.ru";
     client.establishConnection(url);
     client.logIn();
@@ -32,8 +32,8 @@ TEST(TestHttpClient, correct_log_out) {
     client.breakConection();    
 }
 
-TEST(TestHttpClient, correct_registration) {
-    HttpClient client;
+TEST(TestClient, correct_registration) {
+    Client client;
     const char *url = "http://mail.ru";
     client.establishConnection(url);
     client.registerClient();
@@ -41,13 +41,13 @@ TEST(TestHttpClient, correct_registration) {
     client.breakConection();
 }
 
-class MockPass : public HttpClient::Pass {
+class MockPass : public Client::Pass {
  public:
     MOCK_METHOD2(requestTempCode, void());
 }
 
-TEST(TestHttpClient, correct_getting_temp_pass) {
-    HttpClient client;
+TEST(TestClient, correct_getting_temp_pass) {
+    Client client;
     const char *url = "htttp://mail.ru";
     client.establishConnection(url);
     client.logIn();
@@ -78,8 +78,8 @@ TEST(TestHttpClient, correct_getting_temp_pass) {
 
 }
 
-TEST(TestHttpClient, correct_connecton_establishing) {
-    HttpClient client;
+TEST(TestClient, correct_connecton_establishing) {
+    Client client;
     const char *url = "http://mail.ru";
     client.establishConnection(url);
     EXPECT_TRUE(client.getIsConnected());
