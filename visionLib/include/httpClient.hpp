@@ -27,7 +27,7 @@ class HttpClient : public WebApplicationClient {
       void getID();
 
       void setID(long _ID);
-      void setprivateKey(std::string _privateKey);
+      void setPrivateKey(std::string _privateKey);
       void setCompanyName(std::string _companyName);
     private:
       long ID;
