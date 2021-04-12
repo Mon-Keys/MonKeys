@@ -24,16 +24,13 @@ void HttpClient::registerClient() {
 
 }
 
-void HttpClient::getPasses() {
+void HttpClient::requestPasses() {
 
 }
 
-void HttpClient::getTempPass() {
-
-}
-
-void HttpClient::serverRequest() {
-
+std::string HttpClient::getTempPass(const long passID) {
+    HttpClient::Pass currentPass = getPass(passID);
+    currentPass.requestTempCode();
 }
 
 void HttpClient::establishConnection(const char *url) {
@@ -41,10 +38,6 @@ void HttpClient::establishConnection(const char *url) {
 }
 
 void HttpClient::breakConection() {
-
-}
-
-void HttpClient::Pass::getTempCode() {
 
 }
 
@@ -56,7 +49,11 @@ bool HttpClient::getIsLogIn() {
 
 }
 
-void HttpClient::setIsConnectde(const bool value) {
+HttpClient::Pass HttpClient::getPass(int index) {
+
+}
+
+void HttpClient::setIsConnected(const bool value) {
 
 }
 
@@ -64,6 +61,22 @@ void HttpClient::setIslogIn(const bool value) {
 
 }
 
-void HttpClient::setPasses(long *passesFromBD) {
+void HttpClient::Pass::requestTempCode() {
+
+}
+
+void HttpClient::Pass::getID() {
+
+}
+
+void HttpClient::Pass::setID(long _ID) {
+
+}
+
+void HttpClient::Pass::setprivateKey(std::string _privateKey) {
+
+}
+
+void HttpClient::Pass::setCompanyName(std::string _companyName) {
 
 }

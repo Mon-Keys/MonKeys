@@ -2,15 +2,41 @@
 // Created by Monkeys on 11.04.2021.
 //
 
-#ifndef MONKEYS_CLIENT_HPP
-#define MONKEYS_CLIENT_HPP
+#ifndef MONKEYS_HTTPCLIENT_HPP
+#define MONKEYS_HTTPCLIENT_HPP
 
 #include <string>
 
-class HttpClient {
+#include "../include/WebApplicationClient.hpp"
+
+class HttpClient : public WebApplicationClient {
  public:
-   ~HttpClient();
+   class Pass {
+    public:
+      Pass();
+      ~Pass();
+
+      Pass(const Pass&) = delete;
+      Pass(Pass&&) = default;
+
+      Pass& operator=(const Pass&) = delete;
+      Pass& operator=(Pass&&) = delete;
+
+      void requestTempCode();
+      
+      void getID();
+
+      void setID(long _ID);
+      void setprivateKey(std::string _privateKey);
+      void setCompanyName(std::string _companyName);
+    private:
+      long ID;
+      std::string privateKey;
+      std::string companyName;
+   };
+
    HttpClient();
+   ~HttpClient();
 
    HttpClient(const HttpClient&) = delete;
    HttpClient(HttpClient&&) = delete;
@@ -21,35 +47,27 @@ class HttpClient {
    void logIn();
    void logOut();
    void registerClient();
-   void getPasses();
-   void getTempPass();
+   void requestPasses();
+   std::string getTempPass(const long passID);
 
-   void serverRequest();
    void establishConnection(const char *url);
    void breakConection();
 
+   HttpClient::Pass getPass(int index);
    bool getIsConnected();
    bool getIsLogIn();
 
-   void setIsConnectde(const bool value);
+   void setPasses(Pass* currentPasses);
+   void setIsConnected(const bool value);
    void setIslogIn(const bool value);
-   void setPasses(long *passesFromBD);
 
  private:
-   class Pass {
-    public:
-      void getTempCode();
-    private:
-      std::string privateKey;
-      std::string companyName;
-      std::string tempCode;
-   };
-
    long ID;
    Pass *passes;
+   int passesCount;
    std::string name;
    bool isConnected;
    bool isLogin;
 };
 
-#endif //MONKEYS_CLIENT_HPP
+#endif //MONKEYS_HTTPCLIENT_HPP
