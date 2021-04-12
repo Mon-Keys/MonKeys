@@ -3,7 +3,7 @@
 //
 
 #include <iostream>
-#include "../inc/client_server.hpp"
+#include "../inc/httpServer.hpp"
 
 void ClientServer::waitRequest() {
 

@@ -73,7 +73,7 @@ void HttpClient::Pass::setID(long _ID) {
 
 }
 
-void HttpClient::Pass::setprivateKey(std::string _privateKey) {
+void HttpClient::Pass::setPrivateKey(std::string _privateKey) {
 
 }
 
