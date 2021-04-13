@@ -1,22 +1,20 @@
-//
-// Created by Monkeys on 11.04.2021.
-//
+// Copyright 2021 MonKeys
 
-#ifndef MONKEYS_WEBAPPLICATIONCLIENT_HPP
-#define MONKEYS_WEBAPPLICATIONCLIENT_HPP
+#ifndef VISIONLIB_INCLUDE_WEBAPPLICATIONCLIENT_HPP_
+#define VISIONLIB_INCLUDE_WEBAPPLICATIONCLIENT_HPP_
 
 #include <string>
 
-class WebApplicationClient {
+class IWebApplicationClient {
  public:
-   virtual void logIn();
-   virtual void logOut();
-   virtual void registerClient();
-   virtual void requestPasses();
-   virtual std::string getTempPass(const long passID);
+    virtual void logIn() = 0;
+    virtual void logOut() = 0;
+    virtual void registerClient() = 0;
+    virtual void requestPasses() = 0;
+    virtual std::string getTempPass(uint64_t passID) = 0;
 
-   virtual void establishConnection(const char *url);
-   virtual void breakConection();
+    virtual void establishConnection(const char *url) = 0;
+    virtual void breakConection()= 0;
 };
 
-#endif // MONKEYS_WEBAPPLICATIONCLIENT_HPP
+#endif  // VISIONLIB_INCLUDE_WEBAPPLICATIONCLIENT_HPP_
