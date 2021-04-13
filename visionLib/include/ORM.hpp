@@ -1,39 +1,44 @@
-//
-// Created by ilyagu on 11.04.2021.
-//
+// Copyright 2021 Monkeys. All rights reserved.
+//  __  __                   _  __
+// |  \/  |   ___    _ __   | |/ /   ___   _   _   ___
+// | |\/| |  / _ \  | '_ \  | ' /   / _ \ | | | | / __|
+// | |  | | | (_) | | | | | | . \  |  __/ | |_| | \__ \
+// |_|  |_|  \___/  |_| |_| |_|\_\  \___|  \__, | |___/
+//                                         |___/
 
-#ifndef MONKEYS_ORM_HPP
-#define MONKEYS_ORM_HPP
+#ifndef VISIONLIB_INCLUDE_ORM_HPP_
+#define VISIONLIB_INCLUDE_ORM_HPP_
 
 #include <string>
 
 class ORM {
  private:
-    class ClientDB {
-     public:
-     private:
-        long ID;
-        std::string login;
-        std::string password;
-        long * passes;
-    };
-    class PassDB {
-     public:
-     private:
-        long ID;
-        std::string privateKey;
-        long companyID;
-    };
-    class CompanyDB {
-     public:
-     private:
-        long ID;
-        std::string name;
-    };
+  class ClientDB {
+   public:
+   private:
+    uint64_t ID;
+    std::string login;
+    std::string password;
+    uint64_t* passes;
+  };
+  class PassDB {
+   public:
+   private:
+    uint64_t ID;
+    std::string privateKey;
+    uint64_t companyID;
+  };
+  class CompanyDB {
+   public:
+   private:
+    uint64_t ID;
+    std::string name;
+  };
+
  public:
-    PassDB getPassData(long ID);
-    ClientDB getClientData(long ID);
-    CompanyDB getCompanyData(long ID);
+  PassDB getPassData(uint64_t ID);
+  ClientDB getClientData(uint64_t ID);
+  CompanyDB getCompanyData(uint64_t ID);
 };
 
-#endif //MONKEYS_ORM_HPP
+#endif  // VISIONLIB_INCLUDE_ORM_HPP_

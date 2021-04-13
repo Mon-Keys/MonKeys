@@ -1,1 +1,8 @@
+#idea
 .idea/
+
+#VSCode
+.vscode/
+
+#Build Folder
+build/

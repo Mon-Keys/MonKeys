@@ -1,24 +1,21 @@
-//
-// Created by Monkeys on 11.04.2021.
-//
+// Copyright 2021 Monkeys. All rights reserved.
+//  __  __                   _  __
+// |  \/  |   ___    _ __   | |/ /   ___   _   _   ___
+// | |\/| |  / _ \  | '_ \  | ' /   / _ \ | | | | / __|
+// | |  | | | (_) | | | | | | . \  |  __/ | |_| | \__ \
+// |_|  |_|  \___/  |_| |_| |_|\_\  \___|  \__, | |___/
+//                                         |___/
 
-#include <string>
 #include "../include/TerminalServer.hpp"
 
-void TerminalServer::compareTimeCode() {
+#include <string>
 
-}
+void TerminalServer::compareTimeCode() {}
 
-void TerminalServer::generateTimeCode() {
+void TerminalServer::generateTimeCode() {}
 
-}
+void TerminalServer::getClientDataFromDB() {}
 
-void TerminalServer::getClientDataFromDB() {
+void TerminalServer::getCompanyDataFromDB() {}
 
-}
-
-void TerminalServer::getCompanyDataFromDB() {
-
-}
-
-void TerminalServer::getPassDataFromDB() {
+void TerminalServer::getPassDataFromDB() {}

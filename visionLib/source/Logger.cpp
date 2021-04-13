@@ -1,43 +1,27 @@
-//
-// Created by Monkeys on 11.04.2021.
-//
-
+// Copyright 2021 Monkeys. All rights reserved.
+//  __  __                   _  __
+// |  \/  |   ___    _ __   | |/ /   ___   _   _   ___
+// | |\/| |  / _ \  | '_ \  | ' /   / _ \ | | | | / __|
+// | |  | | | (_) | | | | | | . \  |  __/ | |_| | \__ \
+// |_|  |_|  \___/  |_| |_| |_|\_\  \___|  \__, | |___/
+//                                         |___/
 
 #include "../include/Logger.hpp"
 
-unsigned int Database::OpenLog(){
+uint16_t Database::OpenLog() { return LOG_MOCK; }
 
-}
+uint16_t Database::CloseLog() { return LOG_MOCK; }
 
-unsigned int Database::CloseLog(){
+uint16_t Database::WriteLog(const char *errorMessage) { return LOG_MOCK; }
 
-}
+uint16_t LogFile::OpenLog() { return LOG_MOCK; }
 
-unsigned int Database::WriteLog(const char* errorMessage){
+uint16_t LogFile::CloseLog() { return LOG_MOCK; }
 
-}
+uint16_t LogFile::WriteLog(const char *errorMessage) { return LOG_MOCK; }
 
-unsigned int LogFile::OpenLog(){
+void Logger::CloseLog(const IWriteToLog &Log) {}
 
-}
+void Logger::OpenLog(const IWriteToLog &Log) {}
 
-unsigned int LogFile::CloseLog(){
-
-}
-
-unsigned int LogFile::WriteLog(const char* errorMessage){
-    
-}
-
-void Logger::CloseLog(IWriteToLog &Log){
-    
-}
-
-void Logger::OpenLog(IWriteToLog &Log){
-    
-}
-
-
-void Logger::WriteLog(IWriteToLog &Log, std::string text){
-    
-}
+void Logger::WriteLog(const IWriteToLog &Log, std::string text) {}

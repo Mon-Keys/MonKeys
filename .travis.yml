@@ -15,6 +15,6 @@ install:
   - sudo pip install cpplint
 
 script:
-  - cd visionLib
-  - cd ..
+  - cd scripts
+  - bash travis.sh
 

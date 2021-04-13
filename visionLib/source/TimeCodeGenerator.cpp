@@ -1,22 +1,26 @@
-//
-// Created by ilyagu on 11.04.2021.
-//
+// Copyright 2021 Monkeys. All rights reserved.
+//  __  __                   _  __
+// |  \/  |   ___    _ __   | |/ /   ___   _   _   ___
+// | |\/| |  / _ \  | '_ \  | ' /   / _ \ | | | | / __|
+// | |  | | | (_) | | | | | | . \  |  __/ | |_| | \__ \
+// |_|  |_|  \___/  |_| |_| |_|\_\  \___|  \__, | |___/
+//                                         |___/
 
 #include "../include/TimeCodeGenerator.hpp"
 
+#include <iostream>
+
 std::string TimeCodeGenerator::generateTimeCode() {
-
+  std::cout << "hello" << std::endl;
+  return "hello";
 }
 
-std::string TimeCodeGenerator::getHashedOTP() {
+TimeCodeGenerator::TimeCodeGenerator() {}
 
-}
+TimeCodeGenerator::~TimeCodeGenerator() {}
 
+std::string TimeCodeGenerator::getHashedOTP() { return ""; }
 
-void TimeCodeGenerator::updateTime() {
+void TimeCodeGenerator::updateTime() {}
 
-}
-
-unsigned long TimeCodeGenerator::getTParameter() {
-
-}
+uint64_t TimeCodeGenerator::getTParameter() { return 1; }

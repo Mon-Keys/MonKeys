@@ -1,18 +1,23 @@
-//
-// Created by Monkeys on 11.04.2021.
-//
+// Copyright 2021 Monkeys. All rights reserved.
+//  __  __                   _  __
+// |  \/  |   ___    _ __   | |/ /   ___   _   _   ___
+// | |\/| |  / _ \  | '_ \  | ' /   / _ \ | | | | / __|
+// | |  | | | (_) | | | | | | . \  |  __/ | |_| | \__ \
+// |_|  |_|  \___/  |_| |_| |_|\_\  \___|  \__, | |___/
+//                                         |___/
 
-#ifndef MONKEYS_TERMINALSERVER_HPP
-#define MONKEYS_TERMINALSERVER_HPP
+#ifndef VISIONLIB_INCLUDE_TERMINALSERVER_HPP_
+#define VISIONLIB_INCLUDE_TERMINALSERVER_HPP_
 
 class TerminalServer {
-public:
-    void getClientDataFromDB();
-    void getPassDataFromDB();
-    void getCompanyDataFromDB();
-    void generateTimeCode();
-    void compareTimeCode();
-private:
+ public:
+  void getClientDataFromDB();
+  void getPassDataFromDB();
+  void getCompanyDataFromDB();
+  void generateTimeCode();
+  void compareTimeCode();
+
+ private:
 };
 
-#endif //MONKEYS_TERMINALSERVER_HPP
+#endif  // VISIONLIB_INCLUDE_TERMINALSERVER_HPP_
