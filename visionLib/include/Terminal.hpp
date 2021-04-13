@@ -1,20 +1,26 @@
-//
-// Created by Monkeys on 11.04.2021.
-//
+// Copyright 2021 Monkeys. All rights reserved.
+//  __  __                   _  __
+// |  \/  |   ___    _ __   | |/ /   ___   _   _   ___
+// | |\/| |  / _ \  | '_ \  | ' /   / _ \ | | | | / __|
+// | |  | | | (_) | | | | | | . \  |  __/ | |_| | \__ \
+// |_|  |_|  \___/  |_| |_| |_|\_\  \___|  \__, | |___/
+//                                         |___/
 
-#ifndef MONKEYS_TERMINAL_HPP
-#define MONKEYS_TERMINAL_HPP
+#ifndef VISIONLIB_INCLUDE_TERMINAL_HPP_
+#define VISIONLIB_INCLUDE_TERMINAL_HPP_
+
+#include <string>
 
 class Terminal {
  public:
-    void open();
-    void readTimeCode();
+  void open();
+  void readTimeCode();
+
  private:
-    void serverRequest();
-    void establishConnection();
+  void serverRequest();
+  void establishConnection();
 
-    long ID;
-
+  uint64_t ID;
 };
 
-#endif //MONKEYS_TERMINAL_HPP
+#endif  // VISIONLIB_INCLUDE_TERMINAL_HPP_

@@ -1,74 +1,79 @@
-//
-// Created by Monkeys on 11.04.2021.
-//
+// Copyright 2021 Monkeys. All rights reserved.
+//  __  __                   _  __
+// |  \/  |   ___    _ __   | |/ /   ___   _   _   ___
+// | |\/| |  / _ \  | '_ \  | ' /   / _ \ | | | | / __|
+// | |  | | | (_) | | | | | | . \  |  __/ | |_| | \__ \
+// |_|  |_|  \___/  |_| |_| |_|\_\  \___|  \__, | |___/
+//                                         |___/
 
-#ifndef MONKEYS_CLIENT_HPP
-#define MONKEYS_CLIENT_HPP
+#ifndef VISIONLIB_INCLUDE_CLIENT_HPP_
+#define VISIONLIB_INCLUDE_CLIENT_HPP_
 
 #include <string>
 
 #include "../include/WebApplicationClient.hpp"
 
-class Client : public WebApplicationClient {
+class Client : public IWebApplicationClient {
  public:
-   class Pass {
-    public:
-      Pass();
-      ~Pass();
+  class Pass {
+   public:
+    Pass();
+    ~Pass();
 
-      Pass(const Pass&) = delete;
-      Pass(Pass&&) = default;
+    Pass(const Pass&) = delete;
+    Pass(Pass&&) = default;
 
-      Pass& operator=(const Pass&) = delete;
-      Pass& operator=(Pass&&) = delete;
+    Pass& operator=(const Pass&) = delete;
+    Pass& operator=(Pass&&) = delete;
 
-      void requestTempCode();
-      
-      void getID();
+    void requestTempCode();
 
-      void setID(long _ID);
-      void setPrivateKey(std::string _privateKey);
-      void setCompanyName(std::string _companyName);
-    private:
-      long ID;
-      std::string privateKey;
-      std::string companyName;
-   };
+    void getID();
 
-   Client();
-   ~Client();
+    void setID(uint64_t _ID);
+    void setPrivateKey(std::string _privateKey);
+    void setCompanyName(std::string _companyName);
 
-   Client(const Client&) = delete;
-   Client(Client&&) = delete;
+   private:
+    uint64_t ID;
+    std::string privateKey;
+    std::string companyName;
+  };
 
-   Client& operator=(const Client&) = delete;
-   Client& operator=(Client&&) = delete;
+  Client();
+  ~Client();
 
-   void logIn();
-   void logOut();
-   void registerClient();
-   void requestPasses();
-   std::string getTempPass(const long passID);
+  Client(const Client&) = delete;
+  Client(Client&&) = delete;
 
-   void establishConnection(const char *url);
-   void breakConection();
+  Client& operator=(const Client&) = delete;
+  Client& operator=(Client&&) = delete;
 
-   Client::Pass getPass(int index);
-   bool getIsConnected();
-   bool getIsLogIn();
+  void logIn();
+  void logOut();
+  void registerClient();
+  void requestPasses();
+  std::string getTempPass(const uint64_t passID);
 
-   void setPasses(Pass* currentPasses);
-   void setIsConnected(const bool value);
-   void setIslogIn(const bool value);
+  void establishConnection(const char* url);
+  void breakConection();
+
+  Client::Pass getPass(uint16_t index);
+  bool getIsConnected();
+  bool getIsLogIn();
+
+  void setPasses(Pass* currentPasses);
+  void setIsConnected(const bool value);
+  void setIslogIn(const bool value);
 
  private:
-   long ID;
-   Pass *passes;
-   int passesCount;
-   std::string name;
-   std::string password;
-   bool isConnected;
-   bool isLogin;
+  uint64_t ID;
+  Pass* passes;
+  uint16_t passesCount;
+  std::string name;
+  std::string password;
+  bool isConnected;
+  bool isLogin;
 };
 
-#endif //MONKEYS_CLIENT_HPP
+#endif  // VISIONLIB_INCLUDE_CLIENT_HPP_

@@ -1,40 +1,31 @@
-//
-// Created by Monkeys on 11.04.2021.
-//
+// Copyright 2021 Monkeys. All rights reserved.
+//  __  __                   _  __
+// |  \/  |   ___    _ __   | |/ /   ___   _   _   ___
+// | |\/| |  / _ \  | '_ \  | ' /   / _ \ | | | | / __|
+// | |  | | | (_) | | | | | | . \  |  __/ | |_| | \__ \
+// |_|  |_|  \___/  |_| |_| |_|\_\  \___|  \__, | |___/
+//                                         |___/
 
 #include "../include/ClientServer.hpp"
 
-void ClientServer::getClientDataFromDB(long ID) {
+void ClientServer::getClientDataFromDB(uint64_t ID) {}
 
-}
+void ClientServer::getPassDataFromDB(uint64_t PassID) {}
+void ClientServer::getCompanyDataFromDB(uint64_t CompanyID) {}
 
-void ClientServer::getPassDataFromDB(long PassID) {
+void ClientServer::logInClient(std::string Login, std::string Password) {}
 
-}
-void ClientServer::getCompanyDataFromDB(long CompanyID){
+void ClientServer::logOutClient(uint64_t ClientID) {}
 
-}
+void ClientServer::registerClient(std::string Login, std::string Password) {}
 
-void ClientServer::logInClient(std::string Login, std::string Password) {
-
-}
-
-void ClientServer::logOutClient(long ClientID) {
-
-}
-
-void ClientServer::registerClient(std::string Login, std::string Password) {
-
-}
-
-void ClientServer::getTimeCode(long PassID) {
-// Здесь ты получаешь текущее время
-/*
-  ___   _      __   __     _       ____   _   _ 
- |_ _| | |     \ \ / /    / \     / ___| | | | |
-  | |  | |      \ V /    / _ \   | |  _  | | | |
-  | |  | |___    | |    / ___ \  | |_| | | |_| |
- |___| |_____|   |_|   /_/   \_\  \____|  \___/ 
-*/
-
+void ClientServer::getTimeCode(uint64_t PassID) {
+  // Здесь ты получаешь текущее время
+  /*
+    ___   _      __   __     _       ____   _   _
+   |_ _| | |     \ \ / /    / \     / ___| | | | |
+    | |  | |      \ V /    / _ \   | |  _  | | | |
+    | |  | |___    | |    / ___ \  | |_| | | |_| |
+   |___| |_____|   |_|   /_/   \_\  \____|  \___/
+  */
 }

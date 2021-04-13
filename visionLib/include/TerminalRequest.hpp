@@ -1,15 +1,19 @@
-//
-// Created by Monkeys on 11.04.2021.
-//
+// Copyright 2021 Monkeys. All rights reserved.
+//  __  __                   _  __
+// |  \/  |   ___    _ __   | |/ /   ___   _   _   ___
+// | |\/| |  / _ \  | '_ \  | ' /   / _ \ | | | | / __|
+// | |  | | | (_) | | | | | | . \  |  __/ | |_| | \__ \
+// |_|  |_|  \___/  |_| |_| |_|\_\  \___|  \__, | |___/
+//                                         |___/
 
-#ifndef MONKEYS_TERMINAL_SERVER_HPP
-#define MONKEYS_TERMINAL_SERVER_HPP
+#ifndef VISIONLIB_INCLUDE_TERMINALREQUEST_HPP_
+#define VISIONLIB_INCLUDE_TERMINALREQUEST_HPP_
 
 class TerminalServer {
-public:
-    void waitRequest();
-    void waitConnection();
-    void reply();
+ public:
+  void waitRequest();
+  void waitConnection();
+  void reply();
 };
 
-#endif //MONKEYS_TERMINAL_SERVER_HPP
+#endif  // VISIONLIB_INCLUDE_TERMINALREQUEST_HPP_

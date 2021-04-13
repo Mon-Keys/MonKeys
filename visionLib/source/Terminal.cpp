@@ -1,21 +1,17 @@
-//
-// Created by Monkeys on 11.04.2021.
-//
+// Copyright 2021 Monkeys. All rights reserved.
+//  __  __                   _  __
+// |  \/  |   ___    _ __   | |/ /   ___   _   _   ___
+// | |\/| |  / _ \  | '_ \  | ' /   / _ \ | | | | / __|
+// | |  | | | (_) | | | | | | . \  |  __/ | |_| | \__ \
+// |_|  |_|  \___/  |_| |_| |_|\_\  \___|  \__, | |___/
+//                                         |___/
 
 #include "../include/Terminal.hpp"
 
-void Terminal::open() {
+void Terminal::open() {}
 
-}
+void Terminal::readTimeCode() {}
 
-void Terminal::readTimeCode() {
+void Terminal::serverRequest() {}
 
-}
-
-void Terminal::serverRequest() {
-
-}
-
-void Terminal::establishConnection() {
-
-}
+void Terminal::establishConnection() {}
