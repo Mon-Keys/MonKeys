@@ -1,8 +1,7 @@
-#include "gtest/gtest.h"
-#include "gmock/gmock.h"
-#include "../include/Client.hpp"
+// Copyright 2021 MonKeys
 
-using ::testing::AtLeast; 
+#include "gtest/gtest.h"
+#include "../include/Client.hpp"
 
 
 TEST(TestClient, correct_log_in) {
@@ -11,7 +10,7 @@ TEST(TestClient, correct_log_in) {
     client.establishConnection(url);
     client.logIn();
     EXPECT_TRUE(client.getIsLogIn());
-    client.breakConection();    
+    client.breakConection();
 }
 
 TEST(TestClient, unauthorized_client) {
@@ -29,7 +28,7 @@ TEST(TestClient, correct_log_out) {
     client.logIn();
     client.logOut();
     EXPECT_FALSE(client.getIsLogIn());
-    client.breakConection();    
+    client.breakConection();
 }
 
 TEST(TestClient, correct_registration) {
@@ -41,18 +40,13 @@ TEST(TestClient, correct_registration) {
     client.breakConection();
 }
 
-class MockPass : public Client::Pass {
- public:
-    MOCK_METHOD2(requestTempCode, void());
-}
-
 TEST(TestClient, correct_getting_temp_pass) {
     Client client;
     const char *url = "htttp://mail.ru";
     client.establishConnection(url);
     client.logIn();
     const int numberOfPasses = 4;
-    MockPass *currentPasses = new MockPass[numberOfPasses];
+    Client::Pass *currentPasses = new Client::Pass[numberOfPasses];
     std::string *privateKeys = new std::string[numberOfPasses];
     privateKeys[0] = "qwert";
     privateKeys[1] = "zxcvb";
@@ -63,19 +57,17 @@ TEST(TestClient, correct_getting_temp_pass) {
     companyNames[1] = "steam";
     companyNames[2] = "lol";
     companyNames[3] = "mda";
-    for (int i = 0; i < numberOfPasses; i++) {
+    for (uint64_t i = 0; i < numberOfPasses; i++) {
         currentPasses[i].setID(i);
-        currentPasses[i].setprivateKey(privateKeys[i]);
+        currentPasses[i].setPrivateKey(privateKeys[i]);
         currentPasses[i].setCompanyName(companyNames[i]);
     }
-    EXPECT_CALL(currentPasses, requestTempCode()).Times(AtLeast(1));
     client.setPasses(currentPasses);
     std::string firstTempPass = client.getTempPass(0);
     sleep(10);
     std::string secondTempPass = client.getTempPass(0);
     EXPECT_EQ(firstTempPass, secondTempPass);
     client.breakConection();
-
 }
 
 TEST(TestClient, correct_connecton_establishing) {

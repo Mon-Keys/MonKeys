@@ -1,14 +1,27 @@
-//
-// Created by Monkeys on 11.04.2021.
-//
+// Copyright 2021 MonKeys
 
-#ifndef MONKEYS_HTTPSERVER_HPP
-#define MONKEYS_HTTPSERVER_HPP
+#ifndef VISIONLIB_INCLUDE_CLIENTREQUEST_HPP_
+#define VISIONLIB_INCLUDE_CLIENTREQUEST_HPP_
 
 class ClientRequest {
-    void waitRequest();
+ public:
+    ClientRequest();
+    ~ClientRequest();
+
+    ClientRequest(const ClientRequest&) = delete;
+    ClientRequest(ClientRequest&&) = delete;
+
+    ClientRequest& operator=(const ClientRequest&) = delete;
+    ClientRequest& operator=(ClientRequest&&) = delete;
+
+ private:
+    void initServer();
+    void initLogger();
+    void setLoggerLevel();
     void waitConnection();
+    void waitRequest();
+    void runHandler();
     void reply();
 };
 
-#endif //MONKEYS_HTTPSERVER_HPP
+#endif  // VISIONLIB_INCLUDE_CLIENTREQUEST_HPP_

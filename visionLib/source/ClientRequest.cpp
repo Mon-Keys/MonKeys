@@ -1,18 +1,11 @@
-//
-// Created by Monkeys on 11.04.2021.
-//
+// Copyright 2021 MonKeys
 
-#include <iostream>
 #include "../include/ClientRequest.hpp"
 
-void ClientRequest::waitRequest() {
-
-}
-
-void ClientRequest::waitConnection() {
-
-}
-
-void ClientRequest::reply() {
-
-}
+void ClientRequest::initServer() {}
+void ClientRequest::initLogger() {}
+void ClientRequest::setLoggerLevel() {}
+void ClientRequest::waitConnection() {}
+void ClientRequest::waitRequest() {}
+void ClientRequest::runHandler() {}
+void ClientRequest::reply() {}
