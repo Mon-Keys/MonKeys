@@ -25,6 +25,7 @@ void Client::breakConection() {}
 bool Client::getIsConnected() { return false; }
 bool Client::getIsLogIn() { return false; }
 Client::Pass Client::getPass(uint16_t index) { return Pass(); }
+void Client::setPasses(Pass* currentPasses) {}
 void Client::setIsConnected(const bool value) {}
 void Client::setIslogIn(const bool value) {}
 void Client::Pass::requestTempCode() {}

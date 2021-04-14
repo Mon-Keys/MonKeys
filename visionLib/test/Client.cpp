@@ -46,10 +46,10 @@ TEST(TestClient, correct_registration) {
   client.breakConection();
 }
 
-/*
+
 TEST(TestClient, correct_getting_temp_pass) {
   Client client;
-  const char *url = "htttp://mail.ru";
+  const char *url = "http://mail.ru";
   client.establishConnection(url);
   client.logIn();
   const int numberOfPasses = 4;
@@ -61,9 +61,9 @@ TEST(TestClient, correct_getting_temp_pass) {
   privateKeys[3] = "vbhgfvbnm";
   std::string *companyNames = new std::string[numberOfPasses];
   companyNames[0] = "Mail.ru";
-  companyNames[1] = "steam";
-  companyNames[2] = "lol";
-  companyNames[3] = "mda";
+  companyNames[1] = "Steam";
+  companyNames[2] = "MonKeys";
+  companyNames[3] = "BMSTU";
   for (uint64_t i = 0; i < numberOfPasses; i++) {
     currentPasses[i].setID(i);
     currentPasses[i].setPrivateKey(privateKeys[i]);
@@ -75,8 +75,11 @@ TEST(TestClient, correct_getting_temp_pass) {
   std::string secondTempPass = client.getTempPass(0);
   EXPECT_EQ(firstTempPass, secondTempPass);
   client.breakConection();
+  delete []currentPasses;
+  delete []privateKeys;
+  delete []companyNames;
 }
-*/
+
 
 TEST(TestClient, correct_connecton_establishing) {
   Client client;

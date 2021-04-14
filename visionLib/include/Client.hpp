@@ -11,7 +11,7 @@
 
 #include <string>
 
-#include "../include/WebApplicationClient.hpp"
+#include "WebApplicationClient.hpp"
 
 class Client : public IWebApplicationClient {
  public:
