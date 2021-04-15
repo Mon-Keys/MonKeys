@@ -7,6 +7,7 @@
 //                                         |___/
 
 #include "ClientRequest.hpp"
+#include "ClientServer.hpp"
 
 #include "ClientServer.hpp"
 #include "gmock/gmock.h"
