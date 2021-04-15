@@ -1,3 +1,4 @@
+
 // Copyright 2021 Monkeys. All rights reserved.
 //  __  __                   _  __
 // |  \/  |   ___    _ __   | |/ /   ___   _   _   ___
@@ -27,7 +28,7 @@ class TimeCodeGenerator {
 
  public:
   TimeCodeGenerator(std::string privateKey, uint64_t PassID,
-                    uint16_t timeInterval, uint64_t timeStamp);
+                    uint64_t CompanyID , uint16_t timeInterval, uint64_t timeStamp);
   std::string generateTimeCode();
   TimeCodeGenerator();
   ~TimeCodeGenerator();
@@ -41,7 +42,9 @@ private:
   uint64_t PassID;
   std::string timePart;
   uint64_t decodeFrom64(std::string toDecode);
+  bool valid;
 public:
+  bool isValid();
   explicit TimeCode(std::string timecodeString);
   ~TimeCode();
   uint64_t getCompanyID();
