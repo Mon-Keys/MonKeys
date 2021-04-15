@@ -14,9 +14,6 @@
 
 class ClientServer {
  public:
-  void getClientDataFromDB(uint64_t ID);
-  void getPassDataFromDB(uint64_t PassID);
-  void getCompanyDataFromDB(uint64_t CompanyID);
   void logInClient(std::string Login, std::string Password);
   void logOutClient(uint64_t ClientID);
   void registerClient(std::string Login, std::string Password);

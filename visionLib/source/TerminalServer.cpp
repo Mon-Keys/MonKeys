@@ -13,9 +13,3 @@
 void TerminalServer::compareTimeCode() {}
 
 void TerminalServer::generateTimeCode() {}
-
-void TerminalServer::getClientDataFromDB() {}
-
-void TerminalServer::getCompanyDataFromDB() {}
-
-void TerminalServer::getPassDataFromDB() {}

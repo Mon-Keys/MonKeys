@@ -11,9 +11,6 @@
 
 class TerminalServer {
  public:
-  void getClientDataFromDB();
-  void getPassDataFromDB();
-  void getCompanyDataFromDB();
   void generateTimeCode();
   void compareTimeCode();
 
