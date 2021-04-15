@@ -105,14 +105,17 @@ class DataBase {
 
   // Конектится к базе данных, создается объет таблицы
 
-  // std::vector<PassDB> sql_req(const std::string& sql_request);
+  std::vector<PassDB> sqlReqForPass(const std::string& sql_request);
+  std::vector<ClientDB> sqlReqForClient(const std::string& sql_request);
+  std::vector<CompanyDB> sqlReqForCompany(const std::string& sql_request);
+  std::vector<PassageDB> sqlReqForPassage(const std::string& sql_request);
 
   uint64_t sql_req_for_insert(const std::string& sql_request);
 
-  uint64_t insertPass(const PassDB Pass);
-  uint64_t insertPassage(const PassageDB Passage);
-  uint64_t insertClient(const ClientDB Client);
-  uint64_t insertCompany(const CompanyDB Company);
+  uint64_t insertPass(const PassDB& Pass);
+  uint64_t insertPassage(const PassageDB& Passage);
+  uint64_t insertClient(const ClientDB& Client);
+  uint64_t insertCompany(const CompanyDB& Company);
 
   bool deletePass(const uint64_t PassID);
   bool deletePassage(const uint64_t PassageID);

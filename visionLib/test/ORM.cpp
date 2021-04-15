@@ -33,60 +33,12 @@ class MyDataBase {
   }
 };
 
-// class DB {
-//   DataBase& dbC;
+class DB : public DataBase {
+  DataBase& dbC;
 
-//  public:
-//   explicit DB(DataBase& _dbC) : dbC(_dbC) {}
-
-//   uint64_t insertPasslol(const PassDB Pass) { return dbC.insertPass(Pass); }
-//   uint64_t insertPassagelol(const PassageDB Passage) {
-//     return dbC.insertPassage(Passage);
-//   }
-//   uint64_t insertClientlol(const ClientDB Client) {
-//     return dbC.insertClient(Client);
-//   }
-//   uint64_t insertCompanylol(const CompanyDB Company) {
-//     return dbC.insertCompany(Company);
-//   }
-
-//   // bool PassExists(const uint64_t PassID) {
-//   //   std::vector<PassDB> res = dbC.sql_req("skjfh");
-//   //   for (auto& iter : res) {
-//   //     if (iter.getID() == PassID) {
-//   //       return true;
-//   //     }
-//   //   }
-//   //   return false;
-//   // }
-//   // bool ClientExists(const uint64_t ClientID) {
-//   //   std::vector<ClientDB> res = dbC.sql_req("skjfh");
-//   //   for (auto& iter : res) {
-//   //     if (iter.getID() == ClientID) {
-//   //       return true;
-//   //     }
-//   //   }
-//   //   return false;
-//   // }
-//   // bool CompanyExists(const uint64_t CompanyID) {
-//   //   std::vector<CompanyDB> res = dbC.sql_req("skjfh");
-//   //   for (auto& iter : res) {
-//   //     if (iter.getID() == CompanyID) {
-//   //       return true;
-//   //     }
-//   //   }
-//   //   return false;
-//   // }
-//   // bool PassageExistslol(const uint64_t PassageID) {
-//   //   std::vector<PassageDB> res = dbC.sql_req("skjfh");
-//   //   for (auto& iter : res) {
-//   //     if (iter.getID() == PassageID) {
-//   //       return true;
-//   //     }
-//   //   }
-//   //   return false;
-//   // }
-// };
+ public:
+  explicit DB(DataBase& _dbC) : dbC(_dbC) {}
+};
 
 class MockDBC : public DataBaseConnect {
  public:
@@ -94,25 +46,25 @@ class MockDBC : public DataBaseConnect {
   MOCK_METHOD1(logOut, bool(std::string username));
 };
 
-// class MockDBPassExist : public DataBase {
-//  public:
-//   MOCK_METHOD1(sql_req, std::vector<PassDB>(const std::string& sql_request));
-// };
+class MockDBPassExist : public DataBase {
+ public:
+  MOCK_METHOD1(sqlReqForPass, std::vector<PassDB>(const std::string& sql_request));
+};
 
-// class MockDBClientExist : public DataBase {
-//  public:
-//   MOCK_METHOD1(sql_req, std::vector<ClientDB>(const std::string& sql_request));
-// };
+class MockDBClientExist : public DataBase {
+ public:
+  MOCK_METHOD1(sqlReqForClient, std::vector<ClientDB>(const std::string& sql_request));
+};
 
-// class MockDBCompanyExist : public DataBase {
-//  public:
-//   MOCK_METHOD1(sql_req, std::vector<CompanyDB>(const std::string& sql_request));
-// };
+class MockDBCompanyExist : public DataBase {
+ public:
+  MOCK_METHOD1(sqlReqForCompany, std::vector<CompanyDB>(const std::string& sql_request));
+};
 
-// class MockDBPassageExist : public DataBase {
-//  public:
-//   MOCK_METHOD1(sql_req, std::vector<PassageDB>(const std::string& sql_request));
-// };
+class MockDBPassageExist : public DataBase {
+ public:
+  MOCK_METHOD1(sqlReqForPassage, std::vector<PassageDB>(const std::string& sql_request));
+};
 
 class MockDBInsert : public DataBase {
  public:
@@ -131,9 +83,9 @@ TEST(MyDBTest, LoginTest) {
   EXPECT_EQ(res, 1);
 }
 
-TEST(DBTest, InsertTest) {
+TEST(DBInsertTest, InsertPassTest) {
   MockDBInsert mcdb;
-  DataBase db(mcdb);
+  DB db(mcdb);
 
   PassDB pass;
 
@@ -143,86 +95,129 @@ TEST(DBTest, InsertTest) {
   EXPECT_EQ(res, 1);
 }
 
-// TEST(DBTest, TestPassExists) {
-//   MockDBPassExist mcdb;
-//   DB db(mcdb);
+TEST(DBInsertTest, InsertClientTest) {
+  MockDBInsert mcdb;
+  DB db(mcdb);
 
-//   std::vector<PassDB> res;
+  ClientDB client;
 
-//   for (int i = 0; i < 3; i++) {
-//     PassDB pass;
-//     pass.setClientID(i);
-//     pass.setID(i);
-//     pass.setprivate(STR);
-//     pass.setCompanyID(i);
-//     res.push_back(pass);
-//   }
+  ON_CALL(mcdb, sql_req_for_insert(_)).WillByDefault(Return(1));
 
-//   EXPECT_CALL(mcdb, sql_req(_)).Times((1)).WillOnce(Return(res));
+  uint64_t res = db.insertClient(client);
+  EXPECT_EQ(res, 1);
+}
 
-//   bool ex = db.PassExists(1);
-//   EXPECT_EQ(ex, true);
-// }
+TEST(DBInsertTest, InsertCompanyTest) {
+  MockDBInsert mcdb;
+  DB db(mcdb);
 
-// TEST(DBTest, TestCompanyExists) {
-//   MockDBCompanyExist mcdb;
-//   DB db(mcdb);
+  CompanyDB company;
 
-//   std::vector<CompanyDB> res;
+  ON_CALL(mcdb, sql_req_for_insert(_)).WillByDefault(Return(1));
 
-//   for (int i = 0; i < 3; i++) {
-//     CompanyDB company;
-//     company.setID(i);
-//     company.setName("sdgds");
-//     res.push_back(company);
-//   }
+  uint64_t res = db.insertCompany(company);
+  EXPECT_EQ(res, 1);
+}
 
-//   EXPECT_CALL(mcdb, sql_req(_)).Times((1)).WillOnce(Return(res));
+TEST(DBInsertTest, InsertPassageTest) {
+  MockDBInsert mcdb;
+  DB db(mcdb);
 
-//   bool ex = db.CompanyExists(1);
-//   EXPECT_EQ(ex, true);
-// }
+  PassageDB passage;
 
-// TEST(DBTest, TestClientExists) {
-//   MockDBClientExist mcdb;
-//   DB db(mcdb);
+  ON_CALL(mcdb, sql_req_for_insert(_)).WillByDefault(Return(1));
 
-//   std::vector<ClientDB> res;
+  uint64_t res = db.insertPassage(passage);
+  EXPECT_EQ(res, 1);
+}
 
-//   for (int i = 0; i < 3; i++) {
-//     ClientDB client;
-//     client.setID(i);
-//     client.setLogin("login");
-//     client.setPassword("password");
-//     client.setEmail("inagdimaev@mail.ru");
-//     res.push_back(client);
-//   }
+TEST(DBExistsTest, TestPassExists) {
+  MockDBPassExist mcdb;
+  DB db(mcdb);
 
-//   EXPECT_CALL(mcdb, sql_req(_)).Times((1)).WillOnce(Return(res));
+  std::vector<PassDB> res;
 
-//   bool ex = db.PassExists(1);
-//   EXPECT_EQ(ex, true);
-// }
+  for (int i = 1; i < 3; i++) {
+    PassDB pass;
+    pass.setClientID(i);
+    pass.setID(i);
+    pass.setprivate(STR);
+    pass.setCompanyID(i);
+    res.push_back(pass);
+  }
 
-// TEST(DBTest, TestPassageExists) {
-//   MockDBPassExist mcdb;
-//   DB db(mcdb);
+  for(auto& iter: res) {
+    std::cout << iter.getID() << std::endl;
+    std::cout << iter.getprivate() << std::endl;
+    std::cout << iter.getCompanyID() << std::endl;
+    std::cout << iter.getClientID() << std::endl;
+  }
 
-//   std::vector<PassageDB> res;
+  ON_CALL(mcdb, sqlReqForPass(_)).WillByDefault(Return(res));
 
-//   time_t time_lol = time();
+  bool ex = db.PassExists(1);
+  EXPECT_TRUE(ex);
+}
 
-//   for (int i = 0; i < 3; i++) {
-//     PassageDB passage;
-//     passage.setID(i);
-//     passage.setActionType(0);
-//     passage.setTime(time_lol);
-//     passage.setPassID(i);
-//     res.push_back(passage);
-//   }
+TEST(DBExistsTest, TestCompanyExists) {
+  MockDBCompanyExist mcdb;
+  DB db(mcdb);
 
-//   EXPECT_CALL(mcdb, sql_req(_)).Times((1)).WillOnce(Return(res));
+  std::vector<CompanyDB> res;
 
-//   bool ex = db.PassExists(1);
-//   EXPECT_EQ(ex, true);
-// }
+  for (int i = 0; i < 3; i++) {
+    CompanyDB company;
+    company.setID(i);
+    company.setName("sdgds");
+    res.push_back(company);
+  }
+
+  ON_CALL(mcdb, sqlReqForCompany(_)).WillByDefault(Return(res));
+
+  bool ex = db.CompanyExists(1);
+  EXPECT_TRUE(ex);
+}
+
+TEST(DBExistsTest, TestClientExists) {
+  MockDBClientExist mcdb;
+  DB db(mcdb);
+
+  std::vector<ClientDB> res;
+
+  for (int i = 0; i < 3; i++) {
+    ClientDB client;
+    client.setID(i);
+    client.setLogin("login");
+    client.setPassword("password");
+    client.setEmail("inagdimaev@mail.ru");
+    res.push_back(client);
+  }
+
+  ON_CALL(mcdb, sqlReqForClient(_)).WillByDefault(Return(res));
+
+  bool ex = db.ClientExists(1);
+  EXPECT_TRUE(ex);
+}
+
+TEST(DBExistsTest, TestPassageExists) {
+  MockDBPassageExist mcdb;
+  DB db(mcdb);
+
+  std::vector<PassageDB> res;
+
+  time_t time_now = time(NULL);
+
+  for (int i = 0; i < 3; i++) {
+    PassageDB passage;
+    passage.setID(i);
+    passage.setActionType(0);
+    passage.setTime(time_now);
+    passage.setPassID(i);
+    res.push_back(passage);
+  }
+
+  ON_CALL(mcdb, sqlReqForPassage(_)).WillByDefault(Return(res));
+
+  bool ex = db.PassageExists(1);
+  EXPECT_TRUE(ex);
+}
