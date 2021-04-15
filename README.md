@@ -5,6 +5,9 @@
 [![Issues](https://img.shields.io/github/issues/perlinleo/MonKeys)](https://github.com/perlinleo/MonKeys/issues)
 ![Commit Activity](https://img.shields.io/github/commit-activity/m/perlinleo/MonKeys)
 ![Last commit](https://img.shields.io/github/last-commit/perlinleo/MonKeys)
+
+![UML](https://github.com/perlinleo/MonKeys/blob/main/diagrams/UML.svg)
+
 ```json
 {
     "name": "MonKeys",
