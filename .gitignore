@@ -6,3 +6,4 @@
 
 #Build Folder
 build/
+cmake-build-debug/

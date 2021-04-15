@@ -20,7 +20,7 @@ class IWebApplicationClient {
   virtual std::string getTempPass(uint64_t passID) = 0;
 
   virtual void establishConnection(const char *url) = 0;
-  virtual void breakConection() = 0;
+  virtual void breakConnection() = 0;
 };
 
 #endif  // VISIONLIB_INCLUDE_WEBAPPLICATIONCLIENT_HPP_

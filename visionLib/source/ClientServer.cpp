@@ -6,26 +6,12 @@
 // |_|  |_|  \___/  |_| |_| |_|\_\  \___|  \__, | |___/
 //                                         |___/
 
-#include "../include/ClientServer.hpp"
+#include <string>
 
-void ClientServer::getClientDataFromDB(uint64_t ID) {}
+#include "../include/TerminalServer.hpp"
 
-void ClientServer::getPassDataFromDB(uint64_t PassID) {}
-void ClientServer::getCompanyDataFromDB(uint64_t CompanyID) {}
-
-void ClientServer::logInClient(std::string Login, std::string Password) {}
-
-void ClientServer::logOutClient(uint64_t ClientID) {}
-
-void ClientServer::registerClient(std::string Login, std::string Password) {}
-
-void ClientServer::getTimeCode(uint64_t PassID) {
-  // Здесь ты получаешь текущее время
-  /*
-    ___   _      __   __     _       ____   _   _
-   |_ _| | |     \ \ / /    / \     / ___| | | | |
-    | |  | |      \ V /    / _ \   | |  _  | | | |
-    | |  | |___    | |    / ___ \  | |_| | | |_| |
-   |___| |_____|   |_|   /_/   \_\  \____|  \___/
-  */
+bool compareTimeCode(std::string firstTimeCode, std::string secondTimeCode) {
+  return true;
 }
+
+bool generateTimeCode(uint64_t PassID) { return true; }

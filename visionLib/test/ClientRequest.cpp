@@ -7,15 +7,16 @@
 //                                         |___/
 
 #include "ClientRequest.hpp"
+
 #include "ClientServer.hpp"
 #include "gmock/gmock.h"
 #include "gtest/gtest.h"
 
+using ::testing::AtLeast;
+using ::testing::Return;
+
 class MockClientServer : public ClientServer {
  public:
-  MOCK_METHOD1(getClientDataFromDB, void(uint64_t ID));
-  MOCK_METHOD1(getPassDataFromDB, void(uint64_t PassID));
-  MOCK_METHOD1(getCompanyDataFromDB, void(uint64_t CompanyID));
   MOCK_METHOD2(logInClient, void(std::string Login, std::string Password));
   MOCK_METHOD1(logOutClient, void(uint64_t ClientID));
   MOCK_METHOD2(registerClient, void(std::string Login, std::string Password));
@@ -23,7 +24,8 @@ class MockClientServer : public ClientServer {
 };
 
 TEST(MockClientServer, RequestHandlerTest) {
-  MockClientServer clientServer;
+  ASSERT_TRUE(true);
 
-  EXPECT_CALL(clientServer, getClientDataFromDB).Times(testing::AtLeast(1));
+  MockClientServer clientServer;
+  EXPECT_CALL(clientServer, logInClient).Times(testing::AtLeast(1));
 }
