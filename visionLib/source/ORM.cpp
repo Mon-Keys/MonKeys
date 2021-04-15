@@ -13,17 +13,20 @@ std::vector<PassDB> DataBase::sqlReqForPass(const std::string& sql_request) {
   return result;
 }
 
-std::vector<ClientDB> DataBase::sqlReqForClient(const std::string& sql_request) {
+std::vector<ClientDB> DataBase::sqlReqForClient(
+    const std::string& sql_request) {
   std::vector<ClientDB> result;
   return result;
 }
 
-std::vector<PassageDB> DataBase::sqlReqForPassage(const std::string& sql_request) {
+std::vector<PassageDB> DataBase::sqlReqForPassage(
+    const std::string& sql_request) {
   std::vector<PassageDB> result;
   return result;
 }
 
-std::vector<CompanyDB> DataBase::sqlReqForCompany(const std::string& sql_request) {
+std::vector<CompanyDB> DataBase::sqlReqForCompany(
+    const std::string& sql_request) {
   std::vector<CompanyDB> result;
   return result;
 }
@@ -33,52 +36,92 @@ uint64_t DataBase::sql_req_for_insert(const std::string& sql_request) {
   return result;
 }
 
-uint64_t DataBase::insertPass(const PassDB& Pass) { return sql_req_for_insert("fsdf"); }
-uint64_t DataBase::insertPassage(const PassageDB& Passage) { return sql_req_for_insert("fsdf"); }
-uint64_t DataBase::insertClient(const ClientDB& Client) { return sql_req_for_insert("fsdf"); }
-uint64_t DataBase::insertCompany(const CompanyDB& Company) { return sql_req_for_insert("fsdf"); }
+uint64_t DataBase::insertPass(const PassDB& Pass) {
+  return sql_req_for_insert("fsdf");
+}
+uint64_t DataBase::insertPassage(const PassageDB& Passage) {
+  return sql_req_for_insert("fsdf");
+}
+uint64_t DataBase::insertClient(const ClientDB& Client) {
+  return sql_req_for_insert("fsdf");
+}
+uint64_t DataBase::insertCompany(const CompanyDB& Company) {
+  return sql_req_for_insert("fsdf");
+}
 
 bool DataBase::deletePass(const uint64_t PassID) { return true; }
 bool DataBase::deletePassage(const uint64_t PassageID) { return true; }
-bool DataBase::deletePass(const uint64_t CompanyID, uint64_t ClientID) { return true; }
+bool DataBase::deletePass(const uint64_t CompanyID, uint64_t ClientID) {
+  return true;
+}
 bool DataBase::deleteClient(const uint64_t ClientID) { return true; }
 bool DataBase::deleteCompany(const uint64_t CompanyID) { return true; }
 
 bool DataBase::PassExists(const uint64_t PassID) {
-  DataBase db;
-  std::vector<PassDB> res = db.sqlReqForPass("skjfh");
-  for (auto& iter : res) {
-    if (iter.getID() == PassID) {
+  std::vector<PassDB> res = sqlReqForPass("skjfh");
+  // std::vector<PassDB> res;
+  // for (int i = 1; i < 3; i++) {
+  //   PassDB pass;
+  //   pass.setClientID(i);
+  //   pass.setID(i);
+  //   pass.setprivate(STR);
+  //   pass.setCompanyID(i);
+  //   res.push_back(pass);
+  // }
+  for (int i = 0; i < res.size(); i++) {
+    if (res[i].getID() == PassID) {
       return true;
     }
   }
   return false;
 }
 bool DataBase::ClientExists(const uint64_t ClientID) {
-  DataBase db;
-  std::vector<ClientDB> res = db.sqlReqForClient("skjfh");
-  for (auto& iter : res) {
-    if (iter.getID() == ClientID) {
+  std::vector<ClientDB> res = sqlReqForClient("skjfh");
+  // std::vector<ClientDB> res;
+  // for (int i = 0; i < 3; i++) {
+  //   ClientDB client;
+  //   client.setID(i);
+  //   client.setLogin("login");
+  //   client.setPassword("password");
+  //   client.setEmail("inagdimaev@mail.ru");
+  //   res.push_back(client);
+  // }
+  for (int i = 0; i <res.size(); i++){
+    if (res[i].getID() == ClientID) {
       return true;
     }
   }
   return false;
 }
 bool DataBase::CompanyExists(const uint64_t CompanyID) {
-  DataBase db;
-  std::vector<CompanyDB> res = db.sqlReqForCompany("skjfh");
-  for (auto& iter : res) {
-    if (iter.getID() == CompanyID) {
+  std::vector<CompanyDB> res = sqlReqForCompany("skjfh");
+  // std::vector<CompanyID> res;
+  // for (int i = 0; i < 3; i++) {
+  //   CompanyDB company;
+  //   company.setID(i);
+  //   company.setName("sdgds");
+  //   res.push_back(company);
+  // }
+  for (int i = 0; i <res.size(); i++){
+    if (res[i].getID() == CompanyID) {
       return true;
     }
   }
   return false;
 }
 bool DataBase::PassageExists(const uint64_t PassageID) {
-  DataBase db;
-  std::vector<PassageDB> res = db.sqlReqForPassage("skjfh");
-  for (auto& iter : res) {
-    if (iter.getID() == PassageID) {
+  std::vector<PassageDB> res = sqlReqForPassage("skjfh");
+  // std::vector<PassageID> res;
+  // for (int i = 0; i < 3; i++) {
+  //   PassageDB passage;
+  //   passage.setID(i);
+  //   passage.setActionType(0);
+  //   passage.setTime(time_now);
+  //   passage.setPassID(i);
+  //   res.push_back(passage);
+  // }
+  for (int i = 0; i <res.size(); i++){
+    if (res[i].getID() == PassageID) {
       return true;
     }
   }

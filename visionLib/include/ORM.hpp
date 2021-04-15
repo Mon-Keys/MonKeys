@@ -102,7 +102,6 @@ class DataBaseConnect {
 
 class DataBase {
  public:
-
   // Конектится к базе данных, создается объет таблицы
 
   std::vector<PassDB> sqlReqForPass(const std::string& sql_request);

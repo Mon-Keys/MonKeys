@@ -8,10 +8,14 @@
 
 #include "../include/ClientServer.hpp"
 
-bool ClientServer::logInClient(std::string Login, std::string Password) { return true;}
+bool ClientServer::logInClient(std::string Login, std::string Password) {
+  return true;
+}
 
-bool ClientServer::logOutClient(uint64_t ClientID) {return true;}
+bool ClientServer::logOutClient(uint64_t ClientID) { return true; }
 
-bool ClientServer::registerClient(std::string Login, std::string Password) {return true;}
+bool ClientServer::registerClient(std::string Login, std::string Password) {
+  return true;
+}
 
-std::string ClientServer::getTimeCode(uint64_t PassID) {return "";}
+std::string ClientServer::getTimeCode(uint64_t PassID) { return ""; }

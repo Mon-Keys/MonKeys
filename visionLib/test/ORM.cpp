@@ -48,27 +48,31 @@ class MockDBC : public DataBaseConnect {
 
 class MockDBPassExist : public DataBase {
  public:
-  MOCK_METHOD1(sqlReqForPass, std::vector<PassDB>(const std::string& sql_request));
+  MOCK_METHOD1(sqlReqForPass,
+               std::vector<PassDB>(const std::string& sql_request));
 };
 
 class MockDBClientExist : public DataBase {
  public:
-  MOCK_METHOD1(sqlReqForClient, std::vector<ClientDB>(const std::string& sql_request));
+  MOCK_METHOD1(sqlReqForClient,
+               std::vector<ClientDB>(const std::string& sql_request));
 };
 
 class MockDBCompanyExist : public DataBase {
  public:
-  MOCK_METHOD1(sqlReqForCompany, std::vector<CompanyDB>(const std::string& sql_request));
+  MOCK_METHOD1(sqlReqForCompany,
+               std::vector<CompanyDB>(const std::string& sql_request));
 };
 
 class MockDBPassageExist : public DataBase {
  public:
-  MOCK_METHOD1(sqlReqForPassage, std::vector<PassageDB>(const std::string& sql_request));
+  MOCK_METHOD1(sqlReqForPassage,
+               std::vector<PassageDB>(const std::string& sql_request));
 };
 
 class MockDBInsert : public DataBase {
  public:
-  MOCK_METHOD1 (sql_req_for_insert, uint64_t (const std::string& sql_request));
+  MOCK_METHOD1(sql_req_for_insert, uint64_t(const std::string& sql_request));
 };
 
 TEST(MyDBTest, LoginTest) {
@@ -144,13 +148,6 @@ TEST(DBExistsTest, TestPassExists) {
     pass.setprivate(STR);
     pass.setCompanyID(i);
     res.push_back(pass);
-  }
-
-  for(auto& iter: res) {
-    std::cout << iter.getID() << std::endl;
-    std::cout << iter.getprivate() << std::endl;
-    std::cout << iter.getCompanyID() << std::endl;
-    std::cout << iter.getClientID() << std::endl;
   }
 
   ON_CALL(mcdb, sqlReqForPass(_)).WillByDefault(Return(res));

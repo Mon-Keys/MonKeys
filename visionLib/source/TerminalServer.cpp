@@ -10,6 +10,8 @@
 
 #include <string>
 
-bool compareTimeCode(std::string firstTimeCode, std::string secondTimeCode) { return true;}
+bool compareTimeCode(std::string firstTimeCode, std::string secondTimeCode) {
+  return true;
+}
 
-bool generateTimeCode(uint64_t PassID) {return true;}
+bool generateTimeCode(uint64_t PassID) { return true; }
