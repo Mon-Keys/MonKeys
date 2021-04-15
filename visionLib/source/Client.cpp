@@ -32,7 +32,7 @@ uint16_t Client::getPassesCount() { return 1; }
 std::string Client::getName() { return ""; }
 bool Client::getIsConnected() { return false; }
 bool Client::getIsLogIn() { return false; }
-Client::Pass Client::getPass(uint16_t index) { return Pass(); }
+Client::Pass Client::getPass(uint64_t index) { return Pass(); }
 
 void Client::setID(uint64_t ID) {}
 void Client::setPasses(Pass* currentPasses) {}

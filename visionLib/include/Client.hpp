@@ -79,7 +79,7 @@ class Client : public IWebApplicationClient {
   Pass* getPasses();
   uint16_t getPassesCount();
   std::string getName();
-  Pass getPass(uint16_t index);
+  Pass getPass(uint64_t index);
   bool getIsConnected();
   bool getIsLogIn();
 
