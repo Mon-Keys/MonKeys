@@ -51,6 +51,7 @@ private:
     std::string ID;
     TempCode currentTempCode;
     bool isConnected;
+    bool isVerification;
 };
 
 #endif  // VISIONLIB_INCLUDE_TERMINAL_HPP_
