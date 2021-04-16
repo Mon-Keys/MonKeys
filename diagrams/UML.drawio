@@ -1,6 +1,6 @@
-<mxfile host="app.diagrams.net" modified="2021-04-15T16:35:13.850Z" agent="5.0 (X11)" etag="R5Zgdd26_BnhxP-e6xjk" version="14.6.0" type="github">
+<mxfile host="app.diagrams.net" modified="2021-04-16T08:56:41.284Z" agent="5.0 (X11)" etag="y_6lf3PHcOjJ2yGbvDLs" version="14.6.0" type="github">
   <diagram id="ccHhQuOtFgzH-oTgrX9H" name="Page-1">
-    <mxGraphModel dx="5688" dy="3216" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="3300" pageHeight="2339" math="0" shadow="0">
+    <mxGraphModel dx="2031" dy="1149" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="3300" pageHeight="2339" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -246,7 +246,7 @@
         <mxCell id="Q09Kz5jGnRR5g8NXDhn--77" value="+ getTimecode()" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" parent="Q09Kz5jGnRR5g8NXDhn--71" vertex="1">
           <mxGeometry y="143" width="167" height="20" as="geometry" />
         </mxCell>
-        <mxCell id="0Zxj14m8eIUil3LLvNbh-7" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" edge="1" parent="1" source="Q09Kz5jGnRR5g8NXDhn--79" target="Q09Kz5jGnRR5g8NXDhn--149">
+        <mxCell id="0Zxj14m8eIUil3LLvNbh-7" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" parent="1" source="Q09Kz5jGnRR5g8NXDhn--79" target="Q09Kz5jGnRR5g8NXDhn--149" edge="1">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
         <mxCell id="Q09Kz5jGnRR5g8NXDhn--79" value="Class: ClientDB" style="swimlane;fontStyle=0;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=55;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=0;marginBottom=0;html=1;strokeWidth=2;fillColor=#fff2cc;strokeColor=#d6b656;" parent="1" vertex="1">
@@ -261,7 +261,7 @@
         <mxCell id="Q09Kz5jGnRR5g8NXDhn--82" value="&lt;font color=&quot;#000000&quot;&gt;- Password: string&lt;/font&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontColor=#808080;" parent="Q09Kz5jGnRR5g8NXDhn--79" vertex="1">
           <mxGeometry y="95" width="140" height="20" as="geometry" />
         </mxCell>
-        <mxCell id="0Zxj14m8eIUil3LLvNbh-6" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0.25;entryY=1;entryDx=0;entryDy=0;" edge="1" parent="1" source="Q09Kz5jGnRR5g8NXDhn--85" target="Q09Kz5jGnRR5g8NXDhn--149">
+        <mxCell id="0Zxj14m8eIUil3LLvNbh-6" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0.25;entryY=1;entryDx=0;entryDy=0;" parent="1" source="Q09Kz5jGnRR5g8NXDhn--85" target="Q09Kz5jGnRR5g8NXDhn--149" edge="1">
           <mxGeometry relative="1" as="geometry">
             <mxPoint x="1394" y="1765" as="targetPoint" />
           </mxGeometry>
@@ -281,7 +281,7 @@
         <mxCell id="Q09Kz5jGnRR5g8NXDhn--89" value="- privateKey: string" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" parent="Q09Kz5jGnRR5g8NXDhn--85" vertex="1">
           <mxGeometry y="115" width="140" height="20" as="geometry" />
         </mxCell>
-        <mxCell id="0Zxj14m8eIUil3LLvNbh-8" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" edge="1" parent="1" source="Q09Kz5jGnRR5g8NXDhn--92" target="Q09Kz5jGnRR5g8NXDhn--149">
+        <mxCell id="0Zxj14m8eIUil3LLvNbh-8" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" parent="1" source="Q09Kz5jGnRR5g8NXDhn--92" target="Q09Kz5jGnRR5g8NXDhn--149" edge="1">
           <mxGeometry relative="1" as="geometry">
             <mxPoint x="1593" y="1804" as="targetPoint" />
           </mxGeometry>
@@ -425,7 +425,7 @@
           <mxGeometry x="2114" y="1006" width="20" height="20" as="geometry" />
         </mxCell>
         <mxCell id="Q09Kz5jGnRR5g8NXDhn--136" value="«interface»&#xa;Verification" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=30;fillColor=#d5e8d4;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;strokeWidth=2;strokeColor=#82b366;" parent="1" vertex="1">
-          <mxGeometry x="2105" y="473" width="140" height="76" as="geometry" />
+          <mxGeometry x="2121" y="473" width="140" height="76" as="geometry" />
         </mxCell>
         <mxCell id="Q09Kz5jGnRR5g8NXDhn--137" value="+ void open()" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" parent="Q09Kz5jGnRR5g8NXDhn--136" vertex="1">
           <mxGeometry y="30" width="140" height="26" as="geometry" />
@@ -480,67 +480,67 @@
         <mxCell id="Q09Kz5jGnRR5g8NXDhn--155" value="+ uint64_t insertPass(const PassDB&amp; Pass);&#xa; " style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" parent="Q09Kz5jGnRR5g8NXDhn--149" vertex="1">
           <mxGeometry y="55" width="559" height="26" as="geometry" />
         </mxCell>
-        <mxCell id="0Zxj14m8eIUil3LLvNbh-3" value="+ uint64_t insertPassage(const PassageDB&amp; Passage);&#xa;&#xa; " style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="Q09Kz5jGnRR5g8NXDhn--149">
+        <mxCell id="0Zxj14m8eIUil3LLvNbh-3" value="+ uint64_t insertPassage(const PassageDB&amp; Passage);&#xa;&#xa; " style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" parent="Q09Kz5jGnRR5g8NXDhn--149" vertex="1">
           <mxGeometry y="81" width="559" height="26" as="geometry" />
         </mxCell>
-        <mxCell id="0Zxj14m8eIUil3LLvNbh-4" value="+ uint64_t insertClient(const ClientDB&amp; Client);&#xa;&#xa;&#xa; " style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="Q09Kz5jGnRR5g8NXDhn--149">
+        <mxCell id="0Zxj14m8eIUil3LLvNbh-4" value="+ uint64_t insertClient(const ClientDB&amp; Client);&#xa;&#xa;&#xa; " style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" parent="Q09Kz5jGnRR5g8NXDhn--149" vertex="1">
           <mxGeometry y="107" width="559" height="26" as="geometry" />
         </mxCell>
-        <mxCell id="0Zxj14m8eIUil3LLvNbh-5" value="+ uint64_t insertCompany(const CompanyDB&amp; Company);&#xa;&#xa;&#xa; " style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="Q09Kz5jGnRR5g8NXDhn--149">
+        <mxCell id="0Zxj14m8eIUil3LLvNbh-5" value="+ uint64_t insertCompany(const CompanyDB&amp; Company);&#xa;&#xa;&#xa; " style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" parent="Q09Kz5jGnRR5g8NXDhn--149" vertex="1">
           <mxGeometry y="133" width="559" height="26" as="geometry" />
         </mxCell>
-        <mxCell id="0Zxj14m8eIUil3LLvNbh-10" value="+ bool deletePass(const uint64_t PassID);&#xa;&#xa;&#xa;&#xa; " style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="Q09Kz5jGnRR5g8NXDhn--149">
+        <mxCell id="0Zxj14m8eIUil3LLvNbh-10" value="+ bool deletePass(const uint64_t PassID);&#xa;&#xa;&#xa;&#xa; " style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" parent="Q09Kz5jGnRR5g8NXDhn--149" vertex="1">
           <mxGeometry y="159" width="559" height="26" as="geometry" />
         </mxCell>
-        <mxCell id="0Zxj14m8eIUil3LLvNbh-11" value="+ bool deletePassage(const uint64_t PassageID);&#xa;&#xa;&#xa;&#xa;&#xa; " style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="Q09Kz5jGnRR5g8NXDhn--149">
+        <mxCell id="0Zxj14m8eIUil3LLvNbh-11" value="+ bool deletePassage(const uint64_t PassageID);&#xa;&#xa;&#xa;&#xa;&#xa; " style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" parent="Q09Kz5jGnRR5g8NXDhn--149" vertex="1">
           <mxGeometry y="185" width="559" height="26" as="geometry" />
         </mxCell>
-        <mxCell id="0Zxj14m8eIUil3LLvNbh-12" value="+ bool deleteClient(const uint64_t ClientID);&#xa;&#xa;&#xa;&#xa;&#xa; " style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="Q09Kz5jGnRR5g8NXDhn--149">
+        <mxCell id="0Zxj14m8eIUil3LLvNbh-12" value="+ bool deleteClient(const uint64_t ClientID);&#xa;&#xa;&#xa;&#xa;&#xa; " style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" parent="Q09Kz5jGnRR5g8NXDhn--149" vertex="1">
           <mxGeometry y="211" width="559" height="26" as="geometry" />
         </mxCell>
-        <mxCell id="0Zxj14m8eIUil3LLvNbh-13" value="+ bool deleteCompany(const uint64_t CompanyID);&#xa;&#xa;&#xa;&#xa;&#xa;&#xa; " style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="Q09Kz5jGnRR5g8NXDhn--149">
+        <mxCell id="0Zxj14m8eIUil3LLvNbh-13" value="+ bool deleteCompany(const uint64_t CompanyID);&#xa;&#xa;&#xa;&#xa;&#xa;&#xa; " style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" parent="Q09Kz5jGnRR5g8NXDhn--149" vertex="1">
           <mxGeometry y="237" width="559" height="26" as="geometry" />
         </mxCell>
-        <mxCell id="0Zxj14m8eIUil3LLvNbh-17" value="+ bool PassExists(const uint64_t PassID);&#xa;&#xa;&#xa;&#xa;&#xa;&#xa;&#xa; " style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="Q09Kz5jGnRR5g8NXDhn--149">
+        <mxCell id="0Zxj14m8eIUil3LLvNbh-17" value="+ bool PassExists(const uint64_t PassID);&#xa;&#xa;&#xa;&#xa;&#xa;&#xa;&#xa; " style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" parent="Q09Kz5jGnRR5g8NXDhn--149" vertex="1">
           <mxGeometry y="263" width="559" height="26" as="geometry" />
         </mxCell>
-        <mxCell id="0Zxj14m8eIUil3LLvNbh-18" value="+ bool ClientExists(const uint64_t ClientID);&#xa;&#xa;&#xa;&#xa;&#xa; " style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="Q09Kz5jGnRR5g8NXDhn--149">
+        <mxCell id="0Zxj14m8eIUil3LLvNbh-18" value="+ bool ClientExists(const uint64_t ClientID);&#xa;&#xa;&#xa;&#xa;&#xa; " style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" parent="Q09Kz5jGnRR5g8NXDhn--149" vertex="1">
           <mxGeometry y="289" width="559" height="26" as="geometry" />
         </mxCell>
-        <mxCell id="0Zxj14m8eIUil3LLvNbh-19" value="+ bool CompanyExists(const uint64_t CompanyID);&#xa;&#xa;&#xa;&#xa;&#xa;&#xa;&#xa; " style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="Q09Kz5jGnRR5g8NXDhn--149">
+        <mxCell id="0Zxj14m8eIUil3LLvNbh-19" value="+ bool CompanyExists(const uint64_t CompanyID);&#xa;&#xa;&#xa;&#xa;&#xa;&#xa;&#xa; " style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" parent="Q09Kz5jGnRR5g8NXDhn--149" vertex="1">
           <mxGeometry y="315" width="559" height="26" as="geometry" />
         </mxCell>
-        <mxCell id="0Zxj14m8eIUil3LLvNbh-20" value="+ std::vector&lt;PassDB&gt; getAllPasses(const std::string&amp; sql_limit, const std::string&amp; sql_offset);&#xa;&#xa;&#xa;&#xa;&#xa;&#xa;&#xa; " style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="Q09Kz5jGnRR5g8NXDhn--149">
+        <mxCell id="0Zxj14m8eIUil3LLvNbh-20" value="+ std::vector&lt;PassDB&gt; getAllPasses(const std::string&amp; sql_limit, const std::string&amp; sql_offset);&#xa;&#xa;&#xa;&#xa;&#xa;&#xa;&#xa; " style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" parent="Q09Kz5jGnRR5g8NXDhn--149" vertex="1">
           <mxGeometry y="341" width="559" height="26" as="geometry" />
         </mxCell>
-        <mxCell id="0Zxj14m8eIUil3LLvNbh-21" value="+ std::vector&lt;PassageDB&gt; getAllPassages(const std::string&amp; sql_limit, const std::string&amp; sql_offset);&#xa;&#xa;&#xa;&#xa;&#xa;&#xa;&#xa;&#xa; " style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="Q09Kz5jGnRR5g8NXDhn--149">
+        <mxCell id="0Zxj14m8eIUil3LLvNbh-21" value="+ std::vector&lt;PassageDB&gt; getAllPassages(const std::string&amp; sql_limit, const std::string&amp; sql_offset);&#xa;&#xa;&#xa;&#xa;&#xa;&#xa;&#xa;&#xa; " style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" parent="Q09Kz5jGnRR5g8NXDhn--149" vertex="1">
           <mxGeometry y="367" width="559" height="26" as="geometry" />
         </mxCell>
-        <mxCell id="0Zxj14m8eIUil3LLvNbh-22" value="+ std::vector&lt;ClientDB&gt; getAllClients(const std::string&amp; sql_limit, const std::string&amp; sql_offset);&#xa;&#xa;&#xa;&#xa;&#xa;&#xa;&#xa; " style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="Q09Kz5jGnRR5g8NXDhn--149">
+        <mxCell id="0Zxj14m8eIUil3LLvNbh-22" value="+ std::vector&lt;ClientDB&gt; getAllClients(const std::string&amp; sql_limit, const std::string&amp; sql_offset);&#xa;&#xa;&#xa;&#xa;&#xa;&#xa;&#xa; " style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" parent="Q09Kz5jGnRR5g8NXDhn--149" vertex="1">
           <mxGeometry y="393" width="559" height="26" as="geometry" />
         </mxCell>
-        <mxCell id="0Zxj14m8eIUil3LLvNbh-23" value="+ std::vector&lt;CompanyDB&gt; getAllCompanys(const std::string&amp; sql_limit, const std::string&amp; sql_offset);&#xa;&#xa;&#xa;&#xa;&#xa;&#xa;&#xa; " style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="Q09Kz5jGnRR5g8NXDhn--149">
+        <mxCell id="0Zxj14m8eIUil3LLvNbh-23" value="+ std::vector&lt;CompanyDB&gt; getAllCompanys(const std::string&amp; sql_limit, const std::string&amp; sql_offset);&#xa;&#xa;&#xa;&#xa;&#xa;&#xa;&#xa; " style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" parent="Q09Kz5jGnRR5g8NXDhn--149" vertex="1">
           <mxGeometry y="419" width="559" height="26" as="geometry" />
         </mxCell>
-        <mxCell id="0Zxj14m8eIUil3LLvNbh-24" value="+ std::vector&lt;PassDB&gt; getClientsPasses(const uint64_t ClientID);&#xa;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="Q09Kz5jGnRR5g8NXDhn--149">
+        <mxCell id="0Zxj14m8eIUil3LLvNbh-24" value="+ std::vector&lt;PassDB&gt; getClientsPasses(const uint64_t ClientID);&#xa;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" parent="Q09Kz5jGnRR5g8NXDhn--149" vertex="1">
           <mxGeometry y="445" width="559" height="26" as="geometry" />
         </mxCell>
-        <mxCell id="0Zxj14m8eIUil3LLvNbh-25" value="+ std::vector&lt;PassDB&gt; getCompanysPasses(const uint64_t CompanyID);&#xa;&#xa;&#xa;&#xa;&#xa;&#xa;&#xa;&#xa;&#xa; " style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="Q09Kz5jGnRR5g8NXDhn--149">
+        <mxCell id="0Zxj14m8eIUil3LLvNbh-25" value="+ std::vector&lt;PassDB&gt; getCompanysPasses(const uint64_t CompanyID);&#xa;&#xa;&#xa;&#xa;&#xa;&#xa;&#xa;&#xa;&#xa; " style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" parent="Q09Kz5jGnRR5g8NXDhn--149" vertex="1">
           <mxGeometry y="471" width="559" height="26" as="geometry" />
         </mxCell>
-        <mxCell id="0Zxj14m8eIUil3LLvNbh-26" value="+ std::vector&lt;PassageDB&gt; getPassesPassages(const uint64_t PassID);&#xa;&#xa;&#xa;&#xa;&#xa;&#xa;&#xa;&#xa; " style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="Q09Kz5jGnRR5g8NXDhn--149">
+        <mxCell id="0Zxj14m8eIUil3LLvNbh-26" value="+ std::vector&lt;PassageDB&gt; getPassesPassages(const uint64_t PassID);&#xa;&#xa;&#xa;&#xa;&#xa;&#xa;&#xa;&#xa; " style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" parent="Q09Kz5jGnRR5g8NXDhn--149" vertex="1">
           <mxGeometry y="497" width="559" height="26" as="geometry" />
         </mxCell>
-        <mxCell id="0Zxj14m8eIUil3LLvNbh-27" value="+ PassDB getPass(const uint64_t PassID);&#xa;&#xa;&#xa;&#xa;&#xa;&#xa;&#xa;&#xa; " style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="Q09Kz5jGnRR5g8NXDhn--149">
+        <mxCell id="0Zxj14m8eIUil3LLvNbh-27" value="+ PassDB getPass(const uint64_t PassID);&#xa;&#xa;&#xa;&#xa;&#xa;&#xa;&#xa;&#xa; " style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" parent="Q09Kz5jGnRR5g8NXDhn--149" vertex="1">
           <mxGeometry y="523" width="559" height="26" as="geometry" />
         </mxCell>
-        <mxCell id="0Zxj14m8eIUil3LLvNbh-28" value="+ PassageDB getPassage(const uint64_t PassageID);&#xa;&#xa;&#xa;&#xa;&#xa;&#xa;&#xa;&#xa; " style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="Q09Kz5jGnRR5g8NXDhn--149">
+        <mxCell id="0Zxj14m8eIUil3LLvNbh-28" value="+ PassageDB getPassage(const uint64_t PassageID);&#xa;&#xa;&#xa;&#xa;&#xa;&#xa;&#xa;&#xa; " style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" parent="Q09Kz5jGnRR5g8NXDhn--149" vertex="1">
           <mxGeometry y="549" width="559" height="26" as="geometry" />
         </mxCell>
-        <mxCell id="0Zxj14m8eIUil3LLvNbh-29" value="+ ClientDB getClient(const uint64_t ClientID);&#xa;&#xa;&#xa;&#xa;&#xa;&#xa;&#xa;&#xa;&#xa; " style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="Q09Kz5jGnRR5g8NXDhn--149">
+        <mxCell id="0Zxj14m8eIUil3LLvNbh-29" value="+ ClientDB getClient(const uint64_t ClientID);&#xa;&#xa;&#xa;&#xa;&#xa;&#xa;&#xa;&#xa;&#xa; " style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" parent="Q09Kz5jGnRR5g8NXDhn--149" vertex="1">
           <mxGeometry y="575" width="559" height="26" as="geometry" />
         </mxCell>
-        <mxCell id="0Zxj14m8eIUil3LLvNbh-30" value="+ PassageDB getPassage(const uint64_t PassageID);&#xa;&#xa;&#xa;&#xa;&#xa;&#xa;&#xa;&#xa; " style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="Q09Kz5jGnRR5g8NXDhn--149">
+        <mxCell id="0Zxj14m8eIUil3LLvNbh-30" value="+ PassageDB getPassage(const uint64_t PassageID);&#xa;&#xa;&#xa;&#xa;&#xa;&#xa;&#xa;&#xa; " style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" parent="Q09Kz5jGnRR5g8NXDhn--149" vertex="1">
           <mxGeometry y="601" width="559" height="26" as="geometry" />
         </mxCell>
         <mxCell id="Q09Kz5jGnRR5g8NXDhn--156" value="&lt;font style=&quot;font-size: 14px&quot;&gt;*&lt;/font&gt;" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;" parent="1" vertex="1">
@@ -552,7 +552,7 @@
         <mxCell id="Q09Kz5jGnRR5g8NXDhn--158" value="&lt;font style=&quot;font-size: 14px&quot;&gt;1&lt;/font&gt;" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;" parent="1" vertex="1">
           <mxGeometry x="1500" y="1464" width="20" height="20" as="geometry" />
         </mxCell>
-        <mxCell id="0Zxj14m8eIUil3LLvNbh-9" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0.75;entryY=1;entryDx=0;entryDy=0;" edge="1" parent="1" source="Q09Kz5jGnRR5g8NXDhn--159" target="Q09Kz5jGnRR5g8NXDhn--149">
+        <mxCell id="0Zxj14m8eIUil3LLvNbh-9" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0.75;entryY=1;entryDx=0;entryDy=0;" parent="1" source="Q09Kz5jGnRR5g8NXDhn--159" target="Q09Kz5jGnRR5g8NXDhn--149" edge="1">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
         <mxCell id="Q09Kz5jGnRR5g8NXDhn--159" value="Class: PassageDB" style="swimlane;fontStyle=0;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=55;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=0;marginBottom=0;html=1;strokeWidth=2;fillColor=#fff2cc;strokeColor=#d6b656;" parent="1" vertex="1">
