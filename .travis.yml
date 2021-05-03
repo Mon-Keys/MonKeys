@@ -11,9 +11,8 @@ compiler: gcc
 
 
 install:
-  - sudo apt install -y libc6-dbg
-  - sudo apt-get install valgrind
-  - sudo apt-get install cppcheck
+  - sudo apt install valgrind
+  - sudo apt install cppcheck
   - sudo pip install cpplint
 
 script:
