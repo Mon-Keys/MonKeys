@@ -1,12 +1,13 @@
 # СКУД VISION
 
-
-# TEST
 [![Build Status](https://travis-ci.com/perlinleo/MonKeys.svg?branch=main)](https://travis-ci.com/perlinleo/MonKeys)
 [![Discord Channel](https://img.shields.io/discord/820698183108788275?color=purple&label=discord&logo=discord&logoColor=white)](https://discord.gg/HRztMNeXw7)
 [![Issues](https://img.shields.io/github/issues/perlinleo/MonKeys)](https://github.com/perlinleo/MonKeys/issues)
 ![Commit Activity](https://img.shields.io/github/commit-activity/m/perlinleo/MonKeys)
 ![Last commit](https://img.shields.io/github/last-commit/perlinleo/MonKeys)
+
+![UML](https://github.com/perlinleo/MonKeys/blob/main/diagrams/UML.svg)
+
 ```json
 {
     "name": "MonKeys",
