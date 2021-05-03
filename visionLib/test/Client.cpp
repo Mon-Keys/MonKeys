@@ -78,11 +78,10 @@ TEST(TestClient, correct_getting_temp_pass) {
   std::string secondTempPass = client.getTempPass(0);
   EXPECT_EQ(firstTempPass, secondTempPass);
   client.breakConnection();
-  delete []currentPasses;
-  delete []privateKeys;
-  delete []companyNames;
+  delete[] currentPasses;
+  delete[] privateKeys;
+  delete[] companyNames;
 }
-
 
 TEST(TestClient, correct_connecton_establishing) {
   Client client;
