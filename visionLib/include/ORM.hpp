@@ -21,7 +21,7 @@ class ClientDB {
   ClientDB() = default;
 
   explicit ClientDB(uint64_t _ID, std::string _login, std::string _email,
-           std::string _password)
+                    std::string _password)
       : ID(_ID), login(_login), email(_email), password(_password) {}
 
   ClientDB(const ClientDB& p) = default;
@@ -50,7 +50,7 @@ class PassDB {
   PassDB() = default;
 
   explicit PassDB(uint64_t _ID, std::string _privateKey, uint64_t _CompanyID,
-         uint64_t _ClientID)
+                  uint64_t _ClientID)
       : ID(_ID),
         privateKey(_privateKey),
         CompanyID(_CompanyID),
@@ -102,7 +102,9 @@ class PassageDB {
  public:
   PassageDB() = default;
 
-  explicit PassageDB(uint64_t _ID, time_t _time, uint8_t _actionType, uint64_t _PassID)
+  explicit PassageDB(uint64_t _ID, time_t _time,
+                    uint8_t _actionType,
+                    uint64_t _PassID)
       : ID(_ID), time(_time), actionType(_actionType), PassID(_PassID) {}
 
   PassageDB(const PassageDB& p) = default;
@@ -128,11 +130,11 @@ class PassageDB {
 
 class DataBaseConnect {
  public:
-  DataBaseConnect() {};
+  DataBaseConnect() {}
 
   // explicit DataBaseConnect(std::map<std::string, std::string>& db_settings);
 
-  virtual ~DataBaseConnect() {};
+  virtual ~DataBaseConnect() {}
 
   virtual bool logIn(std::string username, std::string password) {
     return true;
@@ -140,9 +142,9 @@ class DataBaseConnect {
 
   virtual bool logOut(std::string username) { return true; }
 
-  virtual bool is_opened() { return true;};
+  virtual bool is_opened() { return true; }
 
-  virtual void sqlReq(std::string sql_request) {};
+  virtual void sqlReq(std::string sql_request) {}
 
   uint64_t sql_req_for_insert(const std::string& sql_request);
 
