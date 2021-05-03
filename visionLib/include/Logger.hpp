@@ -25,7 +25,13 @@ class IWriteToLog {
 };
 
 class Database : public IWriteToLog {
+ private:
+  void connect();
+
  public:
+  bool isConnected();
+  Database();
+  ~Database();
   uint16_t OpenLog() override;
   uint16_t CloseLog() override;
   uint16_t WriteLog(const char *errorMessage) override;
@@ -37,6 +43,8 @@ class LogFile : public IWriteToLog {
 
  public:
   explicit LogFile(std::string path);
+  ~LogFile();
+  bool isOpen();
   uint16_t OpenLog() override;
   uint16_t CloseLog() override;
   uint16_t WriteLog(const char *errorMessage) override;
@@ -48,6 +56,7 @@ class Logger {
 
  public:
   explicit Logger(int LogLevel);
+  ~Logger();
   void OpenLog(const IWriteToLog &Log);
   void CloseLog(const IWriteToLog &Log);
   void WriteLog(const IWriteToLog &Log, std::string text);

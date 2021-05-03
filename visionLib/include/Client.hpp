@@ -18,6 +18,7 @@ class Client : public IWebApplicationClient {
   class Pass {
    public:
     Pass();
+    Pass(uint64_t _ID, std::string _privateKey, std::string _companyName);
     ~Pass();
 
     Pass(const Pass&) = delete;
@@ -26,10 +27,15 @@ class Client : public IWebApplicationClient {
     Pass& operator=(const Pass&) = delete;
     Pass& operator=(Pass&&) = delete;
 
-    void requestTempCode();
+    // запрос на генерацию временного кода по privateKey пропуска
+    std::string requestTempCode();
 
+    // гетеры
     void getID();
+    void getPrivateKey();
+    void getCompanyName();
 
+    // сетеры
     void setID(uint64_t _ID);
     void setPrivateKey(std::string _privateKey);
     void setCompanyName(std::string _companyName);
@@ -41,6 +47,9 @@ class Client : public IWebApplicationClient {
   };
 
   Client();
+  Client(uint64_t _ID, Pass* _passes, uint16_t _passesCount, std::string _name,
+         std::string _password, bool _isConnected = false,
+         bool _isLogin = false);
   ~Client();
 
   Client(const Client&) = delete;
@@ -49,22 +58,38 @@ class Client : public IWebApplicationClient {
   Client& operator=(const Client&) = delete;
   Client& operator=(Client&&) = delete;
 
-  void logIn();
-  void logOut();
-  void registerClient();
-  void requestPasses();
-  std::string getTempPass(const uint64_t passID);
+  // авторизация пользователя
+  void logIn() override;
+  // выход пользователя из аккаунта
+  void logOut() override;
+  // регистрация пользователя
+  void registerClient() override;
+  // запрос на выдачу всех пропусков пользователя
+  void requestPasses() override;
+  // получение временного кода по выбранному пропуску
+  std::string getTempPass(const uint64_t passID) override;
 
-  void establishConnection(const char* url);
-  void breakConection();
+  // установление соединения
+  void establishConnection(const char* url) override;
+  // разрыв соединения
+  void breakConnection() override;
 
-  Client::Pass getPass(uint16_t index);
+  // гетеры
+  uint64_t getID();
+  Pass* getPasses();
+  uint16_t getPassesCount();
+  std::string getName();
+  Pass getPass(uint64_t index);
   bool getIsConnected();
   bool getIsLogIn();
 
+  // сетеры
+  void setID(uint64_t _ID);
   void setPasses(Pass* currentPasses);
+  void setPassesCount(uint16_t _passesCount);
+  void setName(std::string _name);
   void setIsConnected(const bool value);
-  void setIslogIn(const bool value);
+  void setIsLogIn(const bool value);
 
  private:
   uint64_t ID;

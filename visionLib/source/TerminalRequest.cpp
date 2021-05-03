@@ -10,8 +10,8 @@
 
 #include <iostream>
 
-void TerminalServer::waitRequest() {}
+void TerminalRequest::waitRequest() {}
 
-void TerminalServer::waitConnection() {}
+void TerminalRequest::waitConnection() {}
 
-void TerminalServer::reply() {}
+void TerminalRequest::reply() {}

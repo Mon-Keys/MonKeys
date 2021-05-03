@@ -5,3 +5,19 @@
 // | |  | | | (_) | | | | | | . \  |  __/ | |_| | \__ \
 // |_|  |_|  \___/  |_| |_| |_|\_\  \___|  \__, | |___/
 //                                         |___/
+#include "TerminalRequest.hpp"
+
+#include "TerminalServer.hpp"
+#include "gmock/gmock.h"
+#include "gtest/gtest.h"
+
+class MockTerminalServer : public TerminalServer {
+ public:
+  MOCK_METHOD0(compareTimeCode, void());
+  MOCK_METHOD0(generateTimeCode, void());
+};
+
+TEST(MockClientServer, RequestTerminalHandlerTest) {
+  MockTerminalServer terminalServer;
+  EXPECT_CALL(terminalServer, compareTimeCode).Times(testing::AtLeast(1));
+}

@@ -10,12 +10,7 @@
 
 #include <string>
 
-void TerminalServer::compareTimeCode() {}
+bool TerminalServer::generateTimeCode(uint64_t PassID) {}
 
-void TerminalServer::generateTimeCode() {}
-
-void TerminalServer::getClientDataFromDB() {}
-
-void TerminalServer::getCompanyDataFromDB() {}
-
-void TerminalServer::getPassDataFromDB() {}
+bool TerminalServer::compareTimeCode(std::string firstTimeCode,
+                                     std::string secondTimeCode) {}

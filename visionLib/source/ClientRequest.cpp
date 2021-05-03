@@ -8,6 +8,9 @@
 
 #include "../include/ClientRequest.hpp"
 
+ClientRequest::ClientRequest() {}
+ClientRequest::~ClientRequest() {}
+
 void ClientRequest::initServer() {}
 void ClientRequest::initLogger() {}
 void ClientRequest::setLoggerLevel() {}
