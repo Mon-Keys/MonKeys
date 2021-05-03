@@ -6,10 +6,6 @@
 // |_|  |_|  \___/  |_| |_| |_|\_\  \___|  \__, | |___/
 //                                         |___/
 
-#include "TimeCodeGenerator.hpp"
-
 int main() {
-  TimeCodeGenerator test;
-  test.generateTimeCode();
   return 0;
 }

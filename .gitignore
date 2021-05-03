@@ -1,9 +1,0 @@
-#idea
-.idea/
-
-#VSCode
-.vscode/
-
-#Build Folder
-build/
-cmake-build-debug/

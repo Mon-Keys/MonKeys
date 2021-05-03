@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 // Copyright 2021 Monkeys. All rights reserved.
 //  __  __                   _  __
 // |  \/  |   ___    _ __   | |/ /   ___   _   _   ___
@@ -58,3 +59,5 @@ TEST(MOCKClientServer, getTimeCodeTest) {
   std::string ex = mcs.getTimeCode(1);
   // EXPECT_STREQ(ex, "abcd");
 }
+=======
+>>>>>>> 604e7b1a12f46225ef2f1bb28b9c47f50695f080

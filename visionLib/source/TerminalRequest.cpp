@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 // Copyright 2021 Monkeys. All rights reserved.
 //  __  __                   _  __
 // |  \/  |   ___    _ __   | |/ /   ___   _   _   ___
@@ -15,3 +16,5 @@ void TerminalRequest::waitRequest() {}
 void TerminalRequest::waitConnection() {}
 
 void TerminalRequest::reply() {}
+=======
+>>>>>>> 604e7b1a12f46225ef2f1bb28b9c47f50695f080

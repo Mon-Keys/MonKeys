@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 // Copyright 2021 Monkeys. All rights reserved.
 //  __  __                   _  __
 // |  \/  |   ___    _ __   | |/ /   ___   _   _   ___
@@ -94,3 +95,5 @@ TEST(closeLogFile, correctClose) {
   ErrorLogger.CloseLog(lf);
   EXPECT_FALSE(lf.isOpen());
 }
+=======
+>>>>>>> 604e7b1a12f46225ef2f1bb28b9c47f50695f080

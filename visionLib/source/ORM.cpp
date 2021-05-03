@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 // Copyright 2021 Monkeys. All rights reserved.
 //  __  __                   _  __
 // |  \/  |   ___    _ __   | |/ /   ___   _   _   ___
@@ -141,3 +142,5 @@ PassDB getPass(const uint64_t PassID) { return PassDB(); }
 PassageDB getPassage(const uint64_t PassageID) { return PassageDB(); }
 ClientDB getClient(const uint64_t ClientID) { return ClientDB(); }
 CompanyDB getCompany(const uint64_t CompanyID) { return CompanyDB(); }
+=======
+>>>>>>> 604e7b1a12f46225ef2f1bb28b9c47f50695f080
