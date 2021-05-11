@@ -6,15 +6,15 @@
 // |_|  |_|  \___/  |_| |_| |_|\_\  \___|  \__, | |___/
 //                                         |___/
 
-#include "../include/ClientRequest.hpp"
+#include "httpServer.hpp"
 
-ClientRequest::ClientRequest() {}
-ClientRequest::~ClientRequest() {}
+clientServer::clientServer() {}
+clientServer::~clientServer() {}
 
-void ClientRequest::initServer() {}
-void ClientRequest::initLogger() {}
-void ClientRequest::setLoggerLevel() {}
-void ClientRequest::waitConnection() {}
-void ClientRequest::waitRequest() {}
-void ClientRequest::runHandler() {}
-void ClientRequest::reply() {}
+void clientServer::initServer() {}
+void clientServer::initLogger() {}
+void clientServer::setLoggerLevel() {}
+void clientServer::waitConnection() {}
+void clientServer::waitRequest() {}
+void clientServer::runHandler() {}
+void clientServer::reply() {}

@@ -6,20 +6,29 @@
 // |_|  |_|  \___/  |_| |_| |_|\_\  \___|  \__, | |___/
 //                                         |___/
 
-#ifndef VISIONLIB_INCLUDE_CLIENTSERVER_HPP_
-#define VISIONLIB_INCLUDE_CLIENTSERVER_HPP_
+#ifndef VISIONLIB_INCLUDE_CLIENTHANDLER_HPP_
+#define VISIONLIB_INCLUDE_CLIENTHANDLER_HPP_
 
 #include <ctime>
 #include <string>
 
-class ClientServer {
+#include "database.hpp"
+
+class clientHandler {
  public:
+
+  clientHandler() : _Cldb(), _Codb(), _Passdb(), _Passagedb() {};
+
   bool logInClient(std::string Login, std::string Password);
   bool logOutClient(uint64_t ClientID);
   bool registerClient(std::string Login, std::string Password);
   std::string getTimeCode(uint64_t PassID);
 
  private:
+  ClientDataBase _Cldb;
+  CompanyDataBase _Codb;
+  PassDataBase _Passdb;
+  PassageDataBase _Passagedb;
 };
 
-#endif  // VISIONLIB_INCLUDE_CLIENTSERVER_HPP_
+#endif  // VISIONLIB_INCLUDE_CLIENTHANDLER_HPP_

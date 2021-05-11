@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.10.2)
 project(vision)
 
 set(Boost_USE_MULTITHREAD ON)
-set(CMAKE_CXX_STANDARD 20)
+set(CMAKE_CXX_STANDARD 14)
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wpedantic -pedantic -fprofile-arcs -ftest-coverage -lpqxx -lpq")
 
 find_package(Boost)
@@ -11,11 +11,23 @@ include_directories(${Boost_LIBRARIES})
 # Building lib
 set(VISION_LIB_PATH ${PROJECT_SOURCE_DIR}/visionLib)
 
-file(GLOB sources "${VISION_LIB_PATH}/source/*.cpp")
-file(GLOB headers "${VISION_LIB_PATH}/include/*.hpp")
+file(GLOB sources "${VISION_LIB_PATH}/*/source/*.cpp")
+file(GLOB headers "${VISION_LIB_PATH}/*/include/*.hpp")
 
+
+include_directories("visionLib/database/include")
+include_directories("visionLib/clientHandler/include")
+include_directories("visionLib/httpClient/include")
+include_directories("visionLib/httpServer/include")
+include_directories("visionLib/logger/include")
+include_directories("visionLib/terminalClient/include")
+include_directories("visionLib/terminalHandler/include")
+include_directories("visionLib/terminalServer/include")
+include_directories("visionLib/timecode/include")
 
 add_library(visionLib SHARED ${sources} ${headers})
+
+link_libraries(visionLib ${Boost_LIBRARIES} -lboost_thread ${PQXX_LIB} ${PQ_LIB})
 # Building lib
 
 # <Test>

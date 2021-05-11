@@ -6,7 +6,7 @@
 // |_|  |_|  \___/  |_| |_| |_|\_\  \___|  \__, | |___/
 //                                         |___/
 
-#include "Logger.hpp"
+#include "logger.hpp"
 
 #include "gtest/gtest.h"
 

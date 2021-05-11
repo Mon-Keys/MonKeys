@@ -6,7 +6,7 @@
 // |_|  |_|  \___/  |_| |_| |_|\_\  \___|  \__, | |___/
 //                                         |___/
 
-#include "../include/Terminal.hpp"
+#include "terminalClient.hpp"
 
 Terminal::Terminal(TempCode _tempCode, std::string _ID, bool isConnected) {}
 Terminal::Terminal() {}

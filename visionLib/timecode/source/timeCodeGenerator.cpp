@@ -6,7 +6,7 @@
 // |_|  |_|  \___/  |_| |_| |_|\_\  \___|  \__, | |___/
 //                                         |___/
 
-#include "../include/TimeCodeGenerator.hpp"
+#include "TimeCodeGenerator.hpp"
 
 #include <iostream>
 

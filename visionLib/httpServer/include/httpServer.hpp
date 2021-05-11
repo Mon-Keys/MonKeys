@@ -5,20 +5,19 @@
 // | |  | | | (_) | | | | | | . \  |  __/ | |_| | \__ \
 // |_|  |_|  \___/  |_| |_| |_|\_\  \___|  \__, | |___/
 //                                         |___/
+#ifndef VISIONLIB_INCLUDE_clientServer_HPP_
+#define VISIONLIB_INCLUDE_clientServer_HPP_
 
-#ifndef VISIONLIB_INCLUDE_CLIENTREQUEST_HPP_
-#define VISIONLIB_INCLUDE_CLIENTREQUEST_HPP_
-
-class ClientRequest {
+class clientServer {
  public:
-  ClientRequest();
-  ~ClientRequest();
+  clientServer();
+  ~clientServer();
 
-  ClientRequest(const ClientRequest&) = delete;
-  ClientRequest(ClientRequest&&) = delete;
+  clientServer(const clientServer&) = delete;
+  clientServer(clientServer&&) = delete;
 
-  ClientRequest& operator=(const ClientRequest&) = delete;
-  ClientRequest& operator=(ClientRequest&&) = delete;
+  clientServer& operator=(const clientServer&) = delete;
+  clientServer& operator=(clientServer&&) = delete;
 
  private:
   void initServer();
@@ -30,4 +29,4 @@ class ClientRequest {
   void reply();
 };
 
-#endif  // VISIONLIB_INCLUDE_CLIENTREQUEST_HPP_
+#endif  // VISIONLIB_INCLUDE_clientServer_HPP_

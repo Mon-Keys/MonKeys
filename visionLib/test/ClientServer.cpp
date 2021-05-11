@@ -6,7 +6,7 @@
 // |_|  |_|  \___/  |_| |_| |_|\_\  \___|  \__, | |___/
 //                                         |___/
 
-#include "../include/ClientServer.hpp"
+#include "httpServer.hpp"
 
 #include "gmock/gmock.h"
 #include "gtest/gtest.h"
@@ -15,7 +15,7 @@ using ::testing::_;
 using ::testing::AtLeast;
 using ::testing::Return;
 
-class MockClientServer : public ClientServer {
+class MockclientServer : public clientServer {
  public:
   MOCK_METHOD2(logInClient, bool(std::string Login, std::string Password));
   MOCK_METHOD1(logOutClient, bool(uint64_t ClientID));
@@ -23,8 +23,8 @@ class MockClientServer : public ClientServer {
   MOCK_METHOD1(getTimeCode, std::string(uint64_t PassID));
 };
 
-TEST(MOCKClientServer, logInTest) {
-  MockClientServer mcs;
+TEST(MOCKclientServer, logInTest) {
+  MockclientServer mcs;
 
   ON_CALL(mcs, logInClient(_, _)).WillByDefault(Return(true));
 
@@ -32,8 +32,8 @@ TEST(MOCKClientServer, logInTest) {
   EXPECT_EQ(ex, 1);
 }
 
-TEST(MOCKClientServer, logOutTest) {
-  MockClientServer mcs;
+TEST(MOCKclientServer, logOutTest) {
+  MockclientServer mcs;
 
   ON_CALL(mcs, logOutClient(_)).WillByDefault(Return(true));
 
@@ -41,8 +41,8 @@ TEST(MOCKClientServer, logOutTest) {
   EXPECT_EQ(ex, 1);
 }
 
-TEST(MOCKClientServer, registerTest) {
-  MockClientServer mcs;
+TEST(MOCKclientServer, registerTest) {
+  MockclientServer mcs;
 
   ON_CALL(mcs, registerClient(_, _)).WillByDefault(Return(true));
 
@@ -50,8 +50,8 @@ TEST(MOCKClientServer, registerTest) {
   EXPECT_EQ(ex, 1);
 }
 
-TEST(MOCKClientServer, getTimeCodeTest) {
-  MockClientServer mcs;
+TEST(MOCKclientServer, getTimeCodeTest) {
+  MockclientServer mcs;
 
   ON_CALL(mcs, getTimeCode(_)).WillByDefault(Return("abcd"));
 

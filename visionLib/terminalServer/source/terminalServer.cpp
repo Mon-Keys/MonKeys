@@ -6,12 +6,12 @@
 // |_|  |_|  \___/  |_| |_| |_|\_\  \___|  \__, | |___/
 //                                         |___/
 
-#include "../include/TerminalRequest.hpp"
+#include "terminalServer.hpp"
 
 #include <iostream>
 
-void TerminalRequest::waitRequest() {}
+void terminalServer::waitRequest() {}
 
-void TerminalRequest::waitConnection() {}
+void terminalServer::waitConnection() {}
 
-void TerminalRequest::reply() {}
+void terminalServer::reply() {}

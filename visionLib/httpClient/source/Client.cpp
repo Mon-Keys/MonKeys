@@ -6,7 +6,7 @@
 // |_|  |_|  \___/  |_| |_| |_|\_\  \___|  \__, | |___/
 //                                         |___/
 
-#include "../include/Client.hpp"
+#include "Client.hpp"
 
 Client::Client() {}
 Client::Client(uint64_t _ID, Pass* _passes, uint16_t _passesCount,

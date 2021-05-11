@@ -8,14 +8,14 @@
 
 #include "ClientRequest.hpp"
 
-#include "ClientServer.hpp"
+#include "clientServer.hpp"
 #include "gmock/gmock.h"
 #include "gtest/gtest.h"
 
 using ::testing::AtLeast;
 using ::testing::Return;
 
-class MockClientServer : public ClientServer {
+class MockclientServer : public clientServer {
  public:
   MOCK_METHOD2(logInClient, void(std::string Login, std::string Password));
   MOCK_METHOD1(logOutClient, void(uint64_t ClientID));
@@ -23,9 +23,9 @@ class MockClientServer : public ClientServer {
   MOCK_METHOD1(getTimeCode, void(uint64_t PassID));
 };
 
-TEST(MockClientServer, RequestHandlerTest) {
+TEST(MockclientServer, RequestHandlerTest) {
   ASSERT_TRUE(true);
 
-  MockClientServer clientServer;
+  MockclientServer clientServer;
   EXPECT_CALL(clientServer, logInClient).Times(testing::AtLeast(1));
 }

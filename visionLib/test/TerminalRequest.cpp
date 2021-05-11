@@ -5,13 +5,13 @@
 // | |  | | | (_) | | | | | | . \  |  __/ | |_| | \__ \
 // |_|  |_|  \___/  |_| |_| |_|\_\  \___|  \__, | |___/
 //                                         |___/
-#include "TerminalRequest.hpp"
+#include "terminalClient.hpp"
 
-#include "TerminalServer.hpp"
+#include "terminalServer.hpp"
 #include "gmock/gmock.h"
 #include "gtest/gtest.h"
 
-class MockTerminalServer : public TerminalServer {
+class MockTerminalServer : public terminalServer {
  public:
   MOCK_METHOD0(compareTimeCode, void());
   MOCK_METHOD0(generateTimeCode, void());

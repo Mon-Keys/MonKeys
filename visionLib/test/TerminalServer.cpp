@@ -6,7 +6,7 @@
 // |_|  |_|  \___/  |_| |_| |_|\_\  \___|  \__, | |___/
 //                                         |___/
 
-#include "../include/TerminalServer.hpp"
+#include "terminalServer.hpp"
 
 #include "gmock/gmock.h"
 #include "gtest/gtest.h"
@@ -15,7 +15,7 @@ using ::testing::_;
 using ::testing::AtLeast;
 using ::testing::Return;
 
-class MockTerminalServer : public TerminalServer {
+class MockTerminalServer : public terminalServer {
  public:
   MOCK_METHOD2(compareTimeCode,
                bool(std::string firstTimeCode, std::string secondTimeCode));

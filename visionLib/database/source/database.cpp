@@ -6,7 +6,7 @@
 // |_|  |_|  \___/  |_| |_| |_|\_\  \___|  \__, | |___/
 //                                         |___/
 
-#include "../include/ORM.hpp"
+#include "database.hpp"
 
 std::vector<PassDB> PassDataBase::sqlReq(const std::string& sql_request) {
   std::vector<PassDB> result;
@@ -28,7 +28,7 @@ std::vector<CompanyDB> CompanyDataBase::sqlReq(const std::string& sql_request) {
   return result;
 }
 
-uint64_t DataBaseConnect::sql_req_for_insert(const std::string& sql_request) {
+uint64_t DataBase::sql_req_for_insert(const std::string& sql_request) {
   uint64_t result = 1;
   return result;
 }

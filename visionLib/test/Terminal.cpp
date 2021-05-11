@@ -6,7 +6,7 @@
 // |_|  |_|  \___/  |_| |_| |_|\_\  \___|  \__, | |___/
 //                                         |___/
 
-#include "Terminal.hpp"
+#include "terminalClient.hpp"
 
 #include "gmock/gmock.h"
 #include "gtest/gtest.h"

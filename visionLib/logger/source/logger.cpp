@@ -6,7 +6,7 @@
 // |_|  |_|  \___/  |_| |_| |_|\_\  \___|  \__, | |___/
 //                                         |___/
 
-#include "../include/Logger.hpp"
+#include "logger.hpp"
 
 uint16_t Database::OpenLog() { return LOG_MOCK; }
 

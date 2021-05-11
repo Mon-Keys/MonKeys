@@ -8,7 +8,7 @@
 
 #include <string>
 
-#include "../include/TerminalServer.hpp"
+#include "terminalHandler.hpp"
 
 bool compareTimeCode(std::string firstTimeCode, std::string secondTimeCode) {
   return true;
