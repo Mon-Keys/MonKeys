@@ -9,7 +9,7 @@
 #ifndef VISIONLIB_INCLUDE_TERMINALREQUEST_HPP_
 #define VISIONLIB_INCLUDE_TERMINALREQUEST_HPP_
 
-class TerminalServer {
+class TerminalRequest {
  public:
   void waitRequest();
   void waitConnection();

@@ -24,3 +24,23 @@ std::string TimeCodeGenerator::getHashedOTP() { return ""; }
 void TimeCodeGenerator::updateTime() {}
 
 uint64_t TimeCodeGenerator::getTParameter() { return 1; }
+
+// cppcheck-suppress uninitMemberVar
+TimeCodeGenerator::TimeCodeGenerator(std::string privateKey, uint64_t PassID,
+                                     uint64_t CompanyID, uint16_t timeInterval,
+                                     uint64_t timeStamp) {}
+
+// cppcheck-suppress uninitMemberVar
+TimeCode::TimeCode(std::string timecodeString) {}
+
+TimeCode::~TimeCode() {}
+
+uint64_t TimeCode::decodeFrom64(std::string toDecode) {}
+
+uint64_t TimeCode::getCompanyID() {}
+
+uint64_t TimeCode::getPassID() {}
+
+bool TimeCode::isValid() {}
+
+std::string TimeCode::getTimePart() {}

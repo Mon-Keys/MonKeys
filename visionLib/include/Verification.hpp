@@ -6,17 +6,13 @@
 // |_|  |_|  \___/  |_| |_| |_|\_\  \___|  \__, | |___/
 //                                         |___/
 
-#ifndef VISIONLIB_INCLUDE_TERMINALSERVER_HPP_
-#define VISIONLIB_INCLUDE_TERMINALSERVER_HPP_
+#ifndef VISIONLIB_INCLUDE_VERIFICATION_HPP_
+#define VISIONLIB_INCLUDE_VERIFICATION_HPP_
 
-#include <string>
-
-class TerminalServer {
+class Verification {
  public:
-  bool generateTimeCode(uint64_t PassID);
-  bool compareTimeCode(std::string firstTimeCode, std::string secondTimeCode);
-
- private:
+  virtual void open() = 0;
+  virtual void establishConnection(const char *url) = 0;
 };
 
-#endif  // VISIONLIB_INCLUDE_TERMINALSERVER_HPP_
+#endif  // VISIONLIB_INCLUDE_VERIFICATION_HPP_

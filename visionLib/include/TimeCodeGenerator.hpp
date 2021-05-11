@@ -26,13 +26,30 @@ class TimeCodeGenerator {
   void updateTime();
 
  public:
-  TimeCodeGenerator(std::string privateKey, uint64_t PassID,
-                    uint16_t timeInterval);
+  TimeCodeGenerator(std::string privateKey, uint64_t PassID, uint64_t CompanyID,
+                    uint16_t timeInterval, uint64_t timeStamp);
   std::string generateTimeCode();
   TimeCodeGenerator();
   ~TimeCodeGenerator();
   TimeCodeGenerator(const TimeCodeGenerator&) = delete;
   TimeCodeGenerator(TimeCodeGenerator&&) = default;
+};
+
+class TimeCode {
+ private:
+  uint64_t CompanyID;
+  uint64_t PassID;
+  std::string timePart;
+  uint64_t decodeFrom64(std::string toDecode);
+  bool valid;
+
+ public:
+  bool isValid();
+  explicit TimeCode(std::string timecodeString);
+  ~TimeCode();
+  uint64_t getCompanyID();
+  uint64_t getPassID();
+  std::string getTimePart();
 };
 
 #endif  // VISIONLIB_INCLUDE_TIMECODEGENERATOR_HPP_
