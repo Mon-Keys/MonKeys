@@ -18,10 +18,10 @@ using ::testing::AtLeast;
 using ::testing::Return;
 
 class MyDataBase {
-  DataBaseConnect& dbC;
+  DataBase& dbC;
 
  public:
-  explicit MyDataBase(DataBaseConnect& _dbC) : dbC(_dbC) {}
+  explicit MyDataBase(DataBase& _dbC) : dbC(_dbC) {}
 
   int init(std::string username, std::string password) {
     if (dbC.logIn(username, password) == false) {
@@ -35,10 +35,10 @@ class MyDataBase {
 };
 
 class PDB {
-  DataBaseConnect& dbC;
+  DataBase& dbC;
 
  public:
-  explicit PDB(DataBaseConnect& _dbC) : dbC(_dbC) {}
+  explicit PDB(DataBase& _dbC) : dbC(_dbC) {}
 
   uint64_t testinsertPass(const PassDB& Pass) {
     return dbC.sql_req_for_insert("fsdf");
@@ -46,10 +46,10 @@ class PDB {
 };
 
 class ClDB {
-  DataBaseConnect& dbC;
+  DataBase& dbC;
 
  public:
-  explicit ClDB(DataBaseConnect& _dbC) : dbC(_dbC) {}
+  explicit ClDB(DataBase& _dbC) : dbC(_dbC) {}
 
   uint64_t testinsertClient(const ClientDB& Client) {
     return dbC.sql_req_for_insert("fsdf");
@@ -57,10 +57,10 @@ class ClDB {
 };
 
 class CoDB {
-  DataBaseConnect& dbC;
+  DataBase& dbC;
 
  public:
-  explicit CoDB(DataBaseConnect& _dbC) : dbC(_dbC) {}
+  explicit CoDB(DataBase& _dbC) : dbC(_dbC) {}
 
   uint64_t testinsertCompany(const CompanyDB& Company) {
     return dbC.sql_req_for_insert("fsdf");
@@ -68,45 +68,45 @@ class CoDB {
 };
 
 class PaDB {
-  DataBaseConnect& dbC;
+  DataBase& dbC;
 
  public:
-  explicit PaDB(DataBaseConnect& _dbC) : dbC(_dbC) {}
+  explicit PaDB(DataBase& _dbC) : dbC(_dbC) {}
 
   uint64_t testinsertPassage(const PassageDB& Passage) {
     return dbC.sql_req_for_insert("fsdf");
   }
 };
 
-class MockDBC : public DataBaseConnect {
+class MockDBC : public DataBase {
  public:
-  MOCK_METHOD2(logIn, bool(std::string username, std::string password));
-  MOCK_METHOD1(logOut, bool(std::string username));
+  MOCK_METHOD2(logIn, bool (std::string username, std::string password));
+  MOCK_METHOD1(logOut, bool (std::string username));
 };
 
 class MockDBPassExist : public PassDataBase {
  public:
-  MOCK_METHOD1(sqlReq, std::vector<PassDB>(const std::string& sql_request));
+  MOCK_METHOD1(sqlReq, std::vector<PassDB> (const std::string& sql_request));
 };
 
 class MockDBClientExist : public ClientDataBase {
  public:
-  MOCK_METHOD1(sqlReq, std::vector<ClientDB>(const std::string& sql_request));
+  MOCK_METHOD1(sqlReq, std::vector<ClientDB> (const std::string& sql_request));
 };
 
 class MockDBCompanyExist : public CompanyDataBase {
  public:
-  MOCK_METHOD1(sqlReq, std::vector<CompanyDB>(const std::string& sql_request));
+  MOCK_METHOD1(sqlReq, std::vector<CompanyDB> (const std::string& sql_request));
 };
 
 class MockDBPassageExist : public PassageDataBase {
  public:
-  MOCK_METHOD1(sqlReq, std::vector<PassageDB>(const std::string& sql_request));
+  MOCK_METHOD1(sqlReq, std::vector<PassageDB> (const std::string& sql_request));
 };
 
-class MockDBInsert : public DataBaseConnect {
+class MockDBInsert : public DataBase {
  public:
-  MOCK_METHOD1(sql_req_for_insert, uint64_t(const std::string& sql_request));
+  MOCK_METHOD1(sql_req_for_insert, uint64_t (const std::string& sql_request));
 };
 
 TEST(MyDBTest, LoginTest) {
