@@ -1,4 +1,4 @@
-# СКУД VISION
+# Система контроля управления доступом "VISION" 
 
 [![Build Status](https://travis-ci.com/perlinleo/MonKeys.svg?branch=main)](https://travis-ci.com/perlinleo/MonKeys)
 [![Discord Channel](https://img.shields.io/discord/820698183108788275?color=purple&label=discord&logo=discord&logoColor=white)](https://discord.gg/HRztMNeXw7)
