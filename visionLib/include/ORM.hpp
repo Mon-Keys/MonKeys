@@ -9,20 +9,37 @@
 #ifndef VISIONLIB_INCLUDE_ORM_HPP_
 #define VISIONLIB_INCLUDE_ORM_HPP_
 
-#include <ctime>
 #include <iostream>
-#include <map>
 #include <string>
+#include <map>
+#include <optional>
+#include <queue>
+#include <functional>
+#include <ctime>
 #include <vector>
-// #include <pqxx/pqxx>
+
+#include <boost/algorithm/string.hpp>
+#include <boost/asio.hpp>
+#include <boost/date_time.hpp>
+#include <boost/filesystem.hpp>
+#include <boost/lexical_cast.hpp>
+#include <boost/tokenizer.hpp>
+#include <boost/property_tree/ptree.hpp>
+#include <boost/property_tree/json_parser.hpp>
+#include <boost/foreach.hpp>
+
+#include <pqxx/pqxx>
 
 class ClientDB {
  public:
   ClientDB() = default;
 
-  explicit ClientDB(uint64_t _ID, std::string _login, std::string _email,
-                    std::string _password)
-      : ID(_ID), login(_login), email(_email), password(_password) {}
+  explicit ClientDB(uint64_t _ID,
+                    std::string _login,
+                    std::string _email,
+                    std::string _password) 
+          : ID(_ID), login(_login), 
+          email(_email), password(_password) {}
 
   ClientDB(const ClientDB& p) = default;
 
@@ -36,7 +53,7 @@ class ClientDB {
   void setID(uint64_t _ID) { ID = _ID; }
   void setLogin(std::string _login) { login = _login; }
   void setEmail(std::string _email) { email = _email; }
-  void setPassword(std::string _password) { password = _password; }
+  void setPassword(std::string _Password) { password = _Password; }
 
  private:
   uint64_t ID;
@@ -50,7 +67,7 @@ class PassDB {
   PassDB() = default;
 
   explicit PassDB(uint64_t _ID, std::string _privateKey, uint64_t _CompanyID,
-                  uint64_t _ClientID)
+         uint64_t _ClientID)
       : ID(_ID),
         privateKey(_privateKey),
         CompanyID(_CompanyID),
@@ -102,9 +119,7 @@ class PassageDB {
  public:
   PassageDB() = default;
 
-  explicit PassageDB(uint64_t _ID, time_t _time,
-                    uint8_t _actionType,
-                    uint64_t _PassID)
+  explicit PassageDB(uint64_t _ID, time_t _time, uint8_t _actionType, uint64_t _PassID)
       : ID(_ID), time(_time), actionType(_actionType), PassID(_PassID) {}
 
   PassageDB(const PassageDB& p) = default;
@@ -128,13 +143,13 @@ class PassageDB {
   uint64_t PassID;
 };
 
-class DataBaseConnect {
+class DataBase {
  public:
-  DataBaseConnect() {}
+  DataBase() {};
 
-  // explicit DataBaseConnect(std::map<std::string, std::string>& db_settings);
+  explicit DataBase(std::map<std::string, std::string>& db_settings);
 
-  virtual ~DataBaseConnect() {}
+  virtual ~DataBase() {};
 
   virtual bool logIn(std::string username, std::string password) {
     return true;
@@ -142,24 +157,24 @@ class DataBaseConnect {
 
   virtual bool logOut(std::string username) { return true; }
 
-  virtual bool is_opened() { return true; }
+  virtual bool is_opened() { return true;};
 
-  virtual void sqlReq(std::string sql_request) {}
+  virtual void sqlReq(std::string sql_request) {};
 
   uint64_t sql_req_for_insert(const std::string& sql_request);
 
  protected:
-  // std::unique_ptr<pqxx::connection> database_;
+  std::unique_ptr<pqxx::connection> database_;
   std::string str_db_settings;
 
  private:
 };
 
-class PassDataBase : public DataBaseConnect {
+class PassDataBase : public DataBase {
  public:
   PassDataBase() = default;
 
-  // explicit PassDataBase((std::map<std::string, std::string> & db_settings));
+  explicit PassDataBase(std::map<std::string, std::string>& db_settings);
 
   virtual ~PassDataBase() = default;
 
@@ -175,15 +190,14 @@ class PassDataBase : public DataBaseConnect {
  private:
   void do_modifying_request(const std::string& sql_request);
   std::vector<PassDB> sqlReq(const std::string& sql_request);
-  // pqxx::result do_select_request(const std::string& sql_request);
+  pqxx::result do_select_request(const std::string& sql_request);
 };
 
-class ClientDataBase : public DataBaseConnect {
+class ClientDataBase : public DataBase {
  public:
   ClientDataBase() = default;
 
-  // explicit ClientDataBase((std::map<std::string, std::string> &
-  // db_settings));
+  explicit ClientDataBase(std::map<std::string, std::string>& db_settings);
 
   virtual ~ClientDataBase() = default;
 
@@ -197,15 +211,14 @@ class ClientDataBase : public DataBaseConnect {
  private:
   void do_modifying_request(const std::string& sql_request);
   std::vector<ClientDB> sqlReq(const std::string& sql_request);
-  // pqxx::result do_select_request(const std::string& sql_request);
+  pqxx::result do_select_request(const std::string& sql_request);
 };
 
-class CompanyDataBase : public DataBaseConnect {
+class CompanyDataBase : public DataBase {
  public:
   CompanyDataBase() = default;
 
-  // explicit CompanyDataBase((std::map<std::string, std::string> &
-  // db_settings));
+  explicit CompanyDataBase(std::map<std::string, std::string>& db_settings);
 
   virtual ~CompanyDataBase() = default;
 
@@ -219,15 +232,14 @@ class CompanyDataBase : public DataBaseConnect {
  private:
   void do_modifying_request(const std::string& sql_request);
   std::vector<CompanyDB> sqlReq(const std::string& sql_request);
-  // pqxx::result do_select_request(const std::string& sql_request);
+  pqxx::result do_select_request(const std::string& sql_request);
 };
 
-class PassageDataBase : public DataBaseConnect {
+class PassageDataBase : public DataBase {
  public:
   PassageDataBase() = default;
 
-  // explicit PassageDataBase((std::map<std::string, std::string> &
-  // db_settings));
+  explicit PassageDataBase(std::map<std::string, std::string>& db_settings);
 
   virtual ~PassageDataBase() = default;
 
@@ -242,7 +254,87 @@ class PassageDataBase : public DataBaseConnect {
  private:
   void do_modifying_request(const std::string& sql_request);
   std::vector<PassageDB> sqlReq(const std::string& sql_request);
-  // pqxx::result do_select_request(const std::string& sql_request);
+  pqxx::result do_select_request(const std::string& sql_request);
+};
+
+class ClientHandlers {
+
+public:
+    ClientHandlers() : _db() {};
+
+    std::string all_clients(const std::string& id_request, const std::map<std::string, size_t>& args);
+    std::string one_client(const std::string& id_request, const std::map<std::string, size_t>& args);
+    std::string delete_client(const std::string& id_request, const std::map<std::string, size_t>& args);
+    std::string insert_client(const std::string& id_request, const std::map<std::string, size_t>& args);
+
+
+
+    std::string create_client(const std::string& id_request,
+                            const std::map<std::string, size_t>& args,
+                            std::string& body);
+
+private:
+    ClientDataBase _db;
+};
+
+class PassHandlers {
+
+public:
+    PassHandlers() : _db() {};
+
+    std::string all_passes(const std::string& id_request, const std::map<std::string, size_t>& args);
+    std::string one_pass(const std::string& id_request, const std::map<std::string, size_t>& args);
+    std::string delete_pass(const std::string& id_request, const std::map<std::string, size_t>& args);
+    std::string insert_pass(const std::string& id_request, const std::map<std::string, size_t>& args);
+
+
+
+    std::string create_pass(const std::string& id_request,
+                            const std::map<std::string, size_t>& args,
+                            std::string& body);
+
+private:
+    PassDataBase _db;
+};
+
+class CompanyHandlers {
+
+public:
+    CompanyHandlers() : _db() {};
+
+    std::string all_companies(const std::string& id_request, const std::map<std::string, size_t>& args);
+    std::string one_company(const std::string& id_request, const std::map<std::string, size_t>& args);
+    std::string delete_company(const std::string& id_request, const std::map<std::string, size_t>& args);
+    std::string insert_company(const std::string& id_request, const std::map<std::string, size_t>& args);
+
+
+
+    std::string create_company(const std::string& id_request,
+                            const std::map<std::string, size_t>& args,
+                            std::string& body);
+
+private:
+    CompanyDataBase _db;
+};
+
+class PassageHandlers {
+
+public:
+    PassageHandlers() : _db() {};
+
+    std::string all_cpassages(const std::string& id_request, const std::map<std::string, size_t>& args);
+    std::string one_passage(const std::string& id_request, const std::map<std::string, size_t>& args);
+    std::string delete_passage(const std::string& id_request, const std::map<std::string, size_t>& args);
+    std::string insert_passage(const std::string& id_request, const std::map<std::string, size_t>& args);
+
+
+
+    std::string create_passage(const std::string& id_request,
+                            const std::map<std::string, size_t>& args,
+                            std::string& body);
+
+private:
+    PassageDataBase _db;
 };
 
 #endif  // VISIONLIB_INCLUDE_ORM_HPP_
