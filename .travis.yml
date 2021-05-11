@@ -2,17 +2,11 @@
 arch: amd64
 os: linux
 dist: focal
+sudo: required
 
 language: c
 
 compiler: gcc
-
-
-
-install:
-  - sudo apt-get install valgrind
-  - sudo apt-get install cppcheck
-  - sudo pip install cpplint
 
 script:
   - cd scripts
