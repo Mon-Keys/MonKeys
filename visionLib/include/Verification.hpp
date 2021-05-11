@@ -6,10 +6,13 @@
 // |_|  |_|  \___/  |_| |_| |_|\_\  \___|  \__, | |___/
 //                                         |___/
 
-#include "TimeCodeGenerator.hpp"
+#ifndef VISIONLIB_INCLUDE_VERIFICATION_HPP_
+#define VISIONLIB_INCLUDE_VERIFICATION_HPP_
 
-int main() {
-  TimeCodeGenerator test;
-  test.generateTimeCode();
-  return 0;
-}
+class Verification {
+ public:
+  virtual void open() = 0;
+  virtual void establishConnection(const char *url) = 0;
+};
+
+#endif  // VISIONLIB_INCLUDE_VERIFICATION_HPP_
