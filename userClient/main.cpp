@@ -15,6 +15,6 @@ int main()
     uint64_t timeStamp = 164334343;
     uint64_t companyID = 1;
     std::string userKey = "JBSWdssdsK3PXPK3PXP";
-    TimeCodeGenerator codegen(userKey, PassID, companyID, timeInterval, timeStamp);
+    TimeCodeGenerator codegen(userKey, PassID, companyID, timeInterval);
     codegen.generateTimeCode();
 }
