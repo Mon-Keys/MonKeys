@@ -6,9 +6,8 @@
 // |_|  |_|  \___/  |_| |_| |_|\_\  \___|  \__, | |___/
 //                                         |___/
 
-#include "ClientRequest.hpp"
+#include "httpServer.hpp"
 
-#include "clientServer.hpp"
 #include "gmock/gmock.h"
 #include "gtest/gtest.h"
 

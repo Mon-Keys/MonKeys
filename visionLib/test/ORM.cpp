@@ -80,33 +80,33 @@ class PaDB {
 
 class MockDBC : public DataBase {
  public:
-  MOCK_METHOD2(logIn, bool (std::string username, std::string password));
-  MOCK_METHOD1(logOut, bool (std::string username));
+  MOCK_METHOD2(logIn, bool(std::string username, std::string password));
+  MOCK_METHOD1(logOut, bool(std::string username));
 };
 
 class MockDBPassExist : public PassDataBase {
  public:
-  MOCK_METHOD1(sqlReq, std::vector<PassDB> (const std::string& sql_request));
+  MOCK_METHOD1(sqlReq, std::vector<PassDB>(const std::string& sql_request));
 };
 
 class MockDBClientExist : public ClientDataBase {
  public:
-  MOCK_METHOD1(sqlReq, std::vector<ClientDB> (const std::string& sql_request));
+  MOCK_METHOD1(sqlReq, std::vector<ClientDB>(const std::string& sql_request));
 };
 
 class MockDBCompanyExist : public CompanyDataBase {
  public:
-  MOCK_METHOD1(sqlReq, std::vector<CompanyDB> (const std::string& sql_request));
+  MOCK_METHOD1(sqlReq, std::vector<CompanyDB>(const std::string& sql_request));
 };
 
 class MockDBPassageExist : public PassageDataBase {
  public:
-  MOCK_METHOD1(sqlReq, std::vector<PassageDB> (const std::string& sql_request));
+  MOCK_METHOD1(sqlReq, std::vector<PassageDB>(const std::string& sql_request));
 };
 
 class MockDBInsert : public DataBase {
  public:
-  MOCK_METHOD1(sql_req_for_insert, uint64_t (const std::string& sql_request));
+  MOCK_METHOD1(sql_req_for_insert, uint64_t(const std::string& sql_request));
 };
 
 TEST(MyDBTest, LoginTest) {
