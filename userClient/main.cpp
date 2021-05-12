@@ -6,8 +6,15 @@
 // |_|  |_|  \___/  |_| |_| |_|\_\  \___|  \__, | |___/
 //                                         |___/
 
+#include "TimeCodeGenerator.hpp"
 
-
-int main() {
-
+int main()
+{
+    uint64_t PassID = 1;
+    uint16_t timeInterval = 30;
+    uint64_t timeStamp = 164334343;
+    uint64_t companyID = 1;
+    std::string userKey = "JBSWdssdsK3PXPK3PXP";
+    TimeCodeGenerator codegen(userKey, PassID, companyID, timeInterval, timeStamp);
+    codegen.generateTimeCode();
 }
