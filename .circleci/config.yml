@@ -84,5 +84,6 @@ jobs:
              ls
       - run: 
             name: MAKE
-            command: 'make' 
+            command: |
+             cd build && make 
    
