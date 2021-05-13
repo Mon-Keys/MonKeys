@@ -21,6 +21,9 @@ jobs:
       - run:
           name: Installing CPPCHECK
           command: 'apt-get update && sudo apt-get install -y cppcheck'
+      - run:
+          name: Installing CPPLINT
+          command: 'sudo pip install cpplint'
       - run: 
           name: Installing BOOST
           command: 'apt-get update && sudo apt-get install -y libboost-all-dev'
