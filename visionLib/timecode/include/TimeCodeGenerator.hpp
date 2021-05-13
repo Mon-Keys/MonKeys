@@ -11,23 +11,32 @@
 
 #include <iostream>
 #include <string>
+#include <vector>
+#include <boost/uuid/sha1.hpp>
+#include <boost/format.hpp>
+#include <cstdlib>
+#include <bitset>
+#include <cmath>
+#include <chrono>
 
 class TimeCodeGenerator {
  private:
-  std::string privateKey;
-  uint64_t PassID;
-  uint64_t timeStamp;
-  uint16_t timeInterval;
+  std::string _privateKey;
+  uint64_t _PassID;
+  uint16_t _timeInterval;
+  uint64_t _CompanyID;
 
   // startTime --- UNIX0
 
   std::string getHashedOTP();
   uint64_t getTParameter();
   void updateTime();
-
+  uint64_t countFloor();
+  std::string getSHA1(const std::string& message);
+  uint8_t convertHexCharToUINT(char ch);
  public:
   TimeCodeGenerator(std::string privateKey, uint64_t PassID, uint64_t CompanyID,
-                    uint16_t timeInterval, uint64_t timeStamp);
+                    uint16_t timeInterval);
   std::string generateTimeCode();
   TimeCodeGenerator();
   ~TimeCodeGenerator();
