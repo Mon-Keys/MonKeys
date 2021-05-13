@@ -1,7 +1,7 @@
 version: 2
 
 jobs:
-  build:
+  build-and-run:
     docker:
       - image: "debian:stretch"
     steps:
@@ -27,3 +27,34 @@ jobs:
       - run: 
           name: Installing PQXX
           command: 'apt-get update && sudo apt-get install -y libpqxx-dev'
+      - run: 
+          name: CPPCHECK
+          command: |
+            cppcheck --enable=all --language=c++ visionLib/source/*.cpp visionLib/test/*.cpp --suppress=missingInclude --suppress=unusedFunction
+            cppcheck --enable=all --language=c++ terminalClient/main.cpp --suppress=missingInclude --suppress=unusedFunction
+            cppcheck --enable=all --language=c++ userClient/main.cpp --suppress=missingInclude --suppress=unusedFunction
+            cppcheck --enable=all --language=c++ terminalServer/main.cpp --suppress=missingInclude --suppress=unusedFunction
+            cppcheck --enable=all --language=c++ userServer/main.cpp --suppress=missingInclude --suppress=unusedFunction
+      - run: 
+          name: CPPLINT
+          command: |
+            cpplint --extensions=cpp visionLib/test/*.cpp 
+            cpplint --extensions=cpp visionLib/clientHandler/source/*.cpp
+            cpplint --extensions=cpp visionLib/database/source/*.cpp
+            cpplint --extensions=cpp visionLib/httpClient/source/*.cpp
+            cpplint --extensions=cpp visionLib/httpServer/source/*.cpp
+            cpplint --extensions=cpp visionLib/logger/source/*.cpp
+            cpplint --extensions=cpp visionLib/terminalClient/source/*.cpp
+            cpplint --extensions=cpp visionLib/terminalHandler/source/*.cpp
+            cpplint --extensions=cpp visionLib/terminalServer/source/*.cpp
+            cpplint --extensions=cpp visionLib/terminalHandler/source/*.cpp
+      - run: 
+            name: CMAKE
+            command: |
+                rm -rf build
+                mkdir build && cd build
+                cmake .. 
+      - run: 
+            name: MAKE
+            command: 'make clean && make' 
+   
