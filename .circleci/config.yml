@@ -13,7 +13,7 @@ jobs:
           name: Installing GCC
           command: 'apt-get update && apt-get install -y gcc g++'
       - run:
-          name: Installing GCC
+          name: Installing GIT
           command: 'apt-get update && apt-get install -y git'
       - run:
           name: Installing PIP
@@ -21,6 +21,9 @@ jobs:
       - run:
           name: Install CMAKE
           command: 'apt-get update && sudo apt-get install -y cmake'
+      - run:
+          name: CMAKE version check
+          command: 'cmake --version'
       - run:
           name: Installing VALGRIND
           command: 'apt-get update && sudo apt-get install -y valgrind'
