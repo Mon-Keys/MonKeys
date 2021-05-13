@@ -16,8 +16,7 @@ TEST(TimeCodeGeneratorTest, correct_generate_on_one_time_segment) {
   uint64_t timeStamp = 1618494933;
   uint64_t companyID = 1;
   std::string userKey = "JBSWY3DPEHPK3PXP";
-  TimeCodeGenerator codegen(userKey, PassID, companyID, timeInterval,
-                            timeStamp);
+  TimeCodeGenerator codegen(userKey, PassID, companyID, timeInterval);
   std::string generatedCode = codegen.generateTimeCode();
   std::string precalculatedCode = "000100115247474";
   ASSERT_EQ(generatedCode, precalculatedCode);
@@ -30,8 +29,7 @@ TEST(TimeCodeGeneratorTest, correct_generate_on_one_time_segment2) {
   uint64_t companyID = 4096;
   std::string userKey =
       "asddsdsdsdsddsdsfvdsfvsadsadasowkqefoiwefjwe";  // NOLINT
-  TimeCodeGenerator codegen(userKey, PassID, companyID, timeInterval,
-                            timeStamp);
+  TimeCodeGenerator codegen(userKey, PassID, companyID, timeInterval);
   std::string generatedCode = codegen.generateTimeCode();
   std::string precalculatedCode = "010010012249111";
   ASSERT_EQ(generatedCode, precalculatedCode);
