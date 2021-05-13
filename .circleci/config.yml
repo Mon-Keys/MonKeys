@@ -74,5 +74,5 @@ jobs:
                 cmake .. 
       - run: 
             name: MAKE
-            command: 'make clean && make' 
+            command: 'make' 
    
