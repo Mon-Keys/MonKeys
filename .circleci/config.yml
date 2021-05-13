@@ -74,5 +74,16 @@ jobs:
                 cmake .. 
       - run: 
             name: MAKE
-            command: 'make clean && make' 
+            command: |
+             pwd
+             ls
+      - run: 
+            name: MAKE
+            command: |
+             cd build
+             ls
+      - run: 
+            name: MAKE
+            command: |
+             cd build && make 
    
