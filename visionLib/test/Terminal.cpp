@@ -6,10 +6,9 @@
 // |_|  |_|  \___/  |_| |_| |_|\_\  \___|  \__, | |___/
 //                                         |___/
 
-#include "terminalClient.hpp"
-
 #include "gmock/gmock.h"
 #include "gtest/gtest.h"
+#include "terminalClient.hpp"
 
 TEST(TestTerminal, correct_tempcode_lenght) {
   Terminal terminal;

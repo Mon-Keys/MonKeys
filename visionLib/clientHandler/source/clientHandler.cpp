@@ -7,8 +7,22 @@
 //
 
 #include "clientHandler.hpp"
+#include "database.hpp"
 
-bool clientHandler::logInClient(std::string Login, std::string Password) {}
-bool clientHandler::logOutClient(uint64_t ClientID) {}
-bool clientHandler::registerClient(std::string Login, std::string Password) {}
-std::string clientHandler::getTimeCode(uint64_t PassID) {}
+bool clientHandler::logInClient(std::string Login, std::string Password) {
+    if (_Cldb.ClientExists(Login) == false) return false;
+
+    ClientDB client = _Cldb.getClient(Login);
+
+    if (client.getPassword() == Password)
+        return true;
+    else 
+        return false;
+}
+bool clientHandler::logOutClient(uint64_t ClientID) { return true;}
+bool clientHandler::registerClient(const std::string& Login, const std::string& Email, const std::string& Password) {
+    if (_Cldb.ClientExists(Login) == true) return false;
+
+    return _Cldb.insertClient(Login, Email, Password);
+}
+std::string clientHandler::getTimeCode(uint64_t PassID) {return "";}

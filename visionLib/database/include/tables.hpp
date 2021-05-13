@@ -32,7 +32,7 @@
 
 class ClientDB {
  public:
-  ClientDB() = default;
+  ClientDB() : ID(), login(""), email(""), password("") {}
 
   explicit ClientDB(uint64_t _ID,
                     std::string _login,

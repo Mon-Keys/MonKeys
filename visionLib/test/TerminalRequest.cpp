@@ -5,11 +5,10 @@
 // | |  | | | (_) | | | | | | . \  |  __/ | |_| | \__ \
 // |_|  |_|  \___/  |_| |_| |_|\_\  \___|  \__, | |___/
 //                                         |___/
-#include "terminalClient.hpp"
-
-#include "terminalServer.hpp"
 #include "gmock/gmock.h"
 #include "gtest/gtest.h"
+#include "terminalClient.hpp"
+#include "terminalServer.hpp"
 
 class MockTerminalServer : public terminalServer {
  public:
