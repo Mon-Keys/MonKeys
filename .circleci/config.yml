@@ -2,19 +2,28 @@ version: 2
 
 jobs:
   build:
-    machine: # executor type
-      image: ubuntu-2004:202010-01
+    docker:
+      - image: "debian:stretch"
     steps:
       - checkout
       - run:
-          name: Install dependencies
-          command: |
-            sudo apt-get install valgrind
-            sudo apt-get install cppcheck
-            sudo pip install cpplint
-            sudo apt-get install -f libboost-all-dev
-            sudo apt-get install -y libpqxx-dev
+          name: Installing SUDO
+          command: 'apt-get update && apt-get install -y sudo && rm -rf /var/lib/apt/lists/*'
       - run:
-          name: test
-          command: pwd
-    
+          name: Installing GCC
+          command: 'apt-get update && apt-get install -y gcc g++'
+      - run:
+          name: Install CMAKE
+          command: 'apt-get update && sudo apt-get install -y cmake'
+      - run:
+          name: Installing VALGRIND
+          command: 'apt-get update && sudo apt-get install -y valgrind'
+      - run:
+          name: Installing CPPCHECK
+          command: 'apt-get update && sudo apt-get install -y cppcheck'
+      - run: 
+          name: Installing BOOST
+          command: 'apt-get update && sudo apt-get install -y libboost-all-dev'
+      - run: 
+          name: Installing PQXX
+          command: 'apt-get update && sudo apt-get install -y libpqxx-dev'
