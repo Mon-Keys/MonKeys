@@ -8,115 +8,151 @@
 
 #include "database.hpp"
 
-std::vector<PassDB> PassDataBase::sqlReq(const std::string& sql_request) {
-  std::vector<PassDB> result;
-  return result;
+
+bool DataBase::is_opened() const {
+	if (database_->is_open()) {
+		return true;
+	}
+	return false;
 }
 
-std::vector<ClientDB> ClientDataBase::sqlReq(const std::string& sql_request) {
-  std::vector<ClientDB> result;
-  return result;
+DataBase::DataBase()  {
+	str_db_settings = "dbname=Monkeys host=localhost user=postgres password=password port=5432";
+	try {
+		database_ = std::make_unique<pqxx::connection>(str_db_settings);
+	} catch (const std::exception& e) {
+		std::cerr << e.what() << '\n';
+		std::this_thread::sleep_for(std::chrono::seconds(1));
+	}
+	std::cout << "Connecting!" << std::endl;
 }
 
-std::vector<PassageDB> PassageDataBase::sqlReq(const std::string& sql_request) {
-  std::vector<PassageDB> result;
-  return result;
+DataBase::DataBase(std::map<std::string, std::string> &db_settings)  {
+	str_db_settings = ("dbname=" + db_settings["dbname"] +
+							  " host=" + db_settings["host"] +" user=" + db_settings["user"] +
+							  " password=" + db_settings["password"] + " port=5432");
+	try {
+		database_ = std::make_unique<pqxx::connection>(str_db_settings);
+	} catch (const std::exception& e) {
+		std::cerr << e.what() << '\n';
+		std::this_thread::sleep_for(std::chrono::seconds(1));
+	}
+	std::cout << "Connecting!" << std::endl;
 }
 
-std::vector<CompanyDB> CompanyDataBase::sqlReq(const std::string& sql_request) {
-  std::vector<CompanyDB> result;
-  return result;
+void ClientDataBase::do_modifying_request(std::string& sql_request) {
+	pqxx::connection con(str_db_settings);
+	pqxx::work W(con);
+	W.exec(sql_request);
+	W.commit();
 }
 
-uint64_t DataBase::sql_req_for_insert(const std::string& sql_request) {
-  uint64_t result = 1;
-  return result;
+void PassDataBase::do_modifying_request(std::string& sql_request) {
+	pqxx::connection con(str_db_settings);
+	pqxx::work W(con);
+	W.exec(sql_request);
+	W.commit();
 }
 
-uint64_t PassDataBase::insertPass(const PassDB& Pass) {
-  return sql_req_for_insert("fsdf");
-}
-uint64_t PassageDataBase::insertPassage(const PassageDB& Passage) {
-  return sql_req_for_insert("fsdf");
-}
-uint64_t ClientDataBase::insertClient(const ClientDB& Client) {
-  return sql_req_for_insert("fsdf");
-}
-uint64_t CompanyDataBase::insertCompany(const CompanyDB& Company) {
-  return sql_req_for_insert("fsdf");
+void CompanyDataBase::do_modifying_request(std::string& sql_request) {
+	pqxx::connection con(str_db_settings);
+	pqxx::work W(con);
+	W.exec(sql_request);
+	W.commit();
 }
 
-bool PassDataBase::deletePass(const uint64_t PassID) { return true; }
-bool PassageDataBase::deletePassage(const uint64_t PassageID) { return true; }
+void PassageDataBase::do_modifying_request(std::string& sql_request) {
+	pqxx::connection con(str_db_settings);
+	pqxx::work W(con);
+	W.exec(sql_request);
+	W.commit();
+}
+
+pqxx::result ClientDataBase::do_select_request(std::string& sql_request) {
+	pqxx::connection con(str_db_settings);
+	pqxx::work N(con);
+	pqxx::result R = N.exec(sql_request);
+	N.commit();
+	return R;
+}
+
+pqxx::result PassDataBase::do_select_request(std::string& sql_request) {
+	pqxx::connection con(str_db_settings);
+	pqxx::work N(con);
+	pqxx::result R = N.exec(sql_request);
+	N.commit();
+	return R;
+}
+
+pqxx::result CompanyDataBase::do_select_request(std::string& sql_request) {
+	pqxx::connection con(str_db_settings);
+	pqxx::work N(con);
+	pqxx::result R = N.exec(sql_request);
+	N.commit();
+	return R;
+}
+
+pqxx::result PassageDataBase::do_select_request(std::string& sql_request) {
+	pqxx::connection con(str_db_settings);
+	pqxx::work N(con);
+	pqxx::result R = N.exec(sql_request);
+	N.commit();
+	return R;
+}
+
+
+bool PassDataBase::deletePass(const uint64_t& PassID) { return true; }
+bool PassageDataBase::deletePassage(const uint64_t& PassageID) { return true; }
 bool ClientDataBase::deleteCLient(const uint64_t ClientID) { return true; }
 bool CompanyDataBase::deleteCompany(const uint64_t CompanyID) { return true; }
 
+bool ClientDataBase::insertClient(const std::string& Login, const std::string& Email, const std::string& Password) {
+  	std::string sql_request = "insert into client(login, email, password) values ('" + Login + "', '"
+			   + Email + "', '"
+			   + Password + "')";
+
+	do_modifying_request(sql_request);
+
+	std::cout << "Add client" << std::endl;
+
+	return true;
+}
+
 bool PassDataBase::PassExists(const uint64_t PassID) {
-  std::vector<PassDB> res = PassDataBase::sqlReq("skjfh");
-  // std::vector<PassDB> res;
-  // for (int i = 1; i < 3; i++) {
-  //   PassDB pass;
-  //   pass.setClientID(i);
-  //   pass.setID(i);
-  //   pass.setprivate(STR);
-  //   pass.setCompanyID(i);
-  //   res.push_back(pass);
-  // }
-  for (int i = 0; i < res.size(); i++) {
-    if (res[i].getID() == PassID) {
-      return true;
+  auto exist_sql_req = ("select exists(select id from client where pass.if = '" + std::to_string(PassID) + "')");
+    pqxx::result exist = do_select_request(exist_sql_req);
+    auto exist_flag = exist[0][0].as<std::string>();
+    if (exist_flag == "t") {
+        return true;
+    } else {
+        return false;
     }
-  }
-  return false;
 }
 
-bool ClientDataBase::ClientExists(const uint64_t ClientID) {
-  std::vector<ClientDB> res = ClientDataBase::sqlReq("skjfh");
-  // std::vector<ClientDB> res;
-  // for (int i = 0; i < 3; i++) {
-  //   ClientDB client;
-  //   client.setID(i);
-  //   client.setLogin("login");
-  //   client.setPassword("password");
-  //   client.setEmail("inagdimaev@mail.ru");
-  //   res.push_back(client);
-  // }
-  for (int i = 0; i < res.size(); i++) {
-    if (res[i].getID() == ClientID) {
-      return true;
+bool ClientDataBase::ClientExists(const std::string& login) {
+    auto exist_sql_req = ("select exists(select id from client where client.login = '" + login + "')");
+    pqxx::result exist = do_select_request(exist_sql_req);
+    auto exist_flag = exist[0][0].as<std::string>();
+    if (exist_flag == "t") {
+        return true;
+    } else {
+        return false;
     }
-  }
-  return false;
 }
 
-bool CompanyDataBase::CompanyExists(const uint64_t CompanyID) {
-  std::vector<CompanyDB> res = CompanyDataBase::sqlReq("skjfh");
-  // std::vector<CompanyID> res;
-  // for (int i = 0; i < 3; i++) {
-  //   CompanyDB company;
-  //   company.setID(i);
-  //   company.setName("sdgds");
-  //   res.push_back(company);
-  // }
-  for (int i = 0; i < res.size(); i++) {
-    if (res[i].getID() == CompanyID) {
-      return true;
+bool CompanyDataBase::CompanyExists(const std::string& name) {
+  auto exist_sql_req = ("select exists(select id from client where client.login = '" + name + "')");
+    pqxx::result exist = do_select_request(exist_sql_req);
+    auto exist_flag = exist[0][0].as<std::string>();
+    if (exist_flag == "t") {
+        return true;
+    } else {
+        return false;
     }
-  }
-  return false;
 }
 
-bool PassageDataBase::PassageExists(const uint64_t PassageID) {
-  std::vector<PassageDB> res = PassageDataBase::sqlReq("skjfh");
-  // std::vector<PassageID> res;
-  // for (int i = 0; i < 3; i++) {
-  //   PassageDB passage;
-  //   passage.setID(i);
-  //   passage.setActionType(0);
-  //   passage.setTime(time_now);
-  //   passage.setPassID(i);
-  //   res.push_back(passage);
-  // }
+bool PassageDataBase::PassageExists(const uint64_t& PassageID) {
+  std::vector<PassageDB> res;
   for (int i = 0; i < res.size(); i++) {
     if (res[i].getID() == PassageID) {
       return true;
@@ -131,20 +167,20 @@ std::vector<PassDB> PassDataBase::getAllPasses(const std::string& sql_limit,
   return passes;
 }
 
-std::vector<PassageDB> PassageDataBase::getAllPassages(
-    const std::string& sql_limit, const std::string& sql_offset) {
+std::vector<PassageDB> PassageDataBase::getAllPassages(const std::string& sql_limit,
+                                                       const std::string& sql_offset) {
   std::vector<PassageDB> passes(0);
   return passes;
 }
 
-std::vector<ClientDB> ClientDataBase::getAllClients(
-    const std::string& sql_limit, const std::string& sql_offset) {
+std::vector<ClientDB> ClientDataBase::getAllClients(const std::string& sql_limit,
+                                                    const std::string& sql_offset) {
   std::vector<ClientDB> passes(0);
   return passes;
 }
 
-std::vector<CompanyDB> CompanyDataBase::getAllCompanys(
-    const std::string& sql_limit, const std::string& sql_offset) {
+std::vector<CompanyDB> CompanyDataBase::getAllCompanys(const std::string& sql_limit,
+                                                       const std::string& sql_offset) {
   std::vector<CompanyDB> passes(0);
   return passes;
 }
@@ -168,5 +204,25 @@ PassDB PassDataBase::getPass(const uint64_t PassID) { return PassDB(); }
 PassageDB PassageDataBase::getPassage(const uint64_t PassageID) {
   return PassageDB();
 }
-ClientDB getClient(const uint64_t ClientID) { return ClientDB(); }
+
+ClientDB ClientDataBase::getClient(const std::string login) { 
+	std::string sql_request = "select * from client where client.login = '" + login + "'";
+    pqxx::result r = do_select_request(sql_request);
+
+	const auto& row = r.at(0);
+    ClientDB result(
+			row[0].as<int>(),
+			row[1].as<std::string>(),
+			row[2].as<std::string>(),
+			row[3].as<std::string>());
+    return result; 
+}
 CompanyDB getCompany(const uint64_t CompanyID) { return CompanyDB(); }
+
+ClientDataBase::ClientDataBase(std::map<std::string, std::string>& db_settings) : DataBase(db_settings){ }
+
+PassDataBase::PassDataBase(std::map<std::string, std::string>& db_settings) : DataBase(db_settings){ }
+
+CompanyDataBase::CompanyDataBase(std::map<std::string, std::string>& db_settings) : DataBase(db_settings){ }
+
+PassageDataBase::PassageDataBase(std::map<std::string, std::string>& db_settings) : DataBase(db_settings){ }

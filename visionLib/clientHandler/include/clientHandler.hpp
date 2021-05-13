@@ -21,7 +21,7 @@ class clientHandler {
 
   bool logInClient(std::string Login, std::string Password);
   bool logOutClient(uint64_t ClientID);
-  bool registerClient(std::string Login, std::string Password);
+  bool registerClient(const std::string& Login, const std::string& Email, const std::string& Password);
   std::string getTimeCode(uint64_t PassID);
 
  private:
