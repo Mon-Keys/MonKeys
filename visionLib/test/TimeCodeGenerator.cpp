@@ -13,7 +13,6 @@
 TEST(TimeCodeGeneratorTest, correct_generate_on_one_time_segment) {
   uint64_t PassID = 1;
   uint16_t timeInterval = 10000;
-  uint64_t timeStamp = 1618494933;
   uint64_t companyID = 1;
   std::string userKey = "JBSWY3DPEHPK3PXP";
   TimeCodeGenerator codegen(userKey, PassID, companyID, timeInterval);
@@ -25,7 +24,6 @@ TEST(TimeCodeGeneratorTest, correct_generate_on_one_time_segment) {
 TEST(TimeCodeGeneratorTest, correct_generate_on_one_time_segment2) {
   uint64_t PassID = 4096;
   uint16_t timeInterval = 100;
-  uint64_t timeStamp = 1618495933;
   uint64_t companyID = 4096;
   std::string userKey =
       "asddsdsdsdsddsdsfvdsfvsadsadasowkqefoiwefjwe";  // NOLINT

@@ -8,15 +8,14 @@
 
 #include "TimeCodeGenerator.hpp"
 
-int main()
-{
-    uint64_t PassID = 1;
-    uint16_t timeInterval = 5;
-    uint64_t companyID = 1;
-    std::string userKey = "IQ6GRCCXFVOQRBBX";
-    TimeCodeGenerator codegen(userKey, PassID, companyID, timeInterval);
-    while(true){
-        sleep(2);
-        codegen.generateTimeCode();
-    } 
+int main() {
+  uint64_t PassID = 1;
+  uint16_t timeInterval = 5;
+  uint64_t companyID = 1;
+  std::string userKey = "IQ6GRCCXFVOQRBBX";
+  TimeCodeGenerator codegen(userKey, PassID, companyID, timeInterval);
+  while (true) {
+    sleep(2);
+    codegen.generateTimeCode();
+  }
 }

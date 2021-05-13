@@ -54,6 +54,6 @@ TEST(MOCKclientServer, getTimeCodeTest) {
 
   ON_CALL(mcs, getTimeCode(_)).WillByDefault(Return("abcd"));
 
-  std::string ex = mcs.getTimeCode(1);
+  // std::string ex = mcs.getTimeCode(1);
   // EXPECT_STREQ(ex, "abcd");
 }

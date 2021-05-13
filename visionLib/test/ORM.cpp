@@ -18,7 +18,6 @@ using ::testing::_;
 using ::testing::AtLeast;
 using ::testing::Return;
 
-
 TEST(ConnectTEST, TestConnect) {
   std::map<std::string, std::string> lol{{"dbname", "Monkeys"},
                                          {"host", "localhost"},

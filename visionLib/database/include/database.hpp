@@ -9,26 +9,24 @@
 #ifndef VISIONLIB_INCLUDE_ORM_HPP_
 #define VISIONLIB_INCLUDE_ORM_HPP_
 
-#include <iostream>
-#include <string>
-#include <map>
-#include <optional>
-#include <queue>
-#include <functional>
-#include <ctime>
-#include <vector>
-
 #include <boost/algorithm/string.hpp>
 #include <boost/asio.hpp>
 #include <boost/date_time.hpp>
 #include <boost/filesystem.hpp>
-#include <boost/lexical_cast.hpp>
-#include <boost/tokenizer.hpp>
-#include <boost/property_tree/ptree.hpp>
-#include <boost/property_tree/json_parser.hpp>
 #include <boost/foreach.hpp>
-
+#include <boost/lexical_cast.hpp>
+#include <boost/property_tree/json_parser.hpp>
+#include <boost/property_tree/ptree.hpp>
+#include <boost/tokenizer.hpp>
+#include <ctime>
+#include <functional>
+#include <iostream>
+#include <map>
+#include <optional>
 #include <pqxx/pqxx>
+#include <queue>
+#include <string>
+#include <vector>
 
 #include "tables.hpp"
 
@@ -38,7 +36,7 @@ class DataBase {
 
   explicit DataBase(std::map<std::string, std::string>& db_settings);
 
-  virtual ~DataBase() {};
+  virtual ~DataBase(){};
 
   virtual bool is_opened() const;
 
@@ -79,7 +77,8 @@ class ClientDataBase : public DataBase {
 
   virtual ~ClientDataBase() = default;
 
-  bool insertClient(const std::string& Login, const std::string& Email, const std::string& Password);
+  bool insertClient(const std::string& Login, const std::string& Email,
+                    const std::string& Password);
   bool deleteCLient(const uint64_t ClientID);
   bool ClientExists(const std::string& login);
   std::vector<ClientDB> getAllClients(const std::string& sql_limit,
@@ -131,6 +130,5 @@ class PassageDataBase : public DataBase {
   void do_modifying_request(std::string& sql_request);
   pqxx::result do_select_request(std::string& sql_request);
 };
-
 
 #endif  // VISIONLIB_INCLUDE_ORM_HPP_

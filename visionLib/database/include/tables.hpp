@@ -9,37 +9,32 @@
 #ifndef VISIONLIB_INCLUDE_TABLES_HPP_
 #define VISIONLIB_INCLUDE_TABLES_HPP_
 
-#include <iostream>
-#include <string>
-#include <map>
-#include <optional>
-#include <queue>
-#include <functional>
-#include <ctime>
-#include <vector>
-
 #include <boost/algorithm/string.hpp>
 #include <boost/asio.hpp>
 #include <boost/date_time.hpp>
 #include <boost/filesystem.hpp>
-#include <boost/lexical_cast.hpp>
-#include <boost/tokenizer.hpp>
-#include <boost/property_tree/ptree.hpp>
-#include <boost/property_tree/json_parser.hpp>
 #include <boost/foreach.hpp>
-
+#include <boost/lexical_cast.hpp>
+#include <boost/property_tree/json_parser.hpp>
+#include <boost/property_tree/ptree.hpp>
+#include <boost/tokenizer.hpp>
+#include <ctime>
+#include <functional>
+#include <iostream>
+#include <map>
+#include <optional>
 #include <pqxx/pqxx>
+#include <queue>
+#include <string>
+#include <vector>
 
 class ClientDB {
  public:
   ClientDB() : ID(), login(""), email(""), password("") {}
 
-  explicit ClientDB(uint64_t _ID,
-                    std::string _login,
-                    std::string _email,
-                    std::string _password) 
-          : ID(_ID), login(_login), 
-          email(_email), password(_password) {}
+  explicit ClientDB(uint64_t _ID, std::string _login, std::string _email,
+                    std::string _password)
+      : ID(_ID), login(_login), email(_email), password(_password) {}
 
   ClientDB(const ClientDB& p) = default;
 
@@ -67,7 +62,7 @@ class PassDB {
   PassDB() = default;
 
   explicit PassDB(uint64_t _ID, std::string _privateKey, uint64_t _CompanyID,
-         uint64_t _ClientID)
+                  uint64_t _ClientID)
       : ID(_ID),
         privateKey(_privateKey),
         CompanyID(_CompanyID),
@@ -119,7 +114,8 @@ class PassageDB {
  public:
   PassageDB() = default;
 
-  explicit PassageDB(uint64_t _ID, time_t _time, uint8_t _actionType, uint64_t _PassID)
+  explicit PassageDB(uint64_t _ID, time_t _time, uint8_t _actionType,
+                     uint64_t _PassID)
       : ID(_ID), time(_time), actionType(_actionType), PassID(_PassID) {}
 
   PassageDB(const PassageDB& p) = default;
@@ -143,4 +139,4 @@ class PassageDB {
   uint64_t PassID;
 };
 
-#endif // VISIONLIB_INCLUDE_TABLES_HPP_
+#endif  // VISIONLIB_INCLUDE_TABLES_HPP_

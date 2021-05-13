@@ -6,11 +6,12 @@
 // |_|  |_|  \___/  |_| |_| |_|\_\  \___|  \__, | |___/
 //                                         |___/
 
-#include <string>
-
 #include "terminalHandler.hpp"
 
-bool compareTimeCode(std::string firstTimeCode, std::string secondTimeCode) {
+#include <string>
+
+bool compareTimeCode(std::string& firstTimeCode,  // NOLINT
+                std::string& secondTimeCode) {  // NOLINT
   return true;
 }
 
