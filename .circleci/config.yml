@@ -1,0 +1,25 @@
+version: 2.1
+
+jobs:
+  
+  build:
+    docker:
+    - image: archlinux/base
+    steps:
+      - run:
+        name: Install dependencies
+        command: |
+          sudo apt-get install valgrind
+          sudo apt-get install cppcheck
+          sudo pip install cpplint
+          sudo apt-get install -f libboost-all-dev
+          sudo apt-get install -y libpqxx-dev
+      - run:
+        name: test
+        command: pwd
+
+workflows:
+  version: 2
+  build-check:
+    jobs:
+      - build
