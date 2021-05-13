@@ -6,10 +6,9 @@
 // |_|  |_|  \___/  |_| |_| |_|\_\  \___|  \__, | |___/
 //                                         |___/
 
-#include "httpServer.hpp"
-
 #include "gmock/gmock.h"
 #include "gtest/gtest.h"
+#include "httpServer.hpp"
 
 using ::testing::AtLeast;
 using ::testing::Return;
