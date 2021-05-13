@@ -74,5 +74,11 @@ jobs:
                 cmake .. 
       - run: 
             name: MAKE
+            command: |
+             pwd
+             ls
+
+      - run: 
+            name: MAKE
             command: 'make' 
    
