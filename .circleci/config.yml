@@ -19,11 +19,11 @@ jobs:
           name: Installing VALGRIND
           command: 'apt-get update && sudo apt-get install -y valgrind'
       - run:
-          name: Creating Binary Files
+          name: Installing CPPCHECK
           command: 'apt-get update && sudo apt-get install -y cppcheck'
       - run: 
-          name: Creating Binary Files
-          command: 'apt-get update && sudo apt-get install -f libboost-all-dev'
+          name: Installing BOOST
+          command: 'apt-get update && sudo apt-get install -y libboost-all-dev'
       - run: 
-          name: Creating Binary Files
+          name: Installing PQXX
           command: 'apt-get update && sudo apt-get install -y libpqxx-dev'
