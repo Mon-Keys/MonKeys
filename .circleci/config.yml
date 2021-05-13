@@ -36,11 +36,17 @@ jobs:
       - run: 
           name: CPPCHECK
           command: |
-            cppcheck --enable=all --language=c++ visionLib/source/*.cpp visionLib/test/*.cpp --suppress=missingInclude --suppress=unusedFunction
-            cppcheck --enable=all --language=c++ terminalClient/main.cpp --suppress=missingInclude --suppress=unusedFunction
-            cppcheck --enable=all --language=c++ userClient/main.cpp --suppress=missingInclude --suppress=unusedFunction
-            cppcheck --enable=all --language=c++ terminalServer/main.cpp --suppress=missingInclude --suppress=unusedFunction
-            cppcheck --enable=all --language=c++ userServer/main.cpp --suppress=missingInclude --suppress=unusedFunction
+            cppcheck --enable=all --language=c++ visionLib/test/*.cpp --suppress=missingInclude --suppress=unusedFunction 
+            cppcheck --enable=all --language=c++ visionLib/clientHandler/source/*.cpp --suppress=missingInclude --suppress=unusedFunction
+            cppcheck --enable=all --language=c++ visionLib/database/source/*.cpp --suppress=missingInclude --suppress=unusedFunction
+            cppcheck --enable=all --language=c++ visionLib/httpClient/source/*.cpp --suppress=missingInclude --suppress=unusedFunction
+            cppcheck --enable=all --language=c++ visionLib/httpServer/source/*.cpp --suppress=missingInclude --suppress=unusedFunction --suppress=useStlAlgorithm
+            cppcheck --enable=all --language=c++ visionLib/logger/source/*.cpp --suppress=missingInclude --suppress=unusedFunction
+            cppcheck --enable=all --language=c++ visionLib/terminalClient/source/*.cpp --suppress=missingInclude --suppress=unusedFunction
+            cppcheck --enable=all --language=c++ visionLib/terminalHandler/source/*.cpp --suppress=missingInclude --suppress=unusedFunction
+            cppcheck --enable=all --language=c++ visionLib/terminalServer/source/*.cpp --suppress=missingInclude --suppress=unusedFunction
+            cppcheck --enable=all --language=c++ visionLib/terminalHandler/source/*.cpp --suppress=missingInclude --suppress=unusedFunction
+
       - run: 
           name: CPPLINT
           command: |
