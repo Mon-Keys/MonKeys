@@ -1,5 +1,7 @@
 #!/bin/bash
 
+sudo apt-get update
+sudo apt-get install libc6-dbg
 sudo apt-get install valgrind
 sudo apt-get install cppcheck
 sudo pip install cpplint
