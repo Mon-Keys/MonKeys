@@ -5,7 +5,7 @@ set(Boost_USE_MULTITHREAD ON)
 set(CMAKE_CXX_STANDARD 14)
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wpedantic -pedantic -fprofile-arcs -ftest-coverage -lpqxx -lpq -lboost_system")
 
-find_package(Boost)
+find_package(Boost REQUIRED)
 include_directories(${Boost_LIBRARIES})
 
 find_library(PQXX_LIB pqxx)

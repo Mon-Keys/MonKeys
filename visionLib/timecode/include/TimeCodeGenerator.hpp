@@ -12,7 +12,7 @@
 #include <iostream>
 #include <string>
 #include <vector>
-#include <boost/uuid/sha1.hpp>
+#include <boost/uuid/detail/sha1.hpp>
 #include <boost/format.hpp>
 #include <cstdlib>
 #include <bitset>
