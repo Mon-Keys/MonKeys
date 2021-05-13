@@ -1,12 +1,6 @@
 #!/bin/bash
 
-sudo apt-get update
-sudo apt-get install libc6-dbg
-sudo apt-get install valgrind
-sudo apt-get install cppcheck
-sudo pip install cpplint
-sudo apt-get install -f libboost-all-dev
-sudo apt-get install -y libpqxx-dev
+
 cd .. 
 cppcheck --enable=all --language=c++ visionLib/source/*.cpp visionLib/test/*.cpp --suppress=missingInclude --suppress=unusedFunction
 cppcheck --enable=all --language=c++ terminalClient/main.cpp --suppress=missingInclude --suppress=unusedFunction
