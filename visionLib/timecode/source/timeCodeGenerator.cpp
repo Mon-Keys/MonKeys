@@ -13,10 +13,12 @@
 #define TIMEPART_BYTES 8
 
 #define PRIVATE_KEY_BYTES 20
+#define PASS_ID_LENGTH 8
+#define COMPANY_ID_LENGTH 6
 
 #define CHAR_CONVERSION_ERROR -1
 
-#define TOKEN_PART_TIME_LENGTH 100000000
+#define TOKEN_PART_TIME_LENGTH 32
 
 std::uint8_t TimeCodeGenerator::convertHexCharToUINT(char ch){
   if (ch >= '0' && ch <= '9')
@@ -27,60 +29,51 @@ std::uint8_t TimeCodeGenerator::convertHexCharToUINT(char ch){
 }
 
 std::string TimeCodeGenerator::generateTimeCode() {
-  // делаю временную часть для HMAC-SHA1 (8 байт)
   uint32_t nValue = countFloor();
   std::string hexedNString =  (boost::format("%x") % nValue).str();
-  std::cout << "HEXED: " << hexedNString << " Length of a string: " << hexedNString.length() << std::endl;
   int8_t neededZeroes = TIMEPART_BYTES - hexedNString.length();
   hexedNString = std::string(neededZeroes, '0').append(hexedNString);
-  std::cout << std::endl << "COMPLETED TIMEPART: " << hexedNString << std::endl;
-  std::cout << _privateKey << std::endl;
-  std::cout << _privateKey.length() << std::endl;
-  // private key часть (20 байт)
-  std::cout << _privateKey << std::endl;
   int8_t neededZeroesPK = PRIVATE_KEY_BYTES - _privateKey.length();
   if(neededZeroesPK>0) {
     _privateKey = std::string(neededZeroesPK, '0').append(_privateKey);
   }
-
-  std::cout << "COMPLETE PRIVATE KEY(20BYTES): " <<  _privateKey << std::endl;
   std::string HMACSHA = hexedNString.append(_privateKey);
-  std::string SHA1 = getSHA1(HMACSHA); 
-  std::cout << SHA1 << std::endl; 
-  std::cout << "CONVETING CHAR " << SHA1[39] << std::endl; 
+  std::string SHA1 = getSHA1(HMACSHA);  
   uint16_t offsetInteger = convertHexCharToUINT(SHA1[39]);
-  //TRUNCATE
-  std::cout << "i am still here" << std::endl;
-  std::string token = SHA1.substr(offsetInteger, 8);
-  std::cout << "i am still here" << std::endl;
-  std::cout << "TOKEN: " << token << std::endl;
-  // std::bitset<16> bitToken("a123");
+  std::string token = SHA1.substr(offsetInteger, 16);
   uint8_t first4Bits = convertHexCharToUINT(token[0]);
-  std::bitset<4> bitt(first4Bits);
-  std::cout << "FIRST FOUR BITS" << bitt << std::endl;
+  std::bitset<4> bitsToChange(first4Bits);
   std::bitset<4> mask("0111");
-  bitt&=mask;
-  token[0]=char(bitt.to_ulong()+'0');
-  std::cout << "FIRST FOUR BITS" << bitt << std::endl;
-  // std::cout << "TOKEN: " << bitToken << std::endl;
+  bitsToChange&=mask;
+  token[0]=char(bitsToChange.to_ulong()+'0');
+  uint32_t tokenVal = stol(token,0,16);
+  tokenVal = tokenVal << TOKEN_PART_TIME_LENGTH;
+  std::cout << tokenVal << tokenVal << std::endl;
   
- //bitToken &= mask;
-  // std::cout << "TOKEN: " << bitToken << std::endl;
-  std::cout << "TOKEN WITH MASK: " << token << std::endl;
+  std::bitset<32> jops(tokenVal);
+  std::cout << jops << std::endl;
+  //добавляем companyID и passID
+  std::string passIDHex = (boost::format("%x") % _PassID).str();
+  int8_t neededZeroesPassID = PASS_ID_LENGTH - passIDHex.length();
+  if(neededZeroesPassID>0) {
+    passIDHex = std::string(neededZeroesPassID, '0').append(passIDHex);
+  }
+  
+  std::string tokenHex =  passIDHex;
+  
+  tokenHex = tokenHex.append((boost::format("%x") % tokenVal).str());
 
-  // std::cout << int(converted) << std::endl;
-  uint32_t tokenVal = stoi(token,0,16);
-  std::cout << tokenVal << std::endl;
-  // std::cout << SHA1 << std::endl << "UNHEXED SHA1: " << unhexedSHA1 << std::endl;
+  std::string companyIDHex = (boost::format("%x") % _CompanyID).str();
+  int8_t neededZeroesCompanyID = COMPANY_ID_LENGTH - companyIDHex.length();
+  if(neededZeroesCompanyID>0) {
+    companyIDHex = std::string(neededZeroesCompanyID, '0').append(companyIDHex);
+  }
+  tokenHex = tokenHex.append(companyIDHex);
   
-  tokenVal = tokenVal % TOKEN_PART_TIME_LENGTH;
-  std::cout << tokenVal << std::endl;
-  // uint32_t unhexedValue = stoi(hexedNString,0,16);
-  // std::cout << "UNHEXED:" <<  unhexedValue << std::endl;
-  // std::cout << "hello world check";
+  
+  std::cout << tokenHex << std::endl;
+  
   return "foo";
-  //std::string toHMAC = hexVal+_privateKey;
-  //std::cout << toHMAC << std::endl << getSHA1(toHMAC);
 }
 
 TimeCodeGenerator::TimeCodeGenerator() {}
@@ -107,6 +100,7 @@ TimeCodeGenerator::TimeCodeGenerator(std::string privateKey, uint64_t PassID,
 // cppcheck-suppress uninitMemberVar
 
 uint64_t TimeCodeGenerator::countFloor(){ 
+  std::cout << std::time(0) << std::endl; 
   return std::time(0)/_timeInterval;
 }
 
@@ -120,7 +114,7 @@ std::string TimeCodeGenerator::getSHA1(const std::string& message){
     unsigned hash[5] = {0};
     sha1.get_digest(hash);
     char buf[41] = {0};
-    std::cout << std::endl << std::endl <<std::endl <<  std::endl << hash << std::endl << std::endl << std::endl ;
+    // std::cout << std::endl << std::endl <<std::endl <<  std::endl << hash << std::endl << std::endl << std::endl ;
   
     for (int i = 0; i < 5; i++)
     {

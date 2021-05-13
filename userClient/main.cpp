@@ -11,10 +11,12 @@
 int main()
 {
     uint64_t PassID = 1;
-    uint16_t timeInterval = 30;
-    uint64_t timeStamp = 164334343;
+    uint16_t timeInterval = 5;
     uint64_t companyID = 1;
-    std::string userKey = "JBSWdssdsK3PXPK3PXP";
+    std::string userKey = "IQ6GRCCXFVOQRBBX";
     TimeCodeGenerator codegen(userKey, PassID, companyID, timeInterval);
-    codegen.generateTimeCode();
+    while(true){
+        sleep(2);
+        codegen.generateTimeCode();
+    } 
 }
