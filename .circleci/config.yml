@@ -8,6 +8,12 @@ jobs:
       - attach_workspace:
           at: ./
       - run:
+          name: Extract << parameters.label >>.tar.xz
+          command: tar -xf << parameters.label >>.tar.xz
+      - run:
+          name: Test executable
+          command: ls
+      - run:
           name: run ctest
           command: |
                   ls
@@ -17,6 +23,10 @@ jobs:
   build:
     machine:
         image: ubuntu-2004:202008-01
+    parameters:
+      label:
+        type: string
+        default: ubuntu2004build
     steps:
       - run:
             name: Installing dependencies
@@ -72,6 +82,18 @@ jobs:
             name: MAKE
             command: |
              cd build && make
+      - run:
+          name: Create a tarball
+          command: tar -cJf << parameters.label >>.tar.xz << parameters.label >>
+      - run:
+          name: Create a Zip file
+          command: |
+            $ProgressPreference = "SilentlyContinue"
+            Compress-Archive .\\<< parameters.label >> .\\<< parameters.label >>.zip
+      - persist_to_workspace:
+          root: .
+          paths:
+            - << parameters.label >>.zip
             
     
 workflows:
