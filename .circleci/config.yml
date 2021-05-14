@@ -8,6 +8,7 @@ jobs:
       - run:
             name: Installing valgrind
             command: |
+              sudo apt -y -q update
               sudo apt -y -q install valgrind
       - attach_workspace:
           at: ./
