@@ -4,6 +4,9 @@ jobs:
   build:
     docker:
       - image: cimg/base:stable
+    working_directory: ~/circleci-googletest
+    environment:
+      TEST_RESULTS: /tmp/test-results
     steps:
       - checkout
       - run:
