@@ -1,6 +1,19 @@
 version: 2
 
 jobs:
+  test-valgrind:
+    machine:
+        image: ubuntu-2004:202008-01
+    steps:
+      - attach_workspace:
+          at: ./
+      - run:
+          name: run ctest
+          command: |
+                  ls
+                  cd build
+                  valgrind --tool=memcheck --leak-check=full ctest
+
   build:
     machine:
         image: ubuntu-2004:202008-01
@@ -60,17 +73,7 @@ jobs:
             command: |
              cd build && make
             
-    test-valgrind:
-          steps:
-            - attach_workspace:
-                  at: ./
-            - run:
-                  name: run ctest
-                  command: |
-                        ls
-                        cd build
-                        valgrind --tool=memcheck --leak-check=full ctest
-
+    
 workflows:
   version: 2
   build-test:
