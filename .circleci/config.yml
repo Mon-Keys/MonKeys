@@ -10,6 +10,8 @@ jobs:
             command: |
               sudo apt -y -q update
               sudo apt -y -q install valgrind
+              sudo apt -y -q install libboost-all-dev
+              sudo apt -y -q install libpqxx-dev 
       - attach_workspace:
           at: ./
       - run:
@@ -36,6 +38,8 @@ jobs:
             command: |
               sudo apt -y -q update
               sudo apt -y -q install valgrind
+              sudo apt -y -q install libboost-all-dev
+              sudo apt -y -q install libpqxx-dev 
       - attach_workspace:
           at: ./
       - run:
@@ -62,6 +66,8 @@ jobs:
             command: |
               sudo apt -y -q update
               sudo apt -y -q install valgrind
+              sudo apt -y -q install libboost-all-dev
+              sudo apt -y -q install libpqxx-dev 
       - attach_workspace:
           at: ./
       - run:
@@ -88,6 +94,8 @@ jobs:
             command: |
               sudo apt -y -q update
               sudo apt -y -q install valgrind
+              sudo apt -y -q install libboost-all-dev
+              sudo apt -y -q install libpqxx-dev 
       - attach_workspace:
           at: ./
       - run:
@@ -114,6 +122,8 @@ jobs:
             command: |
               sudo apt -y -q update
               sudo apt -y -q install valgrind
+              sudo apt -y -q install libboost-all-dev
+              sudo apt -y -q install libpqxx-dev 
       - attach_workspace:
           at: ./
       - run:
@@ -140,6 +150,8 @@ jobs:
             command: |
               sudo apt -y -q update
               sudo apt -y -q install valgrind
+              sudo apt -y -q install libboost-all-dev
+              sudo apt -y -q install libpqxx-dev 
       - attach_workspace:
           at: ./
       - run:
@@ -166,6 +178,8 @@ jobs:
             command: |
               sudo apt -y -q update
               sudo apt -y -q install valgrind
+              sudo apt -y -q install libboost-all-dev
+              sudo apt -y -q install libpqxx-dev 
       - attach_workspace:
           at: ./
       - run:
@@ -192,6 +206,8 @@ jobs:
             command: |
               sudo apt -y -q update
               sudo apt -y -q install valgrind
+              sudo apt -y -q install libboost-all-dev
+              sudo apt -y -q install libpqxx-dev 
       - attach_workspace:
           at: ./
       - run:
@@ -218,6 +234,8 @@ jobs:
             command: |
               sudo apt -y -q update
               sudo apt -y -q install valgrind
+              sudo apt -y -q install libboost-all-dev
+              sudo apt -y -q install libpqxx-dev 
       - attach_workspace:
           at: ./
       - run:
