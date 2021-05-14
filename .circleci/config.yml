@@ -6,41 +6,17 @@ jobs:
         image: ubuntu-2004:202008-01
     steps:
       - run:
-            name: Install CMake
+            name: Installing dependencies
             command: |
               sudo apt -y -q update
               sudo apt -y -q install cmake
+              sudo apt -y -q install valgrind
+              sudo apt -y -q install cppcheck
+              sudo apt -y -q install python3-pip
+              sudo pip3 install cpplint
+              sudo apt -y -q install libboost-all-dev
+              sudo apt -y -q install libpqxx-dev 
       - checkout
-      - run:
-          name: Installing GCC
-          command: 'sudo apt-get update && sudo apt-get install -y gcc g++'
-      - run:
-          name: Installing GIT
-          command: 'apt-get update && sudo apt-get install -y git'
-      - run:
-          name: Installing PIP
-          command: 'apt-get update && sudo apt-get install -y python3-pip'
-      - run:
-          name: Install CMAKE
-          command: 'apt-get update && sudo apt-get install -y cmake'
-      - run:
-          name: CMAKE version check
-          command: 'cmake --version'
-      - run:
-          name: Installing VALGRIND
-          command: 'apt-get update && sudo apt-get install -y valgrind'
-      - run:
-          name: Installing CPPCHECK
-          command: 'apt-get update && sudo apt-get install -y cppcheck'
-      - run:
-          name: Installing CPPLINT
-          command: 'sudo pip3 install cpplint'
-      - run: 
-          name: Installing BOOST
-          command: 'apt-get update && sudo apt-get install -y libboost-all-dev'
-      - run: 
-          name: Installing PQXX
-          command: 'apt-get update && sudo apt-get install -y libpqxx-dev'
       - run: 
           name: CPPCHECK
           command: |
