@@ -14,8 +14,6 @@ int main() {
   uint64_t companyID = 1;
   std::string userKey = "IQ6GRCCXFVOQRBBX";
   TimeCodeGenerator codegen(userKey, PassID, companyID, timeInterval);
-  while (true) {
-    sleep(2);
-    codegen.generateTimeCode();
-  }
+  codegen.generateTimeCode();
+  
 }
