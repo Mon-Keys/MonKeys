@@ -2,8 +2,8 @@ version: 2
 
 jobs:
   build:
-    machine:
-        image: ubuntu-2004:stretch
+    docker:
+      - image: cimg/base:stable
     steps:
       - checkout
       - run:
