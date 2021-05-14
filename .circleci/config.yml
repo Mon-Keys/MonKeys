@@ -235,7 +235,7 @@ jobs:
                   ls
                   valgrind --tool=memcheck --leak-check=full ./loggerTest
 
-  build:
+  cppcheck-cpplint:
     machine:
         image: ubuntu-2004:202008-01
     parameters:
@@ -247,16 +247,12 @@ jobs:
             name: Installing dependencies
             command: |
               sudo apt -y -q update
-              sudo apt -y -q install cmake
-              sudo apt -y -q install valgrind
               sudo apt -y -q install cppcheck
               sudo apt -y -q install python3-pip
               sudo pip3 install cpplint
-              sudo apt -y -q install libboost-all-dev
-              sudo apt -y -q install libpqxx-dev 
       - checkout
       - run: 
-          name: CPPCHECK
+          name: CPPCheck
           command: |
             cppcheck --enable=all --language=c++ visionLib/test/*.cpp --suppress=missingInclude --suppress=unusedFunction 
             cppcheck --enable=all --language=c++ visionLib/clientHandler/source/*.cpp --suppress=missingInclude --suppress=unusedFunction
@@ -270,7 +266,7 @@ jobs:
             cppcheck --enable=all --language=c++ visionLib/terminalHandler/source/*.cpp --suppress=missingInclude --suppress=unusedFunction
 
       - run: 
-          name: CPPLINT
+          name: CPPLint
           command: |
             cpplint --extensions=cpp visionLib/test/*.cpp 
             cpplint --extensions=cpp visionLib/clientHandler/source/*.cpp
@@ -282,19 +278,33 @@ jobs:
             cpplint --extensions=cpp visionLib/terminalHandler/source/*.cpp
             cpplint --extensions=cpp visionLib/terminalServer/source/*.cpp
             cpplint --extensions=cpp visionLib/terminalHandler/source/*.cpp
+
+
+  
+  build:
+    machine:
+        image: ubuntu-2004:202008-01
+    parameters:
+      label:
+        type: string
+        default: ubuntu2004build
+    steps:
+      - run:
+            name: Installing dependencies
+            command: |
+              sudo apt -y -q update
+              sudo apt -y -q install cmake
+              sudo apt -y -q install libboost-all-dev
+              sudo apt -y -q install libpqxx-dev 
+      - checkout
       - run: 
-            name: CMAKE
+            name: CMake
             command: |
                 rm -rf build
                 mkdir build && cd build
                 cmake .. 
       - run: 
-            name: Build folder
-            command: |
-             cd build
-             ls
-      - run: 
-            name: MAKE
+            name: Make
             command: |
              cd build && make
       - run:
@@ -311,6 +321,7 @@ workflows:
   build-test:
     jobs:
       - build
+      - cppcheck-cpplint
       - test-valgrind-ClientRequest:
           requires:
             - build
@@ -323,6 +334,9 @@ workflows:
       - test-valgrind-TerminalServer:
           requires:
             - build
+      - test-valgrind-ClientServer:
+          requires:
+            - build
       - test-valgrind-TerminalRequest:
           requires:
             - build
@@ -332,5 +346,6 @@ workflows:
       - test-valgrind-logger:
           requires:
             - build
-      
-      
+      - test-valgrind-TimeCodeGenerator:
+          requires:
+            - build
