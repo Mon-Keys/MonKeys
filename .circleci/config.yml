@@ -8,8 +8,8 @@ jobs:
       - attach_workspace:
           at: ./
       - run:
-          name: Extract << parameters.label >>.tar.xz
-          command: tar -xf << parameters.label >>.tar.xz
+          name: Extract build.tar.xz
+          command: tar -xf build.tar.xz
       - run:
           name: Test executable
           command: ls
@@ -84,16 +84,11 @@ jobs:
              cd build && make
       - run:
           name: Create a tarball
-          command: tar -cJf << parameters.label >>.tar.xz << parameters.label >>
-      - run:
-          name: Create a Zip file
-          command: |
-            $ProgressPreference = "SilentlyContinue"
-            Compress-Archive .\\<< parameters.label >> .\\<< parameters.label >>.zip
+          command: tar -cJf build.tar.xz build
       - persist_to_workspace:
           root: .
           paths:
-            - << parameters.label >>.zip
+            - build.tar.xz
             
     
 workflows:
