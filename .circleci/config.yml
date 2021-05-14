@@ -51,17 +51,32 @@ jobs:
                 mkdir build && cd build
                 cmake .. 
       - run: 
-            name: MAKE
-            command: |
-             pwd
-             ls
-      - run: 
-            name: MAKE
+            name: Build folder
             command: |
              cd build
              ls
       - run: 
             name: MAKE
             command: |
-             cd build && make 
-   
+             cd build && make
+            
+    test-valgrind:
+          steps:
+            - attach_workspace:
+                  at: ./
+            - run:
+                  name: run ctest
+                  command: |
+                        ls
+                        cd build
+                        valgrind --tool=memcheck --leak-check=full ctest
+
+workflows:
+  version: 2
+  build-test:
+    jobs:
+      - build
+      - test-valgrind:
+          requires:
+            - build
+      
