@@ -5,6 +5,10 @@ jobs:
     machine:
         image: ubuntu-2004:202008-01
     steps:
+      - run:
+            name: Installing valgrind
+            command: |
+              sudo apt -y -q install valgrind
       - attach_workspace:
           at: ./
       - run:
@@ -13,11 +17,13 @@ jobs:
       - run:
           name: Test executable
           command: ls
+      
       - run:
           name: run ctest
           command: |
                   ls
                   cd build
+                  ls
                   valgrind --tool=memcheck --leak-check=full ctest
 
   build:
