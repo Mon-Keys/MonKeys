@@ -1,7 +1,7 @@
 version: 2
 
 jobs:
-  test-valgrind:
+  test-valgrind-ClientRequest:
     machine:
         image: ubuntu-2004:202008-01
     steps:
@@ -23,9 +23,217 @@ jobs:
           name: run ctest
           command: |
                   ls
-                  cd build
+                  cd build/visionLib/test/
                   ls
-                  valgrind --tool=memcheck --leak-check=full ctest
+                  valgrind --tool=memcheck --leak-check=full ./ClientRequestTest
+  
+  test-valgrind-Client:
+    machine:
+        image: ubuntu-2004:202008-01
+    steps:
+      - run:
+            name: Installing valgrind
+            command: |
+              sudo apt -y -q update
+              sudo apt -y -q install valgrind
+      - attach_workspace:
+          at: ./
+      - run:
+          name: Extract build.tar.xz
+          command: tar -xf build.tar.xz
+      - run:
+          name: Test executable
+          command: ls
+      
+      - run:
+          name: run ctest
+          command: |
+                  ls
+                  cd build/visionLib/test/
+                  ls
+                  valgrind --tool=memcheck --leak-check=full ./ClientTest
+
+  test-valgrind-ORMTest:
+    machine:
+        image: ubuntu-2004:202008-01
+    steps:
+      - run:
+            name: Installing valgrind
+            command: |
+              sudo apt -y -q update
+              sudo apt -y -q install valgrind
+      - attach_workspace:
+          at: ./
+      - run:
+          name: Extract build.tar.xz
+          command: tar -xf build.tar.xz
+      - run:
+          name: Test executable
+          command: ls
+      
+      - run:
+          name: run ctest
+          command: |
+                  ls
+                  cd build/visionLib/test/
+                  ls
+                  valgrind --tool=memcheck --leak-check=full ./ORMTest
+
+  test-valgrind-TerminalServer:
+    machine:
+        image: ubuntu-2004:202008-01
+    steps:
+      - run:
+            name: Installing valgrind
+            command: |
+              sudo apt -y -q update
+              sudo apt -y -q install valgrind
+      - attach_workspace:
+          at: ./
+      - run:
+          name: Extract build.tar.xz
+          command: tar -xf build.tar.xz
+      - run:
+          name: Test executable
+          command: ls
+      
+      - run:
+          name: run ctest
+          command: |
+                  ls
+                  cd build/visionLib/test/
+                  ls
+                  valgrind --tool=memcheck --leak-check=full ./TerminalServerTest
+  
+  test-valgrind-TimeCodeGenerator:
+    machine:
+        image: ubuntu-2004:202008-01
+    steps:
+      - run:
+            name: Installing valgrind
+            command: |
+              sudo apt -y -q update
+              sudo apt -y -q install valgrind
+      - attach_workspace:
+          at: ./
+      - run:
+          name: Extract build.tar.xz
+          command: tar -xf build.tar.xz
+      - run:
+          name: Test executable
+          command: ls
+      
+      - run:
+          name: run ctest
+          command: |
+                  ls
+                  cd build/visionLib/test/
+                  ls
+                  valgrind --tool=memcheck --leak-check=full ./TimeCodeGeneratorTest
+  
+  test-valgrind-ClientServer:
+    machine:
+        image: ubuntu-2004:202008-01
+    steps:
+      - run:
+            name: Installing valgrind
+            command: |
+              sudo apt -y -q update
+              sudo apt -y -q install valgrind
+      - attach_workspace:
+          at: ./
+      - run:
+          name: Extract build.tar.xz
+          command: tar -xf build.tar.xz
+      - run:
+          name: Test executable
+          command: ls
+      
+      - run:
+          name: run ctest
+          command: |
+                  ls
+                  cd build/visionLib/test/
+                  ls
+                  valgrind --tool=memcheck --leak-check=full ./ClientServerTest
+  
+  test-valgrind-TerminalRequest:
+    machine:
+        image: ubuntu-2004:202008-01
+    steps:
+      - run:
+            name: Installing valgrind
+            command: |
+              sudo apt -y -q update
+              sudo apt -y -q install valgrind
+      - attach_workspace:
+          at: ./
+      - run:
+          name: Extract build.tar.xz
+          command: tar -xf build.tar.xz
+      - run:
+          name: Test executable
+          command: ls
+      
+      - run:
+          name: run ctest
+          command: |
+                  ls
+                  cd build/visionLib/test/
+                  ls
+                  valgrind --tool=memcheck --leak-check=full ./TerminalRequestTest
+
+  test-valgrind-Terminal:
+    machine:
+        image: ubuntu-2004:202008-01
+    steps:
+      - run:
+            name: Installing valgrind
+            command: |
+              sudo apt -y -q update
+              sudo apt -y -q install valgrind
+      - attach_workspace:
+          at: ./
+      - run:
+          name: Extract build.tar.xz
+          command: tar -xf build.tar.xz
+      - run:
+          name: Test executable
+          command: ls
+      
+      - run:
+          name: run ctest
+          command: |
+                  ls
+                  cd build/visionLib/test/
+                  ls
+                  valgrind --tool=memcheck --leak-check=full ./TerminalTest
+  
+  test-valgrind-logger:
+    machine:
+        image: ubuntu-2004:202008-01
+    steps:
+      - run:
+            name: Installing valgrind
+            command: |
+              sudo apt -y -q update
+              sudo apt -y -q install valgrind
+      - attach_workspace:
+          at: ./
+      - run:
+          name: Extract build.tar.xz
+          command: tar -xf build.tar.xz
+      - run:
+          name: Test executable
+          command: ls
+      
+      - run:
+          name: run ctest
+          command: |
+                  ls
+                  cd build/visionLib/test/
+                  ls
+                  valgrind --tool=memcheck --leak-check=full ./loggerTest
 
   build:
     machine:
@@ -103,7 +311,26 @@ workflows:
   build-test:
     jobs:
       - build
-      - test-valgrind:
+      - test-valgrind-ClientRequest:
           requires:
             - build
+      - test-valgrind-Client:
+          requires:
+            - build
+      - test-valgrind-ORMTest:
+          requires:
+            - build
+      - test-valgrind-TerminalServer:
+          requires:
+            - build
+      - test-valgrind-TerminalRequest:
+          requires:
+            - build
+      - test-valgrind-Terminal:
+          requires:
+            - build
+      - test-valgrind-logger:
+          requires:
+            - build
+      
       
