@@ -8,6 +8,11 @@ jobs:
     environment:
       TEST_RESULTS: /tmp/test-results
     steps:
+      - run:
+            name: Install CMake
+            command: |
+              sudo apt -y -q update
+              sudo apt -y -q install cmake
       - checkout
       - run:
           name: Installing GCC
