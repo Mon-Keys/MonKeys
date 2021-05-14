@@ -2,8 +2,8 @@ version: 2
 
 jobs:
   build:
-    docker:
-      - image: "cimg/base:stable-20.04"
+    machine:
+        image: ubuntu-2004:202008-01
     steps:
       - checkout
       - run:
