@@ -23,13 +23,12 @@
 #include <iostream>
 #include <map>
 // #include <optional>
+#include <chrono>
 #include <pqxx/pqxx>
 #include <queue>
 #include <string>
-#include <vector>
-#include <chrono>
-#include <chrono>
 #include <thread>
+#include <vector>
 
 class ClientDB {
  public:

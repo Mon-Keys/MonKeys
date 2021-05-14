@@ -9,6 +9,7 @@ clang-format -i -style=Google ../visionLib/terminalClient/include/*.hpp
 clang-format -i -style=Google ../visionLib/terminalHandler/include/*.hpp
 clang-format -i -style=Google ../visionLib/terminalServer/include/*.hpp
 clang-format -i -style=Google ../visionLib/terminalHandler/include/*.hpp
+clang-format -i -style=Google ../visionLib/timecode/include/*.hpp
 
 clang-format -i -style=Google ../visionLib/test/*.cpp 
 clang-format -i -style=Google ../visionLib/clientHandler/source/*.cpp
@@ -20,3 +21,4 @@ clang-format -i -style=Google ../visionLib/terminalClient/source/*.cpp
 clang-format -i -style=Google ../visionLib/terminalHandler/source/*.cpp
 clang-format -i -style=Google ../visionLib/terminalServer/source/*.cpp
 clang-format -i -style=Google ../visionLib/terminalHandler/source/*.cpp
+clang-format -i -style=Google ../visionLib/timecode/source/*.cpp

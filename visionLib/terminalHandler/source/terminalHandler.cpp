@@ -10,8 +10,8 @@
 
 #include <string>
 
-bool compareTimeCode(std::string& firstTimeCode,  // NOLINT
-                std::string& secondTimeCode) {  // NOLINT
+bool compareTimeCode(std::string& firstTimeCode,     // NOLINT
+                     std::string& secondTimeCode) {  // NOLINT
   return true;
 }
 
