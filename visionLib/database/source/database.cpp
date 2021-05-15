@@ -41,8 +41,44 @@ DataBase::DataBase(std::map<std::string, std::string>& db_settings) {
   std::cout << "Connecting!" << std::endl;
 }
 
-bool PassDataBase::deletePass(const uint64_t& PassID) { return true; }
-bool PassageDataBase::deletePassage(const uint64_t& PassageID) { return true; }
+bool PassDataBase::deletePass(const uint64_t& PassID) {
+  if (PassExists(PassID) == false) {
+		std::cout << "Client does not exists" << std::endl;
+		return false;
+	}
+
+  std::string sql_request = "select exists(select id from pass where passage.pass_id = (select id from pass where pass.login = '" + std::to_string(PassID) + "'))";
+	pqxx::result r = do_select_request(sql_request);
+
+	auto exist_flag = r[0][0].as<std::string>();
+  if (exist_flag == "t") {
+      std::cout << "Pass is linked to passage" << std::endl;
+      return false;
+  }
+
+	std::string sql_request = "delete from pass where pass.id = " + std::to_string(PassID);
+
+	do_modifying_request(sql_request);
+
+	std::cout << "Delete client" << std::endl;
+
+	return true;
+}
+
+bool PassageDataBase::deletePassage(const uint64_t& PassageID) {
+  if (PassageExists(PassageID) == false) {
+		std::cout << "Client does not exists" << std::endl;
+		return false;
+	}
+
+	std::string sql_request = "delete from passage where passage.id = " + std::to_string(PassageID);
+
+	do_modifying_request(sql_request);
+
+	std::cout << "Delete client" << std::endl;
+
+	return true;
+}
 bool ClientDataBase::deleteCLient(const std::string& login) {
 	if (ClientExists(login) == false) {
 		std::cout << "Client does not exists" << std::endl;
@@ -62,7 +98,7 @@ bool ClientDataBase::deleteCLient(const std::string& login) {
 
 	do_modifying_request(sql_request);
 
-	std::cout << "Add client" << std::endl;
+	std::cout << "Delete client" << std::endl;
 
 	return true;
 }
@@ -120,13 +156,16 @@ bool CompanyDataBase::CompanyExists(const std::string& name) {
 }
 
 bool PassageDataBase::PassageExists(const uint64_t& PassageID) {
-  std::vector<PassageDB> res;
-  for (int i = 0; i < res.size(); i++) {
-    if (res[i].getID() == PassageID) {
-      return true;
-    }
+  auto exist_sql_req =
+      ("select exists(select id from passage where passage.id = '" + std::to_string(PassageID) +
+       "')");
+  pqxx::result exist = do_select_request(exist_sql_req);
+  auto exist_flag = exist[0][0].as<std::string>();
+  if (exist_flag == "t") {
+    return true;
+  } else {
+    return false;
   }
-  return false;
 }
 
 std::vector<PassDB> PassDataBase::getAllPasses(const std::string& sql_limit,

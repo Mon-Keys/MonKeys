@@ -50,6 +50,22 @@ TEST(ClientExistTEST, ClientExistFalse) {
   EXPECT_FALSE(flag);
 }
 
+TEST(PassageExistsTEST, PassageExistsTrue) {
+  PassageDataBase Psdb;
+
+  bool flag = Psdb.PassageExists(1);
+
+  EXPECT_TRUE(flag);
+}
+
+TEST(PassageExistsTEST, PassageExistsFalse) {
+  PassageDataBase Psdb;
+
+  bool flag = Psdb.PassageExists(0);
+
+  EXPECT_FALSE(flag);
+}
+
 TEST(getClientTEST, getClientTest) {
   std::map<std::string, std::string> lol{{"dbname", "Monkeys"},
                                          {"host", "localhost"},
@@ -98,31 +114,24 @@ TEST(getPassTEST, getPassTest) {
   EXPECT_TRUE(flag);
 }
 
-TEST(insertClietnTEST, insertClient) {
-  ClientDataBase Cdb;
+// TEST(insertClietnTEST, insertClient) {
+//   ClientDataBase Cdb;
+//   bool flag = Cdb.insertClient("Oleg", "kozinov@gmail.com", "iamretard");
+//   EXPECT_TRUE(flag);
+// }
 
-  bool flag = Cdb.insertClient("Oleg", "kozinov@gmail.com", "iamretard");
+// TEST(deleteCLientTEST, deleteClientInCorrect) {
+//   ClientDataBase Cdb;
+//   bool flag = Cdb.deleteCLient("fslkdf");
+//   EXPECT_FALSE(flag);
+// }
 
-  EXPECT_TRUE(flag);
-}
-
-TEST(deleteCLientTEST, deleteClientInCorrect) {
-  ClientDataBase Cdb;
-
-  bool flag = Cdb.deleteCLient("fslkdf");
-
-  EXPECT_FALSE(flag);
-}
-
-TEST(deleteCLientTEST, deleteClientCorrect) {
-  ClientDataBase Cdb;
-
-  bool flag = Cdb.insertClient("Testlogin", "test@mail.ru", "testpassword");
-
-  flag = Cdb.deleteCLient("Testlogin");
-
-  EXPECT_TRUE(flag);
-}
+// TEST(deleteCLientTEST, deleteClientCorrect) {
+//   ClientDataBase Cdb;
+//   bool flag = Cdb.insertClient("Testlogin", "test@mail.ru", "testpassword");
+//   flag = Cdb.deleteCLient("Testlogin");
+//   EXPECT_TRUE(flag);
+// }
 
 TEST(logInTEST, logInTestCorrect) {
   clientHandler CLH;
@@ -148,21 +157,17 @@ TEST(logInTEST, logInTestNotExists) {
   EXPECT_FALSE(flag);
 }
 
-TEST(registerTEST, registerCorrect) {
-  clientHandler CLH;
+// TEST(registerTEST, registerCorrect) {
+//   clientHandler CLH;
+//   bool flag = CLH.registerClient("Oleg", "inagdimaev@mail.ru", "12345");
+//   EXPECT_TRUE(flag);
+// }
 
-  bool flag = CLH.registerClient("Oleg", "inagdimaev@mail.ru", "12345");
-
-  EXPECT_TRUE(flag);
-}
-
-TEST(registerTEST, registerInCorrect) {
-  clientHandler CLH;
-
-  bool flag = CLH.registerClient("Oleg", "lol@mail.ru", "12345");
-
-  EXPECT_FALSE(flag);
-}
+// TEST(registerTEST, registerInCorrect) {
+//   clientHandler CLH;
+//   bool flag = CLH.registerClient("Oleg", "lol@mail.ru", "12345");
+//   EXPECT_FALSE(flag);
+// }
 
 // class PDB {
 //   DataBase& dbC;
