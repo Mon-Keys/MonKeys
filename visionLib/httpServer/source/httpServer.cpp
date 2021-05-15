@@ -8,17 +8,6 @@
 
 #include "httpServer.hpp"
 
-clientServer::clientServer() {}
-clientServer::~clientServer() {}
-
-void clientServer::initServer() {}
-void clientServer::initLogger() {}
-void clientServer::setLoggerLevel() {}
-void clientServer::waitConnection() {}
-void clientServer::waitRequest() {}
-void clientServer::runHandler() {}
-void clientServer::reply() {}
-
 // Return a reasonable mime type based on the extension of a file.
 beast::string_view mime_type(beast::string_view path) {
   using beast::iequals;
@@ -129,13 +118,61 @@ void handle_request(beast::string_view doc_root,
 
   // Build the path to the requested file
   std::string path = path_cat(doc_root, req.target());
-  if (req.target().back() == '/') {
-    property_tree::ptree bodyData;
-    bodyData.put("name", "Mikhail");
-    bodyData.put("timecode", "qwertyuio3456ybsa3ert");
-    property_tree::write_json("my.json", bodyData);
-    path.append("my.json");
+  if (!strcmp(req.target().data(), "/reg")) {
+    property_tree::ptree reqJson;
+    std::stringstream jsonStream(req.body());
+    property_tree::read_json(jsonStream, reqJson);
+    std::string name = reqJson.get<std::string>("name");
+    std::string password = reqJson.get<std::string>("password");
+    std::string email = reqJson.get<std::string>("email");
+
+    // проверить что пользователь не зарегестрирован и зарегать
+
+    property_tree::ptree resData;
+    resData.put("name", name);
+    resData.put("registration", "OK");
+    property_tree::write_json("reg/server.json", resData);
+  } else if (!strcmp(req.target().data(), "/auth")) {
+    property_tree::ptree reqJson;
+    std::stringstream jsonStream(req.body());
+    property_tree::read_json(jsonStream, reqJson);
+    std::string name = reqJson.get<std::string>("name");
+    std::string password = reqJson.get<std::string>("password");
+
+    bool authFlag = false;
+    if (!strcmp(password.c_str(), "hello123")) {
+      authFlag = true;
+    }
+
+    property_tree::ptree resData;
+    resData.put("name", name);
+    resData.put("verification", authFlag);
+    property_tree::write_json("auth/server.json", resData);
+  } else if (!strcmp(req.target().data(), "/timecode")) {
+    property_tree::ptree reqJson;
+    std::stringstream jsonStream(req.body());
+    property_tree::read_json(jsonStream, reqJson);
+    std::string name = reqJson.get<std::string>("name");
+    std::string password = reqJson.get<std::string>("password");
+
+    bool authFlag = false;
+    if (!strcmp(password.c_str(), "hello123")) {
+      authFlag = true;
+    }
+
+    property_tree::ptree resData;
+    resData.put("name", name);
+    resData.put("verification", authFlag);
+
+    if (!authFlag) {
+      resData.put("error", "вы не авторизированы");
+    } else {
+      resData.put("timecode", "qwertyuioihgfdx6");
+    }
+
+    property_tree::write_json("timecode/server.json", resData);
   }
+  path.append("/server.json");
 
   // Attempt to open the file
   beast::error_code ec;
@@ -143,16 +180,19 @@ void handle_request(beast::string_view doc_root,
   body.open(path.c_str(), beast::file_mode::scan, ec);
 
   // Handle the case where the file doesn't exist
-  if (ec == beast::errc::no_such_file_or_directory)
+  if (ec == beast::errc::no_such_file_or_directory) {
     return send(not_found(req.target()));
+  }
 
   // Handle an unknown error
-  if (ec) return send(server_error(ec.message()));
+  if (ec) {
+    return send(server_error(ec.message()));
+  }
 
   // Cache the size since we need it after the move
   auto const size = body.size();
 
-  std::cout << req.base() << "*";
+  std::cout << req;
 
   // Respond to HEAD request
   if (req.method() == http::verb::head) {
@@ -178,7 +218,7 @@ void handle_request(beast::string_view doc_root,
 //------------------------------------------------------------------------------
 
 // Report a failure
-void failOnServer(beast::error_code ec, char const* what) {
+void failServer(beast::error_code ec, char const* what) {
   std::cerr << what << ": " << ec.message() << "\n";
 }
 
@@ -205,7 +245,7 @@ void ServerSession::send_lambda::operator()(
 // Start the asynchronous operation
 void ServerSession::run() {
   // We need to be executing within a strand to perform async operations
-  // on the I/O objects in this ServerSession. Although not strictly necessary
+  // on the I/O objects in this Session. Although not strictly necessary
   // for single-threaded contexts, this example code is written to be
   // thread-safe by default.
   net::dispatch(
@@ -237,8 +277,8 @@ void ServerSession::on_read(beast::error_code ec,
   }
 
   if (ec) {
-    std::cout << ec;
-    return failOnServer(ec, "read");
+    // std::cout << ec << "\n";
+    return failServer(ec, "read");
   }
 
   // Send the response
@@ -251,7 +291,7 @@ void ServerSession::on_write(bool close, beast::error_code ec,
   boost::ignore_unused(bytes_transferred);
 
   if (ec) {
-    return failOnServer(ec, "write");
+    return failServer(ec, "write");
   }
 
   if (close) {
@@ -275,8 +315,6 @@ void ServerSession::do_close() {
   // At this point the connection is closed gracefully
 }
 
-//------------------------------------------------------------------------------
-
 // Start accepting incoming connections
 void Listener::run() { do_accept(); }
 
@@ -289,9 +327,9 @@ void Listener::do_accept() {
 
 void Listener::on_accept(beast::error_code ec, tcp::socket socket) {
   if (ec) {
-    failOnServer(ec, "accept");
+    failServer(ec, "accept");
   } else {
-    // Create the ServerSession and run it
+    // Create the Session and run it
     std::make_shared<ServerSession>(std::move(socket), doc_root_)->run();
   }
 

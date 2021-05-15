@@ -31,27 +31,6 @@ namespace net = boost::asio;
 namespace property_tree = boost::property_tree;
 using tcp = boost::asio::ip::tcp;
 
-class clientServer {
- public:
-  clientServer();
-  ~clientServer();
-
-  clientServer(const clientServer&) = delete;
-  clientServer(clientServer&&) = delete;
-
-  clientServer& operator=(const clientServer&) = delete;
-  clientServer& operator=(clientServer&&) = delete;
-
- private:
-  void initServer();
-  void initLogger();
-  void setLoggerLevel();
-  void waitConnection();
-  void waitRequest();
-  void runHandler();
-  void reply();
-};
-
 // Return a reasonable mime type based on the extension of a file.
 beast::string_view mime_type(beast::string_view path);
 
@@ -71,7 +50,7 @@ void handle_request(beast::string_view doc_root,
 //------------------------------------------------------------------------------
 
 // Report a failure
-void failOnServer(beast::error_code ec, char const* what);
+void failServer(beast::error_code ec, char const* what);
 
 // Handles an HTTP server connection
 class ServerSession : public std::enable_shared_from_this<ServerSession> {
@@ -129,28 +108,28 @@ class Listener : public std::enable_shared_from_this<Listener> {
     // Open the acceptor
     acceptor_.open(endpoint.protocol(), ec);
     if (ec) {
-      failOnServer(ec, "open");
+      failServer(ec, "open");
       return;
     }
 
     // Allow address reuse
     acceptor_.set_option(net::socket_base::reuse_address(true), ec);
     if (ec) {
-      failOnServer(ec, "set_option");
+      failServer(ec, "set_option");
       return;
     }
 
     // Bind to the server address
     acceptor_.bind(endpoint, ec);
     if (ec) {
-      failOnServer(ec, "bind");
+      failServer(ec, "bind");
       return;
     }
 
     // Start listening for connections
     acceptor_.listen(net::socket_base::max_listen_connections, ec);
     if (ec) {
-      failOnServer(ec, "listen");
+      failServer(ec, "listen");
       return;
     }
   }
