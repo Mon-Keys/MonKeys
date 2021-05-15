@@ -79,10 +79,48 @@ TEST(getClientTEST, getClientTest) {
   EXPECT_TRUE(flag);
 }
 
+TEST(getPassTEST, getPassTest) {
+  PassDataBase Pdb;
+
+  PassDB temp = Pdb.getPass(1);
+
+  std::cout<< "ID:\t" << temp.getID() << "\nprivate_key:\t" << temp.getprivate() << "\nCompany_ID:\t" << temp.getCompanyID() << 
+  "\n Client_ID\t" << temp.getClientID() << std::endl;
+
+  EXPECT_EQ(temp.getID(), 1);
+  EXPECT_EQ(temp.getCompanyID(), 1);
+  EXPECT_EQ(temp.getClientID(), 1);
+
+  bool flag = false;
+  if (temp.getprivate() == "FIHsdfWBfsdfEFJfsADF")
+    flag = true;
+  else
+    flag = false;
+  EXPECT_TRUE(flag);
+}
+
 TEST(insertClietnTEST, insertClient) {
   ClientDataBase Cdb;
 
   bool flag = Cdb.insertClient("Oleg", "kozinov@gmail.com", "iamretard");
+
+  EXPECT_TRUE(flag);
+}
+
+TEST(deleteCLientTEST, deleteClientInCorrect) {
+  ClientDataBase Cdb;
+
+  bool flag = Cdb.deleteCLient("fslkdf");
+
+  EXPECT_FALSE(flag);
+}
+
+TEST(deleteCLientTEST, deleteClientCorrect) {
+  ClientDataBase Cdb;
+
+  bool flag = Cdb.insertClient("Testlogin", "test@mail.ru", "testpassword");
+
+  flag = Cdb.deleteCLient("Testlogin");
 
   EXPECT_TRUE(flag);
 }
@@ -114,7 +152,7 @@ TEST(logInTEST, logInTestNotExists) {
 TEST(registerTEST, registerCorrect) {
   clientHandler CLH;
 
-  bool flag = CLH.registerClient("Fedya", "ahah@mail.ru", "blacksnow2K21");
+  bool flag = CLH.registerClient("Oleg", "inagdimaev@mail.ru", "12345");
 
   EXPECT_TRUE(flag);
 }
@@ -122,7 +160,7 @@ TEST(registerTEST, registerCorrect) {
 TEST(registerTEST, registerInCorrect) {
   clientHandler CLH;
 
-  bool flag = CLH.registerClient("Ilyagu", "lol@mail.ru", "12345");
+  bool flag = CLH.registerClient("Oleg", "lol@mail.ru", "12345");
 
   EXPECT_FALSE(flag);
 }

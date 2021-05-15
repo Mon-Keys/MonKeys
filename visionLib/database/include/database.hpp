@@ -80,7 +80,7 @@ class ClientDataBase : public DataBase {
   virtual ~ClientDataBase() = default;
 
   bool insertClient(const std::string& Login, const std::string& Email, const std::string& Password);
-  bool deleteCLient(const uint64_t ClientID);
+  bool deleteCLient(const std::string& login);
   bool ClientExists(const std::string& login);
   std::vector<ClientDB> getAllClients(const std::string& sql_limit,
                                       const std::string& sql_offset);
