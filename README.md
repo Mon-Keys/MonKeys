@@ -1,6 +1,6 @@
-# Система контроля управления доступом "VISION" 
+# Система контроля управления доступом "VISION" "
 
-[![Build Status](https://travis-ci.com/perlinleo/MonKeys.svg?branch=main)](https://travis-ci.com/perlinleo/MonKeys)
+[![<ORG_NAME>](https://circleci.com/gh/perlinleo/MonKeys.svg?style=svg)](https://app.circleci.com/pipelines/github/perlinleo/MonKeys)
 [![Discord Channel](https://img.shields.io/discord/820698183108788275?color=purple&label=discord&logo=discord&logoColor=white)](https://discord.gg/HRztMNeXw7)
 [![Issues](https://img.shields.io/github/issues/perlinleo/MonKeys)](https://github.com/perlinleo/MonKeys/issues)
 ![Commit Activity](https://img.shields.io/github/commit-activity/m/perlinleo/MonKeys)

@@ -16,8 +16,7 @@
 
 class clientHandler {
  public:
-
-  clientHandler() : _Cldb(), _Codb(), _Passdb(), _Passagedb() {};
+  clientHandler() : _Cldb(), _Codb(), _Passdb(), _Passagedb(){};
 
   bool logInClient(const std::string& Login, const std::string& Password);
   bool logOutClient(uint64_t ClientID);

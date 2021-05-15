@@ -1,9 +1,23 @@
 set(VISION_LIB_PATH ${PROJECT_SOURCE_DIR}/visionLib)
 
 
-include_directories("${VISION_LIB_PATH}/include")
+include_directories("${VISION_LIB_PATH}/clientHandler/include/")
+include_directories("${VISION_LIB_PATH}/clientHandler/include/")
+include_directories("${VISION_LIB_PATH}/database/include/")
+include_directories("${VISION_LIB_PATH}/httpClient/include/")
+include_directories("${VISION_LIB_PATH}/httpServer/include/")
+include_directories("${VISION_LIB_PATH}/logger/include/")
+include_directories("${VISION_LIB_PATH}/terminalClient/include/")
+include_directories("${VISION_LIB_PATH}/timecode/include/")
+include_directories("${VISION_LIB_PATH}/terminalServer/include/")
+include_directories("${VISION_LIB_PATH}/terminalHandler/include/")
+include_directories("${VISION_LIB_PATH}/terminalHandler/include/")
 
+find_package(Boost REQUIRED)
+include_directories(${Boost_LIBRARIES})
 
+find_library(PQXX_LIB pqxx)
+find_library(PQ_LIB pq)
 
 file(GLOB tests "${VISION_LIB_PATH}/test/*.cpp")
 list(REMOVE_ITEM tests "${PROJECT_SOURCE_DIR}/test/main.cpp")
@@ -18,6 +32,7 @@ foreach(file ${tests})
     
     add_test(NAME ${name} COMMAND "${name}Test")
 endforeach()
+
 
 
 # <SOURCE_DIR>
