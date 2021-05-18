@@ -94,17 +94,13 @@ ORMTest_EXTERNAL_OBJECTS =
 visionLib/test/ORMTest: visionLib/test/CMakeFiles/ORMTest.dir/ORM.cpp.o
 visionLib/test/ORMTest: visionLib/test/CMakeFiles/ORMTest.dir/main.cpp.o
 visionLib/test/ORMTest: visionLib/test/CMakeFiles/ORMTest.dir/build.make
-visionLib/test/ORMTest: /usr/lib/x86_64-linux-gnu/libpqxx.so
-visionLib/test/ORMTest: /usr/lib/x86_64-linux-gnu/libpq.so
-visionLib/test/ORMTest: lib/libgtest_maind.a
-visionLib/test/ORMTest: lib/libgmock_maind.a
-visionLib/test/ORMTest: /usr/lib/x86_64-linux-gnu/libpqxx.so
-visionLib/test/ORMTest: /usr/lib/x86_64-linux-gnu/libpq.so
-visionLib/test/ORMTest: lib/libgmockd.a
-visionLib/test/ORMTest: lib/libgtestd.a
+visionLib/test/ORMTest: lib/libgtest_main.a
 visionLib/test/ORMTest: libvisionLib.so
+visionLib/test/ORMTest: lib/libgmock_main.a
 visionLib/test/ORMTest: /usr/lib/x86_64-linux-gnu/libpqxx.so
 visionLib/test/ORMTest: /usr/lib/x86_64-linux-gnu/libpq.so
+visionLib/test/ORMTest: lib/libgmock.a
+visionLib/test/ORMTest: lib/libgtest.a
 visionLib/test/ORMTest: visionLib/test/CMakeFiles/ORMTest.dir/link.txt
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/ilyagu/MonKeys/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Linking CXX executable ORMTest"
 	cd /home/ilyagu/MonKeys/build/visionLib/test && $(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/ORMTest.dir/link.txt --verbose=$(VERBOSE)

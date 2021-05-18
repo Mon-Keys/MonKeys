@@ -301,7 +301,7 @@ boost_headers_DIR:PATH=/usr/lib/x86_64-linux-gnu/cmake/boost_headers-1.71.0
 gmock_BINARY_DIR:STATIC=/home/ilyagu/MonKeys/build/googletest-build/googlemock
 
 //Dependencies for the target
-gmock_LIB_DEPENDS:STATIC=general;visionLib;general;-lboost_thread;general;/usr/lib/x86_64-linux-gnu/libpqxx.so;general;/usr/lib/x86_64-linux-gnu/libpq.so;general;-lboost_system;general;gtest;
+gmock_LIB_DEPENDS:STATIC=general;gtest;
 
 //Value Computed by CMake
 gmock_SOURCE_DIR:STATIC=/home/ilyagu/MonKeys/build/googletest-src/googlemock
@@ -310,7 +310,7 @@ gmock_SOURCE_DIR:STATIC=/home/ilyagu/MonKeys/build/googletest-src/googlemock
 gmock_build_tests:BOOL=OFF
 
 //Dependencies for the target
-gmock_main_LIB_DEPENDS:STATIC=general;visionLib;general;-lboost_thread;general;/usr/lib/x86_64-linux-gnu/libpqxx.so;general;/usr/lib/x86_64-linux-gnu/libpq.so;general;-lboost_system;general;gmock;
+gmock_main_LIB_DEPENDS:STATIC=general;gmock;
 
 //Value Computed by CMake
 googletest-distribution_BINARY_DIR:STATIC=/home/ilyagu/MonKeys/build/googletest-build
@@ -320,9 +320,6 @@ googletest-distribution_SOURCE_DIR:STATIC=/home/ilyagu/MonKeys/build/googletest-
 
 //Value Computed by CMake
 gtest_BINARY_DIR:STATIC=/home/ilyagu/MonKeys/build/googletest-build/googletest
-
-//Dependencies for the target
-gtest_LIB_DEPENDS:STATIC=general;visionLib;general;-lboost_thread;general;/usr/lib/x86_64-linux-gnu/libpqxx.so;general;/usr/lib/x86_64-linux-gnu/libpq.so;general;-lboost_system;
 
 //Value Computed by CMake
 gtest_SOURCE_DIR:STATIC=/home/ilyagu/MonKeys/build/googletest-src/googletest
@@ -344,7 +341,7 @@ gtest_force_shared_crt:BOOL=OFF
 gtest_hide_internal_symbols:BOOL=OFF
 
 //Dependencies for the target
-gtest_main_LIB_DEPENDS:STATIC=general;visionLib;general;-lboost_thread;general;/usr/lib/x86_64-linux-gnu/libpqxx.so;general;/usr/lib/x86_64-linux-gnu/libpq.so;general;-lboost_system;general;gtest;
+gtest_main_LIB_DEPENDS:STATIC=general;gtest;
 
 //Value Computed by CMake
 vision_BINARY_DIR:STATIC=/home/ilyagu/MonKeys/build

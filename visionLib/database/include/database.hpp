@@ -9,27 +9,6 @@
 #ifndef VISIONLIB_INCLUDE_ORM_HPP_
 #define VISIONLIB_INCLUDE_ORM_HPP_
 
-#include <boost/algorithm/string.hpp>
-#include <boost/asio.hpp>
-#include <boost/date_time.hpp>
-#include <boost/filesystem.hpp>
-#include <boost/foreach.hpp>
-#include <boost/lexical_cast.hpp>
-#include <boost/property_tree/json_parser.hpp>
-#include <boost/property_tree/ptree.hpp>
-#include <boost/tokenizer.hpp>
-#include <ctime>
-#include <functional>
-#include <iostream>
-#include <map>
-// #include <optional.h>
-#include <chrono>
-#include <pqxx/pqxx>
-#include <queue>
-#include <string>
-#include <thread>
-#include <vector>
-
 #include "tables.hpp"
 
 class DataBase {
@@ -57,14 +36,14 @@ class PassDataBase : public DataBase {
 
   virtual ~PassDataBase() = default;
 
-  bool insertPass(const PassDB& Pass);
+  uint64_t insertPass(const std::string& private_key, const uint64_t& CompanyID, const uint64_t& ClientID);
   bool deletePass(const uint64_t& PassID);
-  bool PassExists(const uint64_t PassID);
+  bool PassExists(const uint64_t& PassID);
   std::vector<PassDB> getAllPasses(const std::string& sql_limit,
                                    const std::string& sql_offset);
-  std::vector<PassDB> getClientsPasses(const uint64_t ClientID);
-  std::vector<PassDB> getCompanysPasses(const uint64_t CompanyID);
-  PassDB getPass(const uint64_t PassID);
+  std::vector<PassDB> getClientsPasses(const uint64_t& ClientID);
+  std::vector<PassDB> getCompanysPasses(const uint64_t& CompanyID);
+  PassDB getPass(const uint64_t& PassID);
 
  private:
   void do_modifying_request(std::string& sql_request);
@@ -79,9 +58,10 @@ class ClientDataBase : public DataBase {
 
   virtual ~ClientDataBase() = default;
 
-  bool insertClient(const std::string& Login, const std::string& Email, const std::string& Password);
+  uint64_t insertClient(const std::string& Login, const std::string& Email, const std::string& Password);
   bool deleteCLient(const std::string& login);
   bool ClientExists(const std::string& login);
+  bool ClientExists(const uint64_t& ClientID);
   std::vector<ClientDB> getAllClients(const std::string& sql_limit,
                                       const std::string& sql_offset);
   ClientDB getClient(const std::string login);
@@ -99,12 +79,12 @@ class CompanyDataBase : public DataBase {
 
   virtual ~CompanyDataBase() = default;
 
-  bool insertCompany(const CompanyDB& Company);
-  bool deleteCompany(const uint64_t CompanyID);
+  uint64_t insertCompany(const std::string& name);
+  bool deleteCompany(const std::string& name);
   bool CompanyExists(const std::string& name);
   std::vector<CompanyDB> getAllCompanys(const std::string& sql_limit,
                                         const std::string& sql_offset);
-  CompanyDB getCompany(const uint64_t CompanyID);
+  CompanyDB getCompany(const uint64_t& CompanyID);
 
  private:
   void do_modifying_request(std::string& sql_request);

@@ -15,16 +15,15 @@ set(CMAKE_TARGET_DEFINITIONS_CXX
 
 # The include file search paths:
 set(CMAKE_CXX_TARGET_INCLUDE_PATH
-  "../visionLib/database/include"
   "../visionLib/clientHandler/include"
+  "../visionLib/database/include"
   "../visionLib/httpClient/include"
   "../visionLib/httpServer/include"
   "../visionLib/logger/include"
   "../visionLib/terminalClient/include"
-  "../visionLib/terminalHandler/include"
-  "../visionLib/terminalServer/include"
   "../visionLib/timecode/include"
-  "../visionLib/include"
+  "../visionLib/terminalServer/include"
+  "../visionLib/terminalHandler/include"
   "googletest-src/googletest/include"
   "googletest-src/googletest"
   "googletest-src/googlemock/include"
@@ -34,10 +33,10 @@ set(CMAKE_CXX_TARGET_INCLUDE_PATH
 # Targets to which this target links.
 set(CMAKE_TARGET_LINKED_INFO_FILES
   "/home/ilyagu/MonKeys/build/googletest-build/googletest/CMakeFiles/gtest_main.dir/DependInfo.cmake"
+  "/home/ilyagu/MonKeys/build/CMakeFiles/visionLib.dir/DependInfo.cmake"
   "/home/ilyagu/MonKeys/build/googletest-build/googlemock/CMakeFiles/gmock_main.dir/DependInfo.cmake"
   "/home/ilyagu/MonKeys/build/googletest-build/googlemock/CMakeFiles/gmock.dir/DependInfo.cmake"
   "/home/ilyagu/MonKeys/build/googletest-build/googletest/CMakeFiles/gtest.dir/DependInfo.cmake"
-  "/home/ilyagu/MonKeys/build/CMakeFiles/visionLib.dir/DependInfo.cmake"
   )
 
 # Fortran module output directory.

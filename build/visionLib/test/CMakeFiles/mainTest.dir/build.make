@@ -79,17 +79,13 @@ mainTest_EXTERNAL_OBJECTS =
 
 visionLib/test/mainTest: visionLib/test/CMakeFiles/mainTest.dir/main.cpp.o
 visionLib/test/mainTest: visionLib/test/CMakeFiles/mainTest.dir/build.make
-visionLib/test/mainTest: /usr/lib/x86_64-linux-gnu/libpqxx.so
-visionLib/test/mainTest: /usr/lib/x86_64-linux-gnu/libpq.so
-visionLib/test/mainTest: lib/libgtest_maind.a
-visionLib/test/mainTest: lib/libgmock_maind.a
-visionLib/test/mainTest: /usr/lib/x86_64-linux-gnu/libpqxx.so
-visionLib/test/mainTest: /usr/lib/x86_64-linux-gnu/libpq.so
-visionLib/test/mainTest: lib/libgmockd.a
-visionLib/test/mainTest: lib/libgtestd.a
+visionLib/test/mainTest: lib/libgtest_main.a
 visionLib/test/mainTest: libvisionLib.so
+visionLib/test/mainTest: lib/libgmock_main.a
 visionLib/test/mainTest: /usr/lib/x86_64-linux-gnu/libpqxx.so
 visionLib/test/mainTest: /usr/lib/x86_64-linux-gnu/libpq.so
+visionLib/test/mainTest: lib/libgmock.a
+visionLib/test/mainTest: lib/libgtest.a
 visionLib/test/mainTest: visionLib/test/CMakeFiles/mainTest.dir/link.txt
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/ilyagu/MonKeys/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Linking CXX executable mainTest"
 	cd /home/ilyagu/MonKeys/build/visionLib/test && $(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/mainTest.dir/link.txt --verbose=$(VERBOSE)

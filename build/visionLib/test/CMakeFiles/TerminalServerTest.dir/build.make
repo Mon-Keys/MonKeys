@@ -94,17 +94,13 @@ TerminalServerTest_EXTERNAL_OBJECTS =
 visionLib/test/TerminalServerTest: visionLib/test/CMakeFiles/TerminalServerTest.dir/TerminalServer.cpp.o
 visionLib/test/TerminalServerTest: visionLib/test/CMakeFiles/TerminalServerTest.dir/main.cpp.o
 visionLib/test/TerminalServerTest: visionLib/test/CMakeFiles/TerminalServerTest.dir/build.make
-visionLib/test/TerminalServerTest: /usr/lib/x86_64-linux-gnu/libpqxx.so
-visionLib/test/TerminalServerTest: /usr/lib/x86_64-linux-gnu/libpq.so
-visionLib/test/TerminalServerTest: lib/libgtest_maind.a
-visionLib/test/TerminalServerTest: lib/libgmock_maind.a
-visionLib/test/TerminalServerTest: /usr/lib/x86_64-linux-gnu/libpqxx.so
-visionLib/test/TerminalServerTest: /usr/lib/x86_64-linux-gnu/libpq.so
-visionLib/test/TerminalServerTest: lib/libgmockd.a
-visionLib/test/TerminalServerTest: lib/libgtestd.a
+visionLib/test/TerminalServerTest: lib/libgtest_main.a
 visionLib/test/TerminalServerTest: libvisionLib.so
+visionLib/test/TerminalServerTest: lib/libgmock_main.a
 visionLib/test/TerminalServerTest: /usr/lib/x86_64-linux-gnu/libpqxx.so
 visionLib/test/TerminalServerTest: /usr/lib/x86_64-linux-gnu/libpq.so
+visionLib/test/TerminalServerTest: lib/libgmock.a
+visionLib/test/TerminalServerTest: lib/libgtest.a
 visionLib/test/TerminalServerTest: visionLib/test/CMakeFiles/TerminalServerTest.dir/link.txt
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/ilyagu/MonKeys/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Linking CXX executable TerminalServerTest"
 	cd /home/ilyagu/MonKeys/build/visionLib/test && $(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/TerminalServerTest.dir/link.txt --verbose=$(VERBOSE)

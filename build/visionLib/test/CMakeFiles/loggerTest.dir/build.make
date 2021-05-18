@@ -94,17 +94,13 @@ loggerTest_EXTERNAL_OBJECTS =
 visionLib/test/loggerTest: visionLib/test/CMakeFiles/loggerTest.dir/logger.cpp.o
 visionLib/test/loggerTest: visionLib/test/CMakeFiles/loggerTest.dir/main.cpp.o
 visionLib/test/loggerTest: visionLib/test/CMakeFiles/loggerTest.dir/build.make
-visionLib/test/loggerTest: /usr/lib/x86_64-linux-gnu/libpqxx.so
-visionLib/test/loggerTest: /usr/lib/x86_64-linux-gnu/libpq.so
-visionLib/test/loggerTest: lib/libgtest_maind.a
-visionLib/test/loggerTest: lib/libgmock_maind.a
-visionLib/test/loggerTest: /usr/lib/x86_64-linux-gnu/libpqxx.so
-visionLib/test/loggerTest: /usr/lib/x86_64-linux-gnu/libpq.so
-visionLib/test/loggerTest: lib/libgmockd.a
-visionLib/test/loggerTest: lib/libgtestd.a
+visionLib/test/loggerTest: lib/libgtest_main.a
 visionLib/test/loggerTest: libvisionLib.so
+visionLib/test/loggerTest: lib/libgmock_main.a
 visionLib/test/loggerTest: /usr/lib/x86_64-linux-gnu/libpqxx.so
 visionLib/test/loggerTest: /usr/lib/x86_64-linux-gnu/libpq.so
+visionLib/test/loggerTest: lib/libgmock.a
+visionLib/test/loggerTest: lib/libgtest.a
 visionLib/test/loggerTest: visionLib/test/CMakeFiles/loggerTest.dir/link.txt
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/ilyagu/MonKeys/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Linking CXX executable loggerTest"
 	cd /home/ilyagu/MonKeys/build/visionLib/test && $(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/loggerTest.dir/link.txt --verbose=$(VERBOSE)

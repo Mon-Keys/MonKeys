@@ -18,156 +18,176 @@ using ::testing::_;
 using ::testing::AtLeast;
 using ::testing::Return;
 
-TEST(ConnectTEST, TestConnect) {
-  std::map<std::string, std::string> lol{{"dbname", "Monkeys"},
-                                         {"host", "localhost"},
-                                         {"user", "postgres"},
-                                         {"password", "password"}};
-  DataBase db(lol);
+TEST(ComapnyExistTEST, CompanyExistTrue) {
+  CompanyDataBase Codb;
+
+  bool flag = Codb.insertCompany("comapny_name");
+
+  flag = Codb.CompanyExists("comapny_name");
+
+  EXPECT_TRUE(flag);
+
+  flag = Codb.deleteCompany("comapny_name");
+  EXPECT_TRUE(flag);
+}
+
+TEST(ComapnyExistTEST, CompanyExistFalse) {
+  CompanyDataBase Codb;
+
+  bool flag = Codb.CompanyExists("gsmg");
+
+  EXPECT_FALSE(flag);
 }
 
 TEST(ClientExistTEST, ClientExistTrue) {
-  std::map<std::string, std::string> lol{{"dbname", "Monkeys"},
-                                         {"host", "localhost"},
-                                         {"user", "postgres"},
-                                         {"password", "password"}};
-  ClientDataBase Cdb(lol);
+  ClientDataBase Cdb;
 
-  bool flag = Cdb.ClientExists("Ilyagu");
+  bool flag = Cdb.insertClient("Ilyagu", "fs", "fsdf");
 
+  flag = Cdb.ClientExists("Ilyagu");
+
+  EXPECT_TRUE(flag);
+
+  flag = Cdb.deleteCLient("Ilyagu");
   EXPECT_TRUE(flag);
 }
 
 TEST(ClientExistTEST, ClientExistFalse) {
-  std::map<std::string, std::string> lol{{"dbname", "Monkeys"},
-                                         {"host", "localhost"},
-                                         {"user", "postgres"},
-                                         {"password", "password"}};
-  ClientDataBase Cdb(lol);
+  ClientDataBase Cdb;
 
   bool flag = Cdb.ClientExists("gsmg");
 
   EXPECT_FALSE(flag);
 }
 
-TEST(PassageExistsTEST, PassageExistsTrue) {
-  PassageDataBase Psdb;
 
-  bool flag = Psdb.PassageExists(1);
+TEST(PassExistsTEST, PassExistsTrue) {
+  PassDataBase Pssdb;
+  ClientDataBase Cldb;
+  CompanyDataBase Codb;
 
+  uint64_t client_id;
+  uint64_t company_id;
+  uint64_t pass_id;
+
+  client_id = Cldb.insertClient("login", "email", "password");
+  company_id = Codb.insertCompany("company_name");
+  pass_id = Pssdb.insertPass("FKADSFM23JFN2", company_id, client_id);
+
+  bool flag = Pssdb.PassExists(pass_id);
+
+  EXPECT_TRUE(flag);
+
+  flag = Pssdb.deletePass(pass_id);
+  EXPECT_TRUE(flag);
+
+  flag = Cldb.deleteCLient("login");
+  EXPECT_TRUE(flag);
+
+  flag = Codb.deleteCompany("company_name");
   EXPECT_TRUE(flag);
 }
 
-TEST(PassageExistsTEST, PassageExistsFalse) {
-  PassageDataBase Psdb;
+TEST(PassExistsTEST, PassExistsFalse) {
+  PassDataBase Pssdb;
 
-  bool flag = Psdb.PassageExists(0);
+  bool flag = Pssdb.PassExists(0);
 
   EXPECT_FALSE(flag);
 }
 
-TEST(getClientTEST, getClientTest) {
-  std::map<std::string, std::string> lol{{"dbname", "Monkeys"},
-                                         {"host", "localhost"},
-                                         {"user", "postgres"},
-                                         {"password", "password"}};
-  ClientDataBase Cdb(lol);
-
-  ClientDB temp = Cdb.getClient("Ilyagu");
-
-  EXPECT_EQ(temp.getID(), 4);
-  bool flag = false;
-  if (temp.getLogin() == "Ilyagu")
-    flag = true;
-  else
-    flag = false;
-  EXPECT_TRUE(flag);
-  if (temp.getEmail() == "inagdimaev@mail.ru")
-    flag = true;
-  else
-    flag = false;
-  EXPECT_TRUE(flag);
-  if (temp.getPassword() == "12345")
-    flag = true;
-  else
-    flag = false;
-  EXPECT_TRUE(flag);
-}
-
-TEST(getPassTEST, getPassTest) {
-  PassDataBase Pdb;
-
-  PassDB temp = Pdb.getPass(1);
-
-  std::cout<< "ID:\t" << temp.getID() << "\nprivate_key:\t" << temp.getprivate() << "\nCompany_ID:\t" << temp.getCompanyID() << 
-  "\n Client_ID\t" << temp.getClientID() << std::endl;
-
-  EXPECT_EQ(temp.getID(), 1);
-  EXPECT_EQ(temp.getCompanyID(), 1);
-  EXPECT_EQ(temp.getClientID(), 1);
-
-  bool flag = false;
-  if (temp.getprivate() == "FIHsdfWBfsdfEFJfsADF")
-    flag = true;
-  else
-    flag = false;
-  EXPECT_TRUE(flag);
-}
-
-// TEST(insertClietnTEST, insertClient) {
+// TEST(getClientTEST, getClientTest) {
 //   ClientDataBase Cdb;
-//   bool flag = Cdb.insertClient("Oleg", "kozinov@gmail.com", "iamretard");
+//   ClientDB temp = Cdb.getClient("Ilyagu");
+//   EXPECT_EQ(temp.getID(), 4);
+//   bool flag = false;
+//   if (temp.getLogin() == "Ilyagu")
+//     flag = true;
+//   else
+//     flag = false;
+//   EXPECT_TRUE(flag);
+//   if (temp.getEmail() == "inagdimaev@mail.ru")
+//     flag = true;
+//   else
+//     flag = false;
+//   EXPECT_TRUE(flag);
+//   if (temp.getPassword() == "12345")
+//     flag = true;
+//   else
+//     flag = false;
 //   EXPECT_TRUE(flag);
 // }
 
-// TEST(deleteCLientTEST, deleteClientInCorrect) {
-//   ClientDataBase Cdb;
-//   bool flag = Cdb.deleteCLient("fslkdf");
+// TEST(getPassTEST, getPassTest) {
+//   PassDataBase Pdb;
+//   PassDB temp = Pdb.getPass(1);
+//   std::cout<< "ID:\t" << temp.getID() << "\nprivate_key:\t" << temp.getprivate() << "\nCompany_ID:\t" << temp.getCompanyID() << 
+//   "\n Client_ID\t" << temp.getClientID() << std::endl;
+//   EXPECT_EQ(temp.getID(), 1);
+//   EXPECT_EQ(temp.getCompanyID(), 1);
+//   EXPECT_EQ(temp.getClientID(), 1);
+//   bool flag = false;
+//   if (temp.getprivate() == "FIHsdfWBfsdfEFJfsADF")
+//     flag = true;
+//   else
+//     flag = false;
+//   EXPECT_TRUE(flag);
+// }
+
+// // TEST(insertClietnTEST, insertClient) {
+// //   ClientDataBase Cdb;
+// //   bool flag = Cdb.insertClient("Oleg", "kozinov@gmail.com", "iamretard");
+// //   EXPECT_TRUE(flag);
+// // }
+
+// // TEST(deleteCLientTEST, deleteClientInCorrect) {
+// //   ClientDataBase Cdb;
+// //   bool flag = Cdb.deleteCLient("fslkdf");
+// //   EXPECT_FALSE(flag);
+// // }
+
+// // TEST(deleteCLientTEST, deleteClientCorrect) {
+// //   ClientDataBase Cdb;
+// //   bool flag = Cdb.insertClient("Testlogin", "test@mail.ru", "testpassword");
+// //   flag = Cdb.deleteCLient("Testlogin");
+// //   EXPECT_TRUE(flag);
+// // }
+
+// TEST(logInTEST, logInTestCorrect) {
+//   clientHandler CLH;
+
+//   bool flag = CLH.logInClient("Ilyagu", "12345");
+
+//   EXPECT_TRUE(flag);
+// }
+
+// TEST(logInTEST, logInTestInCorrect) {
+//   clientHandler CLH;
+
+//   bool flag = CLH.logInClient("Ilyagu", "incorrentpassword");
+
 //   EXPECT_FALSE(flag);
 // }
 
-// TEST(deleteCLientTEST, deleteClientCorrect) {
-//   ClientDataBase Cdb;
-//   bool flag = Cdb.insertClient("Testlogin", "test@mail.ru", "testpassword");
-//   flag = Cdb.deleteCLient("Testlogin");
-//   EXPECT_TRUE(flag);
-// }
-
-TEST(logInTEST, logInTestCorrect) {
-  clientHandler CLH;
-
-  bool flag = CLH.logInClient("Ilyagu", "12345");
-
-  EXPECT_TRUE(flag);
-}
-
-TEST(logInTEST, logInTestInCorrect) {
-  clientHandler CLH;
-
-  bool flag = CLH.logInClient("Ilyagu", "incorrentpassword");
-
-  EXPECT_FALSE(flag);
-}
-
-TEST(logInTEST, logInTestNotExists) {
-  clientHandler CLH;
-
-  bool flag = CLH.logInClient("fasdf", "12345");
-
-  EXPECT_FALSE(flag);
-}
-
-// TEST(registerTEST, registerCorrect) {
+// TEST(logInTEST, logInTestNotExists) {
 //   clientHandler CLH;
-//   bool flag = CLH.registerClient("Oleg", "inagdimaev@mail.ru", "12345");
-//   EXPECT_TRUE(flag);
-// }
 
-// TEST(registerTEST, registerInCorrect) {
-//   clientHandler CLH;
-//   bool flag = CLH.registerClient("Oleg", "lol@mail.ru", "12345");
+//   bool flag = CLH.logInClient("fasdf", "12345");
+
 //   EXPECT_FALSE(flag);
 // }
+
+// // TEST(registerTEST, registerCorrect) {
+// //   clientHandler CLH;
+// //   bool flag = CLH.registerClient("Oleg", "inagdimaev@mail.ru", "12345");
+// //   EXPECT_TRUE(flag);
+// // }
+
+// // TEST(registerTEST, registerInCorrect) {
+// //   clientHandler CLH;
+// //   bool flag = CLH.registerClient("Oleg", "lol@mail.ru", "12345");
+// //   EXPECT_FALSE(flag);
+// // }
 
 // class PDB {
 //   DataBase& dbC;

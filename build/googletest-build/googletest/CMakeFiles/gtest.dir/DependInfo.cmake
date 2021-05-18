@@ -10,22 +10,12 @@ set(CMAKE_CXX_COMPILER_ID "GNU")
 
 # The include file search paths:
 set(CMAKE_CXX_TARGET_INCLUDE_PATH
-  "../visionLib/database/include"
-  "../visionLib/clientHandler/include"
-  "../visionLib/httpClient/include"
-  "../visionLib/httpServer/include"
-  "../visionLib/logger/include"
-  "../visionLib/terminalClient/include"
-  "../visionLib/terminalHandler/include"
-  "../visionLib/terminalServer/include"
-  "../visionLib/timecode/include"
   "googletest-src/googletest/include"
   "googletest-src/googletest"
   )
 
 # Targets to which this target links.
 set(CMAKE_TARGET_LINKED_INFO_FILES
-  "/home/ilyagu/MonKeys/build/CMakeFiles/visionLib.dir/DependInfo.cmake"
   )
 
 # Fortran module output directory.

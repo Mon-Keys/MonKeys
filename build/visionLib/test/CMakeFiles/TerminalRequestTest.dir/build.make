@@ -94,17 +94,13 @@ TerminalRequestTest_EXTERNAL_OBJECTS =
 visionLib/test/TerminalRequestTest: visionLib/test/CMakeFiles/TerminalRequestTest.dir/TerminalRequest.cpp.o
 visionLib/test/TerminalRequestTest: visionLib/test/CMakeFiles/TerminalRequestTest.dir/main.cpp.o
 visionLib/test/TerminalRequestTest: visionLib/test/CMakeFiles/TerminalRequestTest.dir/build.make
-visionLib/test/TerminalRequestTest: /usr/lib/x86_64-linux-gnu/libpqxx.so
-visionLib/test/TerminalRequestTest: /usr/lib/x86_64-linux-gnu/libpq.so
-visionLib/test/TerminalRequestTest: lib/libgtest_maind.a
-visionLib/test/TerminalRequestTest: lib/libgmock_maind.a
-visionLib/test/TerminalRequestTest: /usr/lib/x86_64-linux-gnu/libpqxx.so
-visionLib/test/TerminalRequestTest: /usr/lib/x86_64-linux-gnu/libpq.so
-visionLib/test/TerminalRequestTest: lib/libgmockd.a
-visionLib/test/TerminalRequestTest: lib/libgtestd.a
+visionLib/test/TerminalRequestTest: lib/libgtest_main.a
 visionLib/test/TerminalRequestTest: libvisionLib.so
+visionLib/test/TerminalRequestTest: lib/libgmock_main.a
 visionLib/test/TerminalRequestTest: /usr/lib/x86_64-linux-gnu/libpqxx.so
 visionLib/test/TerminalRequestTest: /usr/lib/x86_64-linux-gnu/libpq.so
+visionLib/test/TerminalRequestTest: lib/libgmock.a
+visionLib/test/TerminalRequestTest: lib/libgtest.a
 visionLib/test/TerminalRequestTest: visionLib/test/CMakeFiles/TerminalRequestTest.dir/link.txt
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/ilyagu/MonKeys/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Linking CXX executable TerminalRequestTest"
 	cd /home/ilyagu/MonKeys/build/visionLib/test && $(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/TerminalRequestTest.dir/link.txt --verbose=$(VERBOSE)

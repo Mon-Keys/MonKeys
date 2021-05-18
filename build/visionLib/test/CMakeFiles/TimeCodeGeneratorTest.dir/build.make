@@ -94,17 +94,13 @@ TimeCodeGeneratorTest_EXTERNAL_OBJECTS =
 visionLib/test/TimeCodeGeneratorTest: visionLib/test/CMakeFiles/TimeCodeGeneratorTest.dir/TimeCodeGenerator.cpp.o
 visionLib/test/TimeCodeGeneratorTest: visionLib/test/CMakeFiles/TimeCodeGeneratorTest.dir/main.cpp.o
 visionLib/test/TimeCodeGeneratorTest: visionLib/test/CMakeFiles/TimeCodeGeneratorTest.dir/build.make
-visionLib/test/TimeCodeGeneratorTest: /usr/lib/x86_64-linux-gnu/libpqxx.so
-visionLib/test/TimeCodeGeneratorTest: /usr/lib/x86_64-linux-gnu/libpq.so
-visionLib/test/TimeCodeGeneratorTest: lib/libgtest_maind.a
-visionLib/test/TimeCodeGeneratorTest: lib/libgmock_maind.a
-visionLib/test/TimeCodeGeneratorTest: /usr/lib/x86_64-linux-gnu/libpqxx.so
-visionLib/test/TimeCodeGeneratorTest: /usr/lib/x86_64-linux-gnu/libpq.so
-visionLib/test/TimeCodeGeneratorTest: lib/libgmockd.a
-visionLib/test/TimeCodeGeneratorTest: lib/libgtestd.a
+visionLib/test/TimeCodeGeneratorTest: lib/libgtest_main.a
 visionLib/test/TimeCodeGeneratorTest: libvisionLib.so
+visionLib/test/TimeCodeGeneratorTest: lib/libgmock_main.a
 visionLib/test/TimeCodeGeneratorTest: /usr/lib/x86_64-linux-gnu/libpqxx.so
 visionLib/test/TimeCodeGeneratorTest: /usr/lib/x86_64-linux-gnu/libpq.so
+visionLib/test/TimeCodeGeneratorTest: lib/libgmock.a
+visionLib/test/TimeCodeGeneratorTest: lib/libgtest.a
 visionLib/test/TimeCodeGeneratorTest: visionLib/test/CMakeFiles/TimeCodeGeneratorTest.dir/link.txt
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/ilyagu/MonKeys/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Linking CXX executable TimeCodeGeneratorTest"
 	cd /home/ilyagu/MonKeys/build/visionLib/test && $(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/TimeCodeGeneratorTest.dir/link.txt --verbose=$(VERBOSE)

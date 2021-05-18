@@ -29,4 +29,7 @@ bool clientHandler::registerClient(const std::string& Login,
   return _Cldb.insertClient(Login, Email, Password);
 }
 
-std::string clientHandler::getTimeCode(const std::string& Login) {return "";}
+std::string clientHandler::getTimeCode(const uint64_t& PassID) {
+  PassDB pass = _Passdb.getPass(PassID);
+  return "";
+}

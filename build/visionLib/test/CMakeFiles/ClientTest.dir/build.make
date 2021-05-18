@@ -94,17 +94,13 @@ ClientTest_EXTERNAL_OBJECTS =
 visionLib/test/ClientTest: visionLib/test/CMakeFiles/ClientTest.dir/Client.cpp.o
 visionLib/test/ClientTest: visionLib/test/CMakeFiles/ClientTest.dir/main.cpp.o
 visionLib/test/ClientTest: visionLib/test/CMakeFiles/ClientTest.dir/build.make
-visionLib/test/ClientTest: /usr/lib/x86_64-linux-gnu/libpqxx.so
-visionLib/test/ClientTest: /usr/lib/x86_64-linux-gnu/libpq.so
-visionLib/test/ClientTest: lib/libgtest_maind.a
-visionLib/test/ClientTest: lib/libgmock_maind.a
-visionLib/test/ClientTest: /usr/lib/x86_64-linux-gnu/libpqxx.so
-visionLib/test/ClientTest: /usr/lib/x86_64-linux-gnu/libpq.so
-visionLib/test/ClientTest: lib/libgmockd.a
-visionLib/test/ClientTest: lib/libgtestd.a
+visionLib/test/ClientTest: lib/libgtest_main.a
 visionLib/test/ClientTest: libvisionLib.so
+visionLib/test/ClientTest: lib/libgmock_main.a
 visionLib/test/ClientTest: /usr/lib/x86_64-linux-gnu/libpqxx.so
 visionLib/test/ClientTest: /usr/lib/x86_64-linux-gnu/libpq.so
+visionLib/test/ClientTest: lib/libgmock.a
+visionLib/test/ClientTest: lib/libgtest.a
 visionLib/test/ClientTest: visionLib/test/CMakeFiles/ClientTest.dir/link.txt
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/ilyagu/MonKeys/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Linking CXX executable ClientTest"
 	cd /home/ilyagu/MonKeys/build/visionLib/test && $(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/ClientTest.dir/link.txt --verbose=$(VERBOSE)
