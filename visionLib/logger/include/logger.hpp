@@ -15,6 +15,7 @@
 #define LOG_WARN 2
 #define LOG_ERROR_FATAL 3
 #define LOG_INFO 4
+
 #define LOG_MOCK 5
 
 class IWriteToLog {

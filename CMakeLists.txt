@@ -1,18 +1,38 @@
-cmake_minimum_required(VERSION 3.10.2)
+cmake_minimum_required(VERSION 3.7.2)
 project(vision)
 
 set(Boost_USE_MULTITHREAD ON)
 set(CMAKE_CXX_STANDARD 14)
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wpedantic -pedantic -fprofile-arcs -ftest-coverage -lpqxx -lpq -lboost_system")
 
-find_package(Boost)
+# Building lib
+set(VISION_LIB_PATH ${PROJECT_SOURCE_DIR}/visionLib)
+
+
+# <Test>
+configure_file(CMakeLists.txt.in
+        googletest-download/CMakeLists.txt)
+execute_process(COMMAND ${CMAKE_COMMAND} -G "${CMAKE_GENERATOR}" .
+        WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/googletest-download )
+execute_process(COMMAND ${CMAKE_COMMAND} --build .
+        WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/googletest-download )
+
+add_subdirectory(${CMAKE_BINARY_DIR}/googletest-src
+      ${CMAKE_BINARY_DIR}/googletest-build)
+
+enable_testing()
+add_subdirectory(${VISION_LIB_PATH}/test)
+
+
+
+# </Test>
+
+find_package(Boost REQUIRED)
 include_directories(${Boost_LIBRARIES})
 
 find_library(PQXX_LIB pqxx)
 find_library(PQ_LIB pq)
 
-# Building lib
-set(VISION_LIB_PATH ${PROJECT_SOURCE_DIR}/visionLib)
 
 file(GLOB sources "${VISION_LIB_PATH}/*/source/*.cpp")
 file(GLOB headers "${VISION_LIB_PATH}/*/include/*.hpp")
@@ -65,18 +85,5 @@ target_include_directories(userServer PUBLIC "${VISION_LIB_PATH}/include")
 
 ### <-->
 
-# <Test>
-configure_file(CMakeLists.txt.in
-        googletest-download/CMakeLists.txt)
-execute_process(COMMAND ${CMAKE_COMMAND} -G "${CMAKE_GENERATOR}" .
-        WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/googletest-download )
-execute_process(COMMAND ${CMAKE_COMMAND} --build .
-        WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/googletest-download )
 
-add_subdirectory(${CMAKE_BINARY_DIR}/googletest-src
-      ${CMAKE_BINARY_DIR}/googletest-build)
 
-enable_testing()
-add_subdirectory(${VISION_LIB_PATH}/test)
-
-# </Test>

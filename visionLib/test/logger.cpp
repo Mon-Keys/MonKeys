@@ -17,9 +17,8 @@ bool compareFiles(FILE* file_compared, FILE* file_checked) {
   int N = MAX_ELEMENTS;
   char* fileBuff1 = reinterpret_cast<char*>(calloc(1, N + 1));
   char* fileBuff2 = reinterpret_cast<char*>(calloc(1, N + 1));
-  size_t fileComparedRead, fileCheckedRead;
-
   do {
+    size_t fileComparedRead, fileCheckedRead;
     fileComparedRead = fread(fileBuff1, 1, N, file_compared);
     fileCheckedRead = fread(fileBuff2, 1, N, file_checked);
 
@@ -38,7 +37,6 @@ bool compareFiles(FILE* file_compared, FILE* file_checked) {
 
 TEST(logFileTest, writeInfo) {
   Logger Log(LOG_INFO);
-  std::string testFilePath = "testData/test1.log";
   std::string writeFilePath = "testData/testWrite.log";
   LogFile lf(writeFilePath);
   Log.WriteLog(lf, "hello");
@@ -51,7 +49,7 @@ TEST(logFileTest, writeInfo) {
 
 TEST(logFileTest, writeErrorFatal) {
   Logger Log(LOG_ERROR_FATAL);
-  std::string testFilePath = "testData/test2.log";
+  // std::string testFilePath = "testData/test2.log";
   std::string writeFilePath = "testData/testWrite.log";
   LogFile lf(writeFilePath);
 

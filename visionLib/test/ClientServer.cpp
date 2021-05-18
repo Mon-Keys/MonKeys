@@ -57,3 +57,7 @@
 //   std::string ex = mcs.getTimeCode(1);
 //   // EXPECT_STREQ(ex, "abcd");
 // }
+  // std::string ex = mcs.getTimeCode(1);
+  // EXPECT_STREQ(ex, "abcd");
+// }
+

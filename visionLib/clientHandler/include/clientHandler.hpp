@@ -16,13 +16,12 @@
 
 class clientHandler {
  public:
+  clientHandler() : _Cldb(), _Codb(), _Passdb(), _Passagedb(){};
 
-  clientHandler() : _Cldb(), _Codb(), _Passdb(), _Passagedb() {};
-
-  bool logInClient(std::string Login, std::string Password);
+  bool logInClient(const std::string& Login, const std::string& Password);
   bool logOutClient(uint64_t ClientID);
   bool registerClient(const std::string& Login, const std::string& Email, const std::string& Password);
-  std::string getTimeCode(uint64_t PassID);
+  std::string getTimeCode(const std::string& Login);
 
  private:
   ClientDataBase _Cldb;

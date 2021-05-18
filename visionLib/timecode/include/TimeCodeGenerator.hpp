@@ -6,18 +6,18 @@
 // |_|  |_|  \___/  |_| |_| |_|\_\  \___|  \__, | |___/
 //                                         |___/
 
-#ifndef VISIONLIB_INCLUDE_TIMECODEGENERATOR_HPP_
-#define VISIONLIB_INCLUDE_TIMECODEGENERATOR_HPP_
+#ifndef VISIONLIB_TIMECODE_INCLUDE_TIMECODEGENERATOR_HPP_
+#define VISIONLIB_TIMECODE_INCLUDE_TIMECODEGENERATOR_HPP_
 
+#include <bitset>
+#include <boost/format.hpp>
+#include <boost/uuid/detail/sha1.hpp>
+#include <chrono>
+#include <cmath>
+#include <cstdlib>
 #include <iostream>
 #include <string>
 #include <vector>
-#include <boost/uuid/detail/sha1.hpp>
-#include <boost/format.hpp>
-#include <cstdlib>
-#include <bitset>
-#include <cmath>
-#include <chrono>
 
 class TimeCodeGenerator {
  private:
@@ -34,6 +34,10 @@ class TimeCodeGenerator {
   uint64_t countFloor();
   std::string getSHA1(const std::string& message);
   uint8_t convertHexCharToUINT(char ch);
+  std::bitset<88> convertHexTokenToBitset(std::string hexToken);
+  std::bitset<88> tableEncoding(std::bitset<88> binToken);
+  std::string binTokenToHex(std::string);
+
  public:
   TimeCodeGenerator(std::string privateKey, uint64_t PassID, uint64_t CompanyID,
                     uint16_t timeInterval);
@@ -46,19 +50,17 @@ class TimeCodeGenerator {
 
 class TimeCode {
  private:
-  uint64_t CompanyID;
-  uint64_t PassID;
-  std::string timePart;
-  uint64_t decodeFrom64(std::string toDecode);
+  std::bitset<88> timecodeDecoded;
   bool valid;
-
+  uint8_t convertHexCharToUINT(char ch);
+  std::bitset<88> decodeTable(std::bitset<88> binToken);
+  std::bitset<88> convertHexTokenToBitset(std::string hexToken);
  public:
   bool isValid();
   explicit TimeCode(std::string timecodeString);
   ~TimeCode();
   uint64_t getCompanyID();
   uint64_t getPassID();
-  std::string getTimePart();
 };
 
-#endif  // VISIONLIB_INCLUDE_TIMECODEGENERATOR_HPP_
+#endif  // VISIONLIB_TIMECODE_INCLUDE_TIMECODEGENERATOR_HPP_
