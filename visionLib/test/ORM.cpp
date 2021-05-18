@@ -209,13 +209,13 @@ using ::testing::Return;
 //   EXPECT_TRUE(flag);
 // }
 
-TEST(logInTEST, logInTestCorrectNoPasses) {
-  clientHandler CLH;
-  std::string status = CLH.logInClient("4Marvin2", "iamretard");
-  bool flag = false;
-  if (status == "success") flag = true;
-  EXPECT_TRUE(flag);
-}
+// TEST(logInTEST, logInTestCorrectNoPasses) {
+//   clientHandler CLH;
+//   std::string status = CLH.logInClient("4Marvin2", "iamretard");
+//   bool flag = false;
+//   if (status == "success") flag = true;
+//   EXPECT_TRUE(flag);
+// }
 
 // TEST(logInTEST, logInTestCorrectNotExists) {
 //   clientHandler CLH;
@@ -253,11 +253,13 @@ TEST(logInTEST, logInTestCorrectNoPasses) {
   // EXPECT_TRUE(flag);
 // }
 
-// // TEST(registerTEST, registerInCorrect) {
-// //   clientHandler CLH;
-// //   bool flag = CLH.registerClient("Oleg", "lol@mail.ru", "12345");
-// //   EXPECT_FALSE(flag);
-// // }
+// TEST(registerTEST, registerInCorrect) {
+//   clientHandler CLH;
+//   std::string status = CLH.registerClient("Ilyagu", "ilyagunagdimaev@gmail.ru", "leonidperlin");
+//   bool flag = false;
+//   if (status == "error") flag = true;
+//   EXPECT_TRUE(flag);
+// }
 
 // class PDB {
 //   DataBase& dbC;
