@@ -6,6 +6,7 @@
 
 #Build Folder
 build/
+build/
 cmake-build-debug/
 
 #Temporary files

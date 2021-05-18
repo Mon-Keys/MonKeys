@@ -9,9 +9,9 @@
 #include "TimeCodeGenerator.hpp"
 
 int main() {
-  uint64_t PassID = 101;
+  uint64_t PassID = 1544716917;
   uint16_t timeInterval = 30;
-  uint64_t companyID = 10;
+  uint64_t companyID = 13303233;
   std::string userKey = "dsdsdCdsdsdsgfwegvwevwerweQRBBX";
   TimeCodeGenerator codegen(userKey, PassID, companyID, timeInterval);
   std::cout << std::time(0) << std::endl;

@@ -51,6 +51,31 @@ TEST(getPassID, easyInput) {
   ASSERT_EQ(tc.getPassID(), PassID);
 }
 
+TEST(getPassID, completeCheck) {
+  uint64_t PassID = 1544716917;
+  uint16_t timeInterval = 30;
+  uint64_t companyID = 13303233;
+  uint64_t floor = (std::time(0) / timeInterval);
+  std::string userKey = "JBSWY3DPEHPK3PXP";
+  TimeCodeGenerator codegen(userKey, PassID, companyID, timeInterval);
+  std::string generatedCode = codegen.generateTimeCode();
+  TimeCode tc(generatedCode);
+  ASSERT_EQ(tc.getPassID(), PassID);
+}
+
+TEST(getCompanyID, completeCheck) {
+  uint64_t PassID = 1544716917;
+  uint16_t timeInterval = 30;
+  uint64_t companyID = 13303233;
+  uint64_t floor = (std::time(0) / timeInterval);
+  std::string userKey = "JBSWY3DPEHPK3PXP";
+  TimeCodeGenerator codegen(userKey, PassID, companyID, timeInterval);
+  std::string generatedCode = codegen.generateTimeCode();
+  TimeCode tc(generatedCode);
+  ASSERT_EQ(tc.getCompanyID(), companyID);
+}
+
+
 
 TEST(validCheck, wrongSizeBig) {
   TimeCode code("010010012sadsadgsd249111dsadsadsa");

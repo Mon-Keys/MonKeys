@@ -1,3 +1,0 @@
-/home/ilyagu/MonKeys/build/googletest-download/CMakeFiles/rebuild_cache.dir
-/home/ilyagu/MonKeys/build/googletest-download/CMakeFiles/edit_cache.dir
-/home/ilyagu/MonKeys/build/googletest-download/CMakeFiles/googletest.dir
