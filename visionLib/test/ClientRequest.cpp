@@ -17,8 +17,8 @@
 //  public:
 //   MOCK_METHOD2(logInClient, void(std::string Login, std::string Password));
 //   MOCK_METHOD1(logOutClient, void(uint64_t ClientID));
-//   MOCK_METHOD2(registerClient, void(std::string Login, std::string Password));
-//   MOCK_METHOD1(getTimeCode, void(uint64_t PassID));
+//   MOCK_METHOD2(registerClient, void(std::string Login, std::string
+//   Password)); MOCK_METHOD1(getTimeCode, void(uint64_t PassID));
 // };
 
 // TEST(MockclientServer, RequestHandlerTest) {

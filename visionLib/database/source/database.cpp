@@ -41,103 +41,115 @@ DataBase::DataBase(std::map<std::string, std::string>& db_settings) {
   std::cout << "Connecting!" << std::endl;
 }
 
-
 bool PassDataBase::deletePass(const uint64_t& PassID) {
   if (PassExists(PassID) == false) {
-		std::cout << "Client does not exists" << std::endl;
-		return false;
-	}
-
-  std::string sql_request = "select exists(select id from passage where passage.pass_id = (select id from pass where pass.id = '" + std::to_string(PassID) + "'))";
-	pqxx::result r = do_select_request(sql_request);
-
-	auto exist_flag = r[0][0].as<std::string>();
-  if (exist_flag == "t") {
-      std::cout << "Pass is linked to passage" << std::endl;
-      return false;
+    std::cout << "Client does not exists" << std::endl;
+    return false;
   }
 
-	sql_request = "delete from pass where pass.id = " + std::to_string(PassID);
+  std::string sql_request =
+      "select exists(select id from passage where passage.pass_id = (select id "
+      "from pass where pass.id = '" +
+      std::to_string(PassID) + "'))";
+  pqxx::result r = do_select_request(sql_request);
 
-	do_modifying_request(sql_request);
+  auto exist_flag = r[0][0].as<std::string>();
+  if (exist_flag == "t") {
+    std::cout << "Pass is linked to passage" << std::endl;
+    return false;
+  }
 
-	std::cout << "Delete pass" << std::endl;
+  sql_request = "delete from pass where pass.id = " + std::to_string(PassID);
 
-	return true;
+  do_modifying_request(sql_request);
+
+  std::cout << "Delete pass" << std::endl;
+
+  return true;
 }
 
 bool PassageDataBase::deletePassage(const uint64_t& PassageID) {
   if (PassageExists(PassageID) == false) {
-		std::cout << "Client does not exists" << std::endl;
-		return false;
-	}
+    std::cout << "Client does not exists" << std::endl;
+    return false;
+  }
 
-	std::string sql_request = "delete from passage where passage.id = " + std::to_string(PassageID);
-
-	do_modifying_request(sql_request);
-
-	std::cout << "Delete passage" << std::endl;
-
-	return true;
-}
-
-bool ClientDataBase::deleteCLient(const std::string& login) {
-	if (ClientExists(login) == false) {
-		std::cout << "Client does not exists" << std::endl;
-		return false;
-	}
-
-	std::string sql_request = "select exists(select id from pass where pass.client_id = (select id from client where client.login = '" + login + "'))";
-	pqxx::result r = do_select_request(sql_request);
-
-	auto exist_flag = r[0][0].as<std::string>();
-    if (exist_flag == "t") {
-		    std::cout << "Client is linked to pass" << std::endl;
-        return false;
-    }
-
-	sql_request = "delete from client where client.login = '" + login + "'";
-
-	do_modifying_request(sql_request);
-
-	std::cout << "Delete client" << std::endl;
-
-	return true;
-}
-bool CompanyDataBase::deleteCompany(const std::string& name) {
-  if (CompanyExists(name) == false) {
-		std::cout << "Company does not exists" << std::endl;
-		return false;
-	}
-
-	std::string sql_request = "select exists(select id from pass where pass.company_id = (select id from company where company.company_name = '" + name + "'))";
-	pqxx::result r = do_select_request(sql_request);
-
-	auto exist_flag = r[0][0].as<std::string>();
-    if (exist_flag == "t") {
-		    std::cout << "Company is linked to pass" << std::endl;
-        return false;
-    }
-
-	sql_request = "delete from company where company.company_name = '" + name + "'";
-
-	do_modifying_request(sql_request);
-
-	std::cout << "Delete comapny" << std::endl;
-
-	return true;
-}
-
-uint64_t ClientDataBase::insertClient(const std::string& Login, const std::string& Email, const std::string& Password) {
-	if (ClientExists(Login) == true) return false;
-
-  	std::string sql_request = "insert into client(login, email, password) values ('" + Login + "', '"
-			   + Email + "', '"
-			   + Password + "')";
+  std::string sql_request =
+      "delete from passage where passage.id = " + std::to_string(PassageID);
 
   do_modifying_request(sql_request);
 
-	std::cout << "Insert client" << std::endl;
+  std::cout << "Delete passage" << std::endl;
+
+  return true;
+}
+
+bool ClientDataBase::deleteCLient(const std::string& login) {
+  if (ClientExists(login) == false) {
+    std::cout << "Client does not exists" << std::endl;
+    return false;
+  }
+
+  std::string sql_request =
+      "select exists(select id from pass where pass.client_id = (select id "
+      "from client where client.login = '" +
+      login + "'))";
+  pqxx::result r = do_select_request(sql_request);
+
+  auto exist_flag = r[0][0].as<std::string>();
+  if (exist_flag == "t") {
+    std::cout << "Client is linked to pass" << std::endl;
+    return false;
+  }
+
+  sql_request = "delete from client where client.login = '" + login + "'";
+
+  do_modifying_request(sql_request);
+
+  std::cout << "Delete client" << std::endl;
+
+  return true;
+}
+bool CompanyDataBase::deleteCompany(const std::string& name) {
+  if (CompanyExists(name) == false) {
+    std::cout << "Company does not exists" << std::endl;
+    return false;
+  }
+
+  std::string sql_request =
+      "select exists(select id from pass where pass.company_id = (select id "
+      "from company where company.company_name = '" +
+      name + "'))";
+  pqxx::result r = do_select_request(sql_request);
+
+  auto exist_flag = r[0][0].as<std::string>();
+  if (exist_flag == "t") {
+    std::cout << "Company is linked to pass" << std::endl;
+    return false;
+  }
+
+  sql_request =
+      "delete from company where company.company_name = '" + name + "'";
+
+  do_modifying_request(sql_request);
+
+  std::cout << "Delete comapny" << std::endl;
+
+  return true;
+}
+
+uint64_t ClientDataBase::insertClient(const std::string& Login,
+                                      const std::string& Email,
+                                      const std::string& Password) {
+  if (ClientExists(Login) == true) return false;
+
+  std::string sql_request =
+      "insert into client(login, email, password) values ('" + Login + "', '" +
+      Email + "', '" + Password + "')";
+
+  do_modifying_request(sql_request);
+
+  std::cout << "Insert client" << std::endl;
 
   std::string sql_req_for_post_id = "select max(id) from client";
   pqxx::result r = do_select_request(sql_req_for_post_id);
@@ -149,11 +161,12 @@ uint64_t ClientDataBase::insertClient(const std::string& Login, const std::strin
 uint64_t CompanyDataBase::insertCompany(const std::string& name) {
   if (CompanyExists(name) == true) return false;
 
-  	std::string sql_request = "insert into company(company_name) values ('" + name + "')";
+  std::string sql_request =
+      "insert into company(company_name) values ('" + name + "')";
 
   do_modifying_request(sql_request);
 
-	std::cout << "Insert company" << std::endl;
+  std::cout << "Insert company" << std::endl;
 
   std::string sql_req_for_post_id = "select max(id) from company";
   pqxx::result r = do_select_request(sql_req_for_post_id);
@@ -162,17 +175,21 @@ uint64_t CompanyDataBase::insertCompany(const std::string& name) {
   return company_id;
 }
 
-uint64_t PassDataBase::insertPass(const std::string& private_key, const uint64_t& CompanyID, const uint64_t& ClientID) {
-  
-  auto exist_sql_req = "select exists(select id from pass where pass.private_key = '" + private_key + "')";
+uint64_t PassDataBase::insertPass(const std::string& private_key,
+                                  const uint64_t& CompanyID,
+                                  const uint64_t& ClientID) {
+  auto exist_sql_req =
+      "select exists(select id from pass where pass.private_key = '" +
+      private_key + "')";
   pqxx::result exist = do_select_request(exist_sql_req);
   auto exist_flag = exist[0][0].as<std::string>();
   if (exist_flag == "t") {
-      std::cout << "This private key already exists" << std::endl;
-      return false;
+    std::cout << "This private key already exists" << std::endl;
+    return false;
   }
 
-  exist_sql_req = "select exists(select id from client where client.id = '" + std::to_string(ClientID) + "')";
+  exist_sql_req = "select exists(select id from client where client.id = '" +
+                  std::to_string(ClientID) + "')";
   exist = do_select_request(exist_sql_req);
   exist_flag = exist[0][0].as<std::string>();
   if (exist_flag != "t") {
@@ -180,7 +197,8 @@ uint64_t PassDataBase::insertPass(const std::string& private_key, const uint64_t
     return false;
   }
 
-  exist_sql_req = "select exists(select id from company where company.id = '" + std::to_string(CompanyID) + "')";
+  exist_sql_req = "select exists(select id from company where company.id = '" +
+                  std::to_string(CompanyID) + "')";
   exist = do_select_request(exist_sql_req);
   exist_flag = exist[0][0].as<std::string>();
   if (exist_flag != "t") {
@@ -188,14 +206,14 @@ uint64_t PassDataBase::insertPass(const std::string& private_key, const uint64_t
     return false;
   }
 
-  std::string sql_request = "insert into pass(private_key, company_id, client_id) values ('" 
-  + private_key + "', '" 
-  + std::to_string(CompanyID) + "', '" 
-  + std::to_string(ClientID) + "')";
+  std::string sql_request =
+      "insert into pass(private_key, company_id, client_id) values ('" +
+      private_key + "', '" + std::to_string(CompanyID) + "', '" +
+      std::to_string(ClientID) + "')";
 
   do_modifying_request(sql_request);
 
-	std::cout << "Insert pass" << std::endl;
+  std::cout << "Insert pass" << std::endl;
 
   std::string sql_req_for_post_id = "select max(id) from pass";
   pqxx::result r = do_select_request(sql_req_for_post_id);
@@ -204,15 +222,15 @@ uint64_t PassDataBase::insertPass(const std::string& private_key, const uint64_t
   return pass_id;
 }
 
-
 bool PassDataBase::PassExists(const uint64_t& PassID) {
-  auto exist_sql_req = ("select exists(select id from pass where pass.id = '" + std::to_string(PassID) + "')");
+  auto exist_sql_req = ("select exists(select id from pass where pass.id = '" +
+                        std::to_string(PassID) + "')");
   pqxx::result exist = do_select_request(exist_sql_req);
   auto exist_flag = exist[0][0].as<std::string>();
   if (exist_flag == "t") {
-      return true;
+    return true;
   } else {
-      return false;
+    return false;
   }
 }
 
@@ -231,8 +249,8 @@ bool ClientDataBase::ClientExists(const std::string& login) {
 
 bool ClientDataBase::ClientExists(const uint64_t& ClientID) {
   auto exist_sql_req =
-      ("select exists(select id from client where client.id = '" + std::to_string(ClientID) +
-       "')");
+      ("select exists(select id from client where client.id = '" +
+       std::to_string(ClientID) + "')");
   pqxx::result exist = do_select_request(exist_sql_req);
   auto exist_flag = exist[0][0].as<std::string>();
   if (exist_flag == "t") {
@@ -243,7 +261,9 @@ bool ClientDataBase::ClientExists(const uint64_t& ClientID) {
 }
 
 bool CompanyDataBase::CompanyExists(const std::string& name) {
-  auto exist_sql_req = "select exists(select id from company where company.company_name = '" + name + "')";
+  auto exist_sql_req =
+      "select exists(select id from company where company.company_name = '" +
+      name + "')";
   pqxx::result exist = do_select_request(exist_sql_req);
   auto exist_flag = exist[0][0].as<std::string>();
   if (exist_flag == "t") {
@@ -255,8 +275,8 @@ bool CompanyDataBase::CompanyExists(const std::string& name) {
 
 bool PassageDataBase::PassageExists(const uint64_t& PassageID) {
   auto exist_sql_req =
-      ("select exists(select id from passage where passage.id = '" + std::to_string(PassageID) +
-       "')");
+      ("select exists(select id from passage where passage.id = '" +
+       std::to_string(PassageID) + "')");
   pqxx::result exist = do_select_request(exist_sql_req);
   auto exist_flag = exist[0][0].as<std::string>();
   if (exist_flag == "t") {
@@ -292,26 +312,25 @@ std::vector<CompanyDB> CompanyDataBase::getAllCompanys(
 
 std::vector<PassDB> PassDataBase::getClientsPasses(const uint64_t& ClientID) {
   std::vector<PassDB> result;
-  
-  auto exist_sql_req = ("select exists(select id from pass where pass.client_id = '" + std::to_string(ClientID) + "')");
+
+  auto exist_sql_req =
+      ("select exists(select id from pass where pass.client_id = '" +
+       std::to_string(ClientID) + "')");
   pqxx::result exist = do_select_request(exist_sql_req);
   auto exist_flag = exist[0][0].as<std::string>();
   if (exist_flag == "f") {
-      std::cout << "No passes for this client" << std::endl;
-      return result;
+    std::cout << "No passes for this client" << std::endl;
+    return result;
   }
 
-
-  std::string sql_request = "select * from pass where pass.client_id = " + std::to_string(ClientID);
+  std::string sql_request =
+      "select * from pass where pass.client_id = " + std::to_string(ClientID);
   pqxx::result r = do_select_request(sql_request);
 
-  for (const auto& row: r) {
-      PassDB temp(
-              row[0].as<uint64_t>(),
-              row[3].as<std::string>(),
-              row[2].as<uint64_t>(),
-              row[1].as<uint64_t>());
-      result.push_back(temp);
+  for (const auto& row : r) {
+    PassDB temp(row[0].as<uint64_t>(), row[3].as<std::string>(),
+                row[2].as<uint64_t>(), row[1].as<uint64_t>());
+    result.push_back(temp);
   }
   return result;
 }
@@ -327,29 +346,27 @@ std::vector<PassageDB> getPassesPassages(const uint64_t PassID) {
 }
 
 PassDB PassDataBase::getPass(const uint64_t& PassID) {
-	std::string sql_request = "select * from pass where pass.id = " + std::to_string(PassID);
+  std::string sql_request =
+      "select * from pass where pass.id = " + std::to_string(PassID);
   pqxx::result r = do_select_request(sql_request);
 
-	const auto& row = r.at(0);
-  PassDB result(
-    row[0].as<uint64_t>(),
-    row[3].as<std::string>(),
-    row[2].as<uint64_t>(),
-    row[1].as<uint64_t>());
-  return result; 
+  const auto& row = r.at(0);
+  PassDB result(row[0].as<uint64_t>(), row[3].as<std::string>(),
+                row[2].as<uint64_t>(), row[1].as<uint64_t>());
+  return result;
 }
 
 // PassageDB PassageDataBase::getPassage(const uint64_t PassageID) {
-//   std::string sql_request = "select * from passage where passage.id = " + std::to_string(PassageID);
-//   pqxx::result r = do_select_request(sql_request);
+//   std::string sql_request = "select * from passage where passage.id = " +
+//   std::to_string(PassageID); pqxx::result r = do_select_request(sql_request);
 
-// 	const auto& row = r.at(0);
+// const auto& row = r.at(0);
 //   PassageDB result(
 //     row[0].as<uint64_t>(),
 //     row[3].as<time_t>(),
 //     row[2].as<uint8_t>(),
 //     row[1].as<uint64_t>());
-//   return result; 
+//   return result;
 // }
 
 ClientDB ClientDataBase::getClient(const std::string login) {
@@ -357,24 +374,19 @@ ClientDB ClientDataBase::getClient(const std::string login) {
       "select * from client where client.login = '" + login + "'";
   pqxx::result r = do_select_request(sql_request);
 
-	const auto& row = r.at(0);
-  ClientDB result(
-    row[0].as<uint64_t>(),
-    row[1].as<std::string>(),
-    row[2].as<std::string>(),
-    row[3].as<std::string>());
-  return result; 
+  const auto& row = r.at(0);
+  ClientDB result(row[0].as<uint64_t>(), row[1].as<std::string>(),
+                  row[2].as<std::string>(), row[3].as<std::string>());
+  return result;
 }
 CompanyDB CompanyDataBase::getCompany(const uint64_t& CompanyID) {
-  std::string sql_request =
-      "select * from company where company.id = '" + std::to_string(CompanyID) + "'";
+  std::string sql_request = "select * from company where company.id = '" +
+                            std::to_string(CompanyID) + "'";
   pqxx::result r = do_select_request(sql_request);
 
-	const auto& row = r.at(0);
-  CompanyDB result(
-    row[0].as<uint64_t>(),
-    row[1].as<std::string>());
-  return result; 
+  const auto& row = r.at(0);
+  CompanyDB result(row[0].as<uint64_t>(), row[1].as<std::string>());
+  return result;
 }
 
 ClientDataBase::ClientDataBase(std::map<std::string, std::string>& db_settings)
@@ -387,65 +399,66 @@ CompanyDataBase::CompanyDataBase(
     std::map<std::string, std::string>& db_settings)
     : DataBase(db_settings) {}
 
-PassageDataBase::PassageDataBase(std::map<std::string, std::string>& db_settings) 
-    : DataBase(db_settings){ }
+PassageDataBase::PassageDataBase(
+    std::map<std::string, std::string>& db_settings)
+    : DataBase(db_settings) {}
 
 void ClientDataBase::do_modifying_request(std::string& sql_request) {
-	pqxx::connection con(str_db_settings);
-	pqxx::work W(con);
-	W.exec(sql_request);
-	W.commit();
+  pqxx::connection con(str_db_settings);
+  pqxx::work W(con);
+  W.exec(sql_request);
+  W.commit();
 }
 
 void PassDataBase::do_modifying_request(std::string& sql_request) {
-	pqxx::connection con(str_db_settings);
-	pqxx::work W(con);
-	W.exec(sql_request);
-	W.commit();
+  pqxx::connection con(str_db_settings);
+  pqxx::work W(con);
+  W.exec(sql_request);
+  W.commit();
 }
 
 void CompanyDataBase::do_modifying_request(std::string& sql_request) {
-	pqxx::connection con(str_db_settings);
-	pqxx::work W(con);
-	W.exec(sql_request);
-	W.commit();
+  pqxx::connection con(str_db_settings);
+  pqxx::work W(con);
+  W.exec(sql_request);
+  W.commit();
 }
 
 void PassageDataBase::do_modifying_request(std::string& sql_request) {
-	pqxx::connection con(str_db_settings);
-	pqxx::work W(con);
-	W.exec(sql_request);
-	W.commit();
+  pqxx::connection con(str_db_settings);
+  pqxx::work W(con);
+  W.exec(sql_request);
+  W.commit();
 }
 
 pqxx::result ClientDataBase::do_select_request(std::string& sql_request) {
-	pqxx::connection con(str_db_settings);
-	pqxx::work N(con);
-	pqxx::result R = N.exec(sql_request);
-	N.commit();
-	return R;
+  pqxx::connection con(str_db_settings);
+  pqxx::work N(con);
+  pqxx::result R = N.exec(sql_request);
+  N.commit();
+  return R;
 }
 
 pqxx::result PassDataBase::do_select_request(std::string& sql_request) {
-	pqxx::connection con(str_db_settings);
-	pqxx::work N(con);
-	pqxx::result R = N.exec(sql_request);
-	N.commit();
-	return R;
+  pqxx::connection con(str_db_settings);
+  pqxx::work N(con);
+  pqxx::result R = N.exec(sql_request);
+  N.commit();
+  return R;
 }
 
 pqxx::result CompanyDataBase::do_select_request(std::string& sql_request) {
-	pqxx::connection con(str_db_settings);
-	pqxx::work N(con);
-	pqxx::result R = N.exec(sql_request);
-	N.commit();
-	return R;
+  pqxx::connection con(str_db_settings);
+  pqxx::work N(con);
+  pqxx::result R = N.exec(sql_request);
+  N.commit();
+  return R;
 }
 
 pqxx::result PassageDataBase::do_select_request(std::string& sql_request) {
-	pqxx::connection con(str_db_settings);
-	pqxx::work N(con);
-	pqxx::result R = N.exec(sql_request);
-	N.commit();
-	return R;
+  pqxx::connection con(str_db_settings);
+  pqxx::work N(con);
+  pqxx::result R = N.exec(sql_request);
+  N.commit();
+  return R;
 }

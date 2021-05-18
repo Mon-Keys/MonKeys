@@ -9,18 +9,18 @@
 #ifndef VISIONLIB_INCLUDE_TERMINAL_HPP_
 #define VISIONLIB_INCLUDE_TERMINAL_HPP_
 
-#include <cstdlib>
-#include <functional>
-#include <iostream>
-#include <memory>
-#include <string>
-#include <vector>
 #include <boost/asio/strand.hpp>
 #include <boost/beast/core.hpp>
 #include <boost/beast/http.hpp>
 #include <boost/beast/version.hpp>
 #include <boost/property_tree/json_parser.hpp>
 #include <boost/property_tree/ptree.hpp>
+#include <cstdlib>
+#include <functional>
+#include <iostream>
+#include <memory>
+#include <string>
+#include <vector>
 
 #include "Verification.hpp"
 

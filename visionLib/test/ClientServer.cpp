@@ -18,8 +18,8 @@
 //  public:
 //   MOCK_METHOD2(logInClient, bool(std::string Login, std::string Password));
 //   MOCK_METHOD1(logOutClient, bool(uint64_t ClientID));
-//   MOCK_METHOD2(registerClient, bool(std::string Login, std::string Password));
-//   MOCK_METHOD1(getTimeCode, std::string(uint64_t PassID));
+//   MOCK_METHOD2(registerClient, bool(std::string Login, std::string
+//   Password)); MOCK_METHOD1(getTimeCode, std::string(uint64_t PassID));
 // };
 
 // TEST(MOCKclientServer, logInTest) {
@@ -57,7 +57,6 @@
 //   std::string ex = mcs.getTimeCode(1);
 //   // EXPECT_STREQ(ex, "abcd");
 // }
-  // std::string ex = mcs.getTimeCode(1);
-  // EXPECT_STREQ(ex, "abcd");
+// std::string ex = mcs.getTimeCode(1);
+// EXPECT_STREQ(ex, "abcd");
 // }
-

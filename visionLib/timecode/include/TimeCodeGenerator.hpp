@@ -55,6 +55,7 @@ class TimeCode {
   uint8_t convertHexCharToUINT(char ch);
   std::bitset<88> decodeTable(std::bitset<88> binToken);
   std::bitset<88> convertHexTokenToBitset(std::string hexToken);
+
  public:
   bool isValid();
   explicit TimeCode(std::string timecodeString);

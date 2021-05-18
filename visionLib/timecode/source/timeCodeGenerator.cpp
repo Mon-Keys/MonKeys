@@ -28,12 +28,12 @@ std::uint8_t TimeCodeGenerator::convertHexCharToUINT(char ch) {
 std::bitset<88> TimeCodeGenerator::convertHexTokenToBitset(
     std::string hexToken) {
   std::string binaryString;
-  for (int i = hexToken.length()-1; i >= 0; i--) {
+  for (int i = hexToken.length() - 1; i >= 0; i--) {
     uint8_t digit = convertHexCharToUINT(hexToken[i]);
 
     std::bitset<4> temp(digit);
     binaryString = temp.to_string().append(binaryString);
-    }
+  }
   std::bitset<88> result(binaryString);
   return result;
 }
@@ -42,17 +42,17 @@ std::bitset<88> TimeCodeGenerator::tableEncoding(std::bitset<88> binToken) {
   std::bitset<88> result;
   size_t index = 0;
   bool massiv[8][11];
-  for (int i=0; i < 8; i++) {
-    for (int j=0; j < 11; j++) {
+  for (int i = 0; i < 8; i++) {
+    for (int j = 0; j < 11; j++) {
       massiv[i][j] = binToken[index];
       index++;
     }
   }
   // std::cout << binToken.to_string() << std::endl;
   index = 0;
-  for (int j=0; j < 11; j++) {
+  for (int j = 0; j < 11; j++) {
     for (int i = 0; i < 8; i++) {
-      result[index]= massiv[i][j];
+      result[index] = massiv[i][j];
       index++;
     }
   }
@@ -61,28 +61,45 @@ std::bitset<88> TimeCodeGenerator::tableEncoding(std::bitset<88> binToken) {
 }
 
 std::string TimeCodeGenerator::binTokenToHex(std::string hexToken) {
-    std::string binToHex, tmp = "0000";
-    for (size_t j = 0; j < hexToken.length(); j += 4){
-        tmp = hexToken.substr(j, 4);
-        if      (!tmp.compare("0000")) binToHex += "0";
-        else if (!tmp.compare("0001")) binToHex += "1";
-        else if (!tmp.compare("0010")) binToHex += "2";
-        else if (!tmp.compare("0011")) binToHex += "3";
-        else if (!tmp.compare("0100")) binToHex += "4";
-        else if (!tmp.compare("0101")) binToHex += "5";
-        else if (!tmp.compare("0110")) binToHex += "6";
-        else if (!tmp.compare("0111")) binToHex += "7";
-        else if (!tmp.compare("1000")) binToHex += "8";
-        else if (!tmp.compare("1001")) binToHex += "9";
-        else if (!tmp.compare("1010")) binToHex += "A";
-        else if (!tmp.compare("1011")) binToHex += "B";
-        else if (!tmp.compare("1100")) binToHex += "C";
-        else if (!tmp.compare("1101")) binToHex += "D";
-        else if (!tmp.compare("1110")) binToHex += "E";
-        else if (!tmp.compare("1111")) binToHex += "F";
-        else continue;
-    }
-    return binToHex;
+  std::string binToHex, tmp = "0000";
+  for (size_t j = 0; j < hexToken.length(); j += 4) {
+    tmp = hexToken.substr(j, 4);
+    if (!tmp.compare("0000"))
+      binToHex += "0";
+    else if (!tmp.compare("0001"))
+      binToHex += "1";
+    else if (!tmp.compare("0010"))
+      binToHex += "2";
+    else if (!tmp.compare("0011"))
+      binToHex += "3";
+    else if (!tmp.compare("0100"))
+      binToHex += "4";
+    else if (!tmp.compare("0101"))
+      binToHex += "5";
+    else if (!tmp.compare("0110"))
+      binToHex += "6";
+    else if (!tmp.compare("0111"))
+      binToHex += "7";
+    else if (!tmp.compare("1000"))
+      binToHex += "8";
+    else if (!tmp.compare("1001"))
+      binToHex += "9";
+    else if (!tmp.compare("1010"))
+      binToHex += "A";
+    else if (!tmp.compare("1011"))
+      binToHex += "B";
+    else if (!tmp.compare("1100"))
+      binToHex += "C";
+    else if (!tmp.compare("1101"))
+      binToHex += "D";
+    else if (!tmp.compare("1110"))
+      binToHex += "E";
+    else if (!tmp.compare("1111"))
+      binToHex += "F";
+    else
+      continue;
+  }
+  return binToHex;
 }
 
 std::string TimeCodeGenerator::generateTimeCode() {
@@ -96,7 +113,7 @@ std::string TimeCodeGenerator::generateTimeCode() {
   }
   std::string HMACSHA = hexedNString.append(_privateKey);
   std::string SHA1 = getSHA1(HMACSHA);
-  
+
   uint16_t offsetInteger = convertHexCharToUINT(SHA1[39]);
   std::string token = SHA1.substr(offsetInteger, 16);
   uint8_t first4Bits = convertHexCharToUINT(token[0]);
@@ -107,7 +124,6 @@ std::string TimeCodeGenerator::generateTimeCode() {
   uint32_t tokenVal = stol(token, 0, 16);
   // cppcheck-suppress shiftTooManyBits
   tokenVal = tokenVal << TOKEN_PART_TIME_LENGTH;
-
 
   //добавляем companyID и passID
   std::string passIDHex = (boost::format("%x") % _PassID).str();
@@ -129,7 +145,8 @@ std::string TimeCodeGenerator::generateTimeCode() {
   // std::cout << convertHexTokenToBitset(tokenHex) << std::endl << std::endl;
   std::bitset<88> encodedHex = tableEncoding(convertHexTokenToBitset(tokenHex));
   // std::cout << convertHexTokenToBitset(tokenHex) << std::endl;  // NOLINT
-  // std::cout << "binTokenEncodedGet send: " << encodedHex << std::endl << std::endl;
+  // std::cout << "binTokenEncodedGet send: " << encodedHex << std::endl <<
+  // std::endl;
   std::string timecode = binTokenToHex(encodedHex.to_string());
   return timecode;
 }
@@ -161,7 +178,6 @@ uint64_t TimeCodeGenerator::countFloor() {
   return std::time(0) / _timeInterval;
 }
 
-
 std::string TimeCodeGenerator::getSHA1(const std::string& message) {
   boost::uuids::detail::sha1 sha1;
   sha1.process_bytes(message.data(), message.size());
@@ -176,19 +192,18 @@ std::string TimeCodeGenerator::getSHA1(const std::string& message) {
   return std::string(buf);
 }
 
-
 TimeCode::TimeCode(std::string timecodeString) {
   if (timecodeString.length() == 22) {
     valid = true;
     timecodeDecoded = decodeTable(convertHexTokenToBitset(timecodeString));
     // std::cout << timecodeDecoded << std::endl;
-  }
-  else {
+  } else {
     valid = false;
   }
-  
+
   // timecodeDecoded[23] = !timecodeDecoded[23];
-  // std::cout << timecodeDecoded << std::endl << std::endl << std::endl << std::endl << std::endl;
+  // std::cout << timecodeDecoded << std::endl << std::endl << std::endl <<
+  // std::endl << std::endl;
 }
 
 std::uint8_t TimeCode::convertHexCharToUINT(char ch) {
@@ -202,16 +217,17 @@ std::bitset<88> TimeCode::decodeTable(std::bitset<88> binToken) {
   std::bitset<88> result;
   size_t index = 0;
   bool massiv[8][11];
-  // std::cout << "binTokenEncodedGet received: " << binToken << std::endl << std::endl;
-  for (int j=0; j < 11; j++) {
+  // std::cout << "binTokenEncodedGet received: " << binToken << std::endl <<
+  // std::endl;
+  for (int j = 0; j < 11; j++) {
     for (int i = 0; i < 8; i++) {
       massiv[i][j] = binToken[index];
       index++;
     }
   }
   index = 0;
-  for (int i=0; i < 8; i++) {
-    for (int j=0; j < 11; j++) {
+  for (int i = 0; i < 8; i++) {
+    for (int j = 0; j < 11; j++) {
       result[index] = massiv[i][j];
       index++;
     }
@@ -219,8 +235,7 @@ std::bitset<88> TimeCode::decodeTable(std::bitset<88> binToken) {
   return result;
 }
 
-std::bitset<88> TimeCode::convertHexTokenToBitset(
-    std::string hexToken) {
+std::bitset<88> TimeCode::convertHexTokenToBitset(std::string hexToken) {
   std::string binaryString;
   for (int i = hexToken.length(); i >= 0; i--) {
     uint8_t digit = convertHexCharToUINT(hexToken[i]);
@@ -228,7 +243,7 @@ std::bitset<88> TimeCode::convertHexTokenToBitset(
     std::bitset<4> temp(digit);
     binaryString = temp.to_string().append(binaryString);
     // std::cout << binaryString << std::endl;
-    }
+  }
   // std::cout << std::endl;
   std::bitset<88> result(binaryString);
   // std::cout << result << std:: endl;
@@ -239,7 +254,7 @@ TimeCode::~TimeCode() {}
 
 uint64_t TimeCode::getCompanyID() {
   std::bitset<24> temp;
-  for (int i=0; i < 24; i++) {
+  for (int i = 0; i < 24; i++) {
     temp[i] = timecodeDecoded[i];
     // std::cout << temp[i];
   }
@@ -250,8 +265,8 @@ uint64_t TimeCode::getCompanyID() {
 
 uint64_t TimeCode::getPassID() {
   std::bitset<24> temp;
-  for (int i=56; i < 88; i++) {
-    temp[i-56] = timecodeDecoded[i];
+  for (int i = 56; i < 88; i++) {
+    temp[i - 56] = timecodeDecoded[i];
     // std::cout << temp[i-56];
   }
   // std::cout << std::endl;
@@ -259,6 +274,4 @@ uint64_t TimeCode::getPassID() {
   return result;
 }
 
-bool TimeCode::isValid() {
-  return valid;
-}
+bool TimeCode::isValid() { return valid; }
