@@ -9,8 +9,6 @@
 #include "clientHandler.hpp"
 #include "database.hpp"
 
-#define STR "lolahah"
-
 #include "gmock/gmock.h"
 #include "gtest/gtest.h"
 
@@ -18,83 +16,133 @@ using ::testing::_;
 using ::testing::AtLeast;
 using ::testing::Return;
 
-TEST(ComapnyExistTEST, CompanyExistTrue) {
-  CompanyDataBase Codb;
 
-  bool flag = Codb.insertCompany("comapny_name");
+// TEST(ComapnyExistTEST, CompanyExistTrue) {
+//   CompanyDataBase Codb;
 
-  flag = Codb.CompanyExists("comapny_name");
+//   bool flag = Codb.insertCompany("comapny_name");
 
-  EXPECT_TRUE(flag);
+//   flag = Codb.CompanyExists("comapny_name");
 
-  flag = Codb.deleteCompany("comapny_name");
-  EXPECT_TRUE(flag);
-}
+//   EXPECT_TRUE(flag);
 
-TEST(ComapnyExistTEST, CompanyExistFalse) {
-  CompanyDataBase Codb;
+//   flag = Codb.deleteCompany("comapny_name");
+//   EXPECT_TRUE(flag);
+// }
 
-  bool flag = Codb.CompanyExists("gsmg");
+// TEST(ComapnyExistTEST, CompanyExistFalse) {
+//   CompanyDataBase Codb;
 
-  EXPECT_FALSE(flag);
-}
+//   bool flag = Codb.CompanyExists("gsmg");
 
-TEST(ClientExistTEST, ClientExistTrue) {
-  ClientDataBase Cdb;
+//   EXPECT_FALSE(flag);
+// }
 
-  bool flag = Cdb.insertClient("Ilyagu", "fs", "fsdf");
+// TEST(ClientExistTEST, ClientExistTrue) {
+//   ClientDataBase Cdb;
 
-  flag = Cdb.ClientExists("Ilyagu");
+//   bool flag = Cdb.insertClient("Ilyagu", "fs", "fsdf");
 
-  EXPECT_TRUE(flag);
+//   flag = Cdb.ClientExists("Ilyagu");
 
-  flag = Cdb.deleteCLient("Ilyagu");
-  EXPECT_TRUE(flag);
-}
+//   EXPECT_TRUE(flag);
 
-TEST(ClientExistTEST, ClientExistFalse) {
-  ClientDataBase Cdb;
+//   flag = Cdb.deleteCLient("Ilyagu");
+//   EXPECT_TRUE(flag);
+// }
 
-  bool flag = Cdb.ClientExists("gsmg");
+// TEST(ClientExistTEST, ClientExistFalse) {
+//   ClientDataBase Cdb;
 
-  EXPECT_FALSE(flag);
-}
+//   bool flag = Cdb.ClientExists("gsmg");
+
+//   EXPECT_FALSE(flag);
+// }
 
 
-TEST(PassExistsTEST, PassExistsTrue) {
-  PassDataBase Pssdb;
-  ClientDataBase Cldb;
-  CompanyDataBase Codb;
+// TEST(PassExistsTEST, PassExistsTrue) {
+  // PassDataBase Pssdb;
+  // ClientDataBase Cldb;
+  // CompanyDataBase Codb;
 
-  uint64_t client_id;
-  uint64_t company_id;
-  uint64_t pass_id;
+  // uint64_t client_id;
+  // uint64_t company_id;
+  // uint64_t pass_id;
 
-  client_id = Cldb.insertClient("login", "email", "password");
-  company_id = Codb.insertCompany("company_name");
-  pass_id = Pssdb.insertPass("FKADSFM23JFN2", company_id, client_id);
+  // client_id = Cldb.insertClient("login", "email", "password");
+  // company_id = Codb.insertCompany("company_name");
+  // pass_id = Pssdb.insertPass("FKADSFM23JFN2", company_id, client_id);
 
-  bool flag = Pssdb.PassExists(pass_id);
+//   bool flag = Pssdb.PassExists(pass_id);
 
-  EXPECT_TRUE(flag);
+//   EXPECT_TRUE(flag);
 
-  flag = Pssdb.deletePass(pass_id);
-  EXPECT_TRUE(flag);
+//   flag = Pssdb.deletePass(pass_id);
+//   EXPECT_TRUE(flag);
 
-  flag = Cldb.deleteCLient("login");
-  EXPECT_TRUE(flag);
+//   flag = Cldb.deleteCLient("login");
+//   EXPECT_TRUE(flag);
 
-  flag = Codb.deleteCompany("company_name");
-  EXPECT_TRUE(flag);
-}
+//   flag = Codb.deleteCompany("company_name");
+//   EXPECT_TRUE(flag);
+// }
 
-TEST(PassExistsTEST, PassExistsFalse) {
-  PassDataBase Pssdb;
+// TEST(PassExistsTEST, PassExistsFalse) {
+//   PassDataBase Pssdb;
 
-  bool flag = Pssdb.PassExists(0);
+//   bool flag = Pssdb.PassExists(0);
 
-  EXPECT_FALSE(flag);
-}
+//   EXPECT_FALSE(flag);
+// }
+
+// TEST(getClientsPassesTEST, getClientsPassesCorrect) {
+//   PassDataBase Pssdb;
+//   ClientDataBase Cldb;
+//   CompanyDataBase Codb;
+
+//   uint64_t client_id;
+//   uint64_t company_id;
+//   uint64_t pass_id;
+
+//   client_id = Cldb.insertClient("login", "email", "password");
+//   int client_temp = client_id;
+//   company_id = Codb.insertCompany("company_name");
+//   pass_id = Pssdb.insertPass("FKADSFM23JFN2", company_id, client_id);
+//   company_id = Codb.insertCompany("name");
+//   pass_id = Pssdb.insertPass("M0NKEYS3G23G", company_id, client_id);
+//   client_id = Cldb.insertClient("lol", "lolemail", "lolpass");
+//   pass_id = Pssdb.insertPass("GKF8FKJ98FK34", company_id, client_id);
+
+//   std::vector<PassDB> passes = Pssdb.getClientsPasses(client_temp);
+
+//   for(int i = 0; i < passes.size(); i++) {
+//     std::cout << 
+//     passes[i].getID() << std::endl << 
+//     passes[i].getprivate() << std::endl << 
+//     passes[i].getCompanyID() << std::endl << 
+//     passes[i].getClientID() << std::endl;
+//   }
+
+//   bool flag = Pssdb.deletePass(pass_id);
+//   flag = Pssdb.deletePass(pass_id - 1);
+//   flag = Pssdb.deletePass(pass_id - 2);
+//   Codb.deleteCompany("name");
+//   Codb.deleteCompany("company_name");
+//   Cldb.deleteCLient("login");
+//   Cldb.deleteCLient("lol");
+// }
+
+// TEST(getClientsPassesTEST, getClientsPassesInCorrect) {
+//   PassDataBase Pssdb;
+//   ClientDataBase Cldb;
+//   CompanyDataBase Codb;
+
+
+//   uint64_t client_id = Cldb.insertClient("login", "email", "password");
+
+//   std::vector<PassDB> passes = Pssdb.getClientsPasses(100);
+
+// }
 
 // TEST(getClientTEST, getClientTest) {
 //   ClientDataBase Cdb;
@@ -134,19 +182,19 @@ TEST(PassExistsTEST, PassExistsFalse) {
 //   EXPECT_TRUE(flag);
 // }
 
-// // TEST(insertClietnTEST, insertClient) {
+// TEST(insertClietnTEST, insertClient) {
 // //   ClientDataBase Cdb;
 // //   bool flag = Cdb.insertClient("Oleg", "kozinov@gmail.com", "iamretard");
 // //   EXPECT_TRUE(flag);
 // // }
 
-// // TEST(deleteCLientTEST, deleteClientInCorrect) {
+// TEST(deleteCLientTEST, deleteClientInCorrect) {
 // //   ClientDataBase Cdb;
 // //   bool flag = Cdb.deleteCLient("fslkdf");
 // //   EXPECT_FALSE(flag);
 // // }
 
-// // TEST(deleteCLientTEST, deleteClientCorrect) {
+// TEST(deleteCLientTEST, deleteClientCorrect) {
 // //   ClientDataBase Cdb;
 // //   bool flag = Cdb.insertClient("Testlogin", "test@mail.ru", "testpassword");
 // //   flag = Cdb.deleteCLient("Testlogin");
@@ -155,33 +203,55 @@ TEST(PassExistsTEST, PassExistsFalse) {
 
 // TEST(logInTEST, logInTestCorrect) {
 //   clientHandler CLH;
+//   std::string status = CLH.logInClient("login", "password");
+//   bool flag = false;
+//   if (status == "success") flag = true;
+//   EXPECT_TRUE(flag);
+// }
 
-//   bool flag = CLH.logInClient("Ilyagu", "12345");
+TEST(logInTEST, logInTestCorrectNoPasses) {
+  clientHandler CLH;
+  std::string status = CLH.logInClient("4Marvin2", "iamretard");
+  bool flag = false;
+  if (status == "success") flag = true;
+  EXPECT_TRUE(flag);
+}
 
+// TEST(logInTEST, logInTestCorrectNotExists) {
+//   clientHandler CLH;
+//   std::string status = CLH.logInClient("fkd", "password");
+//   bool flag = false;
+//   if (status == "error") flag = true;
+//   EXPECT_TRUE(flag);
+// }
+
+// TEST(logInTEST, logInTestCorrectInCorrect) {
+//   clientHandler CLH;
+//   std::string status = CLH.logInClient("login", "gsdg");
+//   bool flag = false;
+//   if (status == "error") flag = true;
 //   EXPECT_TRUE(flag);
 // }
 
 // TEST(logInTEST, logInTestInCorrect) {
 //   clientHandler CLH;
-
 //   bool flag = CLH.logInClient("Ilyagu", "incorrentpassword");
-
 //   EXPECT_FALSE(flag);
 // }
 
 // TEST(logInTEST, logInTestNotExists) {
 //   clientHandler CLH;
-
 //   bool flag = CLH.logInClient("fasdf", "12345");
-
 //   EXPECT_FALSE(flag);
 // }
 
-// // TEST(registerTEST, registerCorrect) {
-// //   clientHandler CLH;
-// //   bool flag = CLH.registerClient("Oleg", "inagdimaev@mail.ru", "12345");
-// //   EXPECT_TRUE(flag);
-// // }
+// TEST(registerTEST, registerCorrect) {
+//   clientHandler CLH;
+//   std::string status = CLH.registerClient("Ilyagu", "ilyagunagdimaev@gmail.ru", "leonidperlin");
+  // bool flag = false;
+  // if (status == "success") flag = true;
+  // EXPECT_TRUE(flag);
+// }
 
 // // TEST(registerTEST, registerInCorrect) {
 // //   clientHandler CLH;

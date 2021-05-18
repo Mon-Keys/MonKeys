@@ -6,6 +6,14 @@
 
 #IncludeRegexTransform: 
 
+../visionLib/clientHandler/include/clientHandler.hpp
+ctime
+-
+string
+-
+database.hpp
+../visionLib/clientHandler/include/database.hpp
+
 ../visionLib/database/include/database.hpp
 tables.hpp
 ../visionLib/database/include/tables.hpp
@@ -50,7 +58,9 @@ thread
 vector
 -
 
-/home/ilyagu/MonKeys/visionLib/database/source/database.cpp
+/home/ilyagu/MonKeys/visionLib/clientHandler/source/clientHandler.cpp
+clientHandler.hpp
+/home/ilyagu/MonKeys/visionLib/clientHandler/source/clientHandler.hpp
 database.hpp
-/home/ilyagu/MonKeys/visionLib/database/source/database.hpp
+/home/ilyagu/MonKeys/visionLib/clientHandler/source/database.hpp
 

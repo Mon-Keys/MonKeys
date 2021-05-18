@@ -291,19 +291,29 @@ std::vector<CompanyDB> CompanyDataBase::getAllCompanys(
 }
 
 std::vector<PassDB> PassDataBase::getClientsPasses(const uint64_t& ClientID) {
-  std::string sql_request = "select * from pass where pass.client_id = " + std::to_string(ClientID);
-    pqxx::result r = do_select_request(sql_request);
+  std::vector<PassDB> result;
+  
+  auto exist_sql_req = ("select exists(select id from pass where pass.client_id = '" + std::to_string(ClientID) + "')");
+  pqxx::result exist = do_select_request(exist_sql_req);
+  auto exist_flag = exist[0][0].as<std::string>();
+  if (exist_flag == "f") {
+      std::cout << "No passes for this client" << std::endl;
+      return result;
+  }
 
-    std::vector<PassDB> result;
-    for (const auto& row: r) {
-        PassDB temp(
-                row[0].as<uint64_t>(),
-                row[3].as<std::string>(),
-                row[2].as<uint64_t>(),
-                row[1].as<uint64_t>());
-        result.push_back(temp);
-    }
-    return result;
+
+  std::string sql_request = "select * from pass where pass.client_id = " + std::to_string(ClientID);
+  pqxx::result r = do_select_request(sql_request);
+
+  for (const auto& row: r) {
+      PassDB temp(
+              row[0].as<uint64_t>(),
+              row[3].as<std::string>(),
+              row[2].as<uint64_t>(),
+              row[1].as<uint64_t>());
+      result.push_back(temp);
+  }
+  return result;
 }
 
 std::vector<PassDB> PassDataBase::getCompanysPasses(const uint64_t& CompanyID) {

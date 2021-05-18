@@ -18,9 +18,9 @@ class clientHandler {
  public:
   clientHandler() : _Cldb(), _Codb(), _Passdb(), _Passagedb(){};
 
-  bool logInClient(const std::string& Login, const std::string& Password);
-  bool logOutClient(uint64_t ClientID);
-  bool registerClient(const std::string& Login, const std::string& Email, const std::string& Password);
+  std::string logInClient(const std::string& Login, const std::string& Password);
+  std::string logOutClient(uint64_t ClientID);
+  std::string registerClient(const std::string& Login, const std::string& Email, const std::string& Password);
   std::string getTimeCode(const uint64_t& PassID);
 
  private:
