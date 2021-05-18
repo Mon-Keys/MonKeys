@@ -6,4 +6,9 @@
 // |_|  |_|  \___/  |_| |_| |_|\_\  \___|  \__, | |___/
 //                                         |___/
 
-int main() { return 0; }
+#include "tables.hpp"
+#include "clientHandler.hpp"
+
+int main() {
+    return 0;
+}
