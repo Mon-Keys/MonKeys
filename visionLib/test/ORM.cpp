@@ -7,6 +7,7 @@
 //                                         |___/
 
 #include "clientHandler.hpp"
+#include "terminalHandler.hpp"
 #include "database.hpp"
 #include "gmock/gmock.h"
 #include "gtest/gtest.h"
@@ -248,6 +249,13 @@ using ::testing::Return;
 //   clientHandler CLH;
 //   std::string status = CLH.getTimeCode("4Marvin2", "iamretard");
 // }
+
+TEST(compareTEST, compareTestInCorrect) {
+//   clientHandler CLH;
+  TerminalHandler th;
+  std::string st = th.compareTimeCode("msndf");
+//   std::string status = CLH.getTimeCode("login", "password");
+}
 
 // TEST(getTimeTEST, getTimeCorrect) {
 //   clientHandler CLH;

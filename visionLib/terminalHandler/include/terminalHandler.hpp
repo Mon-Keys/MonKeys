@@ -10,13 +10,19 @@
 #define VISIONLIB_INCLUDE_TERMINALSERVER_HPP_
 
 #include <string>
+#include "database.hpp"
 
-class TerminalServer {
+class TerminalHandler {
  public:
-  bool generateTimeCode(uint64_t PassID);
-  bool compareTimeCode(std::string firstTimeCode, std::string secondTimeCode);
+  TerminalHandler() : _Cldb(), _Codb(), _Passdb(), _Passagedb(){};
+
+  std::string compareTimeCode(const std::string& timeCode);
 
  private:
+  ClientDataBase _Cldb;
+  CompanyDataBase _Codb;
+  PassDataBase _Passdb;
+  PassageDataBase _Passagedb;
 };
 
 #endif  // VISIONLIB_INCLUDE_TERMINALSERVER_HPP_
