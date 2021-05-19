@@ -16,7 +16,7 @@ class TerminalHandler {
  public:
   TerminalHandler() : _Cldb(), _Codb(), _Passdb(), _Passagedb(){};
 
-  std::string compareTimeCode(const std::string& timeCode);
+  std::string compareTimeCode(const std::string& timeCode, const uint64_t& CompanyID);
 
  private:
   ClientDataBase _Cldb;

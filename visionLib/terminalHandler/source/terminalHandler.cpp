@@ -16,7 +16,7 @@ bool existsTerminal(const std::string& name) {
   return (stat(name.c_str(), &buffer) == 0);
 }
 
-std::string TerminalHandler::compareTimeCode(const std::string& timeCode) {
+std::string TerminalHandler::compareTimeCode(const std::string& timeCode, const uint64_t& CompanyID) {
 
   bool exist = existsTerminal("terminal_server_compare.json");
   if (!exist) {
@@ -36,6 +36,11 @@ std::string TerminalHandler::compareTimeCode(const std::string& timeCode) {
     pass_id = tc.getPassID();
   }
 
+  if (company_id != CompanyID) {
+    tree.put("verification", "error_novalid_terminal");
+    boost::property_tree::write_json("terminal_server_compare.json", tree);
+    return "terminal_server_compare.json";
+  }
 
   if (!(_Passdb.PassExists(pass_id))) {
     tree.put("verification", "error_not_exists");

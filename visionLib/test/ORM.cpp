@@ -250,12 +250,10 @@ using ::testing::Return;
 //   std::string status = CLH.getTimeCode("4Marvin2", "iamretard");
 // }
 
-TEST(compareTEST, compareTestInCorrect) {
-//   clientHandler CLH;
-  TerminalHandler th;
-  std::string st = th.compareTimeCode("msndf");
-//   std::string status = CLH.getTimeCode("login", "password");
-}
+// TEST(compareTEST, compareTestInCorrect) {
+//   TerminalHandler th;
+//   std::string st = th.compareTimeCode("msndf", 15);
+// }
 
 // TEST(getTimeTEST, getTimeCorrect) {
 //   clientHandler CLH;

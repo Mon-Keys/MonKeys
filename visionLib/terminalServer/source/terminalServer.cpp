@@ -136,8 +136,9 @@ void handle_request_terminal(
     std::stringstream jsonStream(req.body());
     property_tree::read_json(jsonStream, reqJson);
     std::string timecode = reqJson.get<std::string>("timecode");
+    uint64_t companyID = reqJson.get<uint64_t>("companyID");
 
-    jsonName = currentHandler.compareTimeCode(timecode);
+    jsonName = currentHandler.compareTimeCode(timecode, companyID);
   }
   path = path_cat_terminal(doc_root, "/");
   path.append(jsonName);

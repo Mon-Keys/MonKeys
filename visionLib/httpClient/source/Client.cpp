@@ -17,7 +17,6 @@ template <class Body, class Allocator, class Send>
 void sendRequest(beast::error_code ec,
                  http::request<Body, http::basic_fields<Allocator>>&& req,
                  Send&& send) {
-  std::cout << req.target().data() << "\n";
   if (!strcmp(req.target().data(), "/registr")) {
     std::string login;
     std::cin >> login;

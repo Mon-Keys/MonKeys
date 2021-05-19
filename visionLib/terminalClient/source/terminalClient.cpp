@@ -8,27 +8,6 @@
 
 #include "terminalClient.hpp"
 
-Terminal::Terminal(TempCode _tempCode, std::string _ID, bool isConnected) {}
-Terminal::Terminal() {}
-Terminal::~Terminal() {}
-Terminal::TempCode::TempCode(std::string _tempCode, bool isValid) {}
-Terminal::TempCode::TempCode() {}
-Terminal::TempCode::~TempCode() {}
-
-void Terminal::open() {}
-void Terminal::serverRequest() {}
-void Terminal::establishConnection(const char* url) {}
-bool Terminal::getIsConnected() { return true; }
-void Terminal::setCompanyID(std::string companyID) {}
-void Terminal::checkTempCodeValidity() {}
-std::string Terminal::getCompanyID() {}
-Terminal::TempCode Terminal::getCurrentTempCode() {}
-std::string Terminal::readTimeCode() {}
-std::string Terminal::TempCode::getTempCode() {}
-void Terminal::TempCode::setTempCode(std::string readTempCode) {}
-bool Terminal::TempCode::isTempCodeValid() {}
-
-//------------------------------------------------------------------------------
 
 bool exists(const std::string& name) {
   struct stat buffer;
@@ -67,12 +46,12 @@ void sendTerminalRequest(
     property_tree::ptree reqData;
     reqData.put("timecode", timecode);
     reqData.put("companyID", companyID);
-    property_tree::write_json("client.json", reqData);
+    property_tree::write_json("terminal.json", reqData);
   }
 
   // Attempt to open the file
   http::file_body::value_type body;
-  std::string path = "client.json";
+  std::string path = "terminal.json";
   body.open(path.c_str(), beast::file_mode::scan, ec);
 
   req.body() = std::move(body);

@@ -102,7 +102,9 @@ std::string clientHandler::getTimeCode(const std::string& Login, const std::stri
     tree.put("login", client.getLogin());
     tree.put("email", client.getEmail());
     tree.put("password", client.getPassword());
+
     std::vector<PassDB> passes_vec = _Passdb.getClientsPasses(client.getID());
+    
     if (passes_vec.empty()) {
       tree.put("passes", "No passes");
     } else {

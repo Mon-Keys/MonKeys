@@ -329,7 +329,7 @@ std::vector<PassDB> PassDataBase::getClientsPasses(const uint64_t& ClientID) {
 
   for (const auto& row : r) {
     PassDB temp(row[0].as<uint64_t>(), row[3].as<std::string>(),
-                row[2].as<uint64_t>(), row[1].as<uint64_t>());
+                row[1].as<uint64_t>(), row[2].as<uint64_t>());
     result.push_back(temp);
   }
   return result;
