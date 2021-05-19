@@ -124,7 +124,7 @@ void handle_request(beast::string_view doc_root,
   std::string path;
   std::string jsonName;
   //  = path_cat(doc_root, req.target());
-  if (!strcmp(req.target().data(), "/reg")) {
+  if (!strcmp(req.target().data(), "/registr")) {
     property_tree::ptree reqJson;
     std::stringstream jsonStream(req.body());
     property_tree::read_json(jsonStream, reqJson);
@@ -134,7 +134,9 @@ void handle_request(beast::string_view doc_root,
 
     jsonName = currentHandler.registerClient(name, email, password);
     
-    path = path_cat(doc_root, jsonName);
+    path = path_cat(doc_root, "/");
+    path.append(jsonName);
+    std::cout << path;
   } else if (!strcmp(req.target().data(), "/auth")) {
     property_tree::ptree reqJson;
     std::stringstream jsonStream(req.body());
@@ -144,7 +146,8 @@ void handle_request(beast::string_view doc_root,
 
     jsonName = currentHandler.logInClient(name, password);
     
-    path = path_cat(doc_root, jsonName);
+    path = path_cat(doc_root, "/");
+    path.append(jsonName);
   } else if (!strcmp(req.target().data(), "/timecode")) {
     property_tree::ptree reqJson;
     std::stringstream jsonStream(req.body());
@@ -152,24 +155,10 @@ void handle_request(beast::string_view doc_root,
     std::string name = reqJson.get<std::string>("name");
     std::string password = reqJson.get<std::string>("password");
 
-    // currentHandler.getTimeCode()
+    // jsonName = currentHandler.getTimeCode()
 
-    bool authFlag = false;
-    if (!strcmp(password.c_str(), "hello123")) {
-      authFlag = true;
-    }
-
-    property_tree::ptree resData;
-    resData.put("name", name);
-    resData.put("verification", authFlag);
-
-    if (!authFlag) {
-      resData.put("error", "вы не авторизированы");
-    } else {
-      resData.put("timecode", "qwertyuioihgfdx6");
-    }
-
-    property_tree::write_json("timecode/server.json", resData);
+    path = path_cat(doc_root, "/");
+    path.append(jsonName);
   }
   // path.append("/server.json");
 

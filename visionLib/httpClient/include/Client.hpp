@@ -66,7 +66,7 @@ class ClientSession : public std::enable_shared_from_this<ClientSession> {
         lambda_(*this) {}
 
   // Start the asynchronous operation
-  void run(char const* host, char const* port, std::string target, int version);
+  void run(char const* host, char const* port, char const* target, int version);
 
   void on_resolve(beast::error_code ec, tcp::resolver::results_type results);
 

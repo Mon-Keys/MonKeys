@@ -17,7 +17,8 @@ template <class Body, class Allocator, class Send>
 void sendRequest(beast::error_code ec,
                  http::request<Body, http::basic_fields<Allocator>>&& req,
                  Send&& send) {
-  if (!strcmp(req.target().data(), "/reg")) {
+  std::cout << req.target().data() << "\n";
+  if (!strcmp(req.target().data(), "/registr")) {
     std::string name;
     std::cin >> name;
     std::string password;
@@ -89,7 +90,7 @@ void ClientSession::send_lambda::operator()(
 }
 
 // Start the asynchronous operation
-void ClientSession::run(char const* host, char const* port, std::string target,
+void ClientSession::run(char const* host, char const* port, char const* target,
                         int version) {
   // Set up an HTTP GET request message
   req_.version(version);
@@ -183,7 +184,7 @@ void ClientSession::on_read(beast::error_code ec,
   property_tree::read_json("client.json", clientJson);
   std::string password = clientJson.get<std::string>("password");
   resJson.put("password", password);
-  resJson.erase("verification");
+  resJson.erase("status");
 
   property_tree::write_json("client.json", resJson);
 
