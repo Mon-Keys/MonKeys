@@ -30,7 +30,6 @@ TEST(getCompanyID, easyInput) {
   uint64_t PassID = 1;
   uint16_t timeInterval = 30;
   uint64_t companyID = 1;
-  uint64_t floor = (std::time(0) / timeInterval);
   std::string userKey = "JBSWY3DPEHPK3PXP";
   TimeCodeGenerator codegen(userKey, PassID, companyID, timeInterval);
   std::string generatedCode = codegen.generateTimeCode();

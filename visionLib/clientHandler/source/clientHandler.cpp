@@ -10,7 +10,7 @@
 
 #include "database.hpp"
 
-bool exists(const std::string& name) {
+bool existsClient(const std::string& name) {
   struct stat buffer;
   return (stat(name.c_str(), &buffer) == 0);
 }
@@ -19,7 +19,7 @@ std::string clientHandler::logInClient(const std::string& Login,
                                        const std::string& Password) {
   boost::property_tree::ptree tree;
 
-  bool exist = exists("server_auth.json");
+  bool exist = existsClient("server_auth.json");
   boost::property_tree::ptree confData;
   if (!exist) {
     std::ofstream ofs("server_auth.json");
@@ -70,7 +70,7 @@ std::string clientHandler::registerClient(const std::string& Login,
                                           const std::string& Password) {
   boost::property_tree::ptree tree;
 
-  bool exist = exists("server_reg.json");
+  bool exist = existsClient("server_reg.json");
   boost::property_tree::ptree confData;
   if (!exist) {
     std::ofstream ofs("server_reg.json");
