@@ -36,7 +36,8 @@ class PassDataBase : public DataBase {
 
   virtual ~PassDataBase() = default;
 
-  uint64_t insertPass(const std::string& private_key, const uint64_t& CompanyID, const uint64_t& ClientID);
+  uint64_t insertPass(const std::string& private_key, const uint64_t& CompanyID,
+                      const uint64_t& ClientID);
   bool deletePass(const uint64_t& PassID);
   bool PassExists(const uint64_t& PassID);
   std::vector<PassDB> getAllPasses(const std::string& sql_limit,
@@ -58,7 +59,8 @@ class ClientDataBase : public DataBase {
 
   virtual ~ClientDataBase() = default;
 
-  uint64_t insertClient(const std::string& Login, const std::string& Email, const std::string& Password);
+  uint64_t insertClient(const std::string& Login, const std::string& Email,
+                        const std::string& Password);
   bool deleteCLient(const std::string& login);
   bool ClientExists(const std::string& login);
   bool ClientExists(const uint64_t& ClientID);

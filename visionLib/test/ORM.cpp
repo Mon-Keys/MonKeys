@@ -8,14 +8,12 @@
 
 #include "clientHandler.hpp"
 #include "database.hpp"
-
 #include "gmock/gmock.h"
 #include "gtest/gtest.h"
 
 using ::testing::_;
 using ::testing::AtLeast;
 using ::testing::Return;
-
 
 // TEST(ComapnyExistTEST, CompanyExistTrue) {
 //   CompanyDataBase Codb;
@@ -59,19 +57,18 @@ using ::testing::Return;
 //   EXPECT_FALSE(flag);
 // }
 
-
 // TEST(PassExistsTEST, PassExistsTrue) {
-  // PassDataBase Pssdb;
-  // ClientDataBase Cldb;
-  // CompanyDataBase Codb;
+// PassDataBase Pssdb;
+// ClientDataBase Cldb;
+// CompanyDataBase Codb;
 
-  // uint64_t client_id;
-  // uint64_t company_id;
-  // uint64_t pass_id;
+// uint64_t client_id;
+// uint64_t company_id;
+// uint64_t pass_id;
 
-  // client_id = Cldb.insertClient("login", "email", "password");
-  // company_id = Codb.insertCompany("company_name");
-  // pass_id = Pssdb.insertPass("FKADSFM23JFN2", company_id, client_id);
+// client_id = Cldb.insertClient("login", "email", "password");
+// company_id = Codb.insertCompany("company_name");
+// pass_id = Pssdb.insertPass("FKADSFM23JFN2", company_id, client_id);
 
 //   bool flag = Pssdb.PassExists(pass_id);
 
@@ -116,10 +113,10 @@ using ::testing::Return;
 //   std::vector<PassDB> passes = Pssdb.getClientsPasses(client_temp);
 
 //   for(int i = 0; i < passes.size(); i++) {
-//     std::cout << 
-//     passes[i].getID() << std::endl << 
-//     passes[i].getprivate() << std::endl << 
-//     passes[i].getCompanyID() << std::endl << 
+//     std::cout <<
+//     passes[i].getID() << std::endl <<
+//     passes[i].getprivate() << std::endl <<
+//     passes[i].getCompanyID() << std::endl <<
 //     passes[i].getClientID() << std::endl;
 //   }
 
@@ -136,7 +133,6 @@ using ::testing::Return;
 //   PassDataBase Pssdb;
 //   ClientDataBase Cldb;
 //   CompanyDataBase Codb;
-
 
 //   uint64_t client_id = Cldb.insertClient("login", "email", "password");
 
@@ -169,7 +165,8 @@ using ::testing::Return;
 // TEST(getPassTEST, getPassTest) {
 //   PassDataBase Pdb;
 //   PassDB temp = Pdb.getPass(1);
-//   std::cout<< "ID:\t" << temp.getID() << "\nprivate_key:\t" << temp.getprivate() << "\nCompany_ID:\t" << temp.getCompanyID() << 
+//   std::cout<< "ID:\t" << temp.getID() << "\nprivate_key:\t" <<
+//   temp.getprivate() << "\nCompany_ID:\t" << temp.getCompanyID() <<
 //   "\n Client_ID\t" << temp.getClientID() << std::endl;
 //   EXPECT_EQ(temp.getID(), 1);
 //   EXPECT_EQ(temp.getCompanyID(), 1);
@@ -196,7 +193,8 @@ using ::testing::Return;
 
 // TEST(deleteCLientTEST, deleteClientCorrect) {
 // //   ClientDataBase Cdb;
-// //   bool flag = Cdb.insertClient("Testlogin", "test@mail.ru", "testpassword");
+// //   bool flag = Cdb.insertClient("Testlogin", "test@mail.ru",
+// "testpassword");
 // //   flag = Cdb.deleteCLient("Testlogin");
 // //   EXPECT_TRUE(flag);
 // // }
@@ -247,18 +245,18 @@ using ::testing::Return;
 
 // TEST(registerTEST, registerCorrect) {
 //   clientHandler CLH;
-//   std::string status = CLH.registerClient("Ilyagu", "ilyagunagdimaev@gmail.ru", "leonidperlin");
-  // bool flag = false;
-  // if (status == "success") flag = true;
-  // EXPECT_TRUE(flag);
+//   std::string status = CLH.registerClient("Ilyagu",
+//   "ilyagunagdimaev@gmail.ru", "leonidperlin");
+// bool flag = false;
+// if (status == "success") flag = true;
+// EXPECT_TRUE(flag);
 // }
 
 // TEST(registerTEST, registerInCorrect) {
 //   clientHandler CLH;
-//   std::string status = CLH.registerClient("Ilyagu", "ilyagunagdimaev@gmail.ru", "leonidperlin");
-//   bool flag = false;
-//   if (status == "error") flag = true;
-//   EXPECT_TRUE(flag);
+//   std::string status = CLH.registerClient("Ilyagu",
+//   "ilyagunagdimaev@gmail.ru", "leonidperlin"); bool flag = false; if (status
+//   == "error") flag = true; EXPECT_TRUE(flag);
 // }
 
 // class PDB {

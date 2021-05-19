@@ -11,18 +11,19 @@
 #include "database.hpp"
 
 bool exists(const std::string& name) {
-    struct stat buffer;
-    return (stat(name.c_str(), &buffer) == 0);
-  }
+  struct stat buffer;
+  return (stat(name.c_str(), &buffer) == 0);
+}
 
-std::string clientHandler::logInClient(const std::string& Login, const std::string& Password) {
+std::string clientHandler::logInClient(const std::string& Login,
+                                       const std::string& Password) {
   boost::property_tree::ptree tree;
 
   bool exist = exists("server_auth.json");
   boost::property_tree::ptree confData;
   if (!exist) {
-      std::ofstream ofs("server_auth.json");
-      ofs.close();
+    std::ofstream ofs("server_auth.json");
+    ofs.close();
   }
 
   if (_Cldb.ClientExists(Login) == false) {
@@ -65,15 +66,15 @@ std::string clientHandler::logInClient(const std::string& Login, const std::stri
 }
 std::string clientHandler::logOutClient(uint64_t ClientID) { return ""; }
 std::string clientHandler::registerClient(const std::string& Login,
-                                   const std::string& Email,
-                                   const std::string& Password) {
+                                          const std::string& Email,
+                                          const std::string& Password) {
   boost::property_tree::ptree tree;
 
   bool exist = exists("server_reg.json");
   boost::property_tree::ptree confData;
   if (!exist) {
-      std::ofstream ofs("server_reg.json");
-      ofs.close();
+    std::ofstream ofs("server_reg.json");
+    ofs.close();
   }
 
   tree.put("login", Login);

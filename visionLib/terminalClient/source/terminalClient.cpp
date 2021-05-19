@@ -28,7 +28,6 @@ std::string Terminal::TempCode::getTempCode() {}
 void Terminal::TempCode::setTempCode(std::string readTempCode) {}
 bool Terminal::TempCode::isTempCodeValid() {}
 
-
 //------------------------------------------------------------------------------
 
 bool exists(const std::string& name) {

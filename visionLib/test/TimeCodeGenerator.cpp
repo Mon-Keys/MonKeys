@@ -26,7 +26,6 @@ TEST(TimeCodeGeneratorTest, correct_generate_on_one_time_segment) {
   }
 }
 
-
 TEST(getCompanyID, easyInput) {
   uint64_t PassID = 1;
   uint16_t timeInterval = 30;
@@ -75,8 +74,6 @@ TEST(getCompanyID, completeCheck) {
   ASSERT_EQ(tc.getCompanyID(), companyID);
 }
 
-
-
 TEST(validCheck, wrongSizeBig) {
   TimeCode code("010010012sadsadgsd249111dsadsadsa");
   EXPECT_FALSE(code.isValid());
@@ -91,6 +88,3 @@ TEST(validCheck, rightSize) {
   TimeCode code("1004142038041431102930");
   EXPECT_TRUE(code.isValid());
 }
-
-
-
