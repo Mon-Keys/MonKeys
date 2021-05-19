@@ -1,4 +1,4 @@
-# Система контроля управления доступом "VISION" "
+# Система контроля управления доступом "VISION" 
 
 [![<ORG_NAME>](https://circleci.com/gh/perlinleo/MonKeys.svg?style=svg)](https://app.circleci.com/pipelines/github/perlinleo/MonKeys)
 [![Discord Channel](https://img.shields.io/discord/820698183108788275?color=purple&label=discord&logo=discord&logoColor=white)](https://discord.gg/HRztMNeXw7)
