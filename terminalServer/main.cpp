@@ -24,8 +24,8 @@ int main(int argc, char* argv[])
     // auto const doc_root = std::make_shared<std::string>(argv[3]);
     // auto const threads = std::max<int>(1, std::atoi(argv[4]));
 
-    const boost::asio::ip::address address = net::ip::make_address("127.0.0.1");
-    const unsigned short port = static_cast<unsigned short>(std::atoi("8080"));
+    const boost::asio::ip::address address = net::ip::make_address("127.0.0.2");
+    const unsigned short port = static_cast<unsigned short>(std::atoi("8181"));
     const std::shared_ptr<std::string> doc_root = std::make_shared<std::string>(".");
     const int threads = 1;
 
