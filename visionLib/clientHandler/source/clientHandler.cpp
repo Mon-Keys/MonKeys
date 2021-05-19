@@ -30,7 +30,7 @@ std::string clientHandler::logInClient(const std::string& Login,
     tree.put("login", Login);
     tree.put("status", "Not Exists");
     boost::property_tree::write_json("server_auth.json", tree);
-    return "error";
+    return "server_auth.json";
   }
 
   ClientDB client = _Cldb.getClient(Login);
@@ -56,12 +56,12 @@ std::string clientHandler::logInClient(const std::string& Login,
       tree.add_child("passes", children);
     }
     boost::property_tree::write_json("server_auth.json", tree);
-    return "success";
+    return "server_auth.json";
   } else {
     tree.put("login", Login);
     tree.put("status", "Incorrect password");
     boost::property_tree::write_json("server_auth.json", tree);
-    return "error";
+    return "server_auth.json";
   }
 }
 std::string clientHandler::logOutClient(uint64_t ClientID) { return ""; }
@@ -81,7 +81,7 @@ std::string clientHandler::registerClient(const std::string& Login,
   if (_Cldb.ClientExists(Login) == true) {
     tree.put("status", "Already exists");
     boost::property_tree::write_json("server_reg.json", tree);
-    return "error";
+    return "server_reg.json";
   }
 
   uint64_t client_id = _Cldb.insertClient(Login, Email, Password);
@@ -92,7 +92,7 @@ std::string clientHandler::registerClient(const std::string& Login,
   tree.put("email", client.getEmail());
   tree.put("password", client.getPassword());
   boost::property_tree::write_json("server_reg.json", tree);
-  return "success";
+  return "server_reg.json";
 }
 
 std::string clientHandler::getTimeCode(const uint64_t& PassID) {
