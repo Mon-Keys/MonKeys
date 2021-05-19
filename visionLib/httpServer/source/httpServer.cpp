@@ -134,10 +134,6 @@ void handle_request(beast::string_view doc_root,
     std::string email = reqJson.get<std::string>("email");
 
     jsonName = currentHandler.registerClient(login, email, password);
-    
-    path = path_cat(doc_root, "/");
-    path.append(jsonName);
-    std::cout << path;
   } else if (!strcmp(req.target().data(), "/auth")) {
     property_tree::ptree reqJson;
     std::stringstream jsonStream(req.body());
@@ -146,9 +142,6 @@ void handle_request(beast::string_view doc_root,
     std::string password = reqJson.get<std::string>("password");
 
     jsonName = currentHandler.logInClient(login, password);
-    
-    path = path_cat(doc_root, "/");
-    path.append(jsonName);
   } else if (!strcmp(req.target().data(), "/timecode")) {
     property_tree::ptree reqJson;
     std::stringstream jsonStream(req.body());
@@ -157,10 +150,9 @@ void handle_request(beast::string_view doc_root,
     std::string password = reqJson.get<std::string>("password");
 
     jsonName = currentHandler.getTimeCode(login, password);
-
-    path = path_cat(doc_root, "/");
-    path.append(jsonName);
   }
+  path = path_cat(doc_root, "/");
+  path.append(jsonName);
   // path.append("/server.json");
 
   // Attempt to open the file

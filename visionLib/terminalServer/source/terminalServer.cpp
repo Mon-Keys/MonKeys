@@ -7,6 +7,7 @@
 //                                         |___/
 
 #include "terminalServer.hpp"
+#include "terminalHandler.hpp"
 
 void terminalServer::waitRequest() {}
 
@@ -123,24 +124,24 @@ void handle_request_terminal(
       req.target().find("..") != beast::string_view::npos)
     return send(bad_request("Illegal request-target"));
 
+  // create handler
+  TerminalHandler currentHandler;
+
   // Build the path to the requested file
-  std::string path = path_cat_terminal(doc_root, req.target());
+  std::string path;
+  std::string jsonName;
+  // std::string path = path_cat_terminal(doc_root, req.target());
   if (!strcmp(req.target().data(), "/checktimecode")) {
     property_tree::ptree reqJson;
     std::stringstream jsonStream(req.body());
     property_tree::read_json(jsonStream, reqJson);
     std::string timecode = reqJson.get<std::string>("timecode");
 
-    bool timecodeFlag = false;
-    if (!strcmp(timecode.c_str(), "qwertyuioihgfdx6")) {
-      timecodeFlag = true;
-    }
-
-    property_tree::ptree resData;
-    resData.put("verification", timecodeFlag);
-    property_tree::write_json("checktimecode/server.json", resData);
+    jsonName = currentHandler.compareTimeCode(timecode);
   }
-  path.append("/server.json");
+  path = path_cat_terminal(doc_root, "/");
+  path.append(jsonName);
+  // path.append("/server.json");
 
   // Attempt to open the file
   beast::error_code ec;
