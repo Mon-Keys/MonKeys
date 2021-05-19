@@ -7,6 +7,7 @@
 //                                         |___/
 
 #include "httpServer.hpp"
+#include "clientHandler.hpp"
 
 // Return a reasonable mime type based on the extension of a file.
 beast::string_view mime_type(beast::string_view path) {
@@ -116,8 +117,13 @@ void handle_request(beast::string_view doc_root,
       req.target().find("..") != beast::string_view::npos)
     return send(bad_request("Illegal request-target"));
 
+  // create handler
+  clientHandler currentHandler;
+
   // Build the path to the requested file
-  std::string path = path_cat(doc_root, req.target());
+  std::string path;
+  std::string jsonName;
+  //  = path_cat(doc_root, req.target());
   if (!strcmp(req.target().data(), "/reg")) {
     property_tree::ptree reqJson;
     std::stringstream jsonStream(req.body());
@@ -126,12 +132,9 @@ void handle_request(beast::string_view doc_root,
     std::string password = reqJson.get<std::string>("password");
     std::string email = reqJson.get<std::string>("email");
 
-    // проверить что пользователь не зарегестрирован и зарегать
-
-    property_tree::ptree resData;
-    resData.put("name", name);
-    resData.put("registration", "OK");
-    property_tree::write_json("reg/server.json", resData);
+    jsonName = currentHandler.registerClient(name, email, password);
+    
+    path = path_cat(doc_root, jsonName);
   } else if (!strcmp(req.target().data(), "/auth")) {
     property_tree::ptree reqJson;
     std::stringstream jsonStream(req.body());
@@ -139,21 +142,17 @@ void handle_request(beast::string_view doc_root,
     std::string name = reqJson.get<std::string>("name");
     std::string password = reqJson.get<std::string>("password");
 
-    bool authFlag = false;
-    if (!strcmp(password.c_str(), "hello123")) {
-      authFlag = true;
-    }
-
-    property_tree::ptree resData;
-    resData.put("name", name);
-    resData.put("verification", authFlag);
-    property_tree::write_json("auth/server.json", resData);
+    jsonName = currentHandler.logInClient(name, password);
+    
+    path = path_cat(doc_root, jsonName);
   } else if (!strcmp(req.target().data(), "/timecode")) {
     property_tree::ptree reqJson;
     std::stringstream jsonStream(req.body());
     property_tree::read_json(jsonStream, reqJson);
     std::string name = reqJson.get<std::string>("name");
     std::string password = reqJson.get<std::string>("password");
+
+    // currentHandler.getTimeCode()
 
     bool authFlag = false;
     if (!strcmp(password.c_str(), "hello123")) {
@@ -172,7 +171,7 @@ void handle_request(beast::string_view doc_root,
 
     property_tree::write_json("timecode/server.json", resData);
   }
-  path.append("/server.json");
+  // path.append("/server.json");
 
   // Attempt to open the file
   beast::error_code ec;
