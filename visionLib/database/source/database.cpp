@@ -268,14 +268,15 @@ bool CompanyDataBase::CompanyExists(const std::string& name) {
   auto exist_flag = exist[0][0].as<std::string>();
   if (exist_flag == "t") {
     return true;
-  } else { git stash apply 
+  } else {
     return false;
   }
 }
 
 bool PassageDataBase::PassageExists(const uint64_t& PassageID) {
-  auto exist_sql_req = "select exists(select id from passage where passage.id = '" +
-       std::to_string(PassageID) + "')";
+  auto exist_sql_req =
+      "select exists(select id from passage where passage.id = '" +
+      std::to_string(PassageID) + "')";
   pqxx::result exist = do_select_request(exist_sql_req);
   auto exist_flag = exist[0][0].as<std::string>();
   if (exist_flag == "t") {

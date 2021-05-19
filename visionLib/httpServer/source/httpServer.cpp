@@ -7,6 +7,7 @@
 //                                         |___/
 
 #include "httpServer.hpp"
+
 #include "clientHandler.hpp"
 
 // Return a reasonable mime type based on the extension of a file.
@@ -133,7 +134,7 @@ void handle_request(beast::string_view doc_root,
     std::string email = reqJson.get<std::string>("email");
 
     jsonName = currentHandler.registerClient(name, email, password);
-    
+
     path = path_cat(doc_root, "/");
     path.append(jsonName);
     std::cout << path;
@@ -145,7 +146,7 @@ void handle_request(beast::string_view doc_root,
     std::string password = reqJson.get<std::string>("password");
 
     jsonName = currentHandler.logInClient(name, password);
-    
+
     path = path_cat(doc_root, "/");
     path.append(jsonName);
   } else if (!strcmp(req.target().data(), "/timecode")) {
