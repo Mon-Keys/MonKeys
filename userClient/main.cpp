@@ -15,6 +15,10 @@ int main() {
   std::string userKey = "dsdsdCdsdsdsgfwegvwevwerweQRBBX";
   TimeCodeGenerator codegen(userKey, PassID, companyID, timeInterval);
   std::cout << std::time(0) << std::endl;
+  std::vector<std::string> result = codegen.generateTimeCodesAhead(5);
+  for (int i = 0; i < 5; i++) {
+    std::cout << i << ": " <<result[i] << std::endl;
+  }
   while (true) {
     std::string timecode = codegen.generateTimeCode();
     std::cout << timecode << std::endl;

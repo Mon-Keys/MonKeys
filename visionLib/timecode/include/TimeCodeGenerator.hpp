@@ -12,7 +12,6 @@
 #include <bitset>
 #include <boost/format.hpp>
 #include <boost/uuid/detail/sha1.hpp>
-#include <chrono>
 #include <cmath>
 #include <cstdlib>
 #include <iostream>
@@ -42,6 +41,7 @@ class TimeCodeGenerator {
   TimeCodeGenerator(std::string privateKey, uint64_t PassID, uint64_t CompanyID,
                     uint16_t timeInterval);
   std::string generateTimeCode();
+  std::vector<std::string> generateTimeCodesAhead(uint8_t timecodesAmount);
   TimeCodeGenerator();
   ~TimeCodeGenerator();
   TimeCodeGenerator(const TimeCodeGenerator&) = delete;
