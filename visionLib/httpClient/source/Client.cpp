@@ -19,28 +19,28 @@ void sendRequest(beast::error_code ec,
                  Send&& send) {
   std::cout << req.target().data() << "\n";
   if (!strcmp(req.target().data(), "/registr")) {
-    std::string name;
-    std::cin >> name;
+    std::string login;
+    std::cin >> login;
     std::string password;
     std::cin >> password;
     std::string email;
     std::cin >> email;
 
     property_tree::ptree reqData;
-    reqData.put("name", name);
+    reqData.put("login", login);
     reqData.put("password", password);
     reqData.put("email", email);
     property_tree::write_json("client.json", reqData);
   }
 
   if (!strcmp(req.target().data(), "/auth")) {
-    std::string name;
-    std::cin >> name;
+    std::string login;
+    std::cin >> login;
     std::string password;
     std::cin >> password;
 
     property_tree::ptree reqData;
-    reqData.put("name", name);
+    reqData.put("login", login);
     reqData.put("password", password);
     property_tree::write_json("client.json", reqData);
   }
@@ -99,7 +99,7 @@ void ClientSession::run(char const* host, char const* port, char const* target,
   req_.set(http::field::host, host);
   req_.set(http::field::user_agent, BOOST_BEAST_VERSION_STRING);
 
-  // Look up the domain name
+  // Look up the domain login
   resolver_.async_resolve(host, port,
                           beast::bind_front_handler(&ClientSession::on_resolve,
                                                     shared_from_this()));

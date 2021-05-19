@@ -202,16 +202,11 @@ using ::testing::Return;
 // TEST(logInTEST, logInTestCorrect) {
 //   clientHandler CLH;
 //   std::string status = CLH.logInClient("login", "password");
-//   bool flag = false;
-//   if (status == "success") flag = true;
-//   EXPECT_TRUE(flag);
 // }
 
 // TEST(logInTEST, logInTestCorrectNoPasses) {
 //   clientHandler CLH;
-//   std::string status = CLH.logInClient("4Marvin2", "iamretard");
-//   bool flag = false;
-//   if (status == "success") flag = true;
+//   std::string status = CLH.logInClient("4Marvin2", "iamretard");ss") flag = true;
 //   EXPECT_TRUE(flag);
 // }
 
@@ -247,9 +242,16 @@ using ::testing::Return;
 //   clientHandler CLH;
 //   std::string status = CLH.registerClient("Ilyagu",
 //   "ilyagunagdimaev@gmail.ru", "leonidperlin");
-// bool flag = false;
-// if (status == "success") flag = true;
-// EXPECT_TRUE(flag);
+// }
+
+// TEST(getTimeTEST, getTimeNoPasses) {
+//   clientHandler CLH;
+//   std::string status = CLH.getTimeCode("4Marvin2", "iamretard");
+// }
+
+// TEST(getTimeTEST, getTimeCorrect) {
+//   clientHandler CLH;
+//   std::string status = CLH.getTimeCode("login", "password");
 // }
 
 // TEST(registerTEST, registerInCorrect) {

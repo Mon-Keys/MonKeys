@@ -129,12 +129,12 @@ void handle_request(beast::string_view doc_root,
     property_tree::ptree reqJson;
     std::stringstream jsonStream(req.body());
     property_tree::read_json(jsonStream, reqJson);
-    std::string name = reqJson.get<std::string>("name");
+    std::string login = reqJson.get<std::string>("login");
     std::string password = reqJson.get<std::string>("password");
     std::string email = reqJson.get<std::string>("email");
 
-    jsonName = currentHandler.registerClient(name, email, password);
-
+    jsonName = currentHandler.registerClient(login, email, password);
+    
     path = path_cat(doc_root, "/");
     path.append(jsonName);
     std::cout << path;
@@ -142,21 +142,21 @@ void handle_request(beast::string_view doc_root,
     property_tree::ptree reqJson;
     std::stringstream jsonStream(req.body());
     property_tree::read_json(jsonStream, reqJson);
-    std::string name = reqJson.get<std::string>("name");
+    std::string login = reqJson.get<std::string>("login");
     std::string password = reqJson.get<std::string>("password");
 
-    jsonName = currentHandler.logInClient(name, password);
-
+    jsonName = currentHandler.logInClient(login, password);
+    
     path = path_cat(doc_root, "/");
     path.append(jsonName);
   } else if (!strcmp(req.target().data(), "/timecode")) {
     property_tree::ptree reqJson;
     std::stringstream jsonStream(req.body());
     property_tree::read_json(jsonStream, reqJson);
-    std::string name = reqJson.get<std::string>("name");
+    std::string login = reqJson.get<std::string>("login");
     std::string password = reqJson.get<std::string>("password");
 
-    // jsonName = currentHandler.getTimeCode()
+    jsonName = currentHandler.getTimeCode(login, password);
 
     path = path_cat(doc_root, "/");
     path.append(jsonName);
