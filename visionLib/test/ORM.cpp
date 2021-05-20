@@ -207,7 +207,8 @@ using ::testing::Return;
 
 // TEST(logInTEST, logInTestCorrectNoPasses) {
 //   clientHandler CLH;
-//   std::string status = CLH.logInClient("4Marvin2", "iamretard");ss") flag = true;
+//   std::string status = CLH.logInClient
+// ("4Marvin2", "iamretard");ss") flag = true;
 //   EXPECT_TRUE(flag);
 // }
 
