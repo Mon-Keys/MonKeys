@@ -40,6 +40,7 @@ class PassDataBase : public DataBase {
                       const uint64_t& ClientID);
   bool deletePass(const uint64_t& PassID);
   bool PassExists(const uint64_t& PassID);
+  bool PassExists(const uint64_t& ClientID, const uint64_t& CompanyID);
   std::vector<PassDB> getAllPasses(const std::string& sql_limit,
                                    const std::string& sql_offset);
   std::vector<PassDB> getClientsPasses(const uint64_t& ClientID);
@@ -86,7 +87,7 @@ class CompanyDataBase : public DataBase {
   bool CompanyExists(const std::string& name);
   std::vector<CompanyDB> getAllCompanys(const std::string& sql_limit,
                                         const std::string& sql_offset);
-  CompanyDB getCompany(const uint64_t& CompanyID);
+  CompanyDB getCompany(const std::string& CompanyName);
 
  private:
   void do_modifying_request(std::string& sql_request);

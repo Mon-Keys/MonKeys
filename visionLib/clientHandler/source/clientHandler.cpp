@@ -28,7 +28,7 @@ std::string clientHandler::logInClient(const std::string& Login,
 
   if (_Cldb.ClientExists(Login) == false) {
     tree.put("login", Login);
-    tree.put("status", "Not Exists");
+    tree.put("status", "not_exists");
     boost::property_tree::write_json("server_auth.json", tree);
     return "server_auth.json";
   }
@@ -44,7 +44,7 @@ std::string clientHandler::logInClient(const std::string& Login,
     return "server_auth.json";
   } else {
     tree.put("login", Login);
-    tree.put("status", "Incorrect password");
+    tree.put("status", "incorrect_password");
     boost::property_tree::write_json("server_auth.json", tree);
     return "server_auth.json";
   }
@@ -63,7 +63,7 @@ std::string clientHandler::registerClient(const std::string& Login,
 
   tree.put("login", Login);
   if (_Cldb.ClientExists(Login) == true) {
-    tree.put("status", "Already exists");
+    tree.put("status", "already_exists");
     boost::property_tree::write_json("server_reg.json", tree);
     return "server_reg.json";
   }
@@ -91,7 +91,7 @@ std::string clientHandler::getTimeCode(const std::string& Login,
 
   if (_Cldb.ClientExists(Login) == false) {
     tree.put("login", Login);
-    tree.put("status", "Not Exists");
+    tree.put("status", "not_exists");
     boost::property_tree::write_json("server_time.json", tree);
     return "server_time.json";
   }
@@ -108,7 +108,7 @@ std::string clientHandler::getTimeCode(const std::string& Login,
     std::vector<PassDB> passes_vec = _Passdb.getClientsPasses(client.getID());
 
     if (passes_vec.empty()) {
-      tree.put("passes", "No passes");
+      tree.put("passes", "no_passes");
     } else {
       boost::property_tree::ptree children;
       for (int i = 0; i < passes_vec.size(); i++) {
@@ -132,8 +132,87 @@ std::string clientHandler::getTimeCode(const std::string& Login,
     return "server_time.json";
   } else {
     tree.put("login", Login);
-    tree.put("status", "Incorrect password");
+    tree.put("status", "incorrect_password");
     boost::property_tree::write_json("server_time.json", tree);
     return "server_time.json";
   }
+}
+
+std::string clientHandler::logInAdmin(const std::string& CompanyName,
+                                       const std::string& LecenseKey) {
+  boost::property_tree::ptree tree;
+
+  bool exist = existsClient("server_admin_login.json");
+  if (!exist) {
+    std::ofstream ofs("server_admin_login.json");
+    ofs.close();
+  }
+
+  if (_Codb.CompanyExists(CompanyName) == false) {
+    tree.put("company_name", CompanyName);
+    tree.put("status", "not_exists");
+    boost::property_tree::write_json("server_admin_login.json", tree);
+    return "server_admin_login.json";
+  }
+
+  CompanyDB company = _Codb.getCompany(CompanyName);
+
+  if (company.getLicenseKey() == LecenseKey) {
+    tree.put("ID", std::to_string(company.getID()));
+    tree.put("company_name", company.getName());
+    tree.put("license_key", company.getLicenseKey());
+    tree.put("status", "success");
+    boost::property_tree::write_json("server_admin_login.json", tree);
+    return "server_admin_login.json";
+  } else {
+    tree.put("company_name", CompanyName);
+    tree.put("status", "incorrect_license_key");
+    boost::property_tree::write_json("server_admin_login.json", tree);
+    return "server_admin_login.json";
+  }
+}
+
+std::string clientHandler::addCleintsPass(const uint64_t& ClientID,
+                            const uint64_t& CompanyID) {
+  boost::property_tree::ptree tree;
+
+
+  bool exist = existsClient("server_add_pass.json");
+  if (!exist) {
+    std::ofstream ofs("server_add_pass.json");
+    ofs.close();
+  }
+
+  if (!(_Cldb.ClientExists(ClientID))) {
+    tree.put("status", "not_exists_client");
+    boost::property_tree::write_json("server_add_pass.json", tree);
+    return "server_add_pass.json";
+  }
+
+  if (_Passdb.PassExists(ClientID, CompanyID)) {
+    tree.put("status", "already_exists");
+    boost::property_tree::write_json("server_add_pass.json", tree);
+    return "server_add_pass.json";
+  }
+
+  srand(time(NULL));
+
+  char let [17] = "0123456789ABCDEF";
+
+  std::string str = "";
+
+  for (int i = 0; i < 40; ++i)
+    str += let[rand()%16];
+
+  std::cout << str << std::endl;
+
+  _Passdb.insertPass(str, CompanyID, ClientID);
+
+  tree.put("private_key", str);
+  tree.put("client_id", std::to_string(ClientID));
+  tree.put("company_id", std::to_string(CompanyID));
+  tree.put("status", "success");
+  boost::property_tree::write_json("server_add_pass.json", tree);
+
+  return "server_add_pass.json";
 }

@@ -200,10 +200,10 @@ using ::testing::Return;
 // //   EXPECT_TRUE(flag);
 // // }
 
-// TEST(logInTEST, logInTestCorrect) {
-//   clientHandler CLH;
-//   std::string status = CLH.logInClient("login", "password");
-// }
+TEST(logInTEST, logInTestCorrect) {
+  clientHandler CLH;
+  std::string status = CLH.logInClient("login", "password");
+}
 
 // TEST(logInTEST, logInTestCorrectNoPasses) {
 //   clientHandler CLH;
@@ -259,6 +259,11 @@ using ::testing::Return;
 //   clientHandler CLH;
 //   std::string status = CLH.getTimeCode("login", "password");
 // }
+
+TEST(addPassTEST, addPassTest) {
+  clientHandler CLH;
+  std::string status = CLH.addCleintsPass(20, 16);
+}
 
 // TEST(registerTEST, registerInCorrect) {
 //   clientHandler CLH;
