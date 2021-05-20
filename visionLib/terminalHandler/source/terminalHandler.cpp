@@ -8,13 +8,10 @@
 
 #include "terminalHandler.hpp"
 
-<<<<<<< HEAD
-=======
 #include <string>
 
 #include "TimeCodeGenerator.hpp"
 
->>>>>>> 7a67c68271e22e457d75a8006a1b465b6f7797b9
 bool existsTerminal(const std::string& name) {
   struct stat buffer;
   return (stat(name.c_str(), &buffer) == 0);

@@ -17,7 +17,7 @@ bool DataBase::is_opened() const {
 
 DataBase::DataBase() {
   str_db_settings =
-      "dbname=Monkeys host=localhost user=postgres password=password port=5432";
+      "dbname=Monkeys host=localhost user=postgres password=1234 port=5432";
   try {
     database_ = std::make_unique<pqxx::connection>(str_db_settings);
   } catch (const std::exception& e) {
