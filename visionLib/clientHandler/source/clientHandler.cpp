@@ -7,6 +7,7 @@
 //
 
 #include "clientHandler.hpp"
+
 #include "TimeCodeGenerator.hpp"
 #include "database.hpp"
 
@@ -78,7 +79,8 @@ std::string clientHandler::registerClient(const std::string& Login,
   return "server_reg.json";
 }
 
-std::string clientHandler::getTimeCode(const std::string& Login, const std::string& Password) {
+std::string clientHandler::getTimeCode(const std::string& Login,
+                                       const std::string& Password) {
   boost::property_tree::ptree tree;
 
   bool exist = existsClient("server_time.json");
@@ -104,7 +106,7 @@ std::string clientHandler::getTimeCode(const std::string& Login, const std::stri
     tree.put("password", client.getPassword());
 
     std::vector<PassDB> passes_vec = _Passdb.getClientsPasses(client.getID());
-    
+
     if (passes_vec.empty()) {
       tree.put("passes", "No passes");
     } else {
@@ -115,7 +117,9 @@ std::string clientHandler::getTimeCode(const std::string& Login, const std::stri
         child.put("privateKey", passes_vec[i].getprivate());
         child.put("companyID", std::to_string(passes_vec[i].getCompanyID()));
 
-        TimeCodeGenerator generator(passes_vec[i].getprivate(), passes_vec[i].getID(), passes_vec[i].getCompanyID(), 30);
+        TimeCodeGenerator generator(passes_vec[i].getprivate(),
+                                    passes_vec[i].getID(),
+                                    passes_vec[i].getCompanyID(), 30);
         std::vector<std::string> str_vec = generator.generateTimeCodesAhead(5);
         for (int i = 0; i < str_vec.size(); i++) {
           child.put(std::to_string(i + 1), str_vec[i]);

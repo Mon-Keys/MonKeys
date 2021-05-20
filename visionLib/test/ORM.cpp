@@ -7,10 +7,10 @@
 //                                         |___/
 
 #include "clientHandler.hpp"
-#include "terminalHandler.hpp"
 #include "database.hpp"
 #include "gmock/gmock.h"
 #include "gtest/gtest.h"
+#include "terminalHandler.hpp"
 
 using ::testing::_;
 using ::testing::AtLeast;
@@ -207,8 +207,8 @@ using ::testing::Return;
 
 // TEST(logInTEST, logInTestCorrectNoPasses) {
 //   clientHandler CLH;
-//   std::string status = CLH.logInClient("4Marvin2", "iamretard");ss") flag = true;
-//   EXPECT_TRUE(flag);
+//   std::string status = CLH.logInClient("4Marvin2", "iamretard");ss") flag =
+//   true; EXPECT_TRUE(flag);
 // }
 
 // TEST(logInTEST, logInTestCorrectNotExists) {

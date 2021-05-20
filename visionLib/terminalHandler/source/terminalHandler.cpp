@@ -7,17 +7,18 @@
 //                                         |___/
 
 #include "terminalHandler.hpp"
-#include "TimeCodeGenerator.hpp"
 
 #include <string>
+
+#include "TimeCodeGenerator.hpp"
 
 bool existsTerminal(const std::string& name) {
   struct stat buffer;
   return (stat(name.c_str(), &buffer) == 0);
 }
 
-std::string TerminalHandler::compareTimeCode(const std::string& timeCode, const uint64_t& CompanyID) {
-
+std::string TerminalHandler::compareTimeCode(const std::string& timeCode,
+                                             const uint64_t& CompanyID) {
   bool exist = existsTerminal("terminal_server_compare.json");
   if (!exist) {
     std::ofstream ofs("terminal_server_compare.json");
@@ -47,7 +48,7 @@ std::string TerminalHandler::compareTimeCode(const std::string& timeCode, const 
     boost::property_tree::write_json("terminal_server_compare.json", tree);
     return "terminal_server_compare.json";
   }
-  
+
   PassDB pass = _Passdb.getPass(pass_id);
 
   tree.put("passID", std::to_string(pass_id));
@@ -57,10 +58,9 @@ std::string TerminalHandler::compareTimeCode(const std::string& timeCode, const 
 
   std::string second_src = generator.generateTimeCode();
 
-
   if (second_src == timeCode)
     tree.put("verifiaction", "success");
-  else 
+  else
     tree.put("verification", "error_not_compare");
 
   boost::property_tree::write_json("terminal_server_compare.json", tree);

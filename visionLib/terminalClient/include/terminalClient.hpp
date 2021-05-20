@@ -30,7 +30,6 @@ namespace net = boost::asio;       // from <boost/asio.hpp>
 using tcp = boost::asio::ip::tcp;  // from <boost/asio/ip/tcp.hpp>
 namespace property_tree = boost::property_tree;
 
-
 bool exists(const std::string& name);
 
 // Report a failure
