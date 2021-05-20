@@ -23,7 +23,8 @@ class clientHandler {
   std::string logOutClient(uint64_t ClientID);
   std::string registerClient(const std::string& Login, const std::string& Email,
                              const std::string& Password);
-  std::string getTimeCode(const std::string& Login, const std::string& Password);
+  std::string getTimeCode(const std::string& Login,
+                          const std::string& Password);
 
  private:
   ClientDataBase _Cldb;

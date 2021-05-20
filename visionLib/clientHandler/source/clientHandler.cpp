@@ -7,6 +7,7 @@
 //
 
 #include "clientHandler.hpp"
+
 #include "TimeCodeGenerator.hpp"
 #include "database.hpp"
 
@@ -78,8 +79,8 @@ std::string clientHandler::registerClient(const std::string& Login,
   return "server_reg.json";
 }
 
-std::string clientHandler::getTimeCode(const std::string& Login, 
-                                      const std::string& Password) {
+std::string clientHandler::getTimeCode(const std::string& Login,
+                                       const std::string& Password) {
   boost::property_tree::ptree tree;
 
   bool exist = existsClient("server_time.json");
@@ -105,7 +106,7 @@ std::string clientHandler::getTimeCode(const std::string& Login,
     tree.put("password", client.getPassword());
 
     std::vector<PassDB> passes_vec = _Passdb.getClientsPasses(client.getID());
-    
+
     if (passes_vec.empty()) {
       tree.put("passes", "No passes");
     } else {

@@ -7,6 +7,7 @@
 //                                         |___/
 
 #include "terminalServer.hpp"
+
 #include "terminalHandler.hpp"
 
 void terminalServer::waitRequest() {}
