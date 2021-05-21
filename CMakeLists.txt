@@ -26,6 +26,12 @@ add_subdirectory(${VISION_LIB_PATH}/test)
 
 
 # </Test>
+set(OpenCV_DIR /home/marvin/scripts/installation/OpenCV-master/lib/cmake/opencv4)
+find_package(Threads REQUIRED)
+find_package(OpenCV REQUIRED)
+
+find_package(PkgConfig REQUIRED)
+pkg_search_module(ZBAR REQUIRED zbar)
 
 find_package(Boost REQUIRED)
 include_directories(${Boost_LIBRARIES})
@@ -65,8 +71,9 @@ set(CMAKE_BUILD_TYPE DEBUG)
 
 #TerminalClient
 add_executable(terminalClient ${PROJECT_SOURCE_DIR}/terminalClient/main.cpp)
-target_link_libraries(terminalClient visionLib ${Boost_LIBRARIES} -lboost_thread ${PQXX_LIB} ${PQ_LIB})
-target_include_directories(terminalClient PUBLIC "${VISION_LIB_PATH}/include")
+target_link_libraries(terminalClient visionLib ${Boost_LIBRARIES} -lboost_thread ${PQXX_LIB} ${PQ_LIB} ${OpenCV_LIBS} ${ZBAR_LIBRARIES} ${CMAKE_THREAD_LIBS_INIT})
+target_include_directories(terminalClient PUBLIC "${VISION_LIB_PATH}/include" ${OpenCV_INCLUDE_DIRS} ${ZBAR_INCLUDE_DIRS})
+target_link_directories(terminalClient PUBLIC ${ZBAR_LIBRARY_DIRS})
 
 #TerminalServer
 add_executable(terminalServer ${PROJECT_SOURCE_DIR}/terminalServer/main.cpp)

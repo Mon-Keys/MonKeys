@@ -117,10 +117,9 @@ std::string clientHandler::getTimeCode(const std::string& Login,
         child.put("privateKey", passes_vec[i].getprivate());
         child.put("companyID", std::to_string(passes_vec[i].getCompanyID()));
 
-        TimeCodeGenerator generator(passes_vec[i].getprivate(), 
-                                    passes_vec[i].getID(), 
-                                    passes_vec[i].getCompanyID(), 
-                                    30);
+        TimeCodeGenerator generator(passes_vec[i].getprivate(),
+                                    passes_vec[i].getID(),
+                                    passes_vec[i].getCompanyID(), 30);
         std::string str_vec = generator.generateTimeCode();
         child.put("timecode", str_vec);
 
