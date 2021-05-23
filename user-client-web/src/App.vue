@@ -1,34 +1,154 @@
 <template>
 <div>
-<Navbar/>
-<test/>
-
+  <navbar/>
+    <login @setUser="setUser($event)" />
+    <passes/>
 </div>
 </template>
 
 <script>
 
-import test from './components/test.vue'
+import passes from './components/passes.vue'
 
-import Navbar from './components/Navbar.vue'
+import login from './components/login.vue'
+
+import navbar from './components/navbar.vue'
 
 
 export default {
   data() {
-      return {
-        value: 'https://example',
-        size: 300,
-      }
+        return {
+            itemRefs: [],
+            percentage: 20,
+            timeLeft: 0,
+            selected: "none",
+            auth :{
+                login: '',
+                password: '',
+                loggedIn: false
+            },
+            res: {
+                "status": "success",
+                "ID": "1",
+                "login": "pierrelean",
+                "email": "perlinleo@gmail.com",
+                "password": "admin",
+                "passes": [{
+                        "privateKey": "sdsdsdsdsdsd",
+                        "companyID": "1233232",
+                        "companyName": "mail.ru",
+                        "passID": "1233232",
+                        "timecode": "92303494939434",
+                    },
+                    {
+                        "privateKey": "dsdsdsdd",
+                        "companyID": "13232232",
+                        "companyName": "контора",
+                        "passID": "123343232",
+                        "timecode": "92303494939234",
+                        
+                    },
+                    {
+                        "privateKey": "sd43sdsdsdsdsd",
+                        "companyID": "12332434332",
+                        "companyName": "ёбаных",
+                        "passID": "123324545432",
+                        "timecode": "92303494464554",
+                       
+                    },
+                    {
+                        "privateKey": "sd43sdsdsdsdsd",
+                        "companyID": "12332434332",
+                        "companyName": "долбаебов",
+                        "passID": "123324545432",
+                        "timecode": "92303494464554",
+                       
+                    },
+                    {
+                        "privateKey": "sd43sdsdsdsdsd",
+                        "companyID": "12332434332",
+                        "companyName": "как же",
+                        "passID": "123324545432",
+                        "timecode": "92303494464554",
+                       
+                    },
+                    {
+                        "privateKey": "sd43sdsdsdsdsd",
+                        "companyID": "12332434332",
+                        "companyName": "я ебал",
+                        "passID": "123324545432",
+                        "timecode": "92303494464554",
+                       
+                    },
+                    {
+                        "privateKey": "sd43sdsdsdsdsd",
+                        "companyID": "12332434332",
+                        "companyName": "их сучьи",
+                        "passID": "123324545432",
+                        "timecode": "92303494464554",
+                       
+                    },
+                    {
+                        "privateKey": "sd43sdsdsdsdsd",
+                        "companyID": "12332434332",
+                        "companyName": "рты",
+                        "passID": "123324545432",
+                        "timecode": "92303494464554",
+                       
+                    },
+                    {
+                        "privateKey": "sd43sdsdsdsdsd",
+                        "companyID": "12332434332",
+                        "companyName": "дайте",
+                        "passID": "123324545432",
+                        "timecode": "92303494464554",
+                       
+                    },
+                    {
+                        "privateKey": "sd43sdsdsdsdsd",
+                        "companyID": "12332434332",
+                        "companyName": "допуск",
+                        "passID": "123324545432",
+                        "timecode": "92303494464554",
+                       
+                    },
+                    {
+                        "privateKey": "sd43sdsdsdsdsd",
+                        "companyID": "12332434332",
+                        "companyName": "к защите",
+                        "passID": "123324545432",
+                        "timecode": "92303494464554",
+                       
+                    },
+                    {
+                        "privateKey": "sd43sdsdsdsdsd",
+                        "companyID": "12332434332",
+                        "companyName": "мрази",
+                        "passID": "123324545432",
+                        "timecode": "92303494464554",
+                       
+                    }
+                ]
+            }
+        }
     },
   name: 'App',
   components: {
-    test,
-    Navbar
+    passes,
+    navbar,
+    login
   },
 
   mounted: function() {
 
   },
+  methods: {
+    setUser(login, password)
+    {
+      this.auth.login=login;
+      this.auth.password=password;
+    }
+  }
  }
 </script>
 

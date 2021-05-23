@@ -73,6 +73,18 @@ template <class Body, class Allocator, class Send>
 void handle_request(beast::string_view doc_root,
                     http::request<Body, http::basic_fields<Allocator>>&& req,
                     Send&& send) {
+
+    if (req.method() == http::verb::options) {
+      std::cout << "jops" << std::endl;
+      http::response<http::empty_body> res{http::status::no_content, req.version()};
+      res.set(http::field::server, BOOST_BEAST_VERSION_STRING);
+      res.keep_alive(req.keep_alive());
+      res.set(http::field::access_control_allow_origin, "http://localhost:3000");
+      res.set(http::field::access_control_allow_methods, "POST");
+      res.set(http::field::access_control_allow_headers, "Content-Type");
+      return send(std::move(res));
+  }
+  std::cout << "still here" << std::endl;
   // Returns a bad request response
   auto const bad_request = [&req](beast::string_view why) {
     http::response<http::string_body> res{http::status::bad_request,
@@ -186,8 +198,11 @@ void handle_request(beast::string_view doc_root,
   // Cache the size since we need it after the move
   auto const size = body.size();
 
-  std::cout << req;
-
+  std::cout << req << std::endl << req.target();
+  
+  
+  
+  
   // Respond to HEAD request
   if (req.method() == http::verb::head) {
     http::response<http::empty_body> res{http::status::ok, req.version()};
@@ -199,7 +214,7 @@ void handle_request(beast::string_view doc_root,
     return send(std::move(res));
   }
 
-  // Respond to GET request
+  // Respond to POST request
   http::response<http::file_body> res{
       std::piecewise_construct, std::make_tuple(std::move(body)),
       std::make_tuple(http::status::ok, req.version())};
@@ -208,6 +223,7 @@ void handle_request(beast::string_view doc_root,
   res.content_length(size);
   res.keep_alive(req.keep_alive());
   res.set(http::field::access_control_allow_origin, "http://localhost:3000");
+  std::cout << "jopa" << std::endl << std::endl;
   return send(std::move(res));
 }
 
@@ -287,6 +303,7 @@ void ServerSession::on_write(bool close, beast::error_code ec,
   boost::ignore_unused(bytes_transferred);
 
   if (ec) {
+    std::cout << ec << "\n";
     return failServer(ec, "write");
   }
 
