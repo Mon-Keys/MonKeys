@@ -97,6 +97,7 @@ void ClientSession::run(char const* host, char const* port, char const* target,
   req_.target(target);
   req_.set(http::field::host, host);
   req_.set(http::field::user_agent, BOOST_BEAST_VERSION_STRING);
+  req_.set(http::field::access_control_allow_origin, "http://localhost:3000");
 
   // Look up the domain login
   resolver_.async_resolve(host, port,

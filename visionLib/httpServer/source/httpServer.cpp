@@ -110,7 +110,8 @@ void handle_request(beast::string_view doc_root,
   };
 
   // Make sure we can handle the method
-  if (req.method() != http::verb::post && req.method() != http::verb::head)
+  if (req.method() != http::verb::post && req.method() != http::verb::head &&
+      req.method()!= http::verb::options)
     return send(bad_request("Unknown HTTP-method"));
 
   // Request path must be absolute and not contain "..".
@@ -125,6 +126,7 @@ void handle_request(beast::string_view doc_root,
   std::string path;
   std::string jsonName;
   //  = path_cat(doc_root, req.target());
+
   if (!strcmp(req.target().data(), "/registr")) {
     property_tree::ptree reqJson;
     std::stringstream jsonStream(req.body());
@@ -137,11 +139,22 @@ void handle_request(beast::string_view doc_root,
   } else if (!strcmp(req.target().data(), "/auth")) {
     property_tree::ptree reqJson;
     std::stringstream jsonStream(req.body());
-    property_tree::read_json(jsonStream, reqJson);
-    std::string login = reqJson.get<std::string>("login");
-    std::string password = reqJson.get<std::string>("password");
-
-    jsonName = currentHandler.logInClient(login, password);
+    
+    std::cout << "still here" << std::endl;
+    try {
+      property_tree::read_json(jsonStream, reqJson);
+      std::string login = reqJson.get<std::string>("login");
+          std::string password = reqJson.get<std::string>("password");
+          std::cout << "hello";
+          jsonName = currentHandler.logInClient(login, password);
+    }
+    catch (const std::exception &exc)
+      {
+          std::cout << exc.what();
+          std::cout << "whoop" << std::endl;
+          
+      }
+    
   } else if (!strcmp(req.target().data(), "/timecode")) {
     property_tree::ptree reqJson;
     std::stringstream jsonStream(req.body());
@@ -182,6 +195,7 @@ void handle_request(beast::string_view doc_root,
     res.set(http::field::content_type, mime_type(path));
     res.content_length(size);
     res.keep_alive(req.keep_alive());
+    res.set(http::field::access_control_allow_origin, "http://localhost:3000");
     return send(std::move(res));
   }
 
@@ -193,6 +207,7 @@ void handle_request(beast::string_view doc_root,
   res.set(http::field::content_type, mime_type(path));
   res.content_length(size);
   res.keep_alive(req.keep_alive());
+  res.set(http::field::access_control_allow_origin, "http://localhost:3000");
   return send(std::move(res));
 }
 
