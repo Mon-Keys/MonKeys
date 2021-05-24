@@ -20,13 +20,15 @@ class clientHandler {
 
   std::string logInClient(const std::string& Login,
                           const std::string& Password);
-  std::string logOutClient(uint64_t ClientID);
+  std::string logOutClient();
   std::string registerClient(const std::string& Login, const std::string& Email,
                              const std::string& Password);
   std::string getTimeCode(const std::string& Login,
-                          const std::string& Password);
+                          const std::string& Password,
+                          const std::string& Name);
   std::string logInAdmin(const std::string& CompanyName,
                           const std::string& LecenseKey);
+  std::string logOutAdmin();
   std::string addCleintsPass(const uint64_t& ClientID,
                             const uint64_t& CompanyID);
 

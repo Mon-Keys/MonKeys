@@ -39,6 +39,19 @@ std::string clientHandler::logInClient(const std::string& Login,
     tree.put("ID", std::to_string(client.getID()));
     tree.put("login", client.getLogin());
     tree.put("email", client.getEmail());
+    std::vector<std::string> companys = _Passdb.getClientsCompanys(Login);
+    if (companys.empty()) {
+      tree.put("companys", "no_companys");
+    } else {
+      boost::property_tree::ptree children;
+      for (int i = 0; i < companys.size(); i++) {
+        boost::property_tree::ptree child;
+        child.put("company_" + std::to_string(i + 1), companys[i]);
+
+        children.push_back(std::make_pair("", child));
+      }
+      tree.add_child("companys", children);
+    }
     tree.put("status", "success");
     boost::property_tree::write_json("server_auth.json", tree);
     return "server_auth.json";
@@ -49,7 +62,21 @@ std::string clientHandler::logInClient(const std::string& Login,
     return "server_auth.json";
   }
 }
-std::string clientHandler::logOutClient(uint64_t ClientID) { return ""; }
+
+std::string clientHandler::logOutClient() {
+  boost::property_tree::ptree tree;
+
+  bool exist = existsClient("server_auth.json");
+  if (!exist) {
+    std::ofstream ofs("server_auth.json");
+    ofs.close();
+  }
+
+  tree.put("status", "not_auth");
+  boost::property_tree::write_json("server_auth.json", tree);
+    return "server_auth.json";
+}
+
 std::string clientHandler::registerClient(const std::string& Login,
                                           const std::string& Email,
                                           const std::string& Password) {
@@ -80,7 +107,8 @@ std::string clientHandler::registerClient(const std::string& Login,
 }
 
 std::string clientHandler::getTimeCode(const std::string& Login,
-                                       const std::string& Password) {
+                                       const std::string& Password,
+                                       const std::string& Name) {
   boost::property_tree::ptree tree;
 
   bool exist = existsClient("server_time.json");
@@ -91,7 +119,15 @@ std::string clientHandler::getTimeCode(const std::string& Login,
 
   if (_Cldb.ClientExists(Login) == false) {
     tree.put("login", Login);
-    tree.put("status", "not_exists");
+    tree.put("status", "client_not_exists");
+    boost::property_tree::write_json("server_time.json", tree);
+    return "server_time.json";
+  }
+
+  if (_Codb.CompanyExists(Name) == false) {
+    tree.put("login", Login);
+    tree.put("company_name", Name);
+    tree.put("status", "company_not_exists");
     boost::property_tree::write_json("server_time.json", tree);
     return "server_time.json";
   }
@@ -103,9 +139,10 @@ std::string clientHandler::getTimeCode(const std::string& Login,
     tree.put("ID", std::to_string(client.getID()));
     tree.put("login", client.getLogin());
     tree.put("email", client.getEmail());
-    tree.put("password", client.getPassword());
 
     std::vector<PassDB> passes_vec = _Passdb.getClientsPasses(client.getID());
+    CompanyDB company = _Codb.getCompany(Name);
+    
 
     if (passes_vec.empty()) {
       tree.put("passes", "no_passes");
@@ -142,17 +179,17 @@ std::string clientHandler::logInAdmin(const std::string& CompanyName,
                                        const std::string& LecenseKey) {
   boost::property_tree::ptree tree;
 
-  bool exist = existsClient("server_admin_login.json");
+  bool exist = existsClient("server_admin_auth.json");
   if (!exist) {
-    std::ofstream ofs("server_admin_login.json");
+    std::ofstream ofs("server_admin_auth.json");
     ofs.close();
   }
 
   if (_Codb.CompanyExists(CompanyName) == false) {
     tree.put("company_name", CompanyName);
     tree.put("status", "not_exists");
-    boost::property_tree::write_json("server_admin_login.json", tree);
-    return "server_admin_login.json";
+    boost::property_tree::write_json("server_admin_auth.json", tree);
+    return "server_admin_auth.json";
   }
 
   CompanyDB company = _Codb.getCompany(CompanyName);
@@ -162,13 +199,13 @@ std::string clientHandler::logInAdmin(const std::string& CompanyName,
     tree.put("company_name", company.getName());
     tree.put("license_key", company.getLicenseKey());
     tree.put("status", "success");
-    boost::property_tree::write_json("server_admin_login.json", tree);
-    return "server_admin_login.json";
+    boost::property_tree::write_json("server_admin_auth.json", tree);
+    return "server_admin_auth.json";
   } else {
     tree.put("company_name", CompanyName);
     tree.put("status", "incorrect_license_key");
-    boost::property_tree::write_json("server_admin_login.json", tree);
-    return "server_admin_login.json";
+    boost::property_tree::write_json("server_admin_auth.json", tree);
+    return "server_admin_auth.json";
   }
 }
 
@@ -215,4 +252,18 @@ std::string clientHandler::addCleintsPass(const uint64_t& ClientID,
   boost::property_tree::write_json("server_add_pass.json", tree);
 
   return "server_add_pass.json";
+}
+
+std::string clientHandler::logOutAdmin() {
+  boost::property_tree::ptree tree;
+
+  bool exist = existsClient("server_auth.json");
+  if (!exist) {
+    std::ofstream ofs("server_auth.json");
+    ofs.close();
+  }
+
+  tree.put("status", "not_auth");
+  boost::property_tree::write_json("server_admin_auth.json", tree);
+  return "server_admin_auth.json";
 }

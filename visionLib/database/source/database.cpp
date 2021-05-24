@@ -41,6 +41,7 @@ DataBase::DataBase(std::map<std::string, std::string>& db_settings) {
   std::cout << "Connecting!" << std::endl;
 }
 
+
 bool PassDataBase::deletePass(const uint64_t& PassID) {
   if (PassExists(PassID) == false) {
     std::cout << "Client does not exists" << std::endl;
@@ -299,29 +300,6 @@ bool PassageDataBase::PassageExists(const uint64_t& PassageID) {
   }
 }
 
-std::vector<PassDB> PassDataBase::getAllPasses(const std::string& sql_limit,
-                                               const std::string& sql_offset) {
-  std::vector<PassDB> passes(0);
-  return passes;
-}
-
-std::vector<PassageDB> PassageDataBase::getAllPassages(
-    const std::string& sql_limit, const std::string& sql_offset) {
-  std::vector<PassageDB> passes(0);
-  return passes;
-}
-
-std::vector<ClientDB> ClientDataBase::getAllClients(
-    const std::string& sql_limit, const std::string& sql_offset) {
-  std::vector<ClientDB> passes(0);
-  return passes;
-}
-
-std::vector<CompanyDB> CompanyDataBase::getAllCompanys(
-    const std::string& sql_limit, const std::string& sql_offset) {
-  std::vector<CompanyDB> passes(0);
-  return passes;
-}
 
 std::vector<PassDB> PassDataBase::getClientsPasses(const uint64_t& ClientID) {
   std::vector<PassDB> result;
@@ -348,6 +326,29 @@ std::vector<PassDB> PassDataBase::getClientsPasses(const uint64_t& ClientID) {
   return result;
 }
 
+std::vector<std::string> PassDataBase::getClientsCompanys(const std::string& Login) {
+  std::vector<std::string> result;
+
+  auto exist_sql_req = "select company_name from company join pass on company.id = pass.company_id"
+  "join client on client.id = pass.client_id where client.login = '" + Login +"'";
+  pqxx::result exist = do_select_request(exist_sql_req);
+  auto exist_flag = exist[0][0].as<std::string>();
+  if (exist_flag == "f") {
+    std::cout << "No companys for this client" << std::endl;
+    return result;
+  }
+
+  std::string sql_request = "select company_name from company join pass on company.id = pass.company_id"
+  "join client on client.id = pass.client_id where client.login = '" + Login +"'";
+  pqxx::result r = do_select_request(sql_request);
+
+  for (const auto& row : r) {
+    std::string temp_company_name = row[0].as<std::string>();
+    result.push_back(temp_company_name);
+  }
+  return result;
+}
+
 std::vector<PassDB> PassDataBase::getCompanysPasses(const uint64_t& CompanyID) {
   std::vector<PassDB> passes(0);
   return passes;
@@ -366,6 +367,17 @@ PassDB PassDataBase::getPass(const uint64_t& PassID) {
   const auto& row = r.at(0);
   PassDB result(row[0].as<uint64_t>(), row[3].as<std::string>(),
                 row[2].as<uint64_t>(), row[1].as<uint64_t>());
+  return result;
+}
+
+std::string PassDataBase::getPrivateKey(const std::string& Login, const std::string& Name) {
+  std::string sql_request = "select private_key from company join pass"
+  "on company.id = pass.company_id join client"
+  "on client.id = pass.client_id where client.login = '" + Login +"' and company_name = '" + Name +"'";
+  pqxx::result r = do_select_request(sql_request);
+
+  const auto& row = r.at(0);
+  std::string result = row[0].as<std::string>();
   return result;
 }
 

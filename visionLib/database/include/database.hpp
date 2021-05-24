@@ -41,11 +41,11 @@ class PassDataBase : public DataBase {
   bool deletePass(const uint64_t& PassID);
   bool PassExists(const uint64_t& PassID);
   bool PassExists(const uint64_t& ClientID, const uint64_t& CompanyID);
-  std::vector<PassDB> getAllPasses(const std::string& sql_limit,
-                                   const std::string& sql_offset);
   std::vector<PassDB> getClientsPasses(const uint64_t& ClientID);
+  std::vector<std::string> getClientsCompanys(const std::string& Login);
   std::vector<PassDB> getCompanysPasses(const uint64_t& CompanyID);
   PassDB getPass(const uint64_t& PassID);
+  std::string getPrivateKey(const std::string& Login, const std::string& Name);
 
  private:
   void do_modifying_request(std::string& sql_request);
@@ -65,8 +65,6 @@ class ClientDataBase : public DataBase {
   bool deleteCLient(const std::string& login);
   bool ClientExists(const std::string& login);
   bool ClientExists(const uint64_t& ClientID);
-  std::vector<ClientDB> getAllClients(const std::string& sql_limit,
-                                      const std::string& sql_offset);
   ClientDB getClient(const std::string login);
 
  private:
@@ -85,8 +83,6 @@ class CompanyDataBase : public DataBase {
   uint64_t insertCompany(const std::string& name);
   bool deleteCompany(const std::string& name);
   bool CompanyExists(const std::string& name);
-  std::vector<CompanyDB> getAllCompanys(const std::string& sql_limit,
-                                        const std::string& sql_offset);
   CompanyDB getCompany(const std::string& CompanyName);
 
  private:
@@ -105,8 +101,6 @@ class PassageDataBase : public DataBase {
   bool insertPassage(const PassageDB& Passage);
   bool deletePassage(const uint64_t& PassageID);
   bool PassageExists(const uint64_t& PassageID);
-  std::vector<PassageDB> getAllPassages(const std::string& sql_limit,
-                                        const std::string& sql_offset);
   std::vector<PassageDB> getPassesPassages(const uint64_t PassID);
   PassageDB getPassage(const uint64_t PassageID);
 

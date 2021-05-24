@@ -149,7 +149,7 @@ void handle_request(beast::string_view doc_root,
     std::string login = reqJson.get<std::string>("login");
     std::string password = reqJson.get<std::string>("password");
 
-    jsonName = currentHandler.getTimeCode(login, password);
+    jsonName = currentHandler.getTimeCode(login, password, "Apple");
   }
   path = path_cat(doc_root, "/");
   path.append(jsonName);

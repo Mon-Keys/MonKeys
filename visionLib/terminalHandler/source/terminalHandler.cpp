@@ -44,7 +44,7 @@ std::string TerminalHandler::compareTimeCode(const std::string& timeCode,
   }
 
   if (!(_Passdb.PassExists(pass_id))) {
-    tree.put("verification", "error_not_exists");
+    tree.put("verification", "pass_not_exists");
     boost::property_tree::write_json("terminal_server_compare.json", tree);
     return "terminal_server_compare.json";
   }
