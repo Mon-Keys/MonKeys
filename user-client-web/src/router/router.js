@@ -1,15 +1,27 @@
-import Vue from 'vue'
-import Router from 'vue-router'
+import { createWebHistory, createRouter } from 'vue-router'
+import passes from '@/views/passes.vue'
+import homepage from '@/views/homepage.vue'
+import login from '@/views/login.vue'
 
-Vue.use(Router);
-
-
-let router = new Router( {
+const router = createRouter({
+    history: createWebHistory(process.env.BASE_URL),
     routes: [
         {
-        path: '/',
-        name: 'homepage',
-        component: homepage
+            path: '/',
+            name: 'Homepage',
+            component: homepage
+        },
+        {
+            path: '/timecodes',
+            name: 'Timecodes',
+            component: passes
+        },
+        {
+            path: '/login',
+            name: 'Login',
+            component: login
         }
     ]
 })
+
+export default router;

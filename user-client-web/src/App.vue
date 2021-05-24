@@ -1,143 +1,56 @@
 <template>
-<div>
-  <navbar/>
-    <login @setUser="setUser($event)" />
-    <passes/>
-</div>
+    <div id="nav">
+    
+    <router-link :to="{ name: 'Homepage'}">
+    
+         Главная 
+    
+    </router-link>
+    <div v-if="loginStatus"> 
+    <router-link :to="{ name: 'Timecodes'}">
+    
+         Временные коды 
+    
+    </router-link>
+    </div>
+    <router-link :to="{ name: 'Login'}">
+    
+         Войти </router-link>
+    
+    <div v-if="loginStatus"> 
+    
+        Logged in as {{usernameLoggedIn}} 
+    
+    </div>
+    <button v-on:click="logoutUser">
+        logout
+    </button>
+    </div>
+    
+    <router-view/>
 </template>
 
 <script>
 
-import passes from './components/passes.vue'
-
-import login from './components/login.vue'
-
-import navbar from './components/navbar.vue'
-
-
 export default {
+    computed: {
+        loginStatus () {
+            return this.$store.state.loggedin
+        },
+        usernameLoggedIn () {
+            return this.$store.state.auth.login
+        }
+    },
   data() {
         return {
             itemRefs: [],
             percentage: 20,
             timeLeft: 0,
             selected: "none",
-            auth :{
-                login: '',
-                password: '',
-                loggedIn: false
-            },
-            res: {
-                "status": "success",
-                "ID": "1",
-                "login": "pierrelean",
-                "email": "perlinleo@gmail.com",
-                "password": "admin",
-                "passes": [{
-                        "privateKey": "sdsdsdsdsdsd",
-                        "companyID": "1233232",
-                        "companyName": "mail.ru",
-                        "passID": "1233232",
-                        "timecode": "92303494939434",
-                    },
-                    {
-                        "privateKey": "dsdsdsdd",
-                        "companyID": "13232232",
-                        "companyName": "контора",
-                        "passID": "123343232",
-                        "timecode": "92303494939234",
-                        
-                    },
-                    {
-                        "privateKey": "sd43sdsdsdsdsd",
-                        "companyID": "12332434332",
-                        "companyName": "ёбаных",
-                        "passID": "123324545432",
-                        "timecode": "92303494464554",
-                       
-                    },
-                    {
-                        "privateKey": "sd43sdsdsdsdsd",
-                        "companyID": "12332434332",
-                        "companyName": "долбаебов",
-                        "passID": "123324545432",
-                        "timecode": "92303494464554",
-                       
-                    },
-                    {
-                        "privateKey": "sd43sdsdsdsdsd",
-                        "companyID": "12332434332",
-                        "companyName": "как же",
-                        "passID": "123324545432",
-                        "timecode": "92303494464554",
-                       
-                    },
-                    {
-                        "privateKey": "sd43sdsdsdsdsd",
-                        "companyID": "12332434332",
-                        "companyName": "я ебал",
-                        "passID": "123324545432",
-                        "timecode": "92303494464554",
-                       
-                    },
-                    {
-                        "privateKey": "sd43sdsdsdsdsd",
-                        "companyID": "12332434332",
-                        "companyName": "их сучьи",
-                        "passID": "123324545432",
-                        "timecode": "92303494464554",
-                       
-                    },
-                    {
-                        "privateKey": "sd43sdsdsdsdsd",
-                        "companyID": "12332434332",
-                        "companyName": "рты",
-                        "passID": "123324545432",
-                        "timecode": "92303494464554",
-                       
-                    },
-                    {
-                        "privateKey": "sd43sdsdsdsdsd",
-                        "companyID": "12332434332",
-                        "companyName": "дайте",
-                        "passID": "123324545432",
-                        "timecode": "92303494464554",
-                       
-                    },
-                    {
-                        "privateKey": "sd43sdsdsdsdsd",
-                        "companyID": "12332434332",
-                        "companyName": "допуск",
-                        "passID": "123324545432",
-                        "timecode": "92303494464554",
-                       
-                    },
-                    {
-                        "privateKey": "sd43sdsdsdsdsd",
-                        "companyID": "12332434332",
-                        "companyName": "к защите",
-                        "passID": "123324545432",
-                        "timecode": "92303494464554",
-                       
-                    },
-                    {
-                        "privateKey": "sd43sdsdsdsdsd",
-                        "companyID": "12332434332",
-                        "companyName": "мрази",
-                        "passID": "123324545432",
-                        "timecode": "92303494464554",
-                       
-                    }
-                ]
-            }
+            
         }
     },
-  name: 'App',
-  components: {
-    passes,
-    navbar,
-    login
-  },
+  
 
   mounted: function() {
 
@@ -147,6 +60,10 @@ export default {
     {
       this.auth.login=login;
       this.auth.password=password;
+    },
+    logoutUser: function () { 
+       
+        this.$store.commit('LOGOUT_USER',false);
     }
   }
  }
@@ -168,6 +85,10 @@ body {
    url(./fonts/MinecraftRegular-Bmg3.otf) format("truetype");
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+#nav {
+    padding: 30px;
 }
 #app {
   font-family: MinecraftRegular-Bmg3, Helvetica, Arial, sans-serif;
