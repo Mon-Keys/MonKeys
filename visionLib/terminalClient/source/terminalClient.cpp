@@ -61,16 +61,6 @@ void sendTerminalRequest(
 
   req.body() = std::move(body);
 
-  // std::ifstream file("client.json");
-  // std::string line;
-  // std::string body;
-  // while (std::getline(file, line))
-  // {
-  //     body += line;
-  // }
-
-  // req.body() = std::move(body);
-
   auto const size = body.size();
 
   req.content_length(size);
@@ -142,10 +132,6 @@ void TerminalSession::on_connect(beast::error_code ec,
   stream_.expires_after(std::chrono::seconds(30));
 
   sendTerminalRequest(ec, std::move(req_), lambda_, timecode_);
-
-  // Send the HTTP request to the remote host
-  // http::async_write(stream_, req_,
-  // beast::bind_front_handler(&Session::on_write, shared_from_this()));
 }
 
 void TerminalSession::on_write(bool close, beast::error_code ec,
@@ -159,10 +145,6 @@ void TerminalSession::on_write(bool close, beast::error_code ec,
   reqsp_ = nullptr;
 
   do_read();
-
-  // Receive the HTTP response
-  // http::async_read(stream_, buffer_, res_,
-  // beast::bind_front_handler(&Session::on_read, shared_from_this()));
 }
 
 void TerminalSession::do_read() {
@@ -192,15 +174,12 @@ void TerminalSession::on_read(beast::error_code ec,
   std::stringstream jsonStream(res_.body());
   property_tree::read_json(jsonStream, resJson);
 
-  // property_tree::ptree clientJson;
-  // property_tree::read_json("client.json", clientJson);
-  // std::string password = clientJson.get<std::string>("password");
-  // resJson.put("password", password);
-  // resJson.erase("verification");
-
-  // property_tree::write_json("client.json", resJson);
-
-  std::cout << res_ << std::endl;
+  std::string verification = resJson.get<std::string>("verification");
+  if (!std::strcmp(verification.c_str(), "success")) {
+    std::cout << "access open\n";
+  } else {
+    std::cout << "access closed\n";
+  }
 
   // Gracefully close the socket
   stream_.socket().shutdown(tcp::socket::shutdown_both, ec);
