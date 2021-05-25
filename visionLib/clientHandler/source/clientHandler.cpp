@@ -117,10 +117,9 @@ std::string clientHandler::getTimeCode(const std::string& Login,
         child.put("privateKey", passes_vec[i].getprivate());
         child.put("companyID", std::to_string(passes_vec[i].getCompanyID()));
 
-        TimeCodeGenerator generator(passes_vec[i].getprivate(), 
-                                    passes_vec[i].getID(), 
-                                    passes_vec[i].getCompanyID(), 
-                                    30);
+        TimeCodeGenerator generator(passes_vec[i].getprivate(),
+                                    passes_vec[i].getID(),
+                                    passes_vec[i].getCompanyID(), 30);
         std::string str_vec = generator.generateTimeCode();
         child.put("timecode", str_vec);
 
@@ -139,7 +138,7 @@ std::string clientHandler::getTimeCode(const std::string& Login,
 }
 
 std::string clientHandler::logInAdmin(const std::string& CompanyName,
-                                       const std::string& LecenseKey) {
+                                      const std::string& LecenseKey) {
   boost::property_tree::ptree tree;
 
   bool exist = existsClient("server_admin_login.json");
@@ -173,9 +172,8 @@ std::string clientHandler::logInAdmin(const std::string& CompanyName,
 }
 
 std::string clientHandler::addCleintsPass(const uint64_t& ClientID,
-                            const uint64_t& CompanyID) {
+                                          const uint64_t& CompanyID) {
   boost::property_tree::ptree tree;
-
 
   bool exist = existsClient("server_add_pass.json");
   if (!exist) {
@@ -197,12 +195,11 @@ std::string clientHandler::addCleintsPass(const uint64_t& ClientID,
 
   srand(time(NULL));
 
-  char let [17] = "0123456789ABCDEF";
+  char let[17] = "0123456789ABCDEF";
 
   std::string str = "";
 
-  for (int i = 0; i < 40; ++i)
-    str += let[rand()%16];
+  for (int i = 0; i < 40; ++i) str += let[rand() % 16];
 
   std::cout << str << std::endl;
 

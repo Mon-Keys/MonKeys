@@ -26,9 +26,9 @@ class clientHandler {
   std::string getTimeCode(const std::string& Login,
                           const std::string& Password);
   std::string logInAdmin(const std::string& CompanyName,
-                          const std::string& LecenseKey);
+                         const std::string& LecenseKey);
   std::string addCleintsPass(const uint64_t& ClientID,
-                            const uint64_t& CompanyID);
+                             const uint64_t& CompanyID);
 
  private:
   ClientDataBase _Cldb;

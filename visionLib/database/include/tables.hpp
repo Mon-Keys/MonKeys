@@ -95,8 +95,8 @@ class CompanyDB {
  public:
   CompanyDB() = default;
 
-  explicit CompanyDB(uint64_t _ID, std::string _name, std::string _license_key) 
-  : ID(_ID), name(_name), license_key(_license_key) {}
+  explicit CompanyDB(uint64_t _ID, std::string _name, std::string _license_key)
+      : ID(_ID), name(_name), license_key(_license_key) {}
 
   CompanyDB(const CompanyDB& p) = default;
 
