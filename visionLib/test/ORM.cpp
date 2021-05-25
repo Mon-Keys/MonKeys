@@ -278,10 +278,10 @@ using ::testing::Return;
 //   std::string status = CLH.logInAdmin("Monkeys", "MONKEYS");
 // }
 
-TEST(addPassForClietnTEST, addPassForClietnCorrect) {
-  clientHandler CLH;
-  std::string status = CLH.addCleintsPass("Mikhail", "Apple");
-}
+// TEST(addPassForClietnTEST, addPassForClietnCorrect) {
+//   clientHandler CLH;
+//   std::string status = CLH.addCleintsPass("Mikhail", "Apple");
+// }
 
 // class PDB {
 //   DataBase& dbC;
