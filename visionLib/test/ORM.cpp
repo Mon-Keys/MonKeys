@@ -268,9 +268,20 @@ using ::testing::Return;
 // TEST(registerTEST, registerInCorrect) {
 //   clientHandler CLH;
 //   std::string status = CLH.registerClient("Ilyagu",
-//   "ilyagunagdimaev@gmail.ru", "leonidperlin"); bool flag = false; if (status
+//   "ilyagunagdimaev@gmail.ru", "leonidperlin"); 
+//   bool flag = false; if (status
 //   == "error") flag = true; EXPECT_TRUE(flag);
 // }
+
+// TEST(adminLoginTEST, adminLoginCorrect) {
+//   clientHandler CLH;
+//   std::string status = CLH.logInAdmin("Monkeys", "MONKEYS");
+// }
+
+TEST(addPassForClietnTEST, addPassForClietnCorrect) {
+  clientHandler CLH;
+  std::string status = CLH.addCleintsPass("Mikhail", "Apple");
+}
 
 // class PDB {
 //   DataBase& dbC;

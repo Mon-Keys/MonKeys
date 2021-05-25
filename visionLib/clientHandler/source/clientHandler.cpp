@@ -209,8 +209,8 @@ std::string clientHandler::logInAdmin(const std::string& CompanyName,
   }
 }
 
-std::string clientHandler::addCleintsPass(const uint64_t& ClientID,
-                            const uint64_t& CompanyID) {
+std::string clientHandler::addCleintsPass(const std::string& Login,
+                            const std::string& Name) {
   boost::property_tree::ptree tree;
 
 
@@ -220,17 +220,29 @@ std::string clientHandler::addCleintsPass(const uint64_t& ClientID,
     ofs.close();
   }
 
-  if (!(_Cldb.ClientExists(ClientID))) {
+  if (!(_Cldb.ClientExists(Login))) {
     tree.put("status", "not_exists_client");
     boost::property_tree::write_json("server_add_pass.json", tree);
     return "server_add_pass.json";
   }
+  
+  if (!(_Codb.CompanyExists(Name))) {
+    tree.put("status", "not_exists_company");
+    boost::property_tree::write_json("server_add_pass.json", tree);
+    return "server_add_pass.json";
+  }
 
-  if (_Passdb.PassExists(ClientID, CompanyID)) {
+  ClientDB client = _Cldb.getClient(Login);
+
+  CompanyDB company = _Codb.getCompany(Name);
+
+  if (_Passdb.PassExists(client.getID(), company.getID())) {
     tree.put("status", "already_exists");
     boost::property_tree::write_json("server_add_pass.json", tree);
     return "server_add_pass.json";
   }
+
+  std::cout << client.getID() << std::endl << company.getID() << std::endl;
 
   srand(time(NULL));
 
@@ -243,11 +255,12 @@ std::string clientHandler::addCleintsPass(const uint64_t& ClientID,
 
   std::cout << str << std::endl;
 
-  _Passdb.insertPass(str, CompanyID, ClientID);
+  uint64_t pass_id = _Passdb.insertPass(str, company.getID(), client.getID());
 
+  tree.put("pass_id", std::to_string(pass_id));
   tree.put("private_key", str);
-  tree.put("client_id", std::to_string(ClientID));
-  tree.put("company_id", std::to_string(CompanyID));
+  tree.put("client_id", std::to_string(client.getID()));
+  tree.put("company_id", std::to_string(company.getID()));
   tree.put("status", "success");
   boost::property_tree::write_json("server_add_pass.json", tree);
 

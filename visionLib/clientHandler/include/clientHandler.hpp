@@ -29,8 +29,8 @@ class clientHandler {
   std::string logInAdmin(const std::string& CompanyName,
                           const std::string& LecenseKey);
   std::string logOutAdmin();
-  std::string addCleintsPass(const uint64_t& ClientID,
-                            const uint64_t& CompanyID);
+  std::string addCleintsPass(const std::string& Login,
+                            const std::string& Name);
 
  private:
   ClientDataBase _Cldb;
