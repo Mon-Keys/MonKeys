@@ -56,12 +56,11 @@ sudo apt -y install python3-testresources
 
 cd $cwd
 
-git clone https://github.com/opencv/opencv.git
+
 cd opencv
 git checkout $cvVersion
 cd ..
- 
-git clone https://github.com/opencv/opencv_contrib.git
+
 cd opencv_contrib
 git checkout $cvVersion
 cd ..

@@ -1,20 +1,21 @@
 CREATE TABLE client(  
     id SERIAL primary key,
-    login varchar(255),
-    email varchar(255),
-    password varchar(255)   
+    login varchar(255) NULL,
+    email varchar(255) NULL,
+    password varchar(255) NULL   
 );
 
 CREATE TABLE company(  
     id SERIAL primary key,
-    company_name VARCHAR(255) 
+    company_name VARCHAR(255) NULL, 
+    license_key VARCHAR(255) NULL
 );
 
 CREATE TABLE pass(  
     id SERIAL primary key,
     company_id int,
     client_id int,
-    private_key varchar(255),
+    private_key varchar(255) NULL,
     CONSTRAINT fk_company_id
         FOREIGN KEY (company_id)
         REFERENCES company (id),

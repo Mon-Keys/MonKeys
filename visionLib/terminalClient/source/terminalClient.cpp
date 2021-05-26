@@ -178,8 +178,17 @@ void TerminalSession::on_read(beast::error_code ec,
   property_tree::ptree resJson;
   std::stringstream jsonStream(res_.body());
   property_tree::read_json(jsonStream, resJson);
+  std::cout << "check" << std::endl;
 
-  std::string verification = resJson.get<std::string>("verification");
+  std::string verification = "";
+  try{
+    verification = resJson.get<std::string>("verification");
+  }
+  catch (...) {
+    std::cout << "no verification";
+    verification = "failure";
+  }
+  std::cout << "check" << std::endl;
   if (!std::strcmp(verification.c_str(), "success")) {
     system("clear");
 
