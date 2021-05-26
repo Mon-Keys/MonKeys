@@ -18,14 +18,31 @@ bool existsTerminal(const std::string& name) {
 }
 
 std::string TerminalHandler::compareTimeCode(const std::string& timeCode,
-                                             const uint64_t& CompanyID) {
+                                             const std::string& Name,
+                                             const std::string& Key) {
+  boost::property_tree::ptree tree;
+
   bool exist = existsTerminal("terminal_server_compare.json");
   if (!exist) {
     std::ofstream ofs("terminal_server_compare.json");
     ofs.close();
   }
 
-  boost::property_tree::ptree tree;
+  if (_Codb.CompanyExists(Name) == false) {
+    tree.put("company_name", Name);
+    tree.put("status", "not_exists");
+    boost::property_tree::write_json("terminal_server_compare.json", tree);
+    return "terminal_server_compare.json";
+  }
+
+  CompanyDB company = _Codb.getCompany(Name);
+
+  if (company.getLicenseKey() != Key) {
+    tree.put("company_name", Name);
+    tree.put("status", "incorrect_license_key");
+    boost::property_tree::write_json("terminal_server_compare.json", tree);
+    return "terminal_server_compare.json";
+  }
 
   TimeCode tc(timeCode);
 
@@ -37,14 +54,14 @@ std::string TerminalHandler::compareTimeCode(const std::string& timeCode,
     pass_id = tc.getPassID();
   }
 
-  if (company_id != CompanyID) {
+  if (company_id != company.getID()) {
     tree.put("verification", "error_novalid_terminal");
     boost::property_tree::write_json("terminal_server_compare.json", tree);
     return "terminal_server_compare.json";
   }
 
   if (!(_Passdb.PassExists(pass_id))) {
-    tree.put("verification", "error_not_exists");
+    tree.put("verification", "pass_not_exists");
     boost::property_tree::write_json("terminal_server_compare.json", tree);
     return "terminal_server_compare.json";
   }
