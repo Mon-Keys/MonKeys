@@ -2,8 +2,8 @@ cmake_minimum_required(VERSION 3.7.2)
 project(vision)
 
 set(Boost_USE_MULTITHREAD ON)
-set(CMAKE_CXX_STANDARD 14)
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wpedantic -pedantic -fprofile-arcs -ftest-coverage -lpqxx -lpq -lboost_system -pthread")
+set(CMAKE_CXX_STANDARD 20)
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wpedantic -pedantic -fprofile-arcs -ftest-coverage -L/usr/local/Cellar/libpqxx/7.5.2 -L/usr/local/Cellar/libpq/13.3 -pthread")
 
 # Building lib
 set(VISION_LIB_PATH ${PROJECT_SOURCE_DIR}/visionLib)
@@ -29,9 +29,10 @@ add_subdirectory(${VISION_LIB_PATH}/test)
 
 find_package(Boost REQUIRED)
 include_directories(${Boost_LIBRARIES})
-
+include_directories(/usr/local/Cellar/boost/1.75.0_3/include)
 find_library(PQXX_LIB pqxx)
 find_library(PQ_LIB pq)
+include_directories(/usr/local/Cellar/libpqxx/7.5.2/include)
 
 
 file(GLOB sources "${VISION_LIB_PATH}/*/source/*.cpp")
