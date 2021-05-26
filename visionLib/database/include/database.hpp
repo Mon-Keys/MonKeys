@@ -88,6 +88,7 @@ class CompanyDataBase : public DataBase {
   std::vector<CompanyDB> getAllCompanys(const std::string& sql_limit,
                                         const std::string& sql_offset);
   CompanyDB getCompany(const std::string& CompanyName);
+  CompanyDB getCompany(const uint64_t& CompanyID);
 
  private:
   void do_modifying_request(std::string& sql_request);

@@ -116,9 +116,7 @@ std::string clientHandler::getTimeCode(const std::string& Login,
         child.put("privateKey", passes_vec[i].getprivate());
         child.put("companyID", std::to_string(passes_vec[i].getCompanyID()));
 
-
         CompanyDB company = _Codb.getCompany(passes_vec[i].getCompanyID());
-
 
         child.put("companyName", company.getName());
 

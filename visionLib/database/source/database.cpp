@@ -394,6 +394,17 @@ ClientDB ClientDataBase::getClient(const std::string login) {
                   row[2].as<std::string>(), row[3].as<std::string>());
   return result;
 }
+
+CompanyDB CompanyDataBase::getCompany(const uint64_t& CompanyID) {
+  std::string sql_request = "select * from company where company.id = '" +
+                            std::to_string(CompanyID) + "'";
+  pqxx::result r = do_select_request(sql_request);
+
+  const auto& row = r.at(0);
+  CompanyDB result(row[0].as<uint64_t>(), row[1].as<std::string>());
+  return result;
+}
+
 CompanyDB CompanyDataBase::getCompany(const std::string& CompanyName) {
   std::string sql_request =
       "select * from company where company.company_name = '" + CompanyName +
