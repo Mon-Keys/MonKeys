@@ -49,7 +49,6 @@ std::string clientHandler::logInClient(const std::string& Login,
     return "server_auth.json";
   }
 }
-std::string clientHandler::logOutClient(uint64_t ClientID) { return ""; }
 std::string clientHandler::registerClient(const std::string& Login,
                                           const std::string& Email,
                                           const std::string& Password) {
@@ -227,18 +226,4 @@ std::string clientHandler::addCleintsPass(const std::string& Login,
   boost::property_tree::write_json("server_add_pass.json", tree);
 
   return "server_add_pass.json";
-}
-
-std::string clientHandler::logOutAdmin() {
-  boost::property_tree::ptree tree;
-
-  bool exist = existsClient("server_auth.json");
-  if (!exist) {
-    std::ofstream ofs("server_auth.json");
-    ofs.close();
-  }
-
-  tree.put("status", "not_auth");
-  boost::property_tree::write_json("server_admin_auth.json", tree);
-  return "server_admin_auth.json";
 }
