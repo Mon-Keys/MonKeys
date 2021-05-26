@@ -75,7 +75,6 @@ void handle_request(beast::string_view doc_root,
                     Send&& send) {
 
     if (req.method() == http::verb::options) {
-      std::cout << "jops" << std::endl;
       http::response<http::empty_body> res{http::status::no_content, req.version()};
       res.set(http::field::server, BOOST_BEAST_VERSION_STRING);
       res.keep_alive(req.keep_alive());
@@ -84,7 +83,6 @@ void handle_request(beast::string_view doc_root,
       res.set(http::field::access_control_allow_headers, "Content-Type");
       return send(std::move(res));
   }
-  std::cout << "still here" << std::endl;
   // Returns a bad request response
   auto const bad_request = [&req](beast::string_view why) {
     http::response<http::string_body> res{http::status::bad_request,
@@ -137,8 +135,6 @@ void handle_request(beast::string_view doc_root,
   // Build the path to the requested file
   std::string path;
   std::string jsonName;
-  //  = path_cat(doc_root, req.target());
-
   if (!strcmp(req.target().data(), "/registr")) {
     property_tree::ptree reqJson;
     std::stringstream jsonStream(req.body());
@@ -151,19 +147,16 @@ void handle_request(beast::string_view doc_root,
   } else if (!strcmp(req.target().data(), "/auth")) {
     property_tree::ptree reqJson;
     std::stringstream jsonStream(req.body());
+    property_tree::read_json(jsonStream, reqJson);
     
-    std::cout << "still here" << std::endl;
     try {
-      property_tree::read_json(jsonStream, reqJson);
       std::string login = reqJson.get<std::string>("login");
-          std::string password = reqJson.get<std::string>("password");
-          std::cout << "hello";
-          jsonName = currentHandler.logInClient(login, password);
+      std::string password = reqJson.get<std::string>("password");
+      jsonName = currentHandler.logInClient(login, password);
     }
     catch (const std::exception &exc)
       {
           std::cout << exc.what();
-          std::cout << "whoop" << std::endl;
           
       }
     
@@ -178,7 +171,6 @@ void handle_request(beast::string_view doc_root,
   }
   path = path_cat(doc_root, "/");
   path.append(jsonName);
-  // path.append("/server.json");
 
   // Attempt to open the file
   beast::error_code ec;
@@ -198,10 +190,7 @@ void handle_request(beast::string_view doc_root,
   // Cache the size since we need it after the move
   auto const size = body.size();
 
-  std::cout << req << std::endl << req.target();
-  
-  
-  
+  std::cout << req << std::endl;
   
   // Respond to HEAD request
   if (req.method() == http::verb::head) {
@@ -223,7 +212,6 @@ void handle_request(beast::string_view doc_root,
   res.content_length(size);
   res.keep_alive(req.keep_alive());
   res.set(http::field::access_control_allow_origin, "*");
-  std::cout << "jopa" << std::endl << std::endl;
   return send(std::move(res));
 }
 

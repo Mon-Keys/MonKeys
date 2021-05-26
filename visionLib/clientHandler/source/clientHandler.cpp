@@ -98,6 +98,7 @@ std::string clientHandler::getTimeCode(const std::string& Login,
   ClientDB client = _Cldb.getClient(Login);
 
   if (client.getPassword() == Password) {
+
     tree.put("status", "success");
     tree.put("ID", std::to_string(client.getID()));
     tree.put("login", client.getLogin());
@@ -179,7 +180,6 @@ std::string clientHandler::addCleintsPass(const std::string& Login,
                             const std::string& Name) {
   boost::property_tree::ptree tree;
 
-
   bool exist = existsClient("server_add_pass.json");
   if (!exist) {
     std::ofstream ofs("server_add_pass.json");
@@ -208,8 +208,6 @@ std::string clientHandler::addCleintsPass(const std::string& Login,
     return "server_add_pass.json";
   }
 
-  std::cout << client.getID() << std::endl << company.getID() << std::endl;
-
   srand(time(NULL));
 
   char let [17] = "0123456789ABCDEF";
@@ -218,8 +216,6 @@ std::string clientHandler::addCleintsPass(const std::string& Login,
 
   for (int i = 0; i < 40; ++i)
     str += let[rand()%16];
-
-  std::cout << str << std::endl;
 
   uint64_t pass_id = _Passdb.insertPass(str, company.getID(), client.getID());
 

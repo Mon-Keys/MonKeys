@@ -61,7 +61,7 @@ export default {
                     )
             };
             alert(this.register.email)
-            fetch("http://172.20.10.2:8080/registr", requestOptions)
+            fetch("http://192.168.0.104:8080/registr", requestOptions)
             .then(response => 
                     response.json().then(data => ({
                         data: data,
