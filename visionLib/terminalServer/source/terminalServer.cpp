@@ -136,10 +136,18 @@ void handle_request_terminal(
     property_tree::ptree reqJson;
     std::stringstream jsonStream(req.body());
     property_tree::read_json(jsonStream, reqJson);
-    std::string timecode = reqJson.get<std::string>("timecode");
-    uint64_t companyID = reqJson.get<uint64_t>("companyID");
+    
+    try {
+      std::string timecode = reqJson.get<std::string>("timecode");
+      std::string companyName = reqJson.get<std::string>("companyName");
+      std::string licenseKey = reqJson.get<std::string>("licenseKey");
 
-    jsonName = currentHandler.compareTimeCode(timecode, companyID);
+      jsonName = currentHandler.compareTimeCode(timecode, companyName, licenseKey);
+    } catch (const std::exception &exc) {
+      // jsonName - нужно значение
+      std::cout << exc.what();
+    }
+    
   }
   path = path_cat_terminal(doc_root, "/");
   path.append(jsonName);
