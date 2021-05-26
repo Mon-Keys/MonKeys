@@ -176,8 +176,12 @@ void TerminalSession::on_read(beast::error_code ec,
 
   std::string verification = resJson.get<std::string>("verification");
   if (!std::strcmp(verification.c_str(), "success")) {
+    system("clear");
+
     std::cout << "access open\n";
   } else {
+    system("clear");
+
     std::cout << "access closed\n";
   }
 
