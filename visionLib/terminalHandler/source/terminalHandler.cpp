@@ -59,7 +59,7 @@ std::string TerminalHandler::compareTimeCode(const std::string& timeCode,
   std::string second_src = generator.generateTimeCode();
 
   if (second_src == timeCode)
-    tree.put("verifiaction", "success");
+    tree.put("verification", "success");
   else
     tree.put("verification", "error_not_compare");
 

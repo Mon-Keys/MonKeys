@@ -18,14 +18,13 @@ void failTerminal(beast::error_code ec, char const* what) {
   std::cerr << what << ": " << ec.message() << "\n";
 }
 
-template <class Body, class Allocator, class Send>
-void sendTerminalRequest(
-    beast::error_code ec,
-    http::request<Body, http::basic_fields<Allocator>>&& req, Send&& send) {
+void createConfigFile() {
   bool exist = exists("config.json");
   property_tree::ptree confData;
   if (!exist) {
     std::string companyID;
+    std::cout << "---------------Начальная настройка---------------\n"
+              << "Введите ID компании, которой принадлежит терминал:\n";
     std::cin >> companyID;
 
     std::ofstream ofs("config.json");
@@ -33,13 +32,20 @@ void sendTerminalRequest(
 
     confData.put("companyID", companyID);
     property_tree::write_json("config.json", confData);
-  } else {
-    property_tree::read_json("config.json", confData);
   }
+}
+
+template <class Body, class Allocator, class Send>
+void sendTerminalRequest(
+    beast::error_code ec,
+    http::request<Body, http::basic_fields<Allocator>>&& req, Send&& send,
+    const std::string& timecode) {
+  property_tree::ptree confData;
+  property_tree::read_json("config.json", confData);
 
   if (!strcmp(req.target().data(), "/checktimecode")) {
-    std::string timecode;
-    std::cin >> timecode;
+    // std::string timecode;
+    // std::cin >> timecode;
     int companyID = confData.get<int>("companyID");
 
     property_tree::ptree reqData;
@@ -54,16 +60,6 @@ void sendTerminalRequest(
   body.open(path.c_str(), beast::file_mode::scan, ec);
 
   req.body() = std::move(body);
-
-  // std::ifstream file("client.json");
-  // std::string line;
-  // std::string body;
-  // while (std::getline(file, line))
-  // {
-  //     body += line;
-  // }
-
-  // req.body() = std::move(body);
 
   auto const size = body.size();
 
@@ -94,13 +90,15 @@ void TerminalSession::send_lambda::operator()(
 
 // Start the asynchronous operation
 void TerminalSession::run(char const* host, char const* port,
-                          std::string target, int version) {
+                          std::string target, int version,
+                          const std::string& currentTimecode) {
   // Set up an HTTP GET request message
   req_.version(version);
   req_.method(http::verb::post);
   req_.target(target);
   req_.set(http::field::host, host);
   req_.set(http::field::user_agent, BOOST_BEAST_VERSION_STRING);
+  timecode_ = currentTimecode;
 
   // Look up the domain name
   resolver_.async_resolve(
@@ -133,11 +131,7 @@ void TerminalSession::on_connect(beast::error_code ec,
   // Set a timeout on the operation
   stream_.expires_after(std::chrono::seconds(30));
 
-  sendTerminalRequest(ec, std::move(req_), lambda_);
-
-  // Send the HTTP request to the remote host
-  // http::async_write(stream_, req_,
-  // beast::bind_front_handler(&Session::on_write, shared_from_this()));
+  sendTerminalRequest(ec, std::move(req_), lambda_, timecode_);
 }
 
 void TerminalSession::on_write(bool close, beast::error_code ec,
@@ -151,10 +145,6 @@ void TerminalSession::on_write(bool close, beast::error_code ec,
   reqsp_ = nullptr;
 
   do_read();
-
-  // Receive the HTTP response
-  // http::async_read(stream_, buffer_, res_,
-  // beast::bind_front_handler(&Session::on_read, shared_from_this()));
 }
 
 void TerminalSession::do_read() {
@@ -184,15 +174,16 @@ void TerminalSession::on_read(beast::error_code ec,
   std::stringstream jsonStream(res_.body());
   property_tree::read_json(jsonStream, resJson);
 
-  // property_tree::ptree clientJson;
-  // property_tree::read_json("client.json", clientJson);
-  // std::string password = clientJson.get<std::string>("password");
-  // resJson.put("password", password);
-  // resJson.erase("verification");
+  std::string verification = resJson.get<std::string>("verification");
+  if (!std::strcmp(verification.c_str(), "success")) {
+    system("clear");
 
-  // property_tree::write_json("client.json", resJson);
+    std::cout << "access open\n";
+  } else {
+    system("clear");
 
-  std::cout << res_ << std::endl;
+    std::cout << "access closed\n";
+  }
 
   // Gracefully close the socket
   stream_.socket().shutdown(tcp::socket::shutdown_both, ec);

@@ -22,3 +22,8 @@ clang-format -i -style=Google ../visionLib/terminalHandler/source/*.cpp
 clang-format -i -style=Google ../visionLib/terminalServer/source/*.cpp
 clang-format -i -style=Google ../visionLib/terminalHandler/source/*.cpp
 clang-format -i -style=Google ../visionLib/timecode/source/*.cpp
+
+clang-format -i -style=Google ../terminalClient/*.cpp 
+clang-format -i -style=Google ../terminalServer/*.cpp 
+clang-format -i -style=Google ../userClient/*.cpp 
+clang-format -i -style=Google ../userServer/*.cpp 
