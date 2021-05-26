@@ -262,7 +262,12 @@ using ::testing::Return;
 
 // TEST(addPassTEST, addPassTest) {
 //   clientHandler CLH;
-//   std::string status = CLH.addCleintsPass(20, 16);
+//   std::string status = CLH.logInAdmin("Monkeys", "FKMDF");
+// }
+
+// TEST(addPassTEST, addPassTest) {
+//   clientHandler CLH;
+//   std::string status = CLH.addCleintsPass("Mikhail", "jnl");
 // }
 
 // TEST(registerTEST, registerInCorrect) {

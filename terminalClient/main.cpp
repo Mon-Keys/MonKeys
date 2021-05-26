@@ -79,7 +79,7 @@ int main(int argc, char **argv) {
         // send http request to the server
         net::io_context ioc;
         std::make_shared<TerminalSession>(ioc)->run(
-            "192.168.0.104", "8181", "/checktimecode", 11, symbol->get_data());
+            "192.168.1.69", "8181", "/checktimecode", 11, symbol->get_data());
         ioc.run();
         previousCode = symbol->get_data();
       }

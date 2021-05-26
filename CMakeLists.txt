@@ -26,7 +26,7 @@ add_subdirectory(${VISION_LIB_PATH}/test)
 
 
 # </Test>
-set(OpenCV_DIR /home/marvin/scripts/installation/OpenCV-master/lib/cmake/opencv4)
+set(OpenCV_DIR /home/ilyagu/installation/OpenCV-master/lib/cmake/opencv4)
 find_package(Threads REQUIRED)
 find_package(OpenCV REQUIRED)
 
