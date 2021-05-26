@@ -4,7 +4,7 @@
     
     <div>
         <!-- пропуска -->
-        <button v-on:click="updateTempCodes">clown </button>
+        
          
                 <li v-for="pass in res.passes" v-bind:key="pass.passID" 
                 
@@ -138,7 +138,7 @@ export default {
                         )
                 };
                 
-                fetch("http://127.0.0.1:8080/timecode", requestOptions)
+                fetch("http://192.168.31.65:8080/timecode", requestOptions)
                 .then(response => 
                         response.json().then(data => ({
                             data: data,

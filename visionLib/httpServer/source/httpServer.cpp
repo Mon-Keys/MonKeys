@@ -79,7 +79,7 @@ void handle_request(beast::string_view doc_root,
       http::response<http::empty_body> res{http::status::no_content, req.version()};
       res.set(http::field::server, BOOST_BEAST_VERSION_STRING);
       res.keep_alive(req.keep_alive());
-      res.set(http::field::access_control_allow_origin, "http://localhost:3000");
+      res.set(http::field::access_control_allow_origin, "*");
       res.set(http::field::access_control_allow_methods, "POST");
       res.set(http::field::access_control_allow_headers, "Content-Type");
       return send(std::move(res));
@@ -210,7 +210,7 @@ void handle_request(beast::string_view doc_root,
     res.set(http::field::content_type, mime_type(path));
     res.content_length(size);
     res.keep_alive(req.keep_alive());
-    res.set(http::field::access_control_allow_origin, "http://localhost:3000");
+    res.set(http::field::access_control_allow_origin, "*");
     return send(std::move(res));
   }
 
@@ -222,7 +222,7 @@ void handle_request(beast::string_view doc_root,
   res.set(http::field::content_type, mime_type(path));
   res.content_length(size);
   res.keep_alive(req.keep_alive());
-  res.set(http::field::access_control_allow_origin, "http://localhost:3000");
+  res.set(http::field::access_control_allow_origin, "*");
   std::cout << "jopa" << std::endl << std::endl;
   return send(std::move(res));
 }

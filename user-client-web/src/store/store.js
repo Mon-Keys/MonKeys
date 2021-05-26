@@ -17,7 +17,7 @@ const store = createStore({
                 state.loggedin = true
             }
             console.log(state.auth)
-            alert(state.loggedin)
+            
         },
         GET_TIMECODES: (state, res) => {
             state.res = res;

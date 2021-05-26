@@ -2,8 +2,8 @@
      <!-- форма входа -->
         
             <div>
-                <h3> Выполните вход </h3>
-            <form @submit.prevent="CreatePost">
+                <h3> Регистрация </h3>
+            <form @submit.prevent="CreatePost" style="display: flex; flex-direction: column; justify-content: center;">
                 <div>
                     <label for="auth.login"> Логин </label>
                     <input type="text" id="login" v-model="auth.login">
@@ -12,7 +12,11 @@
                     <label for="auth.password"> Пароль </label>
                     <input type="text" id="auth.password" v-model="auth.password">
                 </div>
-                <button v-on:click="createPost"> Login </button>
+                <div>
+                    <label for="auth.password"> Повторите пароль </label>
+                    <input type="text" id="auth.password" v-model="auth.password">
+                </div>
+                <button v-on:click="createPost"> Зарегистрироваться </button>
             </form>
             <div>
                 {{this.$store.auth}}
