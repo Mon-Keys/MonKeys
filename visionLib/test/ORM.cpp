@@ -257,7 +257,12 @@ using ::testing::Return;
 
 // TEST(getTimeTEST, getTimeCorrect) {
 //   clientHandler CLH;
-//   std::string status = CLH.getTimeCode("login", "password");
+//   std::string status = CLH.getTimeCode("Leonid", "yaloh");
+// }
+
+// TEST(addPassTEST, addPassTest) {
+//   clientHandler CLH;
+//   std::string status = CLH.addCleintsPass(20, 16);
 // }
 
 // TEST(registerTEST, registerInCorrect) {

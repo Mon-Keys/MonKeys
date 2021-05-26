@@ -234,6 +234,21 @@ bool PassDataBase::PassExists(const uint64_t& PassID) {
   }
 }
 
+bool PassDataBase::PassExists(const uint64_t& ClientID,
+                              const uint64_t& CompanyID) {
+  auto exist_sql_req =
+      ("select exists(select id from pass where pass.client_id = " +
+       std::to_string(ClientID) +
+       " and pass.company_id = " + std::to_string(CompanyID) + ")");
+  pqxx::result exist = do_select_request(exist_sql_req);
+  auto exist_flag = exist[0][0].as<std::string>();
+  if (exist_flag == "t") {
+    return true;
+  } else {
+    return false;
+  }
+}
+
 bool ClientDataBase::ClientExists(const std::string& login) {
   auto exist_sql_req =
       ("select exists(select id from client where client.login = '" + login +
@@ -379,13 +394,15 @@ ClientDB ClientDataBase::getClient(const std::string login) {
                   row[2].as<std::string>(), row[3].as<std::string>());
   return result;
 }
-CompanyDB CompanyDataBase::getCompany(const uint64_t& CompanyID) {
-  std::string sql_request = "select * from company where company.id = '" +
-                            std::to_string(CompanyID) + "'";
+CompanyDB CompanyDataBase::getCompany(const std::string& CompanyName) {
+  std::string sql_request =
+      "select * from company where company.company_name = '" + CompanyName +
+      "'";
   pqxx::result r = do_select_request(sql_request);
 
   const auto& row = r.at(0);
-  CompanyDB result(row[0].as<uint64_t>(), row[1].as<std::string>());
+  CompanyDB result(row[0].as<uint64_t>(), row[1].as<std::string>(),
+                   row[2].as<std::string>());
   return result;
 }
 
