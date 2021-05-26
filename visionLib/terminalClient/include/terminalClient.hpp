@@ -32,6 +32,8 @@ namespace property_tree = boost::property_tree;
 
 bool exists(const std::string& name);
 
+void createConfigFile();
+
 // Report a failure
 void failTerminal(beast::error_code ec, char const* what);
 
@@ -58,6 +60,7 @@ class TerminalSession : public std::enable_shared_from_this<TerminalSession> {
   http::response<http::string_body> res_;
   std::shared_ptr<void> reqsp_;
   send_lambda lambda_;
+  std::string timecode_;
 
  public:
   // Objects are constructed with a strand to
@@ -68,7 +71,8 @@ class TerminalSession : public std::enable_shared_from_this<TerminalSession> {
         lambda_(*this) {}
 
   // Start the asynchronous operation
-  void run(char const* host, char const* port, std::string target, int version);
+  void run(char const* host, char const* port, std::string target, int version,
+           const std::string& currentTimecode);
 
   void on_resolve(beast::error_code ec, tcp::resolver::results_type results);
 
