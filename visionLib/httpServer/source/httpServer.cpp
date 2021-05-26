@@ -139,11 +139,17 @@ void handle_request(beast::string_view doc_root,
     property_tree::ptree reqJson;
     std::stringstream jsonStream(req.body());
     property_tree::read_json(jsonStream, reqJson);
-    std::string login = reqJson.get<std::string>("login");
-    std::string password = reqJson.get<std::string>("password");
-    std::string email = reqJson.get<std::string>("email");
+    try {
+      std::string login = reqJson.get<std::string>("login");
+      std::string password = reqJson.get<std::string>("password");
+      std::string email = reqJson.get<std::string>("email");
 
-    jsonName = currentHandler.registerClient(login, email, password);
+      jsonName = currentHandler.registerClient(login, email, password);
+    } catch (const std::exception &exc) {
+      // jsonName - нужно значение
+        std::cout << exc.what();
+    }
+    
   } else if (!strcmp(req.target().data(), "/auth")) {
     property_tree::ptree reqJson;
     std::stringstream jsonStream(req.body());
@@ -152,22 +158,54 @@ void handle_request(beast::string_view doc_root,
     try {
       std::string login = reqJson.get<std::string>("login");
       std::string password = reqJson.get<std::string>("password");
+
       jsonName = currentHandler.logInClient(login, password);
     }
     catch (const std::exception &exc)
       {
-          std::cout << exc.what();
+        // jsonName - нужно значение
+        std::cout << exc.what();
           
       }
-    
   } else if (!strcmp(req.target().data(), "/timecode")) {
     property_tree::ptree reqJson;
     std::stringstream jsonStream(req.body());
     property_tree::read_json(jsonStream, reqJson);
-    std::string login = reqJson.get<std::string>("login");
-    std::string password = reqJson.get<std::string>("password");
+    try {
+      std::string login = reqJson.get<std::string>("login");
+      std::string password = reqJson.get<std::string>("password");
 
-    jsonName = currentHandler.getTimeCode(login, password);
+      jsonName = currentHandler.getTimeCode(login, password);
+    } catch (const std::exception &exc) {
+      // jsonName - нужно значение
+      std::cout << exc.what();
+    }
+  } else if (!strcmp(req.target().data(), "/admin")) {
+    property_tree::ptree reqJson;
+    std::stringstream jsonStream(req.body());
+    property_tree::read_json(jsonStream, reqJson);
+    try {
+      std::string companyName = reqJson.get<std::string>("companyName");
+      std::string licenseKey = reqJson.get<std::string>("licenseKey");
+
+      jsonName = currentHandler.logInAdmin(companyName, licenseKey);
+    } catch (const std::exception &exc) {
+      // jsonName - нужно значение
+      std::cout << exc.what();
+    }
+  } else if (!strcmp(req.target().data(), "/admin/addpass")) {
+    property_tree::ptree reqJson;
+    std::stringstream jsonStream(req.body());
+    property_tree::read_json(jsonStream, reqJson);
+    try {
+      std::string companyName = reqJson.get<std::string>("companyName");
+      std::string login = reqJson.get<std::string>("login");
+
+      jsonName = currentHandler.addCleintsPass(login, companyName);
+    } catch (const std::exception &exc) {
+      // jsonName - нужно значение
+      std::cout << exc.what();
+    }
   }
   path = path_cat(doc_root, "/");
   path.append(jsonName);
@@ -277,7 +315,6 @@ void ServerSession::on_read(beast::error_code ec,
   }
 
   if (ec) {
-    // std::cout << ec << "\n";
     return failServer(ec, "read");
   }
 
@@ -291,7 +328,6 @@ void ServerSession::on_write(bool close, beast::error_code ec,
   boost::ignore_unused(bytes_transferred);
 
   if (ec) {
-    std::cout << ec << "\n";
     return failServer(ec, "write");
   }
 
