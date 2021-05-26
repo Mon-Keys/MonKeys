@@ -26,7 +26,10 @@
       </div>
       <div v-if="loginStatus"> 
       <div class="navbarItem">
-          Logged in as {{usernameLoggedIn}} 
+          В системе как 
+      <div style="color: red;">
+        {{usernameLoggedIn}}
+      </div> 
         </div> 
           
       
@@ -174,6 +177,7 @@ body {
   color: black;
   text-decoration: none;
   padding: 10px;
+  height: 40px;
   border: 1px solid black;
 }
 @keyframes slideInside {

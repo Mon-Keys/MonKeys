@@ -5,16 +5,18 @@
                 <h3> Регистрация </h3>
             <form @submit.prevent="CreatePost" style="display: flex; flex-direction: column; justify-content: center;">
                 <div>
-                    <label for="auth.login"> Логин </label>
-                    <input type="text" id="login" v-model="auth.login">
+                    <label for="register.login"> Логин </label>
+                    <input type="text" id="login" v-model="register.login">
                 </div>
                 <div>
-                    <label for="auth.password"> Пароль </label>
-                    <input type="text" id="auth.password" v-model="auth.password">
+                    <label for="register.password"> Пароль </label>
+                    <input type="text" id="register.password" v-model="register.password">
                 </div>
+               
+                
                 <div>
-                    <label for="auth.password"> Повторите пароль </label>
-                    <input type="text" id="auth.password" v-model="auth.password">
+                    <label for="register.email"> Email </label>
+                    <input type="text" id="register.email" v-model="register.email">
                 </div>
                 <button v-on:click="createPost"> Зарегистрироваться </button>
             </form>
@@ -37,8 +39,10 @@ export default {
     },
     data() {
         return { 
-            auth :{
-                
+            register :{
+                login: "",
+                password: "",
+                email: ""
             }
         }
     },
@@ -50,12 +54,14 @@ export default {
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(
                     { 
-                        "login": this.auth.login, 
-                        "password": this.auth.password
+                        "login": this.register.login, 
+                        "password": this.register.password,
+                        "email": this.register.email
                     }
                     )
             };
-            fetch("http://192.168.31.65:8080/timecode", requestOptions)
+            alert(this.register.email)
+            fetch("http://172.20.10.2:8080/registr", requestOptions)
             .then(response => 
                     response.json().then(data => ({
                         data: data,
