@@ -395,6 +395,32 @@ ClientDB ClientDataBase::getClient(const std::string login) {
   return result;
 }
 
+std::vector<std::string> ClientDataBase::getCompanysOfClient(const std::string& Login) {
+  std::vector<std::string> result;
+
+  auto exist_sql_req = "select exists(select company.company_name from" 
+  "client join pass on client.id = pass.client_id"
+  "join company on company.id = pass.company_id"
+  "where client.login = '" + Login + "')";
+  pqxx::result exist = do_select_request(exist_sql_req);
+  auto exist_flag = exist[0][0].as<std::string>();
+  if (exist_flag == "f") {
+    std::cout << "No companys for this client" << std::endl;
+    return result;
+  }
+
+  std::string sql_request = "select company.company_name from" 
+  "client join pass on client.id = pass.client_id"
+  "join company on company.id = pass.company_id"
+  "where client.login = '" + Login + "'";
+  pqxx::result r = do_select_request(sql_request);
+
+  for (const auto& row : r) {
+    result.push_back(row[0].as<std::string>());
+  }
+  return result;
+}
+
 CompanyDB CompanyDataBase::getCompany(const uint64_t& CompanyID) {
   std::string sql_request = "select * from company where company.id = " +
                             std::to_string(CompanyID);
@@ -418,6 +444,32 @@ CompanyDB CompanyDataBase::getCompany(const std::string& CompanyName) {
   const auto& row = r.at(0);
   CompanyDB result(row[0].as<uint64_t>(), row[1].as<std::string>(),
                    row[2].as<std::string>());
+  return result;
+}
+
+std::vector<std::string> CompanyDataBase::getClientsOfCompany(const std::string& Name) {
+  std::vector<std::string> result;
+
+  auto exist_sql_req = "select exists(select client.login from" 
+  "client join pass on client.id = pass.client_id"
+  "join company on company.id = pass.company_id"
+  "where company.company_name = '" + Name + "')";
+  pqxx::result exist = do_select_request(exist_sql_req);
+  auto exist_flag = exist[0][0].as<std::string>();
+  if (exist_flag == "f") {
+    std::cout << "No clients for this company" << std::endl;
+    return result;
+  }
+
+  std::string sql_request = "select client.login from" 
+  "client join pass on client.id = pass.client_id"
+  "join company on company.id = pass.company_id"
+  "where company.company_name = '" + Name + "'";
+  pqxx::result r = do_select_request(sql_request);
+
+  for (const auto& row : r) {
+    result.push_back(row[0].as<std::string>());
+  }
   return result;
 }
 

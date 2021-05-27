@@ -62,7 +62,7 @@ export default {
                     }
                     )
             };
-            fetch("http://192.168.1.69:8080/timecode", requestOptions)
+            fetch("http://192.168.43.121:8080/timecode", requestOptions)
             .then(response => 
                     response.json().then(data => ({
                         data: data,

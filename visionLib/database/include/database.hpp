@@ -68,6 +68,7 @@ class ClientDataBase : public DataBase {
   std::vector<ClientDB> getAllClients(const std::string& sql_limit,
                                       const std::string& sql_offset);
   ClientDB getClient(const std::string login);
+  std::vector<std::string> getCompanysOfClient(const std::string& Login);
 
  private:
   void do_modifying_request(std::string& sql_request);
@@ -89,6 +90,7 @@ class CompanyDataBase : public DataBase {
                                         const std::string& sql_offset);
   CompanyDB getCompany(const std::string& CompanyName);
   CompanyDB getCompany(const uint64_t& CompanyID);
+  std::vector<std::string> getClientsOfCompany(const std::string& Name);
 
  private:
   void do_modifying_request(std::string& sql_request);
