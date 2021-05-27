@@ -2,6 +2,7 @@
     
     <div id="nav">
     <div style="display: flex; align-items: center; justify-content: center;" class="bitfont">
+      
       <div v-if="loginStatus"> 
       <router-link :to="{ name: 'Timecodes'}">
         <div class="navbarItem">
@@ -9,10 +10,18 @@
         </div>
       </router-link>
       </div>
+      <div v-if="!loginStatus "> 
+      
+        <router-link :to="{ name: 'Login'}">
+          <div class="navbarItem">
+            Войти 
+          </div> 
+        </router-link>
+      </div>
       <div v-if="!loginStatus"> 
-      <router-link :to="{ name: 'Login'}">
+      <router-link :to="{ name: 'Admin'}">
         <div class="navbarItem">
-          Войти 
+          Администрирование
         </div> 
       </router-link>
       </div>
@@ -62,6 +71,9 @@ export default {
         },
         usernameLoggedIn () {
             return this.$store.state.auth.login
+        },
+        adminLoggedIn () {
+            return this.$store.state.adminLoggedIn
         }
     },
   data() {

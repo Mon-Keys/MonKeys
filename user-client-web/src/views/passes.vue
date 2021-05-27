@@ -5,7 +5,7 @@
     <div>
         <!-- пропуска -->
         
-         
+         <div v-if="res.passes!='no_passes'">
                 <li v-for="pass in res.passes" v-bind:key="pass.passID" 
                 
                 style="list-style-type: none; padding: 0px;"
@@ -49,9 +49,10 @@
                     </div>
                     </transition>
                 </li>
+         </div>
 
     </div>
-    <div v-if="res.passes===''">
+    <div v-if="res.passes==='no_passes'">
         <div class="noPasses">
         У вас пока нет пропусков!
         </div>
@@ -152,6 +153,7 @@ export default {
                     ).then(res => {
                         this.res = res.data;
                     }));
+                
             }
         },
         updateFloor(){
