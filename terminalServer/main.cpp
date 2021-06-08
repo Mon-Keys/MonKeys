@@ -10,19 +10,6 @@
 
 
 int main(int argc, char* argv[]) {
-  // Check command line arguments.
-  // if (argc != 5) {
-  //     std::cerr <<
-  //               "Usage: http-server-async <address> <port> <doc_root>
-  //               <threads>\n" << "Example:\n" << "    http-server-async
-  //               0.0.0.0 8080 . 1\n";
-  //     return EXIT_FAILURE;
-  // }
-
-  // auto const address = net::ip::make_address(argv[1]);
-  // auto const port = static_cast<unsigned short>(std::atoi(argv[2]));
-  // auto const doc_root = std::make_shared<std::string>(argv[3]);
-  // auto const threads = std::max<int>(1, std::atoi(argv[4]));
 
   const boost::asio::ip::address address = net::ip::make_address("127.0.0.1");
   const unsigned short port = static_cast<unsigned short>(std::atoi("8181"));
