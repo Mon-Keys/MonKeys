@@ -120,7 +120,7 @@ class PassageDB {
  public:
   PassageDB() = default;
 
-  explicit PassageDB(uint64_t _ID, time_t _time, uint8_t _actionType,
+  explicit PassageDB(uint64_t _ID, std::string _time, uint8_t _actionType,
                      uint64_t _PassID)
       : ID(_ID), time(_time), actionType(_actionType), PassID(_PassID) {}
 
@@ -129,18 +129,18 @@ class PassageDB {
   ~PassageDB() = default;
 
   uint64_t getID() { return ID; }
-  time_t getTime() { return time; }
+  std::string getTime() { return time; }
   uint8_t getActionType() { return actionType; }
   uint64_t getPassID() { return PassID; }
 
   void setID(uint64_t _ID) { ID = _ID; }
-  void setTime(time_t _time) { time = _time; }
+  void setTime(std::string _time) { time = _time; }
   void setActionType(uint8_t _actionType) { actionType = _actionType; }
   void setPassID(uint64_t _PassID) { PassID = _PassID; }
 
  private:
   uint64_t ID;
-  time_t time;
+  std::string time;
   uint8_t actionType;
   uint64_t PassID;
 };
