@@ -28,7 +28,7 @@ int main(int argc, char** argv) {
 
   // Launch the asynchronous operation
   // std::make_shared<ClientSession>(ioc)->run(host, port, target, version);
-  std::make_shared<ClientSession>(ioc)->run("127.0.0.1", "8080", "/timecode", 11);
+  std::make_shared<ClientSession>(ioc)->run("192.168.31.234", "8080", "/timecode", 11);
 
   // Run the I/O service. The call will return when
   // the get operation is complete.

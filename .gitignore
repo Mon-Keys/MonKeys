@@ -21,6 +21,13 @@ node_modules/
 .env.local
 .env.*.local
 
+#openCV files
+scripts/installation
+scripts/opencv
+scripts/opencv_contrib
+scripts/OpenCV-master-py3
+
+
 # Log files
 npm-debug.log*
 yarn-debug.log*

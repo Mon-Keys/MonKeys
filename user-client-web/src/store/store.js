@@ -2,7 +2,16 @@ import { createStore } from "vuex"
 
 const store = createStore({
     state:{
+        adminErrorMessage: "",
+        passadminErrorMessage: "",
         loggedin: false,
+        adminLoggedIn: false,
+        addPass: {
+
+        },
+        adminAuth: {
+
+        },
         auth:{
             
         },
@@ -29,6 +38,31 @@ const store = createStore({
             
             state.loggedin = val
             state.loggedin = false
+            
+        },
+        ADMIN_LOGIN: (state, val) => {
+            state.adminAuth = val;
+            if(state.adminAuth.status === "success"){
+                state.adminLoggedIn = true
+                
+            } else {
+                state.adminErrorMessage = state.adminAuth.status
+            }
+            alert(state.adminErrorMessage)
+            
+            console.log(state.adminAuth)
+            
+            
+            
+        },
+        ADD_PASS: (state, val) => {
+            state.addPass = val;
+            state.passadminErrorMessage = state.addPass.status
+            alert(state.addPass)
+            
+            console.log(state.addPass)
+            
+            
             
         }
     },

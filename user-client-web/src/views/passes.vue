@@ -5,7 +5,7 @@
     <div>
         <!-- пропуска -->
         
-         
+         <div v-if="res.passes!='no_passes'">
                 <li v-for="pass in res.passes" v-bind:key="pass.passID" 
                 
                 style="list-style-type: none; padding: 0px;"
@@ -49,9 +49,10 @@
                     </div>
                     </transition>
                 </li>
+         </div>
 
     </div>
-    <div v-if="res.passes===''">
+    <div v-if="res.passes==='no_passes'">
         <div class="noPasses">
         У вас пока нет пропусков!
         </div>
@@ -143,7 +144,7 @@ export default {
                         )
                 };
                 
-                fetch("http://192.168.0.104:8080/timecode", requestOptions)
+                fetch("http://192.168.31.234:8080/timecode", requestOptions)
                 .then(response => 
                         response.json().then(data => ({
                             data: data,
@@ -152,6 +153,7 @@ export default {
                     ).then(res => {
                         this.res = res.data;
                     }));
+                
             }
         },
         updateFloor(){

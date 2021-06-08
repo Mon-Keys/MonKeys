@@ -193,7 +193,7 @@ void handle_request(beast::string_view doc_root,
       // jsonName - нужно значение
       std::cout << exc.what();
     }
-  } else if (!strcmp(req.target().data(), "/admin/addpass")) {
+  } else if (!strcmp(req.target().data(), "/addpass")) {
     property_tree::ptree reqJson;
     std::stringstream jsonStream(req.body());
     property_tree::read_json(jsonStream, reqJson);

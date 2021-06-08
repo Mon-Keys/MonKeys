@@ -22,15 +22,18 @@ void createConfigFile() {
   bool exist = exists("config.json");
   property_tree::ptree confData;
   if (!exist) {
-    std::string companyID;
-    std::cout << "---------------Начальная настройка---------------\n"
-              << "Введите ID компании, которой принадлежит терминал:\n";
-    std::cin >> companyID;
+    std::string companyName;
+    std::string licenseKey;
+    std::cout << "-------------------Начальная настройка-------------------\n"
+              << "Введите вашу название вашей компании и лицензионный ключ:\n";
+    std::cin >> companyName;
+    std::cin >> licenseKey;
 
     std::ofstream ofs("config.json");
     ofs.close();
 
-    confData.put("companyID", companyID);
+    confData.put("companyName", companyName);
+    confData.put("licenseKey", licenseKey);
     property_tree::write_json("config.json", confData);
   }
 }
@@ -46,11 +49,13 @@ void sendTerminalRequest(
   if (!strcmp(req.target().data(), "/checktimecode")) {
     // std::string timecode;
     // std::cin >> timecode;
-    int companyID = confData.get<int>("companyID");
+    std::string companyName = confData.get<std::string>("companyName");
+    std::string licenseKey = confData.get<std::string>("licenseKey");
 
     property_tree::ptree reqData;
     reqData.put("timecode", timecode);
-    reqData.put("companyID", companyID);
+    reqData.put("companyName", companyName);
+    reqData.put("licenseKey", licenseKey);
     property_tree::write_json("terminal.json", reqData);
   }
 
@@ -173,8 +178,17 @@ void TerminalSession::on_read(beast::error_code ec,
   property_tree::ptree resJson;
   std::stringstream jsonStream(res_.body());
   property_tree::read_json(jsonStream, resJson);
+  std::cout << "check" << std::endl;
 
-  std::string verification = resJson.get<std::string>("verification");
+  std::string verification = "";
+  try{
+    verification = resJson.get<std::string>("verification");
+  }
+  catch (...) {
+    std::cout << "no verification";
+    verification = "failure";
+  }
+  std::cout << "check" << std::endl;
   if (!std::strcmp(verification.c_str(), "success")) {
     system("clear");
 
