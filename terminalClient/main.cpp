@@ -14,17 +14,10 @@
 
 #include "terminalClient.hpp"
 
-// using namespace cv;
-// using namespace std;
-// using namespace zbar;
-
 int main(int argc, char **argv) {
   createConfigFile();
 
   cv::VideoCapture cap(0);  // open the video camera no. 0
-
-  // cap.set(CV_CAP_PROP_FRAME_WIDTH,800);
-  // cap.set(CV_CAP_PROP_FRAME_HEIGHT,640);
 
   if (!cap.isOpened())  // if not success, exit program
   {

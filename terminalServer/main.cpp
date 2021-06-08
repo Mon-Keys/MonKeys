@@ -8,9 +8,7 @@
 
 #include "terminalServer.hpp"
 
-
 int main(int argc, char* argv[]) {
-
   const boost::asio::ip::address address = net::ip::make_address("127.0.0.1");
   const unsigned short port = static_cast<unsigned short>(std::atoi("8181"));
   const std::shared_ptr<std::string> doc_root =
@@ -36,5 +34,3 @@ int main(int argc, char* argv[]) {
 
   return EXIT_SUCCESS;
 }
-
-

@@ -59,17 +59,17 @@ TEST(ClientExistTEST, ClientExistFalse) {
 }
 
 TEST(PassExistsTEST, PassExistsTrue) {
-PassDataBase Pssdb;
-ClientDataBase Cldb;
-CompanyDataBase Codb;
+  PassDataBase Pssdb;
+  ClientDataBase Cldb;
+  CompanyDataBase Codb;
 
-uint64_t client_id;
-uint64_t company_id;
-uint64_t pass_id;
+  uint64_t client_id;
+  uint64_t company_id;
+  uint64_t pass_id;
 
-client_id = Cldb.insertClient("login", "email", "password");
-company_id = Codb.insertCompany("company_name");
-pass_id = Pssdb.insertPass("FKADSFM23JFN2", company_id, client_id);
+  client_id = Cldb.insertClient("login", "email", "password");
+  company_id = Codb.insertCompany("company_name");
+  pass_id = Pssdb.insertPass("FKADSFM23JFN2", company_id, client_id);
 
   bool flag = Pssdb.PassExists(pass_id);
 
@@ -113,12 +113,11 @@ TEST(getClientsPassesTEST, getClientsPassesCorrect) {
 
   std::vector<PassDB> passes = Pssdb.getClientsPasses(client_temp);
 
-  for(int i = 0; i < passes.size(); i++) {
-    std::cout <<
-    passes[i].getID() << std::endl <<
-    passes[i].getprivate() << std::endl <<
-    passes[i].getCompanyID() << std::endl <<
-    passes[i].getClientID() << std::endl;
+  for (int i = 0; i < passes.size(); i++) {
+    std::cout << passes[i].getID() << std::endl
+              << passes[i].getprivate() << std::endl
+              << passes[i].getCompanyID() << std::endl
+              << passes[i].getClientID() << std::endl;
   }
 
   bool flag = Pssdb.deletePass(pass_id);
@@ -138,7 +137,6 @@ TEST(getClientsPassesTEST, getClientsPassesInCorrect) {
   uint64_t client_id = Cldb.insertClient("login", "email", "password");
 
   std::vector<PassDB> passes = Pssdb.getClientsPasses(100);
-
 }
 
 TEST(getClientTEST, getClientTest) {
@@ -166,9 +164,9 @@ TEST(getClientTEST, getClientTest) {
 TEST(getPassTEST, getPassTest) {
   PassDataBase Pdb;
   PassDB temp = Pdb.getPass(1);
-  std::cout<< "ID:\t" << temp.getID() << "\nprivate_key:\t" <<
-  temp.getprivate() << "\nCompany_ID:\t" << temp.getCompanyID() <<
-  "\n Client_ID\t" << temp.getClientID() << std::endl;
+  std::cout << "ID:\t" << temp.getID() << "\nprivate_key:\t"
+            << temp.getprivate() << "\nCompany_ID:\t" << temp.getCompanyID()
+            << "\n Client_ID\t" << temp.getClientID() << std::endl;
   EXPECT_EQ(1, 1);
   EXPECT_EQ(1, 1);
   EXPECT_EQ(1, 1);
@@ -240,8 +238,8 @@ TEST(logInTEST, logInTestNotExists) {
 
 TEST(registerTEST, registerCorrect) {
   clientHandler CLH;
-  std::string status = CLH.registerClient("Ilyagu",
-  "ilyagunagdimaev@gmail.ru", "leonidperlin");
+  std::string status =
+      CLH.registerClient("Ilyagu", "ilyagunagdimaev@gmail.ru", "leonidperlin");
 }
 
 TEST(getTimeTEST, getTimeNoPasses) {
@@ -271,7 +269,9 @@ TEST(addPassTEST, addPassTest) {
 
 TEST(registerTEST, registerInCorrect) {
   clientHandler CLH;
-  std::string status = CLH.registerClient("Ilyagu",
-  "ilyagunagdimaev@gmail.ru", "leonidperlin"); bool flag = false; if (status
-  == "error") flag = true; EXPECT_TRUE(true);
+  std::string status =
+      CLH.registerClient("Ilyagu", "ilyagunagdimaev@gmail.ru", "leonidperlin");
+  bool flag = false;
+  if (status == "error") flag = true;
+  EXPECT_TRUE(true);
 }

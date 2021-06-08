@@ -98,7 +98,6 @@ std::string clientHandler::getTimeCode(const std::string& Login,
   ClientDB client = _Cldb.getClient(Login);
 
   if (client.getPassword() == Password) {
-
     tree.put("status", "success");
     tree.put("ID", std::to_string(client.getID()));
     tree.put("login", client.getLogin());
@@ -121,10 +120,9 @@ std::string clientHandler::getTimeCode(const std::string& Login,
 
         child.put("companyName", company.getName());
 
-        TimeCodeGenerator generator(passes_vec[i].getprivate(), 
-                                    passes_vec[i].getID(), 
-                                    passes_vec[i].getCompanyID(), 
-                                    30);
+        TimeCodeGenerator generator(passes_vec[i].getprivate(),
+                                    passes_vec[i].getID(),
+                                    passes_vec[i].getCompanyID(), 30);
         std::string str_vec = generator.generateTimeCode();
         child.put("timecode", str_vec);
 
@@ -143,7 +141,7 @@ std::string clientHandler::getTimeCode(const std::string& Login,
 }
 
 std::string clientHandler::logInAdmin(const std::string& CompanyName,
-                                       const std::string& LecenseKey) {
+                                      const std::string& LecenseKey) {
   boost::property_tree::ptree tree;
 
   bool exist = existsClient("server_admin_auth.json");
@@ -177,7 +175,7 @@ std::string clientHandler::logInAdmin(const std::string& CompanyName,
 }
 
 std::string clientHandler::addCleintsPass(const std::string& Login,
-                            const std::string& Name) {
+                                          const std::string& Name) {
   boost::property_tree::ptree tree;
 
   bool exist = existsClient("server_add_pass.json");
@@ -191,7 +189,7 @@ std::string clientHandler::addCleintsPass(const std::string& Login,
     boost::property_tree::write_json("server_add_pass.json", tree);
     return "server_add_pass.json";
   }
-  
+
   if (!(_Codb.CompanyExists(Name))) {
     tree.put("status", "not_exists_company");
     boost::property_tree::write_json("server_add_pass.json", tree);
@@ -210,12 +208,11 @@ std::string clientHandler::addCleintsPass(const std::string& Login,
 
   srand(time(NULL));
 
-  char let [17] = "0123456789ABCDEF";
+  char let[17] = "0123456789ABCDEF";
 
   std::string str = "";
 
-  for (int i = 0; i < 40; ++i)
-    str += let[rand()%16];
+  for (int i = 0; i < 40; ++i) str += let[rand() % 16];
 
   uint64_t pass_id = _Passdb.insertPass(str, company.getID(), client.getID());
 

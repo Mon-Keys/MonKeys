@@ -372,15 +372,13 @@ PassDB PassDataBase::getPass(const uint64_t& PassID) {
 }
 
 PassageDB PassageDataBase::getPassage(const uint64_t PassageID) {
-  std::string sql_request = "select * from passage where passage.id = " +
-  std::to_string(PassageID); pqxx::result r = do_select_request(sql_request);
+  std::string sql_request =
+      "select * from passage where passage.id = " + std::to_string(PassageID);
+  pqxx::result r = do_select_request(sql_request);
 
-const auto& row = r.at(0);
-  PassageDB result(
-    row[0].as<uint64_t>(),
-    row[3].as<std::string>(),
-    row[2].as<uint8_t>(),
-    row[1].as<uint64_t>());
+  const auto& row = r.at(0);
+  PassageDB result(row[0].as<uint64_t>(), row[3].as<std::string>(),
+                   row[2].as<uint8_t>(), row[1].as<uint64_t>());
   return result;
 }
 
@@ -396,8 +394,8 @@ ClientDB ClientDataBase::getClient(const std::string login) {
 }
 
 CompanyDB CompanyDataBase::getCompany(const uint64_t& CompanyID) {
-  std::string sql_request = "select * from company where company.id = " +
-                            std::to_string(CompanyID);
+  std::string sql_request =
+      "select * from company where company.id = " + std::to_string(CompanyID);
 
   pqxx::result r = do_select_request(sql_request);
 

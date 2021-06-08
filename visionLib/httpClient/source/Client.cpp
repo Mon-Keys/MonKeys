@@ -51,16 +51,6 @@ void sendRequest(beast::error_code ec,
 
   req.body() = std::move(body);
 
-  // std::ifstream file("client.json");
-  // std::string line;
-  // std::string body;
-  // while (std::getline(file, line))
-  // {
-  //     body += line;
-  // }
-
-  // req.body() = std::move(body);
-
   auto const size = body.size();
 
   req.content_length(size);
@@ -130,10 +120,6 @@ void ClientSession::on_connect(beast::error_code ec,
   stream_.expires_after(std::chrono::seconds(30));
 
   sendRequest(ec, std::move(req_), lambda_);
-
-  // Send the HTTP request to the remote host
-  // http::async_write(stream_, req_,
-  // beast::bind_front_handler(&Session::on_write, shared_from_this()));
 }
 
 void ClientSession::on_write(bool close, beast::error_code ec,
@@ -147,10 +133,6 @@ void ClientSession::on_write(bool close, beast::error_code ec,
   reqsp_ = nullptr;
 
   do_read();
-
-  // Receive the HTTP response
-  // http::async_read(stream_, buffer_, res_,
-  // beast::bind_front_handler(&Session::on_read, shared_from_this()));
 }
 
 void ClientSession::do_read() {

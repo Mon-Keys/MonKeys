@@ -73,15 +73,15 @@ template <class Body, class Allocator, class Send>
 void handle_request(beast::string_view doc_root,
                     http::request<Body, http::basic_fields<Allocator>>&& req,
                     Send&& send) {
-
-    if (req.method() == http::verb::options) {
-      http::response<http::empty_body> res{http::status::no_content, req.version()};
-      res.set(http::field::server, BOOST_BEAST_VERSION_STRING);
-      res.keep_alive(req.keep_alive());
-      res.set(http::field::access_control_allow_origin, "*");
-      res.set(http::field::access_control_allow_methods, "POST");
-      res.set(http::field::access_control_allow_headers, "Content-Type");
-      return send(std::move(res));
+  if (req.method() == http::verb::options) {
+    http::response<http::empty_body> res{http::status::no_content,
+                                         req.version()};
+    res.set(http::field::server, BOOST_BEAST_VERSION_STRING);
+    res.keep_alive(req.keep_alive());
+    res.set(http::field::access_control_allow_origin, "*");
+    res.set(http::field::access_control_allow_methods, "POST");
+    res.set(http::field::access_control_allow_headers, "Content-Type");
+    return send(std::move(res));
   }
   // Returns a bad request response
   auto const bad_request = [&req](beast::string_view why) {
@@ -121,7 +121,7 @@ void handle_request(beast::string_view doc_root,
 
   // Make sure we can handle the method
   if (req.method() != http::verb::post && req.method() != http::verb::head &&
-      req.method()!= http::verb::options)
+      req.method() != http::verb::options)
     return send(bad_request("Unknown HTTP-method"));
 
   // Request path must be absolute and not contain "..".
@@ -145,28 +145,25 @@ void handle_request(beast::string_view doc_root,
       std::string email = reqJson.get<std::string>("email");
 
       jsonName = currentHandler.registerClient(login, email, password);
-    } catch (const std::exception &exc) {
+    } catch (const std::exception& exc) {
       // jsonName - нужно значение
-        std::cout << exc.what();
+      std::cout << exc.what();
     }
-    
+
   } else if (!strcmp(req.target().data(), "/auth")) {
     property_tree::ptree reqJson;
     std::stringstream jsonStream(req.body());
     property_tree::read_json(jsonStream, reqJson);
-    
+
     try {
       std::string login = reqJson.get<std::string>("login");
       std::string password = reqJson.get<std::string>("password");
 
       jsonName = currentHandler.logInClient(login, password);
+    } catch (const std::exception& exc) {
+      // jsonName - нужно значение
+      std::cout << exc.what();
     }
-    catch (const std::exception &exc)
-      {
-        // jsonName - нужно значение
-        std::cout << exc.what();
-          
-      }
   } else if (!strcmp(req.target().data(), "/timecode")) {
     property_tree::ptree reqJson;
     std::stringstream jsonStream(req.body());
@@ -176,7 +173,7 @@ void handle_request(beast::string_view doc_root,
       std::string password = reqJson.get<std::string>("password");
 
       jsonName = currentHandler.getTimeCode(login, password);
-    } catch (const std::exception &exc) {
+    } catch (const std::exception& exc) {
       // jsonName - нужно значение
       std::cout << exc.what();
     }
@@ -189,7 +186,7 @@ void handle_request(beast::string_view doc_root,
       std::string licenseKey = reqJson.get<std::string>("licenseKey");
 
       jsonName = currentHandler.logInAdmin(companyName, licenseKey);
-    } catch (const std::exception &exc) {
+    } catch (const std::exception& exc) {
       // jsonName - нужно значение
       std::cout << exc.what();
     }
@@ -202,7 +199,7 @@ void handle_request(beast::string_view doc_root,
       std::string login = reqJson.get<std::string>("login");
 
       jsonName = currentHandler.addCleintsPass(login, companyName);
-    } catch (const std::exception &exc) {
+    } catch (const std::exception& exc) {
       // jsonName - нужно значение
       std::cout << exc.what();
     }
@@ -229,7 +226,7 @@ void handle_request(beast::string_view doc_root,
   auto const size = body.size();
 
   std::cout << req << std::endl;
-  
+
   // Respond to HEAD request
   if (req.method() == http::verb::head) {
     http::response<http::empty_body> res{http::status::ok, req.version()};

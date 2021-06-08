@@ -28,8 +28,6 @@ namespace net = boost::asio;
 namespace property_tree = boost::property_tree;
 using tcp = boost::asio::ip::tcp;
 
-#include "WebApplicationClient.hpp"
-
 // Report a failure
 void failClient(beast::error_code ec, char const* what);
 

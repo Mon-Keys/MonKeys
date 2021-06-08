@@ -47,8 +47,6 @@ void sendTerminalRequest(
   property_tree::read_json("config.json", confData);
 
   if (!strcmp(req.target().data(), "/checktimecode")) {
-    // std::string timecode;
-    // std::cin >> timecode;
     std::string companyName = confData.get<std::string>("companyName");
     std::string licenseKey = confData.get<std::string>("licenseKey");
 
@@ -181,10 +179,9 @@ void TerminalSession::on_read(beast::error_code ec,
   std::cout << "check" << std::endl;
 
   std::string verification = "";
-  try{
+  try {
     verification = resJson.get<std::string>("verification");
-  }
-  catch (...) {
+  } catch (...) {
     std::cout << "no verification";
     verification = "failure";
   }
