@@ -39,32 +39,20 @@ class terminalServer {
   void reply();
 };
 
-// Return a reasonable mime type based on the extension of a file.
 beast::string_view mime_type_terminal(beast::string_view path);
 
-// Append an HTTP rel-path to a local filesystem path.
-// The returned path is normalized for the platform.
 std::string path_cat_terminal(beast::string_view base, beast::string_view path);
 
-// This function produces an HTTP response for the given
-// request. The type of the response object depends on the
-// contents of the request, so the interface requires the
-// caller to pass a generic lambda for receiving the response.
 template <class Body, class Allocator, class Send>
 void handle_request_terminal(
     beast::string_view doc_root,
     http::request<Body, http::basic_fields<Allocator>>&& req, Send&& send);
 
-//------------------------------------------------------------------------------
 
-// Report a failTerminalServerure
 void failTerminalServer(beast::error_code ec, char const* what);
 
-// Handles an HTTP server connection
 class TerminalServerSession
     : public std::enable_shared_from_this<TerminalServerSession> {
-  // This is the C++11 equivalent of a generic lambda.
-  // The function object is used to send an HTTP message.
   struct send_lambda {
     TerminalServerSession& self_;
 
@@ -82,12 +70,10 @@ class TerminalServerSession
   send_lambda lambda_;
 
  public:
-  // Take ownership of the stream
   TerminalServerSession(tcp::socket&& socket,
                         std::shared_ptr<std::string const> const& doc_root)
       : stream_(std::move(socket)), doc_root_(doc_root), lambda_(*this) {}
 
-  // Start the asynchronous operation
   void run();
 
   void do_read();
@@ -100,9 +86,7 @@ class TerminalServerSession
   void do_close();
 };
 
-//------------------------------------------------------------------------------
 
-// Accepts incoming connections and launches the TerminalServerSessions
 class TerminalListener : public std::enable_shared_from_this<TerminalListener> {
   net::io_context& ioc_;
   tcp::acceptor acceptor_;
@@ -114,28 +98,24 @@ class TerminalListener : public std::enable_shared_from_this<TerminalListener> {
       : ioc_(ioc), acceptor_(net::make_strand(ioc)), doc_root_(doc_root) {
     beast::error_code ec;
 
-    // Open the acceptor
     acceptor_.open(endpoint.protocol(), ec);
     if (ec) {
       failTerminalServer(ec, "open");
       return;
     }
 
-    // Allow address reuse
     acceptor_.set_option(net::socket_base::reuse_address(true), ec);
     if (ec) {
       failTerminalServer(ec, "set_option");
       return;
     }
 
-    // Bind to the server address
     acceptor_.bind(endpoint, ec);
     if (ec) {
       failTerminalServer(ec, "bind");
       return;
     }
 
-    // Start listening for connections
     acceptor_.listen(net::socket_base::max_listen_connections, ec);
     if (ec) {
       failTerminalServer(ec, "listen");
@@ -143,7 +123,6 @@ class TerminalListener : public std::enable_shared_from_this<TerminalListener> {
     }
   }
 
-  // Start accepting incoming connections
   void run();
 
  private:

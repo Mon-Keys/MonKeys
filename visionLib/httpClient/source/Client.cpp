@@ -8,7 +8,6 @@
 
 #include "Client.hpp"
 
-// Report a failure
 void failClient(beast::error_code ec, char const* what) {
   std::cerr << what << ": " << ec.message() << "\n";
 }
@@ -44,7 +43,6 @@ void sendRequest(beast::error_code ec,
     property_tree::write_json("client.json", reqData);
   }
 
-  // Attempt to open the file
   http::file_body::value_type body;
   std::string path = "client.json";
   body.open(path.c_str(), beast::file_mode::scan, ec);
@@ -61,27 +59,19 @@ void sendRequest(beast::error_code ec,
 template <bool isRequest, class Body, class Fields>
 void ClientSession::send_lambda::operator()(
     http::message<isRequest, Body, Fields>&& msg) const {
-  // The lifetime of the message has to extend
-  // for the duration of the async operation so
-  // we use a shared_ptr to manage it.
   auto sp =
       std::make_shared<http::message<isRequest, Body, Fields>>(std::move(msg));
 
-  // Store a type-erased version of the shared
-  // pointer in the class to keep it alive.
   self_.reqsp_ = sp;
 
-  // Write the response
   http::async_write(
       self_.stream_, *sp,
       beast::bind_front_handler(&ClientSession::on_write,
                                 self_.shared_from_this(), sp->need_eof()));
 }
 
-// Start the asynchronous operation
 void ClientSession::run(char const* host, char const* port, char const* target,
                         int version) {
-  // Set up an HTTP GET request message
   req_.version(version);
   req_.method(http::verb::post);
   req_.target(target);
@@ -89,7 +79,6 @@ void ClientSession::run(char const* host, char const* port, char const* target,
   req_.set(http::field::user_agent, BOOST_BEAST_VERSION_STRING);
   req_.set(http::field::access_control_allow_origin, "http://localhost:3000");
 
-  // Look up the domain login
   resolver_.async_resolve(host, port,
                           beast::bind_front_handler(&ClientSession::on_resolve,
                                                     shared_from_this()));
@@ -101,10 +90,8 @@ void ClientSession::on_resolve(beast::error_code ec,
     return failClient(ec, "resolve");
   }
 
-  // Set a timeout on the operation
   stream_.expires_after(std::chrono::seconds(30));
 
-  // Make the connection on the IP address we get from a lookup
   stream_.async_connect(results,
                         beast::bind_front_handler(&ClientSession::on_connect,
                                                   shared_from_this()));
@@ -116,7 +103,6 @@ void ClientSession::on_connect(beast::error_code ec,
     return failClient(ec, "connect");
   }
 
-  // Set a timeout on the operation
   stream_.expires_after(std::chrono::seconds(30));
 
   sendRequest(ec, std::move(req_), lambda_);
@@ -136,14 +122,10 @@ void ClientSession::on_write(bool close, beast::error_code ec,
 }
 
 void ClientSession::do_read() {
-  // Make the request empty before reading,
-  // otherwise the operation behavior is undefined.
   res_ = {};
 
-  // Set the timeout.
   stream_.expires_after(std::chrono::seconds(30));
 
-  // Read a request
   http::async_read(
       stream_, buffer_, res_,
       beast::bind_front_handler(&ClientSession::on_read, shared_from_this()));
@@ -157,7 +139,6 @@ void ClientSession::on_read(beast::error_code ec,
     return failClient(ec, "read");
   }
 
-  // Write the message to standard out
   property_tree::ptree resJson;
   std::stringstream jsonStream(res_.body());
   property_tree::read_json(jsonStream, resJson);
@@ -172,13 +153,10 @@ void ClientSession::on_read(beast::error_code ec,
 
   std::cout << res_ << std::endl;
 
-  // Gracefully close the socket
   stream_.socket().shutdown(tcp::socket::shutdown_both, ec);
 
-  // not_connected happens sometimes so don't bother reporting it.
   if (ec && ec != beast::errc::not_connected) {
     return failClient(ec, "shutdown");
   }
 
-  // If we get here then the connection is closed gracefully
 }

@@ -34,28 +34,16 @@ using tcp = boost::asio::ip::tcp;
 // Return a reasonable mime type based on the extension of a file.
 beast::string_view mime_type(beast::string_view path);
 
-// Append an HTTP rel-path to a local filesystem path.
-// The returned path is normalized for the platform.
 std::string path_cat(beast::string_view base, beast::string_view path);
 
-// This function produces an HTTP response for the given
-// request. The type of the response object depends on the
-// contents of the request, so the interface requires the
-// caller to pass a generic lambda for receiving the response.
 template <class Body, class Allocator, class Send>
 void handle_request(beast::string_view doc_root,
                     http::request<Body, http::basic_fields<Allocator>>&& req,
                     Send&& send);
 
-//------------------------------------------------------------------------------
-
-// Report a failure
 void failServer(beast::error_code ec, char const* what);
 
-// Handles an HTTP server connection
 class ServerSession : public std::enable_shared_from_this<ServerSession> {
-  // This is the C++11 equivalent of a generic lambda.
-  // The function object is used to send an HTTP message.
   struct send_lambda {
     ServerSession& self_;
 
@@ -73,12 +61,10 @@ class ServerSession : public std::enable_shared_from_this<ServerSession> {
   send_lambda lambda_;
 
  public:
-  // Take ownership of the stream
   ServerSession(tcp::socket&& socket,
                 std::shared_ptr<std::string const> const& doc_root)
       : stream_(std::move(socket)), doc_root_(doc_root), lambda_(*this) {}
 
-  // Start the asynchronous operation
   void run();
 
   void do_read();
@@ -91,9 +77,6 @@ class ServerSession : public std::enable_shared_from_this<ServerSession> {
   void do_close();
 };
 
-//------------------------------------------------------------------------------
-
-// Accepts incoming connections and launches the ServerSessions
 class Listener : public std::enable_shared_from_this<Listener> {
   net::io_context& ioc_;
   tcp::acceptor acceptor_;
@@ -105,28 +88,24 @@ class Listener : public std::enable_shared_from_this<Listener> {
       : ioc_(ioc), acceptor_(net::make_strand(ioc)), doc_root_(doc_root) {
     beast::error_code ec;
 
-    // Open the acceptor
     acceptor_.open(endpoint.protocol(), ec);
     if (ec) {
       failServer(ec, "open");
       return;
     }
 
-    // Allow address reuse
     acceptor_.set_option(net::socket_base::reuse_address(true), ec);
     if (ec) {
       failServer(ec, "set_option");
       return;
     }
 
-    // Bind to the server address
     acceptor_.bind(endpoint, ec);
     if (ec) {
       failServer(ec, "bind");
       return;
     }
 
-    // Start listening for connections
     acceptor_.listen(net::socket_base::max_listen_connections, ec);
     if (ec) {
       failServer(ec, "listen");
@@ -134,7 +113,6 @@ class Listener : public std::enable_shared_from_this<Listener> {
     }
   }
 
-  // Start accepting incoming connections
   void run();
 
  private:

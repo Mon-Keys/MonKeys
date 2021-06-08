@@ -32,7 +32,6 @@ bool exists(const std::string& name);
 
 void createConfigFile();
 
-// Report a failure
 void failTerminal(beast::error_code ec, char const* what);
 
 template <class Body, class Allocator, class Send>
@@ -40,7 +39,6 @@ void sendTerminalRequest(
     beast::error_code ec,
     http::request<Body, http::basic_fields<Allocator>>&& req, Send&& send);
 
-// Performs an HTTP GET and prints the response
 class TerminalSession : public std::enable_shared_from_this<TerminalSession> {
   struct send_lambda {
     TerminalSession& self_;
@@ -53,7 +51,7 @@ class TerminalSession : public std::enable_shared_from_this<TerminalSession> {
 
   tcp::resolver resolver_;
   beast::tcp_stream stream_;
-  beast::flat_buffer buffer_;  // (Must persist between reads)
+  beast::flat_buffer buffer_; 
   http::request<http::file_body> req_;
   http::response<http::string_body> res_;
   std::shared_ptr<void> reqsp_;
@@ -61,14 +59,11 @@ class TerminalSession : public std::enable_shared_from_this<TerminalSession> {
   std::string timecode_;
 
  public:
-  // Objects are constructed with a strand to
-  // ensure that handlers do not execute concurrently.
   explicit TerminalSession(net::io_context& ioc)
       : resolver_(net::make_strand(ioc)),
         stream_(net::make_strand(ioc)),
         lambda_(*this) {}
 
-  // Start the asynchronous operation
   void run(char const* host, char const* port, std::string target, int version,
            const std::string& currentTimecode);
 

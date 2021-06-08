@@ -16,14 +16,11 @@ int main(int argc, char* argv[]) {
       std::make_shared<std::string>(".");
   const int threads = 1;
 
-  // The io_context is required for all I/O
   net::io_context ioc{threads};
 
-  // Create and launch a listening port
   std::make_shared<Listener>(ioc, tcp::endpoint{address, port}, doc_root)
       ->run();
 
-  // Run the I/O service on the requested number of threads
   std::vector<std::thread> v;
   v.reserve(threads - 1);
   for (auto i = threads - 1; i > 0; --i) {

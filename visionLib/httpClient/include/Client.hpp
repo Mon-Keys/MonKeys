@@ -28,7 +28,6 @@ namespace net = boost::asio;
 namespace property_tree = boost::property_tree;
 using tcp = boost::asio::ip::tcp;
 
-// Report a failure
 void failClient(beast::error_code ec, char const* what);
 
 template <class Body, class Allocator, class Send>
@@ -36,7 +35,6 @@ void sendRequest(beast::error_code ec,
                  http::request<Body, http::basic_fields<Allocator>>&& req,
                  Send&& send);
 
-// Performs an HTTP GET and prints the response
 class ClientSession : public std::enable_shared_from_this<ClientSession> {
   struct send_lambda {
     ClientSession& self_;
@@ -49,21 +47,18 @@ class ClientSession : public std::enable_shared_from_this<ClientSession> {
 
   tcp::resolver resolver_;
   beast::tcp_stream stream_;
-  beast::flat_buffer buffer_;  // (Must persist between reads)
+  beast::flat_buffer buffer_;
   http::request<http::file_body> req_;
   http::response<http::string_body> res_;
   std::shared_ptr<void> reqsp_;
   send_lambda lambda_;
 
  public:
-  // Objects are constructed with a strand to
-  // ensure that handlers do not execute concurrently.
   explicit ClientSession(net::io_context& ioc)
       : resolver_(net::make_strand(ioc)),
         stream_(net::make_strand(ioc)),
         lambda_(*this) {}
 
-  // Start the asynchronous operation
   void run(char const* host, char const* port, char const* target, int version);
 
   void on_resolve(beast::error_code ec, tcp::resolver::results_type results);
