@@ -51,7 +51,7 @@ class TerminalSession : public std::enable_shared_from_this<TerminalSession> {
 
   tcp::resolver resolver_;
   beast::tcp_stream stream_;
-  beast::flat_buffer buffer_; 
+  beast::flat_buffer buffer_;
   http::request<http::file_body> req_;
   http::response<http::string_body> res_;
   std::shared_ptr<void> reqsp_;

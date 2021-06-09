@@ -214,7 +214,6 @@ TimeCodeGenerator::TimeCodeGenerator(std::string privateKey, uint64_t PassID,
   _timeInterval = timeInterval;
 }
 
-
 uint64_t TimeCodeGenerator::countFloor() {
   return std::time(0) / _timeInterval;
 }
@@ -240,8 +239,6 @@ TimeCode::TimeCode(std::string timecodeString) {
   } else {
     valid = false;
   }
-
-
 }
 
 std::uint8_t TimeCode::convertHexCharToUINT(char ch) {

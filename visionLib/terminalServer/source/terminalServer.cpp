@@ -69,12 +69,10 @@ std::string path_cat_terminal(beast::string_view base,
   return result;
 }
 
-
 template <class Body, class Allocator, class Send>
 void handle_request_terminal(
     beast::string_view doc_root,
     http::request<Body, http::basic_fields<Allocator>>&& req, Send&& send) {
-  
   auto const bad_request = [&req](beast::string_view why) {
     http::response<http::string_body> res{http::status::bad_request,
                                           req.version()};
@@ -86,7 +84,6 @@ void handle_request_terminal(
     return res;
   };
 
- 
   auto const not_found = [&req](beast::string_view target) {
     http::response<http::string_body> res{http::status::not_found,
                                           req.version()};
@@ -97,7 +94,6 @@ void handle_request_terminal(
     res.prepare_payload();
     return res;
   };
-
 
   auto const server_error = [&req](beast::string_view what) {
     http::response<http::string_body> res{http::status::internal_server_error,
@@ -110,22 +106,18 @@ void handle_request_terminal(
     return res;
   };
 
-  
   if (req.method() != http::verb::post && req.method() != http::verb::head)
     return send(bad_request("Unknown HTTP-method"));
 
- 
   if (req.target().empty() || req.target()[0] != '/' ||
       req.target().find("..") != beast::string_view::npos)
     return send(bad_request("Illegal request-target"));
 
-  
   TerminalHandler currentHandler;
 
-  
   std::string path;
   std::string jsonName;
- 
+
   if (!strcmp(req.target().data(), "/checktimecode")) {
     property_tree::ptree reqJson;
     std::stringstream jsonStream(req.body());
@@ -139,33 +131,28 @@ void handle_request_terminal(
       jsonName =
           currentHandler.compareTimeCode(timecode, companyName, licenseKey);
     } catch (const std::exception& exc) {
-      
       std::cout << exc.what();
     }
   }
   path = path_cat_terminal(doc_root, "/");
   path.append(jsonName);
-  
+
   beast::error_code ec;
   http::file_body::value_type body;
   body.open(path.c_str(), beast::file_mode::scan, ec);
 
-  
   if (ec == beast::errc::no_such_file_or_directory) {
     return send(not_found(req.target()));
   }
 
-  
   if (ec) {
     return send(server_error(ec.message()));
   }
-
 
   auto const size = body.size();
 
   std::cout << req;
 
-  
   if (req.method() == http::verb::head) {
     http::response<http::empty_body> res{http::status::ok, req.version()};
     res.set(http::field::server, BOOST_BEAST_VERSION_STRING);
@@ -175,7 +162,6 @@ void handle_request_terminal(
     return send(std::move(res));
   }
 
-  
   http::response<http::file_body> res{
       std::piecewise_construct, std::make_tuple(std::move(body)),
       std::make_tuple(http::status::ok, req.version())};
@@ -186,7 +172,6 @@ void handle_request_terminal(
   return send(std::move(res));
 }
 
-
 void failTerminalServer(beast::error_code ec, char const* what) {
   std::cerr << what << ": " << ec.message() << "\n";
 }
@@ -194,36 +179,28 @@ void failTerminalServer(beast::error_code ec, char const* what) {
 template <bool isRequest, class Body, class Fields>
 void TerminalServerSession::send_lambda::operator()(
     http::message<isRequest, Body, Fields>&& msg) const {
-  
   auto sp =
       std::make_shared<http::message<isRequest, Body, Fields>>(std::move(msg));
 
- 
   self_.res_ = sp;
 
-  
   http::async_write(
       self_.stream_, *sp,
       beast::bind_front_handler(&TerminalServerSession::on_write,
                                 self_.shared_from_this(), sp->need_eof()));
 }
 
-
 void TerminalServerSession::run() {
-  
   net::dispatch(stream_.get_executor(),
                 beast::bind_front_handler(&TerminalServerSession::do_read,
                                           shared_from_this()));
 }
 
 void TerminalServerSession::do_read() {
- 
   req_ = {};
 
-  
   stream_.expires_after(std::chrono::seconds(30));
 
- 
   http::async_read(stream_, buffer_, req_,
                    beast::bind_front_handler(&TerminalServerSession::on_read,
                                              shared_from_this()));
@@ -233,7 +210,6 @@ void TerminalServerSession::on_read(beast::error_code ec,
                                     std::size_t bytes_transferred) {
   boost::ignore_unused(bytes_transferred);
 
- 
   if (ec == http::error::end_of_stream) {
     return do_close();
   }
@@ -266,7 +242,6 @@ void TerminalServerSession::on_write(bool close, beast::error_code ec,
 void TerminalServerSession::do_close() {
   beast::error_code ec;
   stream_.socket().shutdown(tcp::socket::shutdown_send, ec);
-
 }
 
 void TerminalListener::run() { do_accept(); }

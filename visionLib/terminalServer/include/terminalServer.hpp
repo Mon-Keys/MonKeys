@@ -48,7 +48,6 @@ void handle_request_terminal(
     beast::string_view doc_root,
     http::request<Body, http::basic_fields<Allocator>>&& req, Send&& send);
 
-
 void failTerminalServer(beast::error_code ec, char const* what);
 
 class TerminalServerSession
@@ -85,7 +84,6 @@ class TerminalServerSession
 
   void do_close();
 };
-
 
 class TerminalListener : public std::enable_shared_from_this<TerminalListener> {
   net::io_context& ioc_;

@@ -182,5 +182,4 @@ void TerminalSession::on_read(beast::error_code ec,
   if (ec && ec != beast::errc::not_connected) {
     return failTerminal(ec, "shutdown");
   }
-
 }
