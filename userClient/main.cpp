@@ -6,10 +6,15 @@
 // |_|  |_|  \___/  |_| |_| |_|\_\  \___|  \__, | |___/
 //                                         |___/
 
-#include "TimeCodeGenerator.hpp"
+#include "Client.hpp"
 
-int main() {
-  TimeCodeGenerator test;
-  test.generateTimeCode();
-  return 0;
+int main(int argc, char** argv) {
+  net::io_context ioc;
+
+  std::make_shared<ClientSession>(ioc)->run("192.168.31.234", "8080",
+                                            "/timecode", 11);
+
+  ioc.run();
+
+  return EXIT_SUCCESS;
 }

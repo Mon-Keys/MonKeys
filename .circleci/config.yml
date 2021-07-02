@@ -1,29 +1,369 @@
 version: 2
 
 jobs:
-  build:
-    docker:
-      - image: "debian:stretch"
+  test-valgrind-ClientRequest:
+    machine:
+        image: ubuntu-2004:202008-01
     steps:
+      - run:
+            name: Installing valgrind
+            command: |
+              sudo apt -y -q update
+              sudo apt -y -q install valgrind
+              sudo apt -y -q install libboost-all-dev
+              sudo apt -y -q install libpqxx-dev 
+      - attach_workspace:
+          at: ./
+      - run:
+          name: Extract build.tar.xz
+          command: tar -xf build.tar.xz
+      - run:
+          name: Test executable
+          command: ls
+      
+      - run:
+          name: run ctest
+          command: |
+                  ls
+                  cd build/visionLib/test/
+                  ls
+                  valgrind --tool=memcheck --leak-check=full ./ClientRequestTest
+  
+  test-valgrind-Client:
+    machine:
+        image: ubuntu-2004:202008-01
+    steps:
+      - run:
+            name: Installing valgrind
+            command: |
+              sudo apt -y -q update
+              sudo apt -y -q install valgrind
+              sudo apt -y -q install libboost-all-dev
+              sudo apt -y -q install libpqxx-dev 
+      - attach_workspace:
+          at: ./
+      - run:
+          name: Extract build.tar.xz
+          command: tar -xf build.tar.xz
+      - run:
+          name: Test executable
+          command: ls
+      
+      - run:
+          name: run ctest
+          command: |
+                  ls
+                  cd build/visionLib/test/
+                  ls
+                  valgrind --tool=memcheck --leak-check=full ./ClientTest
+
+  test-valgrind-ORMTest:
+    machine:
+        image: ubuntu-2004:202008-01
+    steps:
+      - run:
+            name: Installing valgrind
+            command: |
+              sudo apt -y -q update
+              sudo apt -y -q install valgrind
+              sudo apt -y -q install libboost-all-dev
+              sudo apt -y -q install libpqxx-dev 
+      - attach_workspace:
+          at: ./
+      - run:
+          name: Extract build.tar.xz
+          command: tar -xf build.tar.xz
+      - run:
+          name: Test executable
+          command: ls
+      
+      - run:
+          name: run ctest
+          command: |
+                  ls
+                  cd build/visionLib/test/
+                  ls
+                  valgrind --tool=memcheck --leak-check=full ./ORMTest
+
+  test-valgrind-TerminalServer:
+    machine:
+        image: ubuntu-2004:202008-01
+    steps:
+      - run:
+            name: Installing valgrind
+            command: |
+              sudo apt -y -q update
+              sudo apt -y -q install valgrind
+              sudo apt -y -q install libboost-all-dev
+              sudo apt -y -q install libpqxx-dev 
+      - attach_workspace:
+          at: ./
+      - run:
+          name: Extract build.tar.xz
+          command: tar -xf build.tar.xz
+      - run:
+          name: Test executable
+          command: ls
+      
+      - run:
+          name: run ctest
+          command: |
+                  ls
+                  cd build/visionLib/test/
+                  ls
+                  valgrind --tool=memcheck --leak-check=full ./TerminalServerTest
+  
+  test-valgrind-TimeCodeGenerator:
+    machine:
+        image: ubuntu-2004:202008-01
+    steps:
+      - run:
+            name: Installing valgrind
+            command: |
+              sudo apt -y -q update
+              sudo apt -y -q install valgrind
+              sudo apt -y -q install libboost-all-dev
+              sudo apt -y -q install libpqxx-dev 
+      - attach_workspace:
+          at: ./
+      - run:
+          name: Extract build.tar.xz
+          command: tar -xf build.tar.xz
+      - run:
+          name: Test executable
+          command: ls
+      
+      - run:
+          name: run ctest
+          command: |
+                  ls
+                  cd build/visionLib/test/
+                  ls
+                  valgrind --tool=memcheck --leak-check=full ./TimeCodeGeneratorTest
+  
+  test-valgrind-ClientServer:
+    machine:
+        image: ubuntu-2004:202008-01
+    steps:
+      - run:
+            name: Installing valgrind
+            command: |
+              sudo apt -y -q update
+              sudo apt -y -q install valgrind
+              sudo apt -y -q install libboost-all-dev
+              sudo apt -y -q install libpqxx-dev 
+      - attach_workspace:
+          at: ./
+      - run:
+          name: Extract build.tar.xz
+          command: tar -xf build.tar.xz
+      - run:
+          name: Test executable
+          command: ls
+      
+      - run:
+          name: run ctest
+          command: |
+                  ls
+                  cd build/visionLib/test/
+                  ls
+                  valgrind --tool=memcheck --leak-check=full ./ClientServerTest
+  
+  test-valgrind-TerminalRequest:
+    machine:
+        image: ubuntu-2004:202008-01
+    steps:
+      - run:
+            name: Installing valgrind
+            command: |
+              sudo apt -y -q update
+              sudo apt -y -q install valgrind
+              sudo apt -y -q install libboost-all-dev
+              sudo apt -y -q install libpqxx-dev 
+      - attach_workspace:
+          at: ./
+      - run:
+          name: Extract build.tar.xz
+          command: tar -xf build.tar.xz
+      - run:
+          name: Test executable
+          command: ls
+      
+      - run:
+          name: run ctest
+          command: |
+                  ls
+                  cd build/visionLib/test/
+                  ls
+                  valgrind --tool=memcheck --leak-check=full ./TerminalRequestTest
+
+  test-valgrind-Terminal:
+    machine:
+        image: ubuntu-2004:202008-01
+    steps:
+      - run:
+            name: Installing valgrind
+            command: |
+              sudo apt -y -q update
+              sudo apt -y -q install valgrind
+              sudo apt -y -q install libboost-all-dev
+              sudo apt -y -q install libpqxx-dev 
+      - attach_workspace:
+          at: ./
+      - run:
+          name: Extract build.tar.xz
+          command: tar -xf build.tar.xz
+      - run:
+          name: Test executable
+          command: ls
+      
+      - run:
+          name: run ctest
+          command: |
+                  ls
+                  cd build/visionLib/test/
+                  ls
+                  valgrind --tool=memcheck --leak-check=full ./TerminalTest
+  
+  test-valgrind-logger:
+    machine:
+        image: ubuntu-2004:202008-01
+    steps:
+      - run:
+            name: Installing valgrind
+            command: |
+              sudo apt -y -q update
+              sudo apt -y -q install valgrind
+              sudo apt -y -q install libboost-all-dev
+              sudo apt -y -q install libpqxx-dev 
+      - attach_workspace:
+          at: ./
+      - run:
+          name: Extract build.tar.xz
+          command: tar -xf build.tar.xz
+      - run:
+          name: Test executable
+          command: ls
+      
+      - run:
+          name: run ctest
+          command: |
+                  ls
+                  cd build/visionLib/test/
+                  ls
+                  valgrind --tool=memcheck --leak-check=full ./loggerTest
+
+  cppcheck-cpplint:
+    machine:
+        image: ubuntu-2004:202008-01
+    parameters:
+      label:
+        type: string
+        default: ubuntu2004build
+    steps:
+      - run:
+            name: Installing dependencies
+            command: |
+              sudo apt -y -q update
+              sudo apt -y -q install cppcheck
+              sudo apt -y -q install python3-pip
+              sudo pip3 install cpplint
       - checkout
-      - run:
-          name: Installing SUDO
-          command: 'apt-get update && apt-get install -y sudo && rm -rf /var/lib/apt/lists/*'
-      - run:
-          name: Installing GCC
-          command: 'apt-get update && apt-get install -y gcc g++'
-      - run:
-          name: Install CMAKE
-          command: 'apt-get update && sudo apt-get install -y cmake'
-      - run:
-          name: Installing VALGRIND
-          command: 'apt-get update && sudo apt-get install -y valgrind'
-      - run:
-          name: Installing CPPCHECK
-          command: 'apt-get update && sudo apt-get install -y cppcheck'
       - run: 
-          name: Installing BOOST
-          command: 'apt-get update && sudo apt-get install -y libboost-all-dev'
+          name: CPPCheck
+          command: |
+            cppcheck --enable=all --language=c++ visionLib/test/*.cpp --suppress=missingInclude --suppress=unusedFunction 
+            cppcheck --enable=all --language=c++ visionLib/clientHandler/source/*.cpp --suppress=missingInclude --suppress=unusedFunction
+            cppcheck --enable=all --language=c++ visionLib/database/source/*.cpp --suppress=missingInclude --suppress=unusedFunction
+            cppcheck --enable=all --language=c++ visionLib/httpClient/source/*.cpp --suppress=missingInclude --suppress=unusedFunction
+            cppcheck --enable=all --language=c++ visionLib/httpServer/source/*.cpp --suppress=missingInclude --suppress=unusedFunction --suppress=useStlAlgorithm
+            cppcheck --enable=all --language=c++ visionLib/logger/source/*.cpp --suppress=missingInclude --suppress=unusedFunction
+            cppcheck --enable=all --language=c++ visionLib/terminalClient/source/*.cpp --suppress=missingInclude --suppress=unusedFunction
+            cppcheck --enable=all --language=c++ visionLib/terminalHandler/source/*.cpp --suppress=missingInclude --suppress=unusedFunction
+            cppcheck --enable=all --language=c++ visionLib/terminalServer/source/*.cpp --suppress=missingInclude --suppress=unusedFunction
+            cppcheck --enable=all --language=c++ visionLib/terminalHandler/source/*.cpp --suppress=missingInclude --suppress=unusedFunction
+
       - run: 
-          name: Installing PQXX
-          command: 'apt-get update && sudo apt-get install -y libpqxx-dev'
+          name: CPPLint
+          command: |
+            cpplint --extensions=cpp visionLib/test/*.cpp 
+            cpplint --extensions=cpp visionLib/clientHandler/source/*.cpp
+            cpplint --extensions=cpp visionLib/database/source/*.cpp
+            cpplint --extensions=cpp visionLib/httpClient/source/*.cpp
+            cpplint --extensions=cpp visionLib/httpServer/source/*.cpp
+            cpplint --extensions=cpp visionLib/logger/source/*.cpp
+            cpplint --extensions=cpp visionLib/terminalClient/source/*.cpp
+            cpplint --extensions=cpp visionLib/terminalHandler/source/*.cpp
+            cpplint --extensions=cpp visionLib/terminalServer/source/*.cpp
+            cpplint --extensions=cpp visionLib/terminalHandler/source/*.cpp
+
+
+  
+  build:
+    machine:
+        image: ubuntu-2004:202008-01
+    parameters:
+      label:
+        type: string
+        default: ubuntu2004build
+    steps:
+      - run:
+            name: Installing dependencies
+            command: |
+              sudo apt -y -q update
+              sudo apt -y -q install cmake
+              sudo apt -y -q install libboost-all-dev
+              sudo apt -y -q install libpqxx-dev 
+      - checkout
+      - run: 
+            name: CMake
+            command: |
+                rm -rf build
+                mkdir build && cd build
+                cmake .. 
+      - run: 
+            name: Make
+            command: |
+             cd build && make
+      - run:
+          name: Create a tarball
+          command: tar -cJf build.tar.xz build
+      - persist_to_workspace:
+          root: .
+          paths:
+            - build.tar.xz
+            
+    
+workflows:
+  version: 2
+  build-test:
+    jobs:
+      - build
+      - cppcheck-cpplint
+      - test-valgrind-ClientRequest:
+          requires:
+            - build
+      - test-valgrind-Client:
+          requires:
+            - build
+      - test-valgrind-ORMTest:
+          requires:
+            - build
+      - test-valgrind-TerminalServer:
+          requires:
+            - build
+      - test-valgrind-ClientServer:
+          requires:
+            - build
+      - test-valgrind-TerminalRequest:
+          requires:
+            - build
+      - test-valgrind-Terminal:
+          requires:
+            - build
+      - test-valgrind-logger:
+          requires:
+            - build
+      - test-valgrind-TimeCodeGenerator:
+          requires:
+            - build

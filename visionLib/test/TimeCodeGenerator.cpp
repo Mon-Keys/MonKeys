@@ -12,29 +12,65 @@
 
 TEST(TimeCodeGeneratorTest, correct_generate_on_one_time_segment) {
   uint64_t PassID = 1;
-  uint16_t timeInterval = 10000;
-  uint64_t timeStamp = 1618494933;
+  uint16_t timeInterval = 30;
   uint64_t companyID = 1;
+  uint64_t floor = (std::time(0) / timeInterval);
   std::string userKey = "JBSWY3DPEHPK3PXP";
-  TimeCodeGenerator codegen(userKey, PassID, companyID, timeInterval,
-                            timeStamp);
+  TimeCodeGenerator codegen(userKey, PassID, companyID, timeInterval);
   std::string generatedCode = codegen.generateTimeCode();
-  std::string precalculatedCode = "000100115247474";
-  ASSERT_EQ(generatedCode, precalculatedCode);
+  sleep(2);
+  if ((std::time(0) / timeInterval) == floor) {
+    ASSERT_EQ(generatedCode, codegen.generateTimeCode());
+  } else {
+    ASSERT_NE(generatedCode, codegen.generateTimeCode());
+  }
 }
 
-TEST(TimeCodeGeneratorTest, correct_generate_on_one_time_segment2) {
-  uint64_t PassID = 4096;
-  uint16_t timeInterval = 100;
-  uint64_t timeStamp = 1618495933;
-  uint64_t companyID = 4096;
-  std::string userKey =
-      "asddsdsdsdsddsdsfvdsfvsadsadasowkqefoiwefjwe";  // NOLINT
-  TimeCodeGenerator codegen(userKey, PassID, companyID, timeInterval,
-                            timeStamp);
+TEST(getCompanyID, easyInput) {
+  uint64_t PassID = 1;
+  uint16_t timeInterval = 30;
+  uint64_t companyID = 1;
+  std::string userKey = "JBSWY3DPEHPK3PXP";
+  TimeCodeGenerator codegen(userKey, PassID, companyID, timeInterval);
   std::string generatedCode = codegen.generateTimeCode();
-  std::string precalculatedCode = "010010012249111";
-  ASSERT_EQ(generatedCode, precalculatedCode);
+  TimeCode tc(generatedCode);
+  ASSERT_EQ(tc.getCompanyID(), companyID);
+}
+
+TEST(getPassID, easyInput) {
+  uint64_t PassID = 1;
+  uint16_t timeInterval = 30;
+  uint64_t companyID = 1;
+  uint64_t floor = (std::time(0) / timeInterval);
+  std::string userKey = "JBSWY3DPEHPK3PXP";
+  TimeCodeGenerator codegen(userKey, PassID, companyID, timeInterval);
+  std::string generatedCode = codegen.generateTimeCode();
+  TimeCode tc(generatedCode);
+  ASSERT_EQ(tc.getPassID(), PassID);
+}
+
+TEST(getPassID, completeCheck) {
+  uint64_t PassID = 1544716917;
+  uint16_t timeInterval = 30;
+  uint64_t companyID = 13303233;
+  uint64_t floor = (std::time(0) / timeInterval);
+  std::string userKey = "JBSWY3DPEHPK3PXP";
+  TimeCodeGenerator codegen(userKey, PassID, companyID, timeInterval);
+  std::string generatedCode = codegen.generateTimeCode();
+  TimeCode tc(generatedCode);
+  ASSERT_EQ(tc.getPassID(), PassID);
+}
+
+TEST(getCompanyID, completeCheck) {
+  uint64_t PassID = 1544716917;
+  uint16_t timeInterval = 30;
+  uint64_t companyID = 13303233;
+  uint64_t floor = (std::time(0) / timeInterval);
+  std::string userKey = "JBSWY3DPEHPK3PXP";
+  TimeCodeGenerator codegen(userKey, PassID, companyID, timeInterval);
+  std::string generatedCode = codegen.generateTimeCode();
+  TimeCode tc(generatedCode);
+  ASSERT_EQ(tc.getCompanyID(), companyID);
 }
 
 TEST(validCheck, wrongSizeBig) {
@@ -47,33 +83,7 @@ TEST(validCheck, wrongSizeSmall) {
   EXPECT_FALSE(code.isValid());
 }
 
-TEST(validCheck, wrongSymbolsrightSize) {
-  TimeCode code("ывавыащшаоцушщо");
-  EXPECT_FALSE(code.isValid());
-}
-
-TEST(validCheck, correct) {
-  TimeCode code("0100100ABABABAB");
+TEST(validCheck, rightSize) {
+  TimeCode code("1004142038041431102930");
   EXPECT_TRUE(code.isValid());
-}
-
-TEST(getCompanyID, correctCode) {
-  TimeCode code("010010012249111");
-  uint64_t companyID = 4096;
-  EXPECT_TRUE(code.isValid());
-  ASSERT_EQ(companyID, code.getCompanyID());
-}
-
-TEST(getPassID, correctCode) {
-  TimeCode code("010010012249111");
-  uint64_t PassID = 4096;
-  EXPECT_TRUE(code.isValid());
-  ASSERT_EQ(PassID, code.getPassID());
-}
-
-TEST(getTimePart, correctCode) {
-  TimeCode code("0100100ABABABAB");
-  std::string timePart = "ABABABAB";
-  EXPECT_TRUE(code.isValid());
-  ASSERT_EQ(timePart, code.getTimePart());
 }
